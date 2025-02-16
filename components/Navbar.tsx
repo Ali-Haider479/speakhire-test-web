@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import SpeakhireLogo from "@/public/speakhire-logo.png";
+import Footer from "@/components/Footer";
 
 function Navbar() {
   return (
