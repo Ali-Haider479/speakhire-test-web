@@ -1,16 +1,17 @@
 'use client';
-import { Box, Button, Typography, Card, CardContent} from '@mui/material';
+import { Box, Button, Typography, Card, CardContent } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 
 
 // Styled components
-const Container= styled(Box)({
+const Container = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   minHeight: '100vh',
+  backgroundColor: 'white'
 })
 
 const DonateCard = styled(Card)(({ theme }) => ({
@@ -20,7 +21,9 @@ const DonateCard = styled(Card)(({ theme }) => ({
   backgroundColor: '#6AB43E',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
-  }
+  },
+  height: '65vh',
+  width: '80vw'
 }));
 
 const ContentSection = styled(CardContent)(({ theme }) => ({
@@ -64,36 +67,36 @@ const DonateComponent = () => {
 
   return (
     <Container>
-    <DonateCard>
-      <ContentSection>
-        <Typography variant="h3" component="h2" fontWeight="bold" gutterBottom>
-          Donate today to Change a Life Forever
-        </Typography>
-        
-        <Typography variant="body1" sx={{ mb: 4 }}>
-          Your support helps individuals from immigrant families build the confidence,
-          skills, and networks they need to thrive in the workforce. Every contribution counts.
-        </Typography>
+      <DonateCard>
+        <ContentSection>
+          <Typography variant="h3" component="h2" fontWeight="bold" gutterBottom>
+            Donate today to Change a Life Forever
+          </Typography>
 
-        <DonateButton
-          variant="contained"
-          startIcon={<FavoriteIcon />}
-          onClick={handleDonateClick}
-        >
-          Donate Now
-        </DonateButton>
-      </ContentSection>
+          <Typography variant="body1" sx={{ mb: 4 }}>
+            Your support helps individuals from immigrant families build the confidence,
+            skills, and networks they need to thrive in the workforce. Every contribution counts.
+          </Typography>
 
-      <ImageSection>
-        <Image
-          src="/donate.png" // You'll need to put your image in the public/images folder
-          alt="Children sitting together"
-          fill
-          style={{ objectFit: 'cover' }}
-          priority
-        />
-      </ImageSection>
-    </DonateCard>
+          <DonateButton
+            variant="contained"
+            startIcon={<FavoriteIcon />}
+            onClick={handleDonateClick}
+          >
+            Donate Now
+          </DonateButton>
+        </ContentSection>
+
+        <ImageSection>
+          <Image
+            src="/donate.png" // You'll need to put your image in the public/images folder
+            alt="Children sitting together"
+            fill
+            style={{ objectFit: 'cover' }}
+            priority
+          />
+        </ImageSection>
+      </DonateCard>
     </Container>
   );
 };

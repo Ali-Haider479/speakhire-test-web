@@ -56,9 +56,10 @@ const StudentCarousel = () => {
           variant="h3" 
           component="h1" 
           sx={{ 
-            fontWeight: 700,
+            fontWeight: 400,
             marginBottom: 2,
-            '& span': { color: '#2196f3' }
+            '& span': { color: '#2196f3' },
+            color: 'black'
           }}
         >
           Student <span>Success Stories</span>
@@ -104,6 +105,9 @@ const StudentCarousel = () => {
               sx={{
                 width: 400,
                 padding: 3,
+                borderRadius: 5,
+                py: 5,
+                my: 5,
                 backgroundColor: index === activeIndex ? '#E9F6FB' : '#fff',
                 transition: 'all 0.3s ease',
                 cursor: 'pointer',
@@ -114,6 +118,17 @@ const StudentCarousel = () => {
                 }
               }}
             >
+              
+              <Typography 
+                sx={{ 
+                  color: '#666',
+                  textAlign: 'center',
+                  fontSize: '0.875rem',
+                  marginBottom: 5
+                }}
+              >
+                {testimonial.text}
+              </Typography>
               <Avatar 
                 sx={{
                   width: 80,
@@ -125,21 +140,11 @@ const StudentCarousel = () => {
               <Typography 
                 sx={{ 
                   textAlign: 'center',
-                  fontWeight: 600,
-                  fontSize: '1.25rem',
+                  fontWeight: 400,
                   marginBottom: 1
                 }}
               >
                 {testimonial.name} '{testimonial.year}
-              </Typography>
-              <Typography 
-                sx={{ 
-                  color: '#666',
-                  textAlign: 'center',
-                  fontSize: '0.875rem'
-                }}
-              >
-                {testimonial.text}
               </Typography>
             </Paper>
           ))}

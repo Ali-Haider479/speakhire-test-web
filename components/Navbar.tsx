@@ -10,18 +10,20 @@ function Navbar() {
   return (
     <AppBar
       position="static"
-      className="!bg-[#E9F6FB] !shadow-none !p-2"
-      sx={{ backgroundColor: "#E9F6FB" }}
+      className="!bg-[#F2FAFD] !shadow-none !p-2"
+      sx={{ backgroundColor: "#F2FAFD" }}
     >
       <Toolbar className="!flex !justify-between !items-center">
         {/* Logo */}
         <div className="flex items-center ml-20">
-          <Image
-            src={SpeakhireLogo}
-            alt="SpeakHire Logo"
-            width={150}
-            height={40}
-          />
+          <Link href={"/"}>
+            <Image
+              src={SpeakhireLogo}
+              alt="SpeakHire Logo"
+              width={150}
+              height={40}
+            />
+          </Link>
         </div>
 
         {/* Navigation Links */}

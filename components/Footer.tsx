@@ -102,7 +102,7 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
                   <Link 
                     key={label}
                     href={href}
-                    color="inherit"
+                    color="#08547A"
                     aria-label={label}
                   >
                     <Icon />

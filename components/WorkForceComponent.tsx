@@ -1,23 +1,13 @@
 'use client';
-import { Box, Typography, Button, Grid, Paper } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import Image from 'next/image';
 import { styled } from '@mui/material/styles';
+import WorkforceCard from './WorkforceCard';
 
-const StyledPaper = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2),
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  backgroundColor: '#E9F6FB',
-  borderRadius: theme.spacing(4),
-  maxWidth: '80%',    // add this to make content narrower
-  margin: '0 auto',   // add this to center the content
-}));
 const ImageContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
   width: '100%',
-  height: 'auto',
-  marginTop: theme.spacing(2),
+  height: '100%', // Ensures the container fills the grid cell height
   '& img': {
     borderRadius: theme.spacing(1),
   },
@@ -25,49 +15,46 @@ const ImageContainer = styled(Box)(({ theme }) => ({
 
 const WorkforceComponent = () => {
   return (
-    <Grid container spacing={4} sx={{ padding: 4 }}>
-      {/* Text Content Section */}
-      <Grid item xs={12} md={6}>
-        <StyledPaper elevation={0}>
-          <Typography variant="h4" gutterBottom>
-            Where today's workforce{' '}
-            <Box component="span" sx={{ color: 'primary.main' }}>
-              develop
-            </Box>
-          </Typography>
-          <Typography variant="h4" gutterBottom>
-            tomorrow's workforce{' '}
-            <Box component="span" sx={{ color: 'primary.main' }}>
-              leaders
-            </Box>
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mt: 2, mb: 3 }}>
-            We support career awareness, exploration preparation and training of those looking to
-            pursue a career.
-          </Typography>
-          <Button
-            variant="outlined"
-            color="primary"
-            sx={{
-              textTransform: 'none',
-              alignSelf: 'flex-start',
-              borderRadius: 2,
-            }}
-          >
-            View intern programs →
-          </Button>
-        </StyledPaper>
+    <Grid
+      container
+      rowSpacing={4} // Vertical spacing remains the same
+      columnSpacing={8} // Increased horizontal spacing between the two columns
+      sx={{
+        width: '80vw', // Parent grid width is 80vw
+        mx: 'auto',   // Centers the grid horizontally
+        alignItems: 'stretch', // Ensures both grid items are the same height
+        marginTop: 10,
+        marginBottom: 10
+      }}
+    >
+      {/* WorkforceCard Section (40% on md and up, 100% on xs) */}
+      <Grid
+        xs={12}
+        sx={{
+          flex: { xs: '0 0 100%', md: '0 0 40%' },
+          maxWidth: { xs: '100%', md: '40%' },
+          display: 'flex',
+        }}
+      >
+        <WorkforceCard />
       </Grid>
 
-      {/* Video Call Image Section */}
-      <Grid item xs={12} md={6}>
+      {/* Image Section (60% on md and up, 100% on xs) */}
+      <Grid
+        xs={12}
+        sx={{
+          flex: { xs: '0 0 100%', md: '0 0 60%' },
+          maxWidth: { xs: '100%', md: '60%' },
+          display: 'flex',
+        }}
+      >
         <ImageContainer>
-          <Box sx={{ position: 'relative', paddingTop: '75%' }}>
+          <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
             <Image
-              src="/work-force.png"  // Add your video call grid image source here
+              src="/work-force.png" // Replace with your actual image source
               alt="Video call grid"
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: 'cover', borderRadius: 40 }}
             />
           </Box>
         </ImageContainer>
