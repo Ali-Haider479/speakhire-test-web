@@ -72,12 +72,12 @@ const socialLinks = [
 
 const Footer: React.FC<FooterProps> = ({ sx }) => {
   return (
-    <Box 
-      component="footer" 
-      sx={{ 
-        bgcolor: "#E9F6FB", 
+    <Box
+      component="footer"
+      sx={{
+        bgcolor: "#E9F6FB",
         py: 6,
-        ...sx 
+        ...sx
       }}
     >
       <Container maxWidth="lg">
@@ -95,11 +95,11 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                 SPEAKHIRE is a 501c3 organization. EIN 47-4132773
               </Typography>
-              
+
               {/* Social Media Icons */}
               <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
                 {socialLinks.map(({ Icon, href, label }) => (
-                  <Link 
+                  <Link
                     key={label}
                     href={href}
                     color="#08547A"
@@ -112,27 +112,37 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
 
               {/* Action Buttons */}
               <Stack spacing={2}>
-                <Button 
-                  variant="contained" 
+                <Button
+                  variant="contained"
                   fullWidth
-                  sx={{ 
-                    bgcolor: '#0D5C75',
-                    borderRadius: '20px',
-                    '&:hover': { bgcolor: '#0A4A5E' }
+                  sx={{
+                    bgcolor: '#006397', // Button color
+                    borderRadius: 5,
+                    padding: '10px 30px',
+                    '&:hover': {
+                      bgcolor: '#0A4A5E', // Darker hover effect
+                    },
                   }}
                 >
-                  Become a partner now
+                  <Typography variant='body1' sx={{ fontSize: 14, fontWeight: 'bold', textTransform: 'none' }}>
+                    Become a partner now
+                  </Typography>
                 </Button>
-                <Button 
-                  variant="contained" 
+                <Button
+                  variant="contained"
                   fullWidth
-                  sx={{ 
-                    bgcolor: '#8DC63F',
-                    borderRadius: '20px',
-                    '&:hover': { bgcolor: '#7AB32F' }
+                  sx={{
+                    bgcolor: '#8DC63F', // Button color
+                    borderRadius: 5,
+                    padding: '10px 30px',
+                    '&:hover': {
+                      bgcolor: '#7AB32F', // Darker hover effect
+                    },
                   }}
                 >
-                  Donate
+                  <Typography variant='body1' sx={{ fontSize: 14, fontWeight: 'bold', textTransform: 'none' }}>
+                    Donate
+                  </Typography>
                 </Button>
               </Stack>
             </Box>
@@ -143,9 +153,9 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
             <Grid container spacing={4}>
               {footerSections.map((section) => (
                 <Grid item xs={12} sm={4} key={section.title}>
-                  <Typography 
-                    variant="h6" 
-                    color="text.primary" 
+                  <Typography
+                    variant="h6"
+                    color="text.primary"
                     gutterBottom
                     sx={{ fontWeight: 500 }}
                   >
@@ -158,7 +168,7 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
                           href={link.href}
                           variant="body2"
                           color="text.secondary"
-                          sx={{ 
+                          sx={{
                             textDecoration: 'none',
                             '&:hover': { color: 'primary.main' }
                           }}

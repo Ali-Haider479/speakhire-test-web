@@ -33,60 +33,65 @@ export default function OpportunityForChangeComponent() {
     <Box
       sx={{
         width: '100%',
-        backgroundColor: '#ecf6fb',
+        backgroundColor: '#F2FAFD',
         padding: '30px',
         borderRadius: '0px',
-        my: 5,
+        marginBottom: 5,
+        display: 'flex',               // Set to flex to align content
+        justifyContent: 'center',      // Center content horizontally
+        alignItems: 'center',          // Center content vertically
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: 'bold',
-          marginBottom: 4,
-          marginLeft: 3,
-          color: '#333333',
-        }}
-      >
-        Opportunity for Change
-      </Typography>
+      <Box sx={{ width: '80vw', }}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 'bold',
+            marginBottom: 4,
+            marginLeft: 3,
+            color: '#333333',
+          }}
+        >
+          Opportunity for Change
+        </Typography>
 
-      <Grid container spacing={3}>
-        {stats.map((stat, index) => (
-          <Grid item xs={12} md={4} key={index}>
-            <Box
-              sx={{
-                backgroundColor: '#e3f1f8',
-                borderRadius: '15px',
-                padding: '20px',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-start',
-              }}
-            >
-              <Typography
-                variant="h4"
+        <Grid container spacing={3}>
+          {stats.map((stat, index) => (
+            <Grid item xs={12} md={4} key={index}>
+              <Box
                 sx={{
-                  fontWeight: 'bold',
-                  color: '#0F99C3',
-                  marginBottom: 1,
+                  backgroundColor: '#E4F5FB',
+                  borderRadius: '15px',
+                  padding: '20px',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
                 }}
               >
-                {stat.percentage}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: '#555555',
-                }}
-              >
-                {stat.description}
-              </Typography>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontWeight: 'bold',
+                    color: '#08547A',
+                    marginBottom: 1,
+                  }}
+                >
+                  {stat.percentage}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: '#49454F',
+                  }}
+                >
+                  {stat.description}
+                </Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }

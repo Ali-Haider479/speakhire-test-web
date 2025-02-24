@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from '@mui/material';
-import { Settings, Description, Psychology } from '@mui/icons-material'; 
+import { Settings, Description, Psychology } from '@mui/icons-material';
 import React from 'react';
 
 export default function ObjectivesComponent() {
@@ -14,10 +14,10 @@ export default function ObjectivesComponent() {
             </Typography>
 
             {/* Single Box Container for all objectives */}
-            <Box sx={{ width: '70vw', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center',backgroundColor: '#E6F2F9', borderRadius: '15px' }}>
-                
+            <Box sx={{ width: '70vw', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#E6F2F9', borderRadius: '15px' }}>
+
                 {/* Objective 1 - Support */}
-                <Box sx={{ backgroundColor: '#E6F2F9', borderRadius: '15px', padding: '20px', width: '30%', boxShadow: 0, height:'250px'  }}>
+                <Box sx={{ backgroundColor: '#E6F2F9', borderRadius: '15px', padding: '20px', width: '30%', boxShadow: 0, height: '250px', display:'flex', flexDirection: 'column', alignItems:'flex-start'}}>
                     <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                         <Settings sx={{ fontSize: 40, color: '#0D5C75' }} />
                     </Box>
@@ -33,7 +33,7 @@ export default function ObjectivesComponent() {
                 <Typography sx={{ fontSize: '30px', color: '#0D5C75' }}>&#9670;</Typography>
 
                 {/* Objective 2 - Prepare */}
-                <Box sx={{ backgroundColor: '#E6F2F9', borderRadius: '15px', padding: '20px', width: '30%', boxShadow: 0 , height:'250px' }}>
+                <Box sx={{ backgroundColor: '#E6F2F9', borderRadius: '15px', padding: '20px', width: '30%', boxShadow: 0, height: '250px' }}>
                     <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                         <Description sx={{ fontSize: 40, color: '#0D5C75' }} />
                     </Box>
@@ -49,7 +49,7 @@ export default function ObjectivesComponent() {
                 <Typography sx={{ fontSize: '30px', color: '#0D5C75' }}>&#9670;</Typography>
 
                 {/* Objective 3 - Empower */}
-                <Box sx={{ backgroundColor: '#E6F2F9', borderRadius: '15px', padding: '20px', width: '30%', boxShadow: 0, height:'250px'  }}>
+                <Box sx={{ backgroundColor: '#E6F2F9', borderRadius: '15px', padding: '20px', width: '30%', boxShadow: 0, height: '250px' }}>
                     <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                         <Psychology sx={{ fontSize: 40, color: '#0D5C75' }} />
                     </Box>

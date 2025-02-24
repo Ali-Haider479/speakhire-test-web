@@ -1,9 +1,11 @@
-"use client"
+"use client"; // Marks this component as client-side only
+
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { Box, Button, Typography } from '@mui/material';
-import Image from 'next/image';
+import { Box, IconButton, SxProps, Theme, Typography } from '@mui/material';
+import Image from 'next/image';import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; // For left arrow
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'; // For right arrow
 
 // Sample data for partner testimonials
 const testimonials = [
@@ -32,37 +34,80 @@ const testimonials = [
 ];
 
 const responsive = {
-    superLargeDesktop: {
-        breakpoint: { max: 4000, min: 1024 },
-        items: 3,
-    },
     desktop: {
-        breakpoint: { max: 1024, min: 768 },
-        items: 2,
+        breakpoint: { max: 3000, min: 1024 },
+        items: 2, // Show 2 cards at once
     },
     tablet: {
-        breakpoint: { max: 768, min: 464 },
-        items: 1,
+        breakpoint: { max: 1024, min: 464 },
+        items: 1, // Show 1 card on smaller screens
     },
     mobile: {
         breakpoint: { max: 464, min: 0 },
-        items: 1,
+        items: 1, // Show 1 card on mobile
     },
 };
 
-
+// Type for the arrow button props from react-multi-carousel
+interface ArrowProps {
+    onClick?: () => void; // Make onClick optional since it can be undefined in some cases
+  }
+  
+  // Custom arrow components with TypeScript types
+const CustomLeftArrow: React.FC<ArrowProps> = ({ onClick }) => (
+    <IconButton
+      onClick={onClick} // Ensure onClick is passed and functional
+      sx={{
+        // backgroundColor: '#CEDDE4', // Light blue background to match the reference image
+        border: '1px solid gray', // Use `border` instead of `borderColor` for a gray border
+        color: '#08547A', // Blue icon color
+        borderRadius: '50%', // Circular button
+        width: 50,
+        height: 50,
+        '&:hover': {
+          backgroundColor: '#074b6d', // Darker blue on hover
+          color: '#FFFF', // White icon on hover
+        },
+        marginRight: '10px', // Space between arrows
+      } as SxProps<Theme>} // Type for MUI sx prop
+    >
+      <ArrowBackIosIcon sx={{ fontSize: 20 }} />
+    </IconButton>
+  );
+  
+  const CustomRightArrow: React.FC<ArrowProps> = ({ onClick }) => (
+    <IconButton
+      onClick={onClick} // Ensure onClick is passed and functional
+      sx={{
+        // backgroundColor: '#CEDDE4', // Light blue background to match the reference image
+        border: '1px solid gray', // Use `border` instead of `borderColor` for a gray border
+        color: '#08547A', // Blue icon color
+        borderRadius: '50%', // Circular button
+        width: 50,
+        height: 50,
+        '&:hover': {
+          backgroundColor: '#074b6d', // Darker blue on hover
+          color: '#FFFF', // White icon on hover
+        },
+      } as SxProps<Theme>} // Type for MUI sx prop
+    >
+      <ArrowForwardIosIcon sx={{ fontSize: 20 }} />
+    </IconButton>
+  );
+  
 export default function PartnersCarousel() {
-
     return (
-        <Box sx={{ padding: '50px 0', backgroundColor: '#F2FAFD', display: 'flex', justifyContent: 'center' , alignItems: 'center'}}>
-            <Box sx={{ width: '100%', textAlign: 'center' }}>
+        <Box sx={{ padding: '50px 0', backgroundColor: '#F2FAFD', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Box sx={{ width: '80vw', textAlign: 'center' }}>
                 <Carousel
                     responsive={responsive}
                     infinite={true}
                     autoPlay={true}
                     autoPlaySpeed={5000}
-                    centerMode={true}
-                    
+                    centerMode={false} // Disable center mode for better alignment
+                    arrows={false} // Hide default arrows (we'll use custom arrows)
+                    customLeftArrow={<CustomLeftArrow />}
+                    customRightArrow={<CustomRightArrow />}
                 >
                     {testimonials.map((testimonial, index) => (
                         <Box
@@ -70,14 +115,14 @@ export default function PartnersCarousel() {
                             sx={{
                                 backgroundColor: '#E6F2F9',
                                 borderRadius: '15px',
-                                padding: '30px',
+                                padding: '20px',
                                 boxShadow: 0,
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'flex-start',
-                                width: '100%',
-                                height: '520px',
-                                margin: '0 auto', 
+                                width: '80%',
+                                height: '480px', // Fixed height for consistency
+                                margin: '0 auto',
                             }}
                         >
                             <Image
@@ -103,7 +148,13 @@ export default function PartnersCarousel() {
                                 sx={{
                                     textAlign: 'left',
                                     marginBottom: '15px',
-                                    fontSize: 15
+                                    fontSize: 15,
+                                    height: '150px', // Fixed height for testimonial content
+                                    overflow: 'hidden', // Hide overflow text if it exceeds the height
+                                    textOverflow: 'ellipsis', // Add ellipsis for truncated text
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 6, // Limit to 6 lines
+                                    WebkitBoxOrient: 'vertical',
                                 }}
                             >
                                 {testimonial.testimonial}
@@ -136,6 +187,11 @@ export default function PartnersCarousel() {
                         </Box>
                     ))}
                 </Carousel>
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                    {/* Navigation buttons positioned underneath the carousel */}
+                    <CustomLeftArrow />
+                    <CustomRightArrow />
+                </Box>
             </Box>
         </Box>
     );

@@ -8,6 +8,11 @@ import BecomePartnerComponent from "@/components/BecomePartnerComponent";
 import PartnersInfo from "@/components/PartnersInfo";
 import PartnersTestimonials from "@/components/PartnersTestimonials";
 import ObjectivesComponent from "@/components/ObjectivesComponent";
+import ObjectiveSection from "@/components/ObjectivesSection";
+import SupportSection from "@/components/SupportSections";
+import ImageSection from "@/components/ImageSection";
+import ImpactSection from "@/components/ImpactSection";
+import ImpactsLivesSection from "@/components/ImpactsLivesSection";
 
 
 export default function Home() {
@@ -15,7 +20,12 @@ export default function Home() {
     <Box>
       {/* <Typography color="black">Home Page</Typography> */}
       {/* Render the components here for the given task */}
-      <ObjectivesComponent/>
+      <SupportSection/>
+      <ImageSection />
+      <ImpactSection/>
+      <ImpactsLivesSection/>
+      <ObjectiveSection/>
+      {/* <ObjectivesComponent/> */}
       <PartnersInfo/>
       <PartnersTestimonials/>
       <BecomePartnerComponent />
