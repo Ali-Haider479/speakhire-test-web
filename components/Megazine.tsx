@@ -1,0 +1,155 @@
+'use client';
+
+import React from 'react';
+import { 
+  Box, 
+  Typography, 
+  Grid, 
+  Card, 
+  CardMedia, 
+  CardContent,
+  Button,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+// Interface for magazine data
+interface MagazineCover {
+  id: number;
+  imageUrl: string;
+  title: string;
+  date: string;
+  issueNumber: string;
+}
+
+// Styled components
+const StyledCard = styled(Card)(({ theme }) => ({
+  position: 'relative',
+  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+  borderRadius: '12px',
+  overflow: 'hidden',
+  '&:hover': {
+    transform: 'scale(1.03)',
+    boxShadow: theme.shadows[8],
+  },
+}));
+
+const StyledCardMedia = styled(CardMedia)({
+  height: 400,
+  width: '100%',
+  objectFit: 'cover',
+}) as typeof CardMedia;
+
+const ViewAllButton = styled(Button)(({ theme }) => ({
+  marginTop: theme.spacing(4),
+  padding: theme.spacing(1, 4),
+  borderRadius: '25px',
+  border: `1px solid ${theme.palette.primary.main}`,
+  color: theme.palette.primary.main,
+  '&:hover': {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
+  },
+}));
+
+const MagazineSection: React.FC = () => {
+  // Sample data - replace imageUrl with your actual image paths
+  const magazines: MagazineCover[] = [
+    {
+      id: 1,
+      imageUrl: '/stock1.jpg',
+      title: "Celebrating Women's History Month",
+      date: 'March 2024',
+      issueNumber: 'Issue 20',
+    },
+    {
+      id: 2,
+      imageUrl: '/stock2.jpg',
+      title: "Developing Tomorrow's Leaders",
+      date: 'July 2024',
+      issueNumber: 'Issue 21',
+    },
+    {
+      id: 3,
+      imageUrl: '/stock1.jpg',
+      title: "#Cheers4Careers",
+      date: 'December 2023',
+      issueNumber: 'Issue 19',
+    },
+    {
+      id: 4,
+      imageUrl: '/stock2.jpg',
+      title: "#Cheers4Careers",
+      date: 'December 2023',
+      issueNumber: 'Issue 19',
+    },
+  ];
+
+  return (
+    <Box sx={{ py: 6, px: '10%' }}>
+      <Typography 
+        variant="h2" 
+        component="h1" 
+        sx={{ 
+          mb: 2, 
+          fontWeight: 500,
+          fontSize: { xs: '2rem', md: '3rem' }
+        }}
+      >
+        SPEAKHIRE Magazine
+      </Typography>
+      
+      <Typography 
+        variant="h5" 
+        component="h2" 
+        sx={{ 
+          mb: 4,
+          color: 'text.secondary',
+          fontSize: { xs: '1.2rem', md: '1.5rem' }
+        }}
+      >
+        Explore our latest issues
+      </Typography>
+
+      <Grid container spacing={3}>
+        {magazines.map((magazine) => (
+          <Grid item xs={12} sm={6} md={3} key={magazine.id}>
+            <StyledCard>
+              <StyledCardMedia
+                component={'img' as const}
+                image={magazine.imageUrl}
+                alt={`${magazine.title} - ${magazine.date}`}
+              />
+              <CardContent
+                sx={{
+                  position: 'absolute',
+                  bottom: 0,
+                  width: '100%',
+                  background: 'rgba(0, 0, 0, 0.7)',
+                  color: 'white',
+                }}
+              >
+                <Typography variant="subtitle2" component="div">
+                  {magazine.date}
+                </Typography>
+                <Typography variant="caption" component="div">
+                  {magazine.issueNumber}
+                </Typography>
+                <Typography variant="h6" component="div">
+                  {magazine.title}
+                </Typography>
+              </CardContent>
+            </StyledCard>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <ViewAllButton variant="outlined">
+          View all SPEAKHIRE Magazines
+        </ViewAllButton>
+      </Box>
+    </Box>
+  );
+};
+
+export default MagazineSection;
