@@ -33,24 +33,29 @@ export default function OpportunityForChangeComponent() {
     <Box
       sx={{
         width: '100%',
-        backgroundColor: '#ecf6fb',
+        backgroundColor: '#F2FAFD',
         padding: '30px',
         borderRadius: '0px',
         background: 'linear-gradient(180deg,rgb(255, 255, 255) 0%,#ecf6fb 90%)',
         my: 5,
+        marginBottom: 5,
+        display: 'flex',               // Set to flex to align content
+        justifyContent: 'center',      // Center content horizontally
+        alignItems: 'center',          // Center content vertically
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: 'bold',
-          marginBottom: 4,
-          marginLeft: 3,
-          color: '#333333',
-        }}
-      >
-        Opportunity for Change
-      </Typography>
+      <Box sx={{ width: '80vw', }}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 'bold',
+            marginBottom: 4,
+            marginLeft: 3,
+            color: '#333333',
+          }}
+        >
+          Opportunity for Change
+        </Typography>
 
       <Grid container spacing={3}>
         {stats.map((stat, index) => (
@@ -89,6 +94,8 @@ export default function OpportunityForChangeComponent() {
           </Grid>
         ))}
       </Grid>
+        
+      </Box>
     </Box>
   );
 }

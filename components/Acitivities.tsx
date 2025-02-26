@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { 
-  Box, 
-  Typography, 
-  Button, 
-  List, 
-  ListItem, 
-  ListItemIcon, 
+import {
+  Box,
+  Typography,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
   ListItemText,
   styled
 } from '@mui/material';
@@ -20,20 +20,20 @@ interface CarouselImage {
 }
 
 interface CarouselItemProps {
-    active?: boolean;
-    position: 'top' | 'middle' | 'bottom';
-  }
-  const CarouselContainer = styled(Box)({
-    position: 'relative',
-    height: '700px', // Increased from 600px to accommodate the spacing
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    borderRadius: '24px',
-    backgroundColor: '#f0f7ff',
-    padding: '10px',
-  });
+  active?: boolean;
+  position: 'top' | 'middle' | 'bottom';
+}
+const CarouselContainer = styled(Box)({
+  position: 'relative',
+  height: '700px', // Increased from 600px to accommodate the spacing
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  overflow: 'hidden',
+  borderRadius: '24px',
+  backgroundColor: '#f0f7ff',
+  padding: '10px',
+});
 
 const CarouselImage = styled('img')({
   width: '100%',
@@ -44,32 +44,31 @@ const CarouselImage = styled('img')({
 });
 
 const CarouselItem = styled(Box)<CarouselItemProps>(
-    ({ active, position }) => ({
+  ({ active, position }) => ({
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    transition: 'all 0.5s ease',
+    transform: `translateY(${position === 'top'
+        ? '-120%' // Increased from -100% to create more space
+        : position === 'bottom'
+          ? '120%'  // Increased from 100% to create more space
+          : '0'
+      })`,
+    scale: active ? '1' : '0.85',
+    '&::after': {
+      content: '""',
       position: 'absolute',
+      top: 0,
       left: 0,
       right: 0,
+      bottom: 0,
+      background: active ? 'none' : 'rgba(0, 0, 0, 0.4)',
+      borderRadius: '16px',
       transition: 'all 0.5s ease',
-      transform: `translateY(${
-        position === 'top' 
-          ? '-120%' // Increased from -100% to create more space
-          : position === 'bottom' 
-            ? '120%'  // Increased from 100% to create more space
-            : '0'
-      })`,
-      scale: active ? '1' : '0.85',
-      '&::after': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: active ? 'none' : 'rgba(0, 0, 0, 0.4)',
-        borderRadius: '16px',
-        transition: 'all 0.5s ease',
-      }
-    })
-  );
+    }
+  })
+);
 
 const StyledCheckIcon = styled(CheckCircleOutlineIcon)({
   color: '#0066cc',
@@ -115,8 +114,8 @@ const ActivitiesSection = () => {
   };
 
   return (
-    <Box sx={{ 
-      display: 'flex', 
+    <Box sx={{
+      display: 'flex',
       gap: 8,
       px: '10%',
       p: { xs: 2, md: 8 },
@@ -136,9 +135,9 @@ const ActivitiesSection = () => {
               <ListItemIcon>
                 <StyledCheckIcon />
               </ListItemIcon>
-              <ListItemText 
+              <ListItemText
                 primary={activity}
-                sx={{ 
+                sx={{
                   '& .MuiListItemText-primary': {
                     fontSize: '1.1rem',
                     color: '#333'
@@ -157,36 +156,36 @@ const ActivitiesSection = () => {
       {/* Right Column - Carousel */}
       <Box sx={{ flex: 1 }}>
         <CarouselContainer>
-          
 
 
 
 
-        {carouselImages.map((image, index) => {
-  let position: 'top' | 'middle' | 'bottom' = 'middle';
-  const diff = (index - activeIndex + carouselImages.length) % carouselImages.length;
-  
-  if (diff === carouselImages.length - 1) position = 'top';
-  else if (diff === 1) position = 'bottom';
-  else if (diff !== 0) return null; // Don't render images not in view
 
-  return (
-    <CarouselItem 
-      key={image.id}
-      active={index === activeIndex}
-      position={position}
-      onClick={() => handleImageClick(index)}
-      sx={{
-        cursor: 'pointer',
-      }}
-    >
-      <CarouselImage
-        src={image.src}
-        alt={image.alt}
-      />
-    </CarouselItem>
-  );
-})}
+          {carouselImages.map((image, index) => {
+            let position: 'top' | 'middle' | 'bottom' = 'middle';
+            const diff = (index - activeIndex + carouselImages.length) % carouselImages.length;
+
+            if (diff === carouselImages.length - 1) position = 'top';
+            else if (diff === 1) position = 'bottom';
+            else if (diff !== 0) return null; // Don't render images not in view
+
+            return (
+              <CarouselItem
+                key={image.id}
+                active={index === activeIndex}
+                position={position}
+                onClick={() => handleImageClick(index)}
+                sx={{
+                  cursor: 'pointer',
+                }}
+              >
+                <CarouselImage
+                  src={image.src}
+                  alt={image.alt}
+                />
+              </CarouselItem>
+            );
+          })}
 
 
 
