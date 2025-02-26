@@ -11,7 +11,7 @@ export default function PartnersTestimonials() {
                 sx={{ mb: 2, fontWeight: 400, color: 'black' }}
             >
                 What Our
-                <span className="!text-[#0F99C3]"> Partners Say{" "}</span>
+                <span style={{color:'#0F99C3'}}> Partners Say{" "}</span>
             </Typography>
             <Typography
                 variant="body1"

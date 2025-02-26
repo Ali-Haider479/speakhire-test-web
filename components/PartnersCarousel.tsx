@@ -4,8 +4,9 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Box, IconButton, SxProps, Theme, Typography } from '@mui/material';
-import Image from 'next/image';import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; // For left arrow
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'; // For right arrow
+import Image from 'next/image';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Sample data for partner testimonials
 const testimonials = [
@@ -71,7 +72,7 @@ const CustomLeftArrow: React.FC<ArrowProps> = ({ onClick }) => (
         marginRight: '10px', // Space between arrows
       } as SxProps<Theme>} // Type for MUI sx prop
     >
-      <ArrowBackIosIcon sx={{ fontSize: 20 }} />
+      <ArrowBackIcon sx={{ fontSize: 20 }} />
     </IconButton>
   );
   
@@ -91,13 +92,13 @@ const CustomLeftArrow: React.FC<ArrowProps> = ({ onClick }) => (
         },
       } as SxProps<Theme>} // Type for MUI sx prop
     >
-      <ArrowForwardIosIcon sx={{ fontSize: 20 }} />
+      <ArrowForwardIcon sx={{ fontSize: 20 }} />
     </IconButton>
   );
   
 export default function PartnersCarousel() {
     return (
-        <Box sx={{ padding: '50px 0', backgroundColor: '#F2FAFD', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Box sx={{ padding: '40px 0', backgroundColor: '#F2FAFD', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Box sx={{ width: '80vw', textAlign: 'center' }}>
                 <Carousel
                     responsive={responsive}

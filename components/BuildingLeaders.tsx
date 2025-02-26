@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 // Styled components for the background
 const GradientBackground = styled(Box)(({ theme }) => ({
-  background: 'linear-gradient(180deg, #e6f2f7 50%, #ffffff 50%)',
+  background: 'linear-gradient(180deg, #F2FAFD 50%, #ffffff 50%)',
   padding: theme.spacing(6, 0),
   position: 'relative',
   overflow: 'hidden',
@@ -28,23 +28,21 @@ const WhiteSection = styled(Box)(({ theme }) => ({
 const RoundedContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
   zIndex: 1,
-  width: '100%',
+  width: '80vw', // 80% of the viewport width
+  marginLeft: '-8vw', // Add left margin to center it horizontally
   borderRadius: '40px',
   border: '10px solid rgb(195, 206, 211)',
   overflow: 'hidden',
   boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.08)',
   backgroundColor: '#ffffff',
-  
 }));
-
 
 // Inner content of the curved card (where the image will go)
 const CardContent = styled(Box)(({ theme }) => ({
   position: 'relative',
   zIndex: 2,
   overflow: 'hidden',
-  height: '500px',
-  
+  height: '89vh',
   borderRadius: '32px',
   backgroundColor: '#f0f0f0', // Placeholder for the image background
 }));
@@ -72,7 +70,7 @@ const TitleContainer = styled(Box)({
 const BuildingLeaders: React.FC = () => {
   return (
     <GradientBackground>
-      <WhiteSection/>
+      <WhiteSection />
       <Container maxWidth="lg">
         <BreadcrumbContainer>
           <Typography variant="body1" component="div">
@@ -95,14 +93,12 @@ const BuildingLeaders: React.FC = () => {
         <RoundedContainer>
           <CardContent>
             {/* This is where your image will go */}
-            
-            <Image 
-              src="/Stock1.jpg"
+            <Image
+              src="/stock1.jpg"
               alt="SPEAKHIRE team members in conversation"
               layout="fill"
               objectFit="cover"
-            /> 
-           
+            />
           </CardContent>
         </RoundedContainer>
       </Container>

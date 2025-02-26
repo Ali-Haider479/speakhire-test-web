@@ -55,6 +55,7 @@ const SupportSection = () => {
                     width: '35vw',
                     margin: '0 auto',
                     lineHeight: '1.5',
+                    fontWeight: 500
                 }}
             >
                 Your support helps individuals from immigrant families build the confidence, skills, and networks they need to thrive in the workforce
@@ -68,7 +69,7 @@ const SupportSection = () => {
                     '&:hover': {
                         bgcolor: '#0A4A5E', // Darker hover effect
                     },
-                    marginTop: 2
+                    marginTop: 4
                 }}
             >
                 <Typography variant='body1' sx={{ fontSize: 16, fontWeight: 'bold', textTransform: 'none' }}>

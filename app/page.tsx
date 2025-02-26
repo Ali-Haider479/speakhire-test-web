@@ -13,6 +13,7 @@ import SupportSection from "@/components/SupportSections";
 import ImageSection from "@/components/ImageSection";
 import ImpactSection from "@/components/ImpactSection";
 import ImpactsLivesSection from "@/components/ImpactsLivesSection";
+import PartnerMapsSection from "@/components/PartnerMapsSection";
 
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
       <SupportSection/>
       <ImageSection />
       <ImpactSection/>
+      <PartnerMapsSection/>
       <ImpactsLivesSection/>
       <ObjectiveSection/>
       {/* <ObjectivesComponent/> */}

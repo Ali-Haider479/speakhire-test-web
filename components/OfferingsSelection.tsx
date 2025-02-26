@@ -120,7 +120,7 @@ export default function OfferingsSection() {
                                         {/* Title on the left */}
                                         {offer.title}
                                         {/* Icon on the right */}
-                                        <CallMadeIcon sx={{ fontSize: "1.5rem" }} />
+                                        <CallMadeIcon sx={{ fontSize: "1.8rem" }} />
                                     </Typography>
                                     <Typography variant="body2" sx={{ color: '#42474E' }} width={'80%'}>
                                         {offer.description}

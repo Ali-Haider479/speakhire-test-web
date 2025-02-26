@@ -1,48 +1,69 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const WorkforceCard = () => {
     return (
         <Box
-            className="!bg-[#e1f7ff] !rounded-[40] !p-6 !md:p-8 !max-w-lg !mx-auto !text-left !ml-0"
+            sx={{
+                backgroundColor: "#e1f7ff", 
+                borderRadius: "40px", 
+                padding: { xs: "24px", md: "32px" }, 
+                maxWidth: "32rem", 
+                marginX: "auto",
+                textAlign: "left", 
+                marginLeft: 0, 
+            }}
         >
             <Typography
-                variant="h2"
-                component="h2"
-                className="!font-medium !mb-4 !text-gray-900"
+                variant="h3"
+                sx={{
+                    fontWeight: 500, 
+                    marginBottom: "16px", 
+                    color: "#111827", 
+                }}
             >
                 Where today&apos;s workforce{" "}
-                <span className="text-blue-600">develop</span> tomorrow&apos;s workforce{" "}
-                <span className="text-blue-600">leaders</span>
+                <span style={{ color: "#2563eb" }}>develop</span> tomorrow&apos;s workforce{" "}
+                <span style={{ color: "#2563eb" }}>leaders</span>
             </Typography>
 
             <Typography
-                variant="h5"
-                className="!text-gray-700 !mb-6 !leading-tight"
+                variant="body1"
+                sx={{
+                    color: "#374151", 
+                    marginBottom: "24px", 
+                    lineHeight: "1.25", 
+                    fontSize: '1.28rem'
+                }}
             >
                 We support career awareness, exploration preparation, and training
                 of those looking to pursue a career.
             </Typography>
 
             <Button
-                variant='outlined'
+                variant="outlined"
                 color="primary"
-                className="!capitalize !px-6 !mt-[-5] !mb-5"
-                endIcon={<ArrowForwardIosIcon />}
+                endIcon={<ArrowForwardIcon />}
                 onClick={() => {
                     console.log("View intern programs clicked");
                 }}
                 sx={{
-                    color: '#006397',
-                    borderColor: '#006397',
-                    borderRadius: 5,
-                    boxShadow: "none !important", // Removes default shadow
-                    transition: "all 0.3s ease-in-out", // Smooth hover effect
+                    color: "#006397", 
+                    borderColor: "#006397", 
+                    borderRadius: "20px", 
+                    boxShadow: "none", 
+                    textTransform: "none", 
+                    paddingX: "14px", 
+                    paddingY: '8px',
+                    marginTop: "-5px", 
+                    marginBottom: "20px", 
+                    transition: "all 0.3s ease-in-out", 
                     "&:hover": {
-                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2) !important", // Adds shadow on hover
-                        backgroundColor: "#064067 !important", // Slightly darker blue on hover,
-                        color: 'white !important'
+                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", 
+                        backgroundColor: "#064067",
+                        color: "white", 
+                        borderColor: "#064067", 
                     },
                 }}
             >

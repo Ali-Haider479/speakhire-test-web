@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
@@ -49,13 +51,12 @@ const StudentCarousel = () => {
   };
 
   return (
-    <Box sx={{ maxWidth: 1200, margin: '0 auto', padding: '32px 16px' }}>
+    <Box sx={{ margin: '0 auto', padding: '32px 16px', backgroundColor: '#F2FAFD' }}>
       {/* Header Section */}
       <Box sx={{ textAlign: 'center', marginBottom: 6 }}>
-        <Typography 
-          variant="h3" 
-          component="h1" 
-          sx={{ 
+        <Typography
+          variant="h3"
+          sx={{
             fontWeight: 400,
             marginBottom: 2,
             '& span': { color: '#2196f3' },
@@ -64,50 +65,45 @@ const StudentCarousel = () => {
         >
           Student <span>Success Stories</span>
         </Typography>
-        <Typography 
-          sx={{ 
-            color: '#666',
-            fontSize: '1.1rem'
-          }}
-        >
-          Explore real-life success stories from our students that have achieved remarkable results
-        </Typography>
+        <Box>
+          <Typography
+            variant='body1'
+            sx={{
+              color: '#666',
+              fontSize: '1.2rem',
+            }}
+          >
+            Explore real-life success stories from our students that have achieved remarkable results
+          </Typography>
+        </Box>
       </Box>
 
       {/* Carousel Section */}
-      <Box sx={{ 
+      <Box sx={{
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
         gap: 3,
         position: 'relative'
       }}>
-        <IconButton 
-          onClick={handlePrevious}
-          sx={{
-            backgroundColor: '#2196f3',
-            color: 'white',
-            '&:hover': { backgroundColor: '#1976d2' }
-          }}
-        >
-          <ChevronLeftIcon />
-        </IconButton>
-
-        <Box sx={{ 
+        {/* Testimonials Cards */}
+        <Box sx={{
           display: 'flex',
           gap: 3,
-          overflow: 'hidden'
+          overflow: 'hidden',
+          width: '100%',
+          justifyContent: 'center'
         }}>
           {testimonials.map((testimonial, index) => (
             <Paper
               key={testimonial.id}
               elevation={index === activeIndex ? 4 : 1}
               sx={{
-                width: 400,
+                width: '50vw',
                 padding: 3,
                 borderRadius: 5,
                 py: 5,
-                my: 5,
+                my: 4,
                 backgroundColor: index === activeIndex ? '#E9F6FB' : '#fff',
                 transition: 'all 0.3s ease',
                 cursor: 'pointer',
@@ -118,29 +114,30 @@ const StudentCarousel = () => {
                 }
               }}
             >
-              
-              <Typography 
-                sx={{ 
-                  color: '#666',
+              <Typography
+                variant='body1'
+                sx={{
+                  color: '#0C111D',
                   textAlign: 'center',
-                  fontSize: '0.875rem',
+                  fontSize: '0.89rem',
                   marginBottom: 5
                 }}
               >
                 {testimonial.text}
               </Typography>
-              <Avatar 
+              <Avatar
                 sx={{
-                  width: 80,
-                  height: 80,
+                  width: 60,
+                  height: 60,
                   margin: '0 auto 16px',
                   backgroundColor: '#e3f2fd'
                 }}
               />
-              <Typography 
-                sx={{ 
+              <Typography
+                variant='body1'
+                sx={{
                   textAlign: 'center',
-                  fontWeight: 400,
+                  fontWeight: 'bold',
                   marginBottom: 1
                 }}
               >
@@ -150,16 +147,31 @@ const StudentCarousel = () => {
           ))}
         </Box>
 
-        <IconButton 
-          onClick={handleNext}
-          sx={{
-            backgroundColor: '#2196f3',
-            color: 'white',
-            '&:hover': { backgroundColor: '#1976d2' }
-          }}
-        >
-          <ChevronRightIcon />
-        </IconButton>
+        {/* Navigation Buttons */}
+        <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', margin: 2 }}>
+          <IconButton
+            onClick={handlePrevious}
+            sx={{
+              border: '1px solid gray', // Use `border` instead of `borderColor` for a gray border
+              color: '#08547A', // Blue icon color
+              borderRadius: '50%', // Circular button
+              '&:hover': { backgroundColor: '#1976d2', color:'white' }
+            }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+          <IconButton
+            onClick={handleNext}
+            sx={{
+              border: '1px solid gray', // Use `border` instead of `borderColor` for a gray border
+              color: '#08547A', // Blue icon color
+              borderRadius: '50%', // Circular button
+              '&:hover': { backgroundColor: '#1976d2', color:'white' }
+            }}
+          >
+            <ArrowForwardIcon />
+          </IconButton>
+        </Box>
       </Box>
     </Box>
   );

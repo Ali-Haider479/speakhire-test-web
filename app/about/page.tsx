@@ -26,7 +26,7 @@ function About() {
         About Us Page
       </Typography> */}
       <BuildingLeaders/>
-      <ObjectivesComponent/>
+      <ObjectiveSection/>
       <EcoSytemAbout/>
       <TheoryOfChangeComponent/>
       <OpportunityForChangeComponent/>

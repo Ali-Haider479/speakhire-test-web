@@ -9,7 +9,7 @@ export default function BecomePartnerComponent() {
                 width: '80vw', // 80% of the screen width
                 height: '586px', // Set a height for the box
                 borderRadius: '40px', // Border radius
-                backgroundColor: '#f0f0f0', // Background color
+                backgroundColor: '#E6F2F9', // Background color
                 margin: 'auto', // Centers the box horizontally
                 display: 'flex', // To align child boxes in a row
                 justifyContent: 'space-between', // Space between the children
@@ -29,16 +29,17 @@ export default function BecomePartnerComponent() {
                     justifyContent: 'center',
                     alignItems: 'flex-start',
                     height: '100%', // Ensures the box stretches to full height
+                    paddingLeft: 5
                 }}
             >
                 <Typography
                     variant="h3"
                     sx={{
-                        fontWeight: 'bold',
+                        fontWeight: 400,
                         marginBottom: 1,
                     }}
                 >
-                    <span className="!text-[#0F99C3]">Partner with us{" "}</span>
+                    <span style={{color:'#0F99C3'}}>Partner with us{" "}</span>
                     to help future talent succeed
                 </Typography>
                 <Typography
@@ -59,6 +60,7 @@ export default function BecomePartnerComponent() {
                         '&:hover': {
                             bgcolor: '#0A4A5E', // Darker hover effect
                         },
+                        marginTop: 2
                     }}
                 >
                     <Typography variant='body1' sx={{ fontSize: 18, fontWeight: 'bold', textTransform: 'none' }}>

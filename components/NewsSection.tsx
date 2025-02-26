@@ -56,7 +56,7 @@ const ImageGroup = styled(Box)({
 
 const ViewAllButton = styled(Button)({
   borderRadius: '25px',
-  padding: '8px 32px',
+  padding: '8px 18px',
   border: '1px solid #1976d2',
   color: '#1976d2',
   textTransform: 'none',
@@ -108,7 +108,7 @@ const NewsSection: React.FC = () => {
 
   return (
     <Box sx={{ 
-      bgcolor: '#f8fafc',
+      bgcolor: '#F2FAFD',
       py: 8,
       px: '10%',
     }}>
@@ -126,7 +126,7 @@ const NewsSection: React.FC = () => {
       <Typography 
         variant="body1" 
         sx={{ 
-          color: 'text.secondary',
+          color: '#49454F',
           maxWidth: '900px',
           mb: 6,
           fontSize: '1.1rem',

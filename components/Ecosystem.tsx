@@ -11,7 +11,7 @@ import {
     CardActions,
     Button,
 } from "@mui/material";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 // Example data for each offering card.
 // Replace with your own images, titles, and descriptions.
@@ -40,7 +40,7 @@ export default function Ecosystem() {
                     align="center"
                     sx={{ mb: 2, fontWeight: 400, color: 'black' }}
                 >
-                    <span className="!text-[#08547A]">SPEAKHIRE{" "}</span>
+                    <span style={{color:'#08547A'}}>SPEAKHIRE{" "}</span>
                     Ecosystem
                 </Typography>
                 <Typography
@@ -109,25 +109,29 @@ export default function Ecosystem() {
                                     <Button
                                         variant='outlined'
                                         color="primary"
-                                        className="!capitalize !px-6 !mt-[-5] !mb-5"
-                                        endIcon={<ArrowForwardIosIcon />}
+                                        endIcon={<ArrowForwardIcon />}
                                         onClick={() => {
                                             console.log("View intern programs clicked");
                                         }}
                                         sx={{
-                                            color: '#006397',
-                                            borderColor: '#006397',
+                                            color: "#006397",
+                                            borderColor: "#006397",
                                             borderRadius: 5,
+                                            paddingX: "15px",
+                                            paddingY: '8px',
+                                            marginTop: "-20px", 
+                                            marginBottom: "20px", 
+                                            textTransform: "none", 
                                             boxShadow: "none !important", // Removes default shadow
                                             transition: "all 0.3s ease-in-out", // Smooth hover effect
                                             "&:hover": {
-                                                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2) !important", // Adds shadow on hover
-                                                backgroundColor: "#064067 !important", // Slightly darker blue on hover,
-                                                color: 'white !important'
+                                              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2) !important", // Adds shadow on hover
+                                              backgroundColor: "#064067 !important", // Slightly darker blue on hover
+                                              color: "white !important",
                                             },
-                                        }}
+                                          }}
                                     >
-                                        Expolre more
+                                        Explore more
                                     </Button>
                                 </CardActions>
 

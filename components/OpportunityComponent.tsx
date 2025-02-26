@@ -36,8 +36,8 @@ export default function OpportunityForChangeComponent() {
         backgroundColor: '#F2FAFD',
         padding: '30px',
         borderRadius: '0px',
-        background: 'linear-gradient(180deg,rgb(255, 255, 255) 0%,#ecf6fb 90%)',
-        my: 5,
+        // background: 'linear-gradient(180deg,rgb(255, 255, 255) 0%,#ecf6fb 90%)',
+        // my: 5,
         marginBottom: 5,
         display: 'flex',               // Set to flex to align content
         justifyContent: 'center',      // Center content horizontally
@@ -50,7 +50,6 @@ export default function OpportunityForChangeComponent() {
           sx={{
             fontWeight: 'bold',
             marginBottom: 4,
-            marginLeft: 3,
             color: '#333333',
           }}
         >
@@ -83,9 +82,10 @@ export default function OpportunityForChangeComponent() {
                 {stat.percentage}
               </Typography>
               <Typography
-                variant="body2"
+                variant="body1"
                 sx={{
                   color: '#555555',
+                  fontSize: '0.9rem'
                 }}
               >
                 {stat.description}

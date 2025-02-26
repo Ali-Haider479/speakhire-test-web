@@ -25,7 +25,7 @@ interface CarouselItemProps {
 }
 const CarouselContainer = styled(Box)({
   position: 'relative',
-  height: '700px', // Increased from 600px to accommodate the spacing
+  height: '80vh', // Increased from 600px to accommodate the spacing
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -37,7 +37,7 @@ const CarouselContainer = styled(Box)({
 
 const CarouselImage = styled('img')({
   width: '100%',
-  height: '250px',
+  height: '300px',
   objectFit: 'cover',
   borderRadius: '16px',
   transition: 'all 0.5s ease',
@@ -50,10 +50,10 @@ const CarouselItem = styled(Box)<CarouselItemProps>(
     right: 0,
     transition: 'all 0.5s ease',
     transform: `translateY(${position === 'top'
-        ? '-120%' // Increased from -100% to create more space
-        : position === 'bottom'
-          ? '120%'  // Increased from 100% to create more space
-          : '0'
+      ? '-120%' // Increased from -100% to create more space
+      : position === 'bottom'
+        ? '120%'  // Increased from 100% to create more space
+        : '0'
       })`,
     scale: active ? '1' : '0.85',
     '&::after': {
@@ -72,12 +72,12 @@ const CarouselItem = styled(Box)<CarouselItemProps>(
 
 const StyledCheckIcon = styled(CheckCircleOutlineIcon)({
   color: '#0066cc',
-  fontSize: '24px',
+  fontSize: '28px',
 });
 
 const ViewButton = styled(Button)({
   borderRadius: '20px',
-  padding: '8px 24px',
+  padding: '8px 18px',
   textTransform: 'none',
   border: '1px solid #0066cc',
   color: '#0066cc',
@@ -123,7 +123,7 @@ const ActivitiesSection = () => {
     }}>
       {/* Left Column */}
       <Box sx={{ flex: 1 }}>
-        <Typography variant="h3" component="h2" sx={{ mb: 4, fontWeight: 'normal' }}>
+        <Typography variant="h4" sx={{ mb: 4, fontWeight: 'normal' }}>
           Through our activities,
           <br />
           individuals:
@@ -156,11 +156,6 @@ const ActivitiesSection = () => {
       {/* Right Column - Carousel */}
       <Box sx={{ flex: 1 }}>
         <CarouselContainer>
-
-
-
-
-
           {carouselImages.map((image, index) => {
             let position: 'top' | 'middle' | 'bottom' = 'middle';
             const diff = (index - activeIndex + carouselImages.length) % carouselImages.length;
@@ -186,15 +181,6 @@ const ActivitiesSection = () => {
               </CarouselItem>
             );
           })}
-
-
-
-
-
-
-
-
-
         </CarouselContainer>
       </Box>
     </Box>

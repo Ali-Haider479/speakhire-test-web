@@ -277,7 +277,8 @@ const ObjectiveSection = () => {
                         backgroundColor: "#064067 !important", // Slightly darker blue on hover,
                         color: 'white !important'
                     },
-                    marginTop: 5
+                    marginTop: 5,
+                    // height:10
                 }}
                 
             >

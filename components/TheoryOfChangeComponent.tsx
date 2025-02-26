@@ -13,17 +13,18 @@ export default function TheoryOfChangeComponent() {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 marginTop: 5,
+                height: '60vh'
             }}
         >
             {/* Left section with text content */}
             <Box
                 sx={{
                     width: '50%',
-                    
+
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    paddingLeft: '80px',
+                    paddingLeft: '150px',
                     paddingRight: '20px',
                 }}
             >
@@ -31,13 +32,13 @@ export default function TheoryOfChangeComponent() {
                     variant="h3"
                     sx={{
                         fontWeight: 'bold',
-                        marginBottom: 5,
+                        marginBottom: 10,
                         color: '#333333',
                     }}
                 >
                     Theory of Change
                 </Typography>
-                
+
                 <Box sx={{ mb: 3 }}>
                     <Typography
                         variant="h5"
@@ -47,16 +48,17 @@ export default function TheoryOfChangeComponent() {
                         }}
                     >
                         Increase the <span style={{ color: '#0F99C3' }}>Quantity</span>
-                        <br/>and <span style={{ color: '#0F99C3' }}>Quality</span> of Relationships
+                        <br />and <span style={{ color: '#0F99C3' }}>Quality</span> of Relationships
                     </Typography>
                 </Box>
-                
+
                 <Typography
                     variant="body1"
                     sx={{
                         marginBottom: 2,
                         color: '#555555',
                         lineHeight: 1.7,
+                        fontSize: '1.1rem'
                     }}
                 >
                     Career guidance and support through innovative social capital and
@@ -67,10 +69,10 @@ export default function TheoryOfChangeComponent() {
             </Box>
 
             {/* Right section with YouTube video */}
-            <Box 
-                sx={{ 
-                    width: '43%', 
-                    height: '400px', 
+            <Box
+                sx={{
+                    width: '43%',
+                    height: '400px',
                     position: 'relative',
                     borderRadius: '20px',
                     overflow: 'hidden',
@@ -79,27 +81,27 @@ export default function TheoryOfChangeComponent() {
                 }}
             >
                 {/* YouTube Video Player */}
-                <Box sx={{ position: 'relative', width: '100%', height: '100%',backgroundColor: '#F2FAFD', borderRadius: '20px', overflow: 'hidden' }}>
-                <Box sx={{ 
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    position: 'relative'
-}}> 
-                    
-                    {/* iFrame for YouTube Video */}
-                    <iframe
-                        width="80%"
-                        height="80%"
-                        src="https://www.youtube.com/embed/vyrPwLoIYkc?si=J2CITIZR2JJfmgx"
-                        title="Story"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        style={{ borderRadius: '20px' }}
-                    />
+                <Box sx={{ position: 'relative', width: '100%', height: '100%', backgroundColor: '#F2FAFD', borderRadius: '20px', overflow: 'hidden' }}>
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                        height: '100%',
+                        position: 'relative'
+                    }}>
+
+                        {/* iFrame for YouTube Video */}
+                        <iframe
+                            width="80%"
+                            height="100%"
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            title="Story"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{ borderRadius: '20px' }}
+                        />
                     </Box>
                     {/* Play button overlay (optional, as YouTube has its own) */}
                     <Box

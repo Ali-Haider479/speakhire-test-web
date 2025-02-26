@@ -3,11 +3,10 @@ import { Box, Typography, Container } from '@mui/material';
 
 function NewNameComponent() {
   return (
-    <Container maxWidth="lg" sx={{ py: 5 }}>
+    <Container sx={{ py: 5, width: '100vw' }}>
       {/* Title and Subtitle */}
       <Typography 
         variant="h3" 
-        component="h2" 
         align="center" 
         color="text.primary" 
         gutterBottom
@@ -20,23 +19,23 @@ function NewNameComponent() {
       </Typography>
       
       <Typography 
-        variant="subtitle1" 
+        variant="body1" 
         align="center" 
-        color="text.primary" 
         gutterBottom
-        sx={{ mb: 4 }}
+        sx={{ mb: 4, fontSize: '1.2rem' }}
       >
-        SPEAK Mentorship to SPEAKHIRE
+        SPEAK Mentorship to <span style={{color: '#08547A'}}>SPEAKHIRE</span> 
       </Typography>
       
       {/* Light Blue Content Box */}
       <Box 
         sx={{
-          backgroundColor: '#f0f8ff', // Light blue background
+          backgroundColor: '#E9F6FB', // Light blue background
           borderRadius: '16px',
           p: 4,
           mt: 3,
-          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.05)'
+          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.05)',
+          // width:'80vw'
         }}
       >
         <Typography 

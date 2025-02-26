@@ -41,7 +41,7 @@ const StyledCardMedia = styled(CardMedia)({
 
 const ViewAllButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(4),
-  padding: theme.spacing(1, 4),
+  padding: theme.spacing(1, 2),
   borderRadius: '25px',
   border: `1px solid ${theme.palette.primary.main}`,
   color: theme.palette.primary.main,
@@ -99,11 +99,10 @@ const MagazineSection: React.FC = () => {
       </Typography>
       
       <Typography 
-        variant="h5" 
-        component="h2" 
+        variant="body1" 
         sx={{ 
           mb: 4,
-          color: 'text.secondary',
+          color: '#42474E',
           fontSize: { xs: '1.2rem', md: '1.5rem' }
         }}
       >

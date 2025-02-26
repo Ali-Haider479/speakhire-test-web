@@ -37,7 +37,7 @@ export default function VessionariesComponent() {
             padding: 3, // Add padding for spacing
             display: 'flex',
             flexDirection: 'column', // Stack the elements vertically
-            justifyContent: 'center',
+            // justifyContent: 'center',
             alignItems: 'flex-start',
             height: '100%', // Ensures the box stretches to full height
           }}
@@ -45,12 +45,12 @@ export default function VessionariesComponent() {
           <Typography
             variant="h3"
             sx={{
-              fontWeight: 'bold',
+              fontWeight: 400,
               marginBottom: 1,
             }}
           >
-            <span className="!text-[#0F99C3]">Meet{" "}</span>
-            the visionaries behind SPEAKHIRE
+            <span style={{color: '#0F99C3'}}>Meet{" "}</span>
+            the <br/>visionaries<br/> behind SPEAKHIRE
           </Typography>
           <Typography
             variant="body1"
@@ -74,7 +74,7 @@ export default function VessionariesComponent() {
               '&:hover': {
                 borderColor: '#1565c0',
                 backgroundColor: 'rgba(25, 118, 210, 0.04)'
-              }
+              },marginTop: '30px'
             }}
           >
             Meet our team

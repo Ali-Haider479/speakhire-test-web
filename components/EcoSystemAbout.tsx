@@ -1,13 +1,14 @@
 import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
+import ExtensionOutlinedIcon from '@mui/icons-material/ExtensionOutlined';
 
 export default function EcoSytemAbout() {
     return (
         <Box
             sx={{
                 width: '80vw', // 80% of the screen width
-                height: '486px', // Set a height for the box
+                height: '70vh', // Set a height for the box
                 borderRadius: '40px', // Border radius
                 backgroundColor: '#E6F2F9', // Background color
                 margin: 'auto', // Centers the box horizontally
@@ -18,27 +19,45 @@ export default function EcoSytemAbout() {
             }}
         >
             {/* First child box - takes 45% of the width */}
+
             <Box
                 sx={{
                     width: '45%', // Width adjusted
                     backgroundColor: '#E6F2F9', // Light background color to match the image
                     borderRadius: '20px', // Rounded corners to match the image
-                    padding: 3, // Add padding for spacing
+                    paddingY: 5, // Add padding for spacing
+                    paddingX: 4,
                     display: 'flex',
                     flexDirection: 'column', // Stack the elements vertically
-                    justifyContent: 'center',
+                    justifyContent: 'flex-end',
                     alignItems: 'flex-start',
                     height: '100%', // Ensures the box stretches to full height
                 }}
             >
+                <Box
+                    sx={{
+                        backgroundColor: 'lightgray',
+                        borderRadius: '50%',
+                        color: '#08547A',
+                        width: 40,
+                        height: 40,
+                        display: 'flex', // Enable flexbox
+                        alignItems: 'center', // Center vertically
+                        justifyContent: 'center', // Center horizontally
+                        marginBottom: 2
+                    }}
+                >
+                    <ExtensionOutlinedIcon />
+                </Box>
                 <Typography
                     variant="h3"
                     sx={{
                         fontWeight: 'bold',
                         marginBottom: 1,
+                        width: 20
                     }}
                 >
-                    <span className="!text-[#0F99C3]">SPEAKHIRE{" "}</span>
+                    <span style={{color:'#0F99C3'}}>SPEAKHIRE{" "}</span>
                     Ecosystem
                 </Typography>
                 <Typography
@@ -50,7 +69,7 @@ export default function EcoSytemAbout() {
                 >
                     We bring together community resources, a network of professionals to facilitate and empower individuals from immigrant families.
                 </Typography>
-                
+
             </Box>
 
             {/* Second child box - takes 55% of the width */}
