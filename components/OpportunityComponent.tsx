@@ -36,6 +36,7 @@ export default function OpportunityForChangeComponent() {
         backgroundColor: '#ecf6fb',
         padding: '30px',
         borderRadius: '0px',
+        background: 'linear-gradient(180deg,rgb(255, 255, 255) 0%,#ecf6fb 90%)',
         my: 5,
       }}
     >
@@ -60,6 +61,7 @@ export default function OpportunityForChangeComponent() {
                 borderRadius: '15px',
                 padding: '20px',
                 height: '100%',
+                width:'70%',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'flex-start',

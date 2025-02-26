@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function ObjectivesComponent() {
     return (
-        <Box sx={{ padding: '50px 0', backgroundColor: '#F2FAFD', textAlign: 'center' }}>
+        <Box sx={{ padding: '50px 0', backgroundColor: '#ffffff', textAlign: 'center' }}>
             <Typography
                 variant="h3"
                 align="center"

@@ -8,6 +8,8 @@ import OpportunityForChangeComponent from "@/components/OpportunityComponent"
 import ActivitiesSection from "@/components/Acitivities";
 import MegazineSection from "@/components/Megazine";
 import NewsSection from "@/components/NewsSection";
+import BuildingLeaders from "@/components/BuildingLeaders";
+import EcoSytemAbout from "@/components/EcoSystemAbout";
 
 
 import { Box, Typography } from "@mui/material";
@@ -22,8 +24,9 @@ function About() {
       {/* <Typography color="black" variant="h4">
         About Us Page
       </Typography> */}
-
+      <BuildingLeaders/>
       <ObjectivesComponent/>
+      <EcoSytemAbout/>
       <TheoryOfChangeComponent/>
       <OpportunityForChangeComponent/>
       
@@ -33,6 +36,7 @@ function About() {
       <VissionariesComponent/>
       <MegazineSection/>
       <NewsSection/>
+
       <ActivitiesSection/>
       <DonateComponent/>
     </Box>
