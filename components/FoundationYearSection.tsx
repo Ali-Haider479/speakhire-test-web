@@ -69,7 +69,7 @@ function FoundationYearSection() {
             color: "white !important",
           },
         }}
-        endIcon={<img src="link.svg"/>}
+        endIcon={<img src="/link.svg"/>}
       >
         <Typography
           variant="body1"
@@ -95,7 +95,7 @@ function FoundationYearSection() {
           },
           marginLeft:2
         }}
-        endIcon={<img src="link.svg"/>}
+        endIcon={<img src="/link.svg"/>}
       >
         <Typography
           variant="body1"
