@@ -1,12 +1,34 @@
-import { AppBar, Button, IconButton, Toolbar, Box, Typography } from "@mui/material";
+"use client";
+import {
+  AppBar,
+  Button,
+  IconButton,
+  Toolbar,
+  Box,
+  Typography,
+  MenuItem,
+  Menu,
+} from "@mui/material";
 import { LinkedIn, YouTube } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import SpeakhireLogo from "@/public/speakhire-logo.png";
 import Footer from "@/components/Footer";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function Navbar() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <AppBar
       position="static"
@@ -61,90 +83,114 @@ function Navbar() {
               gap: "24px", // Equivalent to space-x-6
             }}
           >
-            <Link href="/activities">
-              <Button
-                sx={{
-                  textTransform: "none", // !capitalize
-                  color: "#0C111D",
-                  paddingX: "8px", // !px-2
-                  borderRadius: 5,
-                  "&:hover": {
-                    backgroundColor: "#A3E1F8",
-                  },
-                }}
+            {/* Activities Link & Dropdown */}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              {/* Main Link (Navigates directly) */}
+              <Link
+                href="/activities"
+                style={{ textDecoration: "none", color: "inherit" }}
               >
-                <Typography variant="body1" fontWeight={400} fontSize={15}>
-                  Activities
-                </Typography>
-              </Button>
-            </Link>
+                <Button
+                  sx={{
+                    textTransform: "none",
+                    color: "#0C111D",
+                    paddingX: "8px",
+                    borderRadius: 5,
+                    "&:hover": { backgroundColor: "#A3E1F8" },
+                  }}
+                >
+                  <Typography variant="body1" fontWeight={400} fontSize={15}>
+                    Activities
+                  </Typography>
+                </Button>
+              </Link>
+
+              {/* Dropdown Icon */}
+              <IconButton
+                onClick={handleClick}
+                sx={{ cursor: "pointer" }}
+                aria-controls={open ? "activities-menu" : undefined}
+                aria-haspopup="true"
+              >
+                <ArrowDropDownIcon />
+              </IconButton>
+            </Box>
+
+            {/* Dropdown Menu */}
+            <Menu
+              id="activities-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                <Link
+                  href="/activities/first-step"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  First Step
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link
+                  href="/activities/foundation-year"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Foundation Year
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link
+                  href="/activities/leadership-courses"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Leadership Courses
+                </Link>
+              </MenuItem>
+            </Menu>
+
+            {/* Other Links */}
             <Link href="/about">
               <Button
                 sx={{
-                  textTransform: "none", // !capitalize
+                  textTransform: "none",
                   color: "black",
                   borderRadius: 5,
-                  "&:hover": {
-                    backgroundColor: "#A3E1F8",
-                  },
+                  "&:hover": { backgroundColor: "#A3E1F8" },
                 }}
               >
-              <Typography variant="body1" fontWeight={400} fontSize={15}>
-                About us
-              </Typography>
+                <Typography variant="body1" fontWeight={400} fontSize={15}>
+                  About us
+                </Typography>
               </Button>
             </Link>
             <Link href="/contact">
               <Button
                 sx={{
-                  textTransform: "none", // !capitalize
+                  textTransform: "none",
                   color: "black",
                   borderRadius: 5,
-                  "&:hover": {
-                    backgroundColor: "#A3E1F8",
-                  },
+                  "&:hover": { backgroundColor: "#A3E1F8" },
                 }}
               >
                 <Typography variant="body1" fontWeight={400} fontSize={15}>
-                Contact us
-              </Typography>
+                  Contact us
+                </Typography>
               </Button>
             </Link>
           </Box>
 
           {/* Social Icons and Buttons */}
-          <Box
-            sx={{
-              display: "flex",
-              gap: "16px", // Equivalent to space-x-4
-            }}
-          >
-            <IconButton
-              sx={{
-                width: "72px",
-                borderWidth: "1px",
-                borderColor: "#08547A",
-                borderStyle: "solid",
-                borderRadius: 5,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Image src="/youtube-icon.svg" alt="YouTube" width={24} height={24} />
+          <Box sx={{ display: "flex", gap: "16px" }}>
+            <IconButton sx={{ border: "1px solid #08547A", borderRadius: 5 }}>
+              <Image
+                src="/youtube-icon.svg"
+                alt="YouTube"
+                width={24}
+                height={24}
+              />
             </IconButton>
-            <IconButton
-              sx={{
-                width: "72px",
-                borderWidth: "1px",
-                borderColor: "#08547A",
-                borderStyle: "solid",
-                borderRadius: 5,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <IconButton sx={{ border: "1px solid #08547A", borderRadius: 5 }}>
               <Image
                 src="/linkedin-icon.svg"
                 alt="LinkedIn"
@@ -157,7 +203,7 @@ function Navbar() {
               sx={{
                 backgroundColor: "#08547A",
                 color: "white",
-                paddingX: "24px", // !px-6
+                paddingX: "24px",
                 borderRadius: 5,
                 boxShadow: "none",
                 transition: "all 0.3s ease-in-out",
@@ -166,7 +212,7 @@ function Navbar() {
                   backgroundColor: "#064067",
                 },
                 textTransform: "none",
-                fontWeight: 'bold'
+                fontWeight: "bold",
               }}
             >
               Login
@@ -176,7 +222,7 @@ function Navbar() {
               sx={{
                 backgroundColor: "#92DB37",
                 color: "black",
-                paddingX: "24px", // !px-6
+                paddingX: "24px",
                 borderRadius: 5,
                 boxShadow: "none",
                 transition: "all 0.3s ease-in-out",
@@ -185,7 +231,7 @@ function Navbar() {
                   backgroundColor: "#7dbb30",
                 },
                 textTransform: "none",
-                fontWeight: 'bold'
+                fontWeight: "bold",
               }}
             >
               Donate

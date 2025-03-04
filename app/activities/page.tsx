@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/material";
 import SpeakerImpact from "@/components/SpeakerImpact";
 import SpeakerSeries from "@/components/SpeakerSeries";
 import StudentCarousel from "@/components/StudentCarousel";
@@ -7,15 +6,12 @@ import React from "react";
 
 function Activities() {
   return (
-    <Box
-    >
-      <ActivitiesHeader/>
-      <SpeakerSeries/>
-      <StudentCarousel/>
-      <SpeakerImpact/>
-      
-     
-    </Box>
+    <>
+      <ActivitiesHeader />
+      <SpeakerSeries />
+      <StudentCarousel />
+      <SpeakerImpact />
+    </>
   );
 }
 
