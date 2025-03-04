@@ -88,7 +88,7 @@ const SpeakerSeries: React.FC = () => {
         >
           A Year of Inspiration
         </Typography>
-        <Typography variant="body1" sx={{ fontSize: '1.1rem', maxWidth: '900px', lineHeight: 1.6 }}>
+        <Typography variant="body1" sx={{ fontSize: '1.1rem', maxWidth: '80vw', lineHeight: 1.6 }}>
           SPEAKHIRE puts up a virtual Speaker Series open to all. Each year from September to June, we present incredible speakers 
           who have overcome many obstacles, identified opportunities, and persevered to reach career success. Our speakers 
           predominantly come from immigrant backgrounds and are very close to the cultures of their countries of origin. We feature one 
@@ -106,7 +106,7 @@ const SpeakerSeries: React.FC = () => {
                 height: '100%', 
                 display: 'flex', 
                 flexDirection: 'column',
-                borderRadius: 2,
+                borderRadius: 5,
                 boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                 overflow: 'visible',
                 bgcolor: '#f5f9fc'
@@ -117,7 +117,7 @@ const SpeakerSeries: React.FC = () => {
                 height="300"
                 image={speaker.image}
                 alt={`${speaker.name} ${speaker.lastName}`}
-                sx={{ objectFit: 'cover' }}
+                sx={{ objectFit: 'cover', borderTopRightRadius: 15, borderTopLeftRadius: 15}}
               />
               <CardContent sx={{ flexGrow: 1, px: 3, py: 3 }}>
                 <Typography 

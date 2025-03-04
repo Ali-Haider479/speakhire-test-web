@@ -27,7 +27,7 @@ const EconomicMobilitySection = () => {
         padding: "20px",
         textAlign: "center",
         alignContent: "center",
-        width: "1240px",
+        width: "75vw",
       }}
     >
       <Typography

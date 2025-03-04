@@ -9,7 +9,7 @@ export default function ActivitiesHeader() {
     <Box 
       sx={{
         width: '100%',
-        backgroundColor: '#e8f4f8', // Light blue background
+        backgroundColor: '#F2FAFD', // Light blue background
         padding: { xs: '40px 0', md: '60px 0' },
         textAlign: 'center',
         position: 'relative'

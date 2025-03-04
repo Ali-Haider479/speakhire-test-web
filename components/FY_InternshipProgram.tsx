@@ -8,8 +8,8 @@ const FY_InternshipProgram = () => {
   return (
     <Box
       sx={{
-        width: "90%", // 80% of the screen width
-        height: "80vh", // Set a height for the box
+        width: "80vw", // 80% of the screen width
+        height: "50vh", // Set a height for the box
         // borderRadius: "40px", // Border radius
         margin: "auto", // Centers the box horizontally
         display: "flex", // To align child boxes in a row

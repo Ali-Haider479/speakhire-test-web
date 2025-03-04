@@ -8,7 +8,7 @@ const page = () => {
       <Box
         sx={{
           padding: "100px 20px",
-          backgroundColor: "#e9f6fb", // Light blue background from the image
+          backgroundColor: "#F2FAFD", // Light blue background from the image
           textAlign: "center",
           width: "100%",
           height: "353px",
@@ -139,6 +139,7 @@ const page = () => {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            style={{borderRadius: '30px'}}
           />
         </Box>
       </Box>

@@ -6,10 +6,10 @@ const InternNetworkCircleComponent = () => {
   return (
     <Box
       sx={{
-        padding: "20px",
+        padding: "40px",
         textAlign: "center",
         alignContent: "center",
-        width: "1240px",
+        width: "75vw",
       }}
     >
       <Box
