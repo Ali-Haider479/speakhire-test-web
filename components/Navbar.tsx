@@ -86,34 +86,22 @@ function Navbar() {
             {/* Activities Link & Dropdown */}
             <Box sx={{ display: "flex", alignItems: "center" }}>
               {/* Main Link (Navigates directly) */}
-              <Link
-                href="/activities"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <Button
-                  sx={{
-                    textTransform: "none",
-                    color: "#0C111D",
-                    paddingX: "8px",
-                    borderRadius: 5,
-                    "&:hover": { backgroundColor: "#A3E1F8" },
-                  }}
-                >
-                  <Typography variant="body1" fontWeight={400} fontSize={15}>
-                    Activities
-                  </Typography>
-                </Button>
-              </Link>
 
-              {/* Dropdown Icon */}
-              <IconButton
+              <Button
+                sx={{
+                  textTransform: "none",
+                  color: "#0C111D",
+                  paddingX: "8px",
+                  borderRadius: 5,
+                  "&:hover": { backgroundColor: "#A3E1F8" },
+                }}
                 onClick={handleClick}
-                sx={{ cursor: "pointer" }}
-                aria-controls={open ? "activities-menu" : undefined}
-                aria-haspopup="true"
               >
+                <Typography variant="body1" fontWeight={400} fontSize={15}>
+                  Activities
+                </Typography>
                 <ArrowDropDownIcon />
-              </IconButton>
+              </Button>
             </Box>
 
             {/* Dropdown Menu */}
@@ -123,6 +111,14 @@ function Navbar() {
               open={open}
               onClose={handleClose}
             >
+              <MenuItem onClick={handleClose}>
+                <Link
+                  href="/activities"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Speakhire Series
+                </Link>
+              </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link
                   href="/activities/first-step"
