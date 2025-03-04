@@ -1,17 +1,20 @@
 import { Box, Typography } from "@mui/material";
+import SpeakerImpact from "@/components/SpeakerImpact";
+import SpeakerSeries from "@/components/SpeakerSeries";
+import StudentCarousel from "@/components/StudentCarousel";
+import ActivitiesHeader from "@/components/ActivitiesHeader";
 import React from "react";
 
 function Activities() {
   return (
     <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="100vh"
     >
-      <Typography color="black" variant="h4">
-        Activities Page
-      </Typography>
+      <ActivitiesHeader/>
+      <SpeakerSeries/>
+      <StudentCarousel/>
+      <SpeakerImpact/>
+      
+     
     </Box>
   );
 }
