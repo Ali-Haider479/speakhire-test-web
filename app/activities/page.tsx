@@ -7,7 +7,15 @@ import React from "react";
 function Activities() {
   return (
     <>
-      <ActivitiesHeader />
+      <ActivitiesHeader 
+        highlightedWord="SpeakHire" 
+        regularWord="Series"
+        buttonConfig={{
+          type: 'youtube',
+          label: 'Watch on YouTube',
+          url: 'https://www.youtube.com/channel/your-channel-id'
+        }}
+      />
       <SpeakerSeries />
       <StudentCarousel />
       <SpeakerImpact />
