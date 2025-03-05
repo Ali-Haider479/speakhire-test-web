@@ -137,7 +137,7 @@ const CustomButtonGroup = ({
     <Box
       sx={{
         margin: "0 auto",
-        padding: "32px 16px",
+        padding: "100px 16px",
         backgroundColor: "#F2FAFD",
       }}
     >
