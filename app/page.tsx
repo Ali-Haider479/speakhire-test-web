@@ -1,3 +1,4 @@
+"use client"
 import { Box, Typography } from "@mui/material";
 import DonateComponent from '../components/DonateComponent';
 import StudentCarousel from '../components/StudentCarousel';

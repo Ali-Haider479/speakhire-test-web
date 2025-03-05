@@ -213,25 +213,27 @@ function Navbar() {
             >
               Login
             </Button>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#92DB37",
-                color: "black",
-                paddingX: "24px",
-                borderRadius: 5,
-                boxShadow: "none",
-                transition: "all 0.3s ease-in-out",
-                "&:hover": {
-                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                  backgroundColor: "#7dbb30",
-                },
-                textTransform: "none",
-                fontWeight: "bold",
-              }}
-            >
-              Donate
-            </Button>
+            <Link href="/donate">
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#92DB37",
+                  color: "black",
+                  paddingX: "24px",
+                  borderRadius: 5,
+                  boxShadow: "none",
+                  transition: "all 0.3s ease-in-out",
+                  "&:hover": {
+                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                    backgroundColor: "#7dbb30",
+                  },
+                  textTransform: "none",
+                  fontWeight: "bold",
+                }}
+              >
+                Donate
+              </Button>
+            </Link>
           </Box>
         </Box>
       </Toolbar>

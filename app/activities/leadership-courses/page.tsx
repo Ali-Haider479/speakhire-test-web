@@ -17,7 +17,7 @@ const page = () => {
         buttonConfig={{
           type: 'internal',
           label: 'Partner Interest Form',
-          url: '/leadership-courses'
+          url: ''
         }}
         breadcrumbLabel="Activities"
       />
