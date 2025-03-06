@@ -12,43 +12,43 @@ export default function LeadershipCourseCurriculum() {
   const curriculumItems: CurriculumItem[] = [
     {
       id: "1",
-      title: "ACCOUNTABILITY - BALANCING COMMITMENTS"
+      title: "Accountability - Balancing commitments"
     },
     {
       id: "2",
-      title: "CONFLICT MANAGEMENT - INTERNAL AND INTERPERSONAL"
+      title: "Conflict management - Internal and interpersonal"
     },
     {
       id: "3",
-      title: "DIVERSITY AND INCLUSION"
+      title: "Diversity and inclusion"
     },
     {
       id: "4",
-      title: "NON-POSITIONAL LEADERSHIP - LEADING FROM WITHIN"
+      title: "Non-positional leadership - Leading from within"
     },
     {
       id: "5",
-      title: "DEFINING YOUR VISION"
+      title: "Defining your vision"
     },
     {
       id: "6",
-      title: "THE IMPORTANCE OF LISTENING"
+      title: "The importance of listening"
     },
     {
       id: "7",
-      title: "ENGAGING IN PRODUCTIVE SELF-REFLECTION AND WELLNESS"
+      title: "Engaging in productive self-reflection and wellness"
     },
     {
       id: "8",
-      title: "GOAL-SETTING"
+      title: "Goal-setting"
     },
     {
       id: "9",
-      title: "SOCIAL MEDIA AND YOUR PERSONAL PROFILE"
+      title: "Social media and your personal profile"
     },
     {
       id: "10",
-      title: "LEADERSHIP ESSENTIALS: INTEGRITY, EMPATHY, AUTHENTICITY EMOTIONAL INTELLIGENCE AND HUMILITY"
+      title: "Leadership essentials: Integrity, empathy, authenticity, emotional intelligence, and humility"
     }
   ];
 

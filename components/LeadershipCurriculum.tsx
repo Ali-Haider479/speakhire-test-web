@@ -186,7 +186,8 @@ export default function LeadershipCurriculum() {
                       '&:hover': {
                         backgroundColor: 'rgba(15, 153, 195, 0.1)',
                         borderColor: '#0F99C3',
-                      }
+                      },
+                      width: '100%'
                     }}
                   >
                     <Typography 
