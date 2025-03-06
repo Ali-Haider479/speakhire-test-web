@@ -40,12 +40,12 @@ const responsive = {
   mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
 };
 
-// Custom Left Arrow
 const CustomLeftArrow = ({ onClick }: { onClick?: () => void }) => (
   <IconButton
     onClick={onClick}
+    aria-label="Previous testimonial"
     sx={{
-      border: "1px solid gray",
+      border: "1px solid #C2C7CE",
       color: "#08547A",
       borderRadius: "50%",
       width: 50,
@@ -57,17 +57,17 @@ const CustomLeftArrow = ({ onClick }: { onClick?: () => void }) => (
   </IconButton>
 );
 
-// Custom Right Arrow
 const CustomRightArrow = ({ onClick }: { onClick?: () => void }) => (
   <IconButton
     onClick={onClick}
+    aria-label="Next testimonial"
     sx={{
-      border: "1px solid gray",
+      border: "1px solid #C2C7CE",
       color: "#08547A",
       borderRadius: "50%",
       width: 50,
       height: 50,
-      ml: 3,
+      ml: 1,
       "&:hover": { backgroundColor: "#074b6d", color: "#FFFF" },
     }}
   >
@@ -122,7 +122,7 @@ export default function PartnersCarousel() {
                 flexDirection: "column",
                 alignItems: "flex-start",
                 width: "80%",
-                height: "480px",
+                height: "520px",
                 margin: "0 auto",
               }}
             >

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Box from "@mui/material/Box";
@@ -61,7 +61,7 @@ const CustomLeftArrow = ({ onClick }: { onClick?: () => void }) => (
     onClick={onClick}
     aria-label="Previous testimonial"
     sx={{
-      border: "1px solid gray",
+      border: "1px solid #C2C7CE",
       color: "#08547A",
       borderRadius: "50%",
       width: 50,
@@ -78,12 +78,12 @@ const CustomRightArrow = ({ onClick }: { onClick?: () => void }) => (
     onClick={onClick}
     aria-label="Next testimonial"
     sx={{
-      border: "1px solid gray",
+      border: "1px solid #C2C7CE",
       color: "#08547A",
       borderRadius: "50%",
       width: 50,
       height: 50,
-      ml: 3,
+      ml: 1,
       "&:hover": { backgroundColor: "#074b6d", color: "#FFFF" },
     }}
   >
@@ -104,7 +104,6 @@ const CustomButtonGroup = ({
 }) => {
   const handleNext = () => {
     if (next) {
-      // Update activeIndex and call next()
       setActiveIndex((prevIndex) =>
         prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
       );
@@ -114,7 +113,6 @@ const CustomButtonGroup = ({
 
   const handlePrevious = () => {
     if (previous) {
-      // Update activeIndex and call previous()
       setActiveIndex((prevIndex) =>
         prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
       );
@@ -130,38 +128,25 @@ const CustomButtonGroup = ({
   );
 };
 
- const StudentCarousel = () => {
+const StudentCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const carouselRef = useRef<any>(null);
 
   return (
-    <Box
-      sx={{
-        margin: "0 auto",
-        padding: "32px 16px",
-        backgroundColor: "#F2FAFD",
-      }}
-    >
+    <Box sx={{ margin: "0 auto", padding: "32px 16px", backgroundColor: "#F2FAFD" }}>
       {/* Header Section */}
       <Box sx={{ textAlign: "center", marginBottom: 6 }}>
-        <Typography
-          variant="h3"
-          sx={{
-            fontWeight: 400,
-            marginBottom: 2,
-            "& span": { color: "#2196f3" },
-            color: "black",
-          }}
-        >
+        <Typography variant="h3" sx={{ fontWeight: 400, marginBottom: 2, "& span": { color: "#2196f3" }, color: "black" }}>
           Student <span>Success Stories</span>
         </Typography>
         <Typography variant="body1" sx={{ color: "#666", fontSize: "1.2rem" }}>
-          Explore real-life success stories from our students that have achieved
-          remarkable results
+          Explore real-life success stories from our students that have achieved remarkable results
         </Typography>
       </Box>
 
       {/* Carousel Section */}
       <Carousel
+        ref={carouselRef}
         responsive={responsive}
         infinite
         centerMode
@@ -170,67 +155,61 @@ const CustomButtonGroup = ({
         arrows={false}
         customButtonGroup={
           <CustomButtonGroup
-            next={() => {}}
-            previous={() => {}}
+            next={() => carouselRef.current?.next()}
+            previous={() => carouselRef.current?.previous()}
             setActiveIndex={setActiveIndex}
             totalSlides={testimonials.length}
           />
         }
       >
-        {testimonials.map((testimonial, index) => (
+        {testimonials.map((student, index) => (
           <Box
-            key={testimonial.id}
+            key={student.id}
             sx={{
               display: "flex",
               justifyContent: "center",
               transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
-              transform: activeIndex === index ? "scale(1.1)" : "scale(0.95)",
-              opacity: activeIndex === index ? 1 : 0.6,
+              transform: "scale(1)",
+              opacity: activeIndex === index ? 1 : 0.5,
             }}
           >
             <Paper
-              elevation={activeIndex === index ? 1 : 0}
               sx={{
-                width: "50vw",
-                padding: 3,
+                width: "46vw",
+                p:6,
                 borderRadius: 5,
                 py: 5,
-                my: 4,
-                backgroundColor: activeIndex === index ? "#D7F2FA" : "#E9F6FB",
+                pb:2,
+                my: 3,
+                backgroundColor:  "#E9F6FB",
                 textAlign: "center",
-                ml: 3,
                 transition: "all 0.3s ease-in-out",
-                boxShadow: activeIndex === index
-                  ? "0px 10px 30px rgba(0, 0, 0, 0.2)"
-                  : "0px 5px 15px rgba(0, 0, 0, 0.1)",
               }}
+              aria-label={`testimonial by ${student.name}`}
             >
               <Typography
                 variant="body1"
                 sx={{
                   color: "#0C111D",
                   marginBottom: 5,
-                  fontSize: activeIndex === index ? "1.1rem" : "1rem",
-                  fontWeight: activeIndex === index ? "bold" : "normal",
+                  fontWeight: 400,
                 }}
               >
-                {testimonial.text}
+                {student.text}
               </Typography>
               <Avatar
                 sx={{
                   width: 60,
                   height: 60,
                   margin: "0 auto 16px",
-                  backgroundColor: activeIndex === index ? "#bbdefb" : "#e3f2fd",
-                  transform: activeIndex === index ? "scale(1.2)" : "scale(1)",
+                  backgroundColor: "#bbdefb",
+                  transform: "scale(1)",
                   transition: "transform 0.3s ease-in-out",
                 }}
+                src={student.image}
               />
-              <Typography
-                variant="body1"
-                sx={{ fontWeight: "bold", marginBottom: 1 }}
-              >
-                {testimonial.name} '{testimonial.year}
+              <Typography variant="body1" sx={{ fontWeight: 400, marginBottom: 1 }}>
+                {student.name} '{student.year}
               </Typography>
             </Paper>
           </Box>
@@ -240,4 +219,4 @@ const CustomButtonGroup = ({
   );
 };
 
-export default StudentCarousel
+export default StudentCarousel;
