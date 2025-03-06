@@ -89,7 +89,7 @@ const DonateComponent = () => {
 
         <ImageSection>
           <Image
-            src="/donate.png" // You'll need to put your image in the public/images folder
+            src="/donate.png" 
             alt="Children sitting together"
             fill
             style={{ objectFit: 'cover' }}
