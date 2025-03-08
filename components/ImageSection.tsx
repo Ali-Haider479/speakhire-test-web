@@ -7,7 +7,12 @@ import {
 } from '@mui/material';
 import Image from 'next/image';
 
-const ImageSection = () => {
+
+const ImageSection = ({ imageSrc = "/stock1.jpg"}) => {
+  // Ensure imageSrc is a valid path
+  const validImageSrc = imageSrc && (imageSrc.startsWith('/') || imageSrc.startsWith('http')) 
+    ? imageSrc 
+    : `/stock1.jpg`;
   const [dimensions, setDimensions] = useState({
     width: 78 * (typeof window !== 'undefined' ? window.innerWidth / 100 : 1248), // Default width for SSR (78vw)
     height: 89 * (typeof window !== 'undefined' ? window.innerHeight / 100 : 801), // Default height for SSR (89vh)
@@ -62,12 +67,14 @@ const ImageSection = () => {
         }}
       >
         <Image
-          src="/main-image.jpg" // Replace with the actual path to your image
+          src={validImageSrc} 
           alt="Group discussion"
           width={dimensions.width} // Use dynamic width from state
           height={dimensions.height} // Use dynamic height from state
-          objectFit="cover" // Ensures the image covers the container without distortion
-          style={{ borderRadius: '44px' }} // Matches the inner box's rounded corners
+          style={{ 
+            borderRadius: '44px',
+            objectFit: 'cover' // Ensures the image covers the container without distortion
+          }} // Matches the inner box's rounded corners
         />
       </Box>
     </Box>
