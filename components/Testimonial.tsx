@@ -18,8 +18,6 @@ const Testimonial: React.FC<TestimonialProps> = ({
   personName,
   designation,
   videoUrl,
-  duration = "02:00 Min",
-  avatarUrl
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

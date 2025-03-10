@@ -2,7 +2,9 @@ import TestimonialsContainer from "@/components/TestimonialsContainer";
 import BecomePartnerComponent from "@/components/BecomePartnerComponent";
 import PartnersTestimonials from "@/components/PartnersTestimonials";
 import PartnersInfo from "@/components/PartnersInfo";
-
+import PartnershipBanner from "@/components/PartnershipBanner";
+import ImageSection from "@/components/ImageSection";
+import ImpactSection from "@/components/ImpactSection";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
@@ -29,6 +31,16 @@ function Partner() {
     <Box
 
     >
+        <PartnershipBanner 
+        title="Together,"
+        subtitle="we're building the workforce of tomorrow"
+        buttonText="Become a partner now"
+        tagline="Join hands with SPEAKHIRE to empower students with the skills they need and the talent your industry deserves"
+        />
+        <ImageSection
+        imageSrc="/stock1.jpg"
+        />
+        <ImpactSection/>
         <PartnersInfo/>
         <PartnersTestimonials/>
         <BecomePartnerComponent/>

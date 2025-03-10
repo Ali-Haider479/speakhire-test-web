@@ -23,7 +23,9 @@ export default function Home() {
       {/* <Typography color="black">Home Page</Typography> */}
       {/* Render the components here for the given task */}
       <SupportSection/>
-      <ImageSection />
+      <ImageSection
+        imageSrc="/stock2.jpg"
+      />
       <ImpactSection/>
       <PartnerMapsSection/>
       <ImpactsLivesSection/>
