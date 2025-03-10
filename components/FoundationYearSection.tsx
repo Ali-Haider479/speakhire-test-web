@@ -67,9 +67,12 @@ function FoundationYearSection() {
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2) !important", // Adds shadow on hover
             backgroundColor: "#064067 !important", // Slightly darker blue on hover,
             color: "white !important",
+            "& img": {
+              filter: "brightness(0) invert(1)",  // Turns icon to pure white
+            },
           },
         }}
-        endIcon={<img src="/link.svg"/>}
+        endIcon={<img src="/link.svg" width={20} height={20}/>}
       >
         <Typography
           variant="body1"
@@ -92,10 +95,13 @@ function FoundationYearSection() {
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2) !important", // Adds shadow on hover
             backgroundColor: "#064067 !important", // Slightly darker blue on hover,
             color: "white !important",
+            "& img": {
+              filter: "brightness(0) invert(1)",  // Turns icon to pure white
+            },
           },
           marginLeft:2
         }}
-        endIcon={<img src="/link.svg"/>}
+        endIcon={<img src="/link.svg" width={20} height={20}/>}
       >
         <Typography
           variant="body1"

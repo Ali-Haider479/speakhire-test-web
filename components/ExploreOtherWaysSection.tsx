@@ -35,7 +35,16 @@ const data = [
 
 const ExploreOtherWaysSection = () => {
   return (
-    <Box sx={{ display:"flex",flexDirection:"column",textAlign: "center", mt: 10 ,alignItems:"center",justifyContent:"center"}}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        textAlign: "center",
+        mt: 10,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Typography variant="h3">
         Explore <span style={{ color: "#6AAA19" }}>other ways</span> to
         contribute
@@ -46,7 +55,7 @@ const ExploreOtherWaysSection = () => {
           gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, // 1-column on small screens, 2-columns on larger
           gap: 3, // Spacing between cards
           p: 3, // Padding for the whole section
-          width:"80vw"
+          width: "80vw",
         }}
       >
         {data.map((item: any, index: number) => (
@@ -60,7 +69,7 @@ const ExploreOtherWaysSection = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              textAlign:"left"
+              textAlign: "left",
             }}
           >
             {/* Icon at the top */}
@@ -76,7 +85,17 @@ const ExploreOtherWaysSection = () => {
                 mb: 2, // Space below the icon
               }}
             >
-              <Image src={item.icon} alt={item.title} width={50} height={50} />
+              <Image
+                src={item.icon}
+                alt={item.title}
+                width={60}
+                height={60}
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  borderRadius: 50,
+                  padding: 15,
+                }}
+              />
             </Box>
 
             {/* Title and Description */}

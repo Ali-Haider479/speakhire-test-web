@@ -9,9 +9,9 @@ import YouTube from 'react-youtube';
 const ImpactsLivesSection = () => {
     // Sample array of YouTube video IDs (replace with your actual video IDs)
     const videoIds = [
-        'dQw4w9WgXcQ', // Example: Rick Astley's "Never Gonna Give You Up" (replace with your video IDs)
-        'dQw4w9WgXcQ', // Example: Another sample video ID (replace with your video IDs)
-        'dQw4w9WgXcQ', // Example: Another sample video ID (replace with your video IDs)
+        'rH6EZrsBJG4',
+        '4zokzUxKPLs',
+        'mT1yas4HOlU'
     ];
 
     // Options for YouTube player (customize as needed)

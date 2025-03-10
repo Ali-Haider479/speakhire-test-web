@@ -22,7 +22,7 @@ const Packages = [
     price: "$15,000",
     descriptionHrs: `270 Hours`,
     description:
-      "SpeakHire envisions a future where education empowers immigrants to thrive.",
+      "Speakhire envisions a future where education empowers immigrants to thrive.",
     buttonText: "Join as a trendsetter",
   },
   {
@@ -30,7 +30,7 @@ const Packages = [
     price: "$20,000",
     descriptionHrs: `405 Hours`,
     description:
-      "SpeakHire envisions a future where education empowers immigrants to thrive.",
+      "Speakhire envisions a future where education empowers immigrants to thrive.",
     buttonText: "Lead the change",
   },
   {
@@ -38,7 +38,7 @@ const Packages = [
     price: "$30,000",
     descriptionHrs: "675 Hours",
     description:
-      "SpeakHire envisions a future where education empowers immigrants to thrive.",
+      "Speakhire envisions a future where education empowers immigrants to thrive.",
     buttonText: "Join as a visionary",
   },
   {
@@ -46,7 +46,7 @@ const Packages = [
     price: "$5,000",
     descriptionHrs: `20 Hours`,
     description:
-      "SpeakHire envisions a future where education empowers immigrants to thrive.",
+      "Speakhire envisions a future where education empowers immigrants to thrive.",
     buttonText: "Become a agent",
   },
 ];
@@ -158,6 +158,7 @@ const DonationPackage = () => {
                 backgroundColor: "#08547A",
                 transition: "background-color 0.2s, color 0.2s", // Smooth effect
                 ":active": { backgroundColor: "#FFFFFF", color: "#08547A" },
+                textTransform: "none",
               }}
             >
               <Typography >{item.buttonText}</Typography>

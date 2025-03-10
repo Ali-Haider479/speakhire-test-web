@@ -60,10 +60,13 @@ const page = () => {
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2) !important", // Adds shadow on hover
               backgroundColor: "#064067 !important", // Slightly darker blue on hover,
               color: "white !important",
+              "& img": {
+                filter: "brightness(0) invert(1)",  // Turns icon to pure white
+              },
             },
           }}
           endIcon={
-            <Image src="/link.svg" alt="Link Icon" width={20} height={20} />
+            <Image src="/link.svg" alt="Link Icon" width={20} height={20} style={{ transition: "filter 0.3s ease" }}/>
           }
         >
           <Typography

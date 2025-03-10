@@ -87,7 +87,7 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
             <Box>
               <Image
                 src="/speakhire-logo.png"
-                alt="SpeakHire Logo"
+                alt="Speakhire Logo"
                 width={150}
                 height={50}
                 style={{ marginBottom: "1rem" }}

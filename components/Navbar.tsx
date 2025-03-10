@@ -56,7 +56,7 @@ function Navbar() {
           <Link href="/">
             <Image
               src={SpeakhireLogo}
-              alt="SpeakHire Logo"
+              alt="Speakhire Logo"
               width={150}
               height={40}
             />
@@ -110,6 +110,7 @@ function Navbar() {
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
+              sx={{ borderRadius: 10, overflow: "hidden" }}
             >
               <MenuItem onClick={handleClose}>
                 <Link
@@ -129,7 +130,7 @@ function Navbar() {
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link
-                  href="/activities/foundation-year"
+                  href="/activities/foundational-year"
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   Foundation Year

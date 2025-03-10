@@ -58,11 +58,12 @@ const ImageSection = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          marginBottom: 10
+          marginBottom: 10,
+          padding:1.5
         }}
       >
         <Image
-          src="/main-image.jpg" // Replace with the actual path to your image
+          src="/home/Dayra.jpg" // Replace with the actual path to your image
           alt="Group discussion"
           width={dimensions.width} // Use dynamic width from state
           height={dimensions.height} // Use dynamic height from state

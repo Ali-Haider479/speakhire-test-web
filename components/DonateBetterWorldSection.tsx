@@ -13,7 +13,7 @@ const DonateBetterWorldSection = () => {
         textAlign: "center",
         alignItems: "center",
         width: "100vw",
-        height:"100vh",
+        height:"auto",
         background: 'linear-gradient(180deg, #F2FAFD 70%, #ffffff 30%)',
         // padding: theme.spacing(6, 0),
         position: 'relative',
@@ -81,7 +81,7 @@ const DonateBetterWorldSection = () => {
           overflow: "hidden",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
           backgroundColor: "#ffffff",
-          height:"60vh",
+          height:"80vh",
           marginTop:5
         }}
       >

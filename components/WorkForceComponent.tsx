@@ -55,7 +55,7 @@ const WorkforceComponent = () => {
           <ImageContainer>
             <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
               <Image
-                src="/work-force.png" // Replace with your actual image source
+                src="/home/Homepage 2.jpg" // Replace with your actual image source
                 alt="Video call grid"
                 fill
                 style={{ objectFit: 'cover', borderRadius: 40 }}

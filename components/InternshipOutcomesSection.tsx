@@ -31,6 +31,7 @@ const InternshipOutcomesSection = () => {
         px: "10%",
         p: { xs: 2, md: 8 },
         flexDirection: { xs: "column", md: "row" },
+        width:"80vw"
       }}
     >
       {/* Left Column */}
@@ -59,19 +60,59 @@ const InternshipOutcomesSection = () => {
           ))}
         </List>
 
-        <Button style={{marginBottom:10,color:"#08547A", borderRadius:"50px", borderColor:"#08547A"}} variant="outlined" endIcon={<Image src={"/link.svg"} alt="" width={24} height={24} />}>Partner Interest Form</Button>
-        <Button style={{marginBottom:10, marginLeft:10, color:"#08547A",borderRadius:"50px", borderColor:"#08547A"}} variant="outlined" endIcon={<Image src={"/link.svg"} alt="" width={24} height={24} />}>Intern Application</Button>
+        <Button
+          style={{
+            marginBottom: 10,
+            color: "#08547A",
+            borderRadius: "50px",
+            borderColor: "#08547A",
+            textTransform: "none",
+            
+          }}
+          variant="outlined"
+          endIcon={<Image src={"/link.svg"} alt="" width={16} height={16} />}
+        >
+          Partner Interest Form
+        </Button>
+        <Button
+          style={{
+            marginBottom: 10,
+            marginLeft: 10,
+            color: "#08547A",
+            borderRadius: "50px",
+            borderColor: "#08547A",
+            textTransform: "none",
+          }}
+          variant="outlined"
+          endIcon={<Image src={"/link.svg"} alt="" width={16} height={16} />}
+        >
+          Intern Application
+        </Button>
       </Box>
-      <Box sx={{
+      <Box
+        sx={{
           display: "flex",
           flexDirection: "column",
           gap: 2,
           backgroundColor: "#F2FAFD", // Light blue background from the image
           padding: 3,
           borderRadius: "20px",
-        }}>
-         <Image src={"/10.png"} alt="" width={620} height={306} style={{borderRadius:24}} />
-         <Image src={"/internship.png"} alt="" width={620} height={306} style={{borderRadius:24, aspectRatio:16/9}} />
+        }}
+      >
+        <Image
+          src={"/10.png"}
+          alt=""
+          width={620}
+          height={306}
+          style={{ borderRadius: 24 }}
+        />
+        <Image
+          src={"/internship.png"}
+          alt=""
+          width={620}
+          height={306}
+          style={{ borderRadius: 24, aspectRatio: 16 / 9 }}
+        />
       </Box>
     </Box>
   );

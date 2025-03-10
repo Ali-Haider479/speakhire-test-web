@@ -8,7 +8,7 @@ function Activities() {
   return (
     <>
       <ActivitiesHeader 
-        highlightedWord="SpeakHire" 
+        highlightedWord="Speakhire" 
         regularWord="Series"
         buttonConfig={{
           type: 'youtube',

@@ -20,7 +20,7 @@ const offeringsData = [
         title: "Leadership courses",
         description:
             "10-session courses to support individuals exploring careers.",
-        imageUrl: "/stock1.jpg",
+        imageUrl: "/Foundational Year/20191026_104734.jpg",
     },
     {
         title: "Foundational Year",
