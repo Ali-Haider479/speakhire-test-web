@@ -16,9 +16,11 @@ import React, { useState } from "react";
 import SpeakhireLogo from "@/public/speakhire-logo.png";
 import Footer from "@/components/Footer";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useRouter } from "next/navigation";
 
 function Navbar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const router = useRouter()
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -214,7 +216,6 @@ function Navbar() {
             >
               Login
             </Button>
-            <Link href="/donate">
               <Button
                 variant="contained"
                 sx={{
@@ -231,10 +232,10 @@ function Navbar() {
                   textTransform: "none",
                   fontWeight: "bold",
                 }}
+                onClick={(()=>router.replace("/donate"))}
               >
                 Donate
               </Button>
-            </Link>
           </Box>
         </Box>
       </Toolbar>

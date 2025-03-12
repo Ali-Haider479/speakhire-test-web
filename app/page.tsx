@@ -1,8 +1,8 @@
-"use client"
+// "use client"
 import { Box, Typography } from "@mui/material";
-import DonateComponent from '../components/DonateComponent';
-import StudentCarousel from '../components/StudentCarousel';
-import WorkForceComponent from '../components/WorkForceComponent';
+import DonateComponent from "../components/DonateComponent";
+import StudentCarousel from "../components/StudentCarousel";
+import WorkForceComponent from "../components/WorkForceComponent";
 import OfferingsSection from "@/components/OfferingsSelection";
 import Ecosystem from "@/components/Ecosystem";
 import BecomePartnerComponent from "@/components/BecomePartnerComponent";
@@ -16,23 +16,33 @@ import ImpactSection from "@/components/ImpactSection";
 import ImpactsLivesSection from "@/components/ImpactsLivesSection";
 import PartnerMapsSection from "@/components/PartnerMapsSection";
 
+async function getData() {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?populate=*`,
+    { next: { revalidate: 60 } }
+  );
 
-export default function Home() {
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json();
+}
+
+const Home = async () => {
+  const homePageRes = await getData();
+  console.log(homePageRes.data);
+  const data = homePageRes.data;
+
   return (
     <Box>
-      {/* <Typography color="black">Home Page</Typography> */}
-      {/* Render the components here for the given task */}
-      <SupportSection/>
-      <ImageSection
-        imageSrc="/stock2.jpg"
-      />
-      <ImpactSection/>
-      <PartnerMapsSection/>
-      <ImpactsLivesSection/>
-      <ObjectiveSection/>
-      {/* <ObjectivesComponent/> */}
-      <PartnersInfo/>
-      <PartnersTestimonials/>
+      <SupportSection data={data} />
+      <ImpactSection data={data} />
+      <PartnerMapsSection />
+      <ImpactsLivesSection data={data} />
+      <ObjectiveSection objectiveSection={data.objectiveSection} />
+      <PartnersInfo />
+      <PartnersTestimonials />
       <BecomePartnerComponent />
       <Ecosystem />
       <OfferingsSection />
@@ -41,4 +51,6 @@ export default function Home() {
       <DonateComponent />
     </Box>
   );
-}
+};
+
+export default Home;
