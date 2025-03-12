@@ -7,7 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Comfortaa, Quicksand } from "next/font/google";
 
 // Import the fonts here so they're only used on the client side
-const comforter = Comfortaa({
+const comfortaa = Comfortaa({
   weight: "400", // adjust weight as needed
   subsets: ["latin"],
 });
@@ -21,12 +21,12 @@ const theme = createTheme({
   typography: {
     // Default font for body text and other variants.
     fontFamily: quicksand.style.fontFamily,
-    h1: { fontFamily: comforter.style.fontFamily },
-    h2: { fontFamily: comforter.style.fontFamily },
-    h3: { fontFamily: comforter.style.fontFamily },
-    h4: { fontFamily: comforter.style.fontFamily },
-    h5: { fontFamily: comforter.style.fontFamily },
-    h6: { fontFamily: comforter.style.fontFamily },
+    h1: { fontFamily: comfortaa.style.fontFamily },
+    h2: { fontFamily: comfortaa.style.fontFamily },
+    h3: { fontFamily: comfortaa.style.fontFamily },
+    h4: { fontFamily: comfortaa.style.fontFamily },
+    h5: { fontFamily: comfortaa.style.fontFamily },
+    h6: { fontFamily: comfortaa.style.fontFamily },
     body1: { fontFamily: quicksand.style.fontFamily }
   },
 });

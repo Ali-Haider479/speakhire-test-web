@@ -112,6 +112,7 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
 
               {/* Action Buttons */}
               <Stack spacing={2}>
+              <Link href="/partner">
                 <Button
                   variant="contained"
                   fullWidth
@@ -135,6 +136,7 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
                     Become a partner now
                   </Typography>
                 </Button>
+              </Link>
                 <Link href="/donate">
                   <Button
                     variant="contained"
