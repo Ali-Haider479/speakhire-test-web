@@ -9,7 +9,7 @@ export default function VessionariesComponent() {
       sx={{
         width: '100vw', // Full viewport width
         backgroundColor: '#F2FAFD', // Light background color (you can adjust this to match your design, e.g., #ECF6FB or any other color)
-        padding: '20px 0', // Optional padding for spacing
+        padding: '20px 0',
         display: 'flex',
         justifyContent: 'center', // Center the inner content horizontally
         alignItems: 'center', // Center vertically if needed

@@ -59,18 +59,22 @@ function Team() {
       <MemberBoard
       title={executiveBoardTitle}
       members={boardMembers}
+      autoPlayInterval={1000}
       />
       <MemberBoard
       title={advisoryBoardTitle}
       members={boardMembers}
+      autoPlayInterval={1000}
       />
       <MemberBoard
       title={associateBoardTitle}
       members={boardMembers}
+      autoPlayInterval={1000}
       />
       <MemberBoard
       title={juniorBoardTitle}
       members={boardMembers}
+      autoPlayInterval={1000}
       />
       
     </Box>
