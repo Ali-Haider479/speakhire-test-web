@@ -114,12 +114,14 @@ const ActivitiesSection = () => {
   };
 
   return (
-    <Box sx={{
+    <Box sx={{width:"100%",display:"flex",flexDirection:"column",alignItems:"center"}}>
+      <Box sx={{
       display: 'flex',
       gap: 8,
       px: '10%',
       p: { xs: 2, md: 8 },
-      flexDirection: { xs: 'column', md: 'row' }
+      flexDirection: { xs: 'column', md: 'row' },
+      width:"80vw"
     }}>
       {/* Left Column */}
       <Box sx={{ flex: 1 }}>
@@ -133,7 +135,7 @@ const ActivitiesSection = () => {
           {activities.map((activity, index) => (
             <ListItem key={index} sx={{ pb: 2 }}>
               <ListItemIcon>
-                <StyledCheckIcon />
+                <img src="/checkBadge.svg" alt="checked List item" />
               </ListItemIcon>
               <ListItemText
                 primary={activity}
@@ -184,6 +186,8 @@ const ActivitiesSection = () => {
         </CarouselContainer>
       </Box>
     </Box>
+    </Box>
+    
   );
 };
 

@@ -15,12 +15,11 @@ import ImageSection from "@/components/ImageSection";
 import ImpactSection from "@/components/ImpactSection";
 import ImpactsLivesSection from "@/components/ImpactsLivesSection";
 import PartnerMapsSection from "@/components/PartnerMapsSection";
-import PageLayout from "@/components/PageLayout";
 
 export default function Home() {
   return (
     // <PageLayout>
-    <Box sx={{width:"85vw"}}>
+    <Box>
       <SupportSection />
       <ImageSection imageSrc="/stock2.jpg" />
       <ImpactSection />

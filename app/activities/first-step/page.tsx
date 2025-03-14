@@ -1,11 +1,10 @@
 import { Box, Button, styled, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
-import PageLayout from "@/components/PageLayout";
 
 const page = () => {
   return (
-    <PageLayout>
+    <Box sx={{width:"100%"}}>
       <Box
         sx={{
           padding: "100px 20px",
@@ -147,7 +146,7 @@ const page = () => {
           />
         </Box>
       </Box>
-    </PageLayout>
+    </Box>
   );
 };
 

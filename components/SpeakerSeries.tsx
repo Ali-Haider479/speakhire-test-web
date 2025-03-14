@@ -58,7 +58,7 @@ const speakers: Speaker[] = [
 
 const SpeakerSeries: React.FC = () => {
   return (
-    <Container maxWidth="lg" sx={{ py: 5 }}>
+    <Box sx={{ py: 5, width:"80vw" }}>
       {/* Header Section */}
       <Box sx={{ mb: 5 }}>
         <Typography 
@@ -168,7 +168,7 @@ const SpeakerSeries: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </Box>
   );
 };
 

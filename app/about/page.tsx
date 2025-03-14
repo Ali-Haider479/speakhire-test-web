@@ -11,7 +11,6 @@ import MegazineSection from "@/components/Megazine";
 import NewsSection from "@/components/NewsSection";
 import BuildingLeaders from "@/components/BuildingLeaders";
 import EcoSytemAbout from "@/components/EcoSystemAbout";
-import PageLayout from "@/components/PageLayout";
 
 import { Box, Typography } from "@mui/material";
 import React from "react";
@@ -19,7 +18,7 @@ import React from "react";
 
 function About() {
   return (
-    <PageLayout>
+    <Box>
       <BuildingLeaders/>
       <ObjectiveSection/>
       <EcoSytemAbout/>
@@ -35,7 +34,7 @@ function About() {
 
       <ActivitiesSection/>
       <DonateComponent/>
-    </PageLayout>
+    </Box>
   );
 }
 

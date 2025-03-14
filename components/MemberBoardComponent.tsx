@@ -214,7 +214,7 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
         transition: 'opacity 0.5s ease-in-out'
       }}
     >
-      <Box sx={{ maxWidth: 1200, margin: '0 auto' }}>
+      <Box sx={{ width: "80vw", margin: '0 auto' }}>
         {/* Title and subtitle section - full width */}
         {(title || subtitle) && (
           <Box sx={{ mb: 4, width: '100%' }}>
@@ -242,14 +242,14 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
           <Grid item xs={12} md={6} >
             
             <Card 
-              elevation={3} 
+              elevation={0} 
               sx={{ 
                 borderRadius: 6, 
                 overflow: 'hidden',
                 transition: 'all 0.5s ease',
                 position: 'relative',
                 mt: 0,
-                backgroundColor:'#ECF6FB'
+                backgroundColor:'#ECF6FB',
               }}
             >
               {/* Image container with transition */}
@@ -280,7 +280,7 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
                   />
                 ))}
               </Box>
-              <CardContent sx={{ p: 3, minHeight: '135px', position: 'relative', backgroundColor:'#ECF6FB' }}>
+              <CardContent sx={{ p: 3, minHeight: '180px', position: 'relative', backgroundColor:'#ECF6FB' }}>
                 {members.map((member, idx) => (
                   <Typography 
                     key={idx}
@@ -308,7 +308,7 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
                 active={index === activeMember}
                 onClick={() => handleMemberClick(index)}
               >
-                <ListItemAvatar>
+                <ListItemAvatar sx={{mr:3}}>
                   <Avatar 
                     src={member.imagePath}
                     alt={member.name}

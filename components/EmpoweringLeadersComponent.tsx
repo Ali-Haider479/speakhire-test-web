@@ -15,7 +15,7 @@ export default function EmpoweringLeadersComponent() {
   return (
     <Box
       sx={{
-        width: '100%',
+        width: '80vw',
         backgroundColor: '#F5F8FA', // Light blue background
         borderRadius: '30px',
         p: { xs: 3, md: 6 },

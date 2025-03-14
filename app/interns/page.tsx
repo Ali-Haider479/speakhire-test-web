@@ -13,8 +13,6 @@ import {
 import React from "react";
 import Image from "next/image";
 import TestimonialSection from "@/components/TestimonialSection";
-import PageLayout from "@/components/PageLayout";
-import { Height } from "@mui/icons-material";
 
 const programs = [
   {
@@ -116,7 +114,6 @@ const testimonialTitle = (
 
 const Interns = () => {
   return (
-    <PageLayout>
     <Box
       sx={{
         display: "flex",
@@ -429,7 +426,6 @@ const Interns = () => {
         </Box>
       </Box>
     </Box>
-    </PageLayout>
   );
 };
 

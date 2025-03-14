@@ -1,10 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import PageLayout from "@/components/PageLayout";
 import React from "react";
 
 function Contact() {
   return (
-    <PageLayout>
       <Box
         display="flex"
         justifyContent="center"
@@ -15,7 +13,6 @@ function Contact() {
           Contact Us Page
         </Typography>
       </Box>
-    </PageLayout>
   );
 }
 
