@@ -35,15 +35,14 @@ const Home = async () => {
   const data = homePageRes.data;
 
   return (
-    // <PageLayout>
     <Box>
-      <SupportSection data={data} />
-      <ImpactSection data={data} />
-      <PartnerMapsSection />
-      <ImpactsLivesSection data={data} />
-      <ObjectiveSection objectiveSection={data.objectiveSection} />
-      <PartnersInfo />
-      <PartnersTestimonials />
+      <SupportSection data={data.hero_section} />
+      <ImpactSection data={data.statistics_section} />
+      <PartnerMapsSection data={data.statistics_section}/>
+      <ImpactsLivesSection data={data.impact_lives_section} />
+      <ObjectiveSection data={data.objective_section} />
+      <PartnersInfo data={data.partner_info_section}/>
+      <PartnersTestimonials data={data.partners_testimonials_section}/>
       <BecomePartnerComponent />
       <Ecosystem />
       <OfferingsSection />
@@ -51,7 +50,6 @@ const Home = async () => {
       <StudentCarousel />
       <DonateComponent />
     </Box>
-    // </PageLayout>
   );
 };
 

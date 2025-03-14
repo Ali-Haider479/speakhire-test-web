@@ -8,6 +8,10 @@ import Image from "next/image";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
+type Props={
+  testimonials:any[]
+}
+
 // Sample data for partner testimonials
 const testimonials = [
   {
@@ -89,7 +93,7 @@ const CustomButtonGroup = ({
   </Box>
 );
 
-export default function PartnersCarousel() {
+export default function PartnersCarousel({testimonials}:Props) {
   return (
     <Box
       sx={{
@@ -111,7 +115,7 @@ export default function PartnersCarousel() {
           arrows={false} // Hide default arrows
           renderButtonGroupOutside
         >
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial:any, index:number) => (
             <Box
               key={index}
               sx={{
@@ -127,8 +131,8 @@ export default function PartnersCarousel() {
               }}
             >
               <Image
-                src={testimonial.logo}
-                alt={testimonial.name}
+                src={process.env.NEXT_PUBLIC_STRAPI_URL+testimonial.instituteLogo.source.url}
+                alt={testimonial.instituteLogo.alternate_text}
                 width={80}
                 height={80}
                 style={{ marginBottom: "20px" }}
@@ -141,7 +145,7 @@ export default function PartnersCarousel() {
                   marginBottom: "15px",
                 }}
               >
-                Exceptional performance
+                {testimonial.title}
               </Typography>
               <Typography
                 variant="body1"
@@ -157,7 +161,7 @@ export default function PartnersCarousel() {
                   WebkitBoxOrient: "vertical",
                 }}
               >
-                {testimonial.testimonial}
+                {testimonial.description}
               </Typography>
               <Box sx={{ borderLeft: "1px solid #0D5C75", mt: 2 }}>
                 <Typography
@@ -170,7 +174,7 @@ export default function PartnersCarousel() {
                     fontSize: 20,
                   }}
                 >
-                  {testimonial.title}
+                  {testimonial.designation}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -181,7 +185,7 @@ export default function PartnersCarousel() {
                     fontSize: 15,
                   }}
                 >
-                  {testimonial.name}
+                  {testimonial.institute_name}
                 </Typography>
               </Box>
             </Box>

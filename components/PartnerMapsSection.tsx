@@ -6,7 +6,31 @@ const title = `<span style= "color: #08547A;" }}>
                         4 States 
                     </span>with Partner Schools & Orgs`;
 
-const PartnerMapsSection = () => {
+interface PartnerMapsSectionProps {
+  data: {
+    countries_represented_title:string,
+    countries_represented_map_image:any,
+    presence_map_image:any,
+    presence_title:string,
+  };
+}
+
+const PartnerMapsSection = async ({ data }:PartnerMapsSectionProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWord = words[0];
+      const lastWords = words.slice(1).join(" ");
+
+      return (
+        <p>
+          <span style={{ color: "#08547A" }}>{firstWord}</span> {lastWords}
+        </p>
+      );
+    } else {
+      return "";
+    }
+  };
   return (
     <Box
       sx={{
@@ -43,7 +67,8 @@ const PartnerMapsSection = () => {
           {/* <span style={{ color: "#08547A" }}>4 States </span>with Partner
           Schools & Orgs */}
           {/* {title} */}
-          <div dangerouslySetInnerHTML={{ __html: title }} />
+          {/* <div dangerouslySetInnerHTML={{ __html: title }} /> */}
+          {HighlightText(data.presence_title)}   
         </Typography>
         <Box
           sx={{
@@ -56,7 +81,7 @@ const PartnerMapsSection = () => {
           }}
         >
           <Image
-            src="/usa-map.svg"
+            src={process.env.NEXT_PUBLIC_STRAPI_URL+data?.presence_map_image?.source?.url}
             alt="US Map with Partner States"
             width={400}
             height={300}
@@ -86,8 +111,7 @@ const PartnerMapsSection = () => {
             color: "#49454F",
           }}
         >
-          <span style={{ color: "#08547A" }}>70 </span>
-          countries represented
+          {HighlightText(data.countries_represented_title)}
         </Typography>
         <Box
           sx={{
@@ -100,7 +124,7 @@ const PartnerMapsSection = () => {
           }}
         >
           <Image
-            src="/world-map.svg"
+            src={process.env.NEXT_PUBLIC_STRAPI_URL+data?.countries_represented_map_image?.source?.url}
             alt="World Map with Represented Countries"
             width={400}
             height={400}

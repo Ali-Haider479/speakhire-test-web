@@ -4,16 +4,31 @@ import ImageSection from "./ImageSection";
 
 interface HeroSectionProps {
   data: {
-    heroSubTitle1: string;
-    heroSubTitle2: string;
-    heroSubTitle3: string;
-    heroDescription: string;
-    heroButtonText: string;
-    heroCoverImage: any;
+    title: string;
+    description: string;
+    button: any;
+    cover_image: any;
   };
 }
 
 const SupportSection = async ({ data }: HeroSectionProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWord = words[0];
+      const lastWord = words[words.length - 1];
+      const middleWords = words.slice(1, -1).join(" ");
+
+      return (
+        <p>
+          <span style={{ color: "#0F99C3" }}>{firstWord}</span> {middleWords}{" "}
+          <span style={{ color: "#08547A" }}>{lastWord}</span>
+        </p>
+      );
+    } else {
+      return "";
+    }
+  };
   return (
     <Box>
       <Box
@@ -38,8 +53,9 @@ const SupportSection = async ({ data }: HeroSectionProps) => {
             paddingTop: "10vh",
           }}
         >
-          <span style={{ color: "#0F99C3" }}>{data.heroSubTitle1} </span>
-          {data.heroSubTitle2} <span style={{ color: "#08547A" }}>leaders</span>
+          {/* <span style={{ color: "#0F99C3" }}>{data.heroSubTitle1} </span>
+          {data.heroSubTitle2} <span style={{ color: "#08547A" }}>leaders</span> */}
+          {HighlightText(data?.title)}
         </Typography>
         <Typography
           variant="body1"
@@ -75,7 +91,7 @@ const SupportSection = async ({ data }: HeroSectionProps) => {
           Make an impact today
         </Button>
       </Box>
-      <ImageSection imageSrc={data?.heroCoverImage?.url} />
+      <ImageSection imageSrc={data?.cover_image?.source?.url} />
     </Box>
   );
 };

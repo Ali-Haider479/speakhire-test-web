@@ -3,17 +3,13 @@ import { Box, Typography, Button } from "@mui/material";
 import Image from "next/image";
 
 interface ObjectiveSectionProps {
-  objectiveSection: {
-    objective1Title: string;
-    objective1SubText: string;
-    objective2Title: string;
-    objective2SubText: string;
-    objective3Title: string;
-    objective3SubText: string;
+  data: {
+    title:string,
+    objectives:any[]
   };
 }
 
-const ObjectiveSection = ({objectiveSection}:ObjectiveSectionProps) => {
+const ObjectiveSection = ({data}:ObjectiveSectionProps) => {
   return (
     <Box
       sx={{
@@ -83,7 +79,7 @@ const ObjectiveSection = ({objectiveSection}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns title to the left
             }}
           >
-            {objectiveSection.objective1Title}
+            {data.objectives[0].title}
           </Typography>
           <Typography
             variant="body1"
@@ -93,7 +89,7 @@ const ObjectiveSection = ({objectiveSection}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns description to the left
             }}
           >
-            {objectiveSection.objective1SubText}
+            {data.objectives[0].description}
           </Typography>
         </Box>
 
@@ -166,7 +162,7 @@ const ObjectiveSection = ({objectiveSection}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns title to the left
             }}
           >
-            {objectiveSection.objective2Title}
+            {data.objectives[1].title}
           </Typography>
           <Typography
             variant="body1"
@@ -176,7 +172,7 @@ const ObjectiveSection = ({objectiveSection}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns description to the left
             }}
           >
-            {objectiveSection.objective2SubText}
+            {data.objectives[1].description}
           </Typography>
         </Box>
 
@@ -249,7 +245,7 @@ const ObjectiveSection = ({objectiveSection}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns title to the left
             }}
           >
-            {objectiveSection.objective3Title}
+            {data.objectives[2].title}
           </Typography>
           <Typography
             variant="body1"
@@ -259,7 +255,7 @@ const ObjectiveSection = ({objectiveSection}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns description to the left
             }}
           >
-           {objectiveSection.objective3SubText}
+           {data.objectives[2].description}
           </Typography>
         </Box>
       </Box>

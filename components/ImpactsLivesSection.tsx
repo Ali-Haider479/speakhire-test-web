@@ -5,13 +5,9 @@ import YouTube from "react-youtube";
 
 interface ImpactsLivesSectionProps {
   data: {
-    impactLivesTitleSubtext1: string;
-    impactLivesTitleSubtext2: string;
-    impactLivesTitleSubtext3: string;
-    impactLivesDescription: string;
-    impactLivesVideoLink1: string;
-    impactLivesVideoLink2: string;
-    impactLivesVideoLink3: string;
+    title:string,
+    description:string,
+    links:any[]
   };
 }
 
@@ -23,11 +19,7 @@ function extractYouTubeID(url: string) {
 const ImpactsLivesSection = ({ data }: ImpactsLivesSectionProps) => {
   // Sample array of YouTube video IDs (replace with your actual video IDs)
   //   const videoIds = ["rH6EZrsBJG4", "4zokzUxKPLs", "mT1yas4HOlU"];
-  const videoLinks = [
-    data.impactLivesVideoLink1,
-    data.impactLivesVideoLink2,
-    data.impactLivesVideoLink3,
-  ];
+  const videoLinks = data.links.map((item:any)=>item.url)
   console.log(videoLinks);
 
   // Options for YouTube player (customize as needed)
@@ -40,6 +32,24 @@ const ImpactsLivesSection = ({ data }: ImpactsLivesSectionProps) => {
       modestbranding: 1, // Hide YouTube logo
       rel: 0, // Don't show related videos
     },
+  };
+
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWord = words[0];
+      const lastWords = words.slice(-2).join(" ");
+      const middleWord = words[1];
+
+      return (
+        <p>
+          {firstWord}  <span style={{ color: "#08547A" }}>{middleWord}</span>{" "}
+         {lastWords}
+        </p>
+      );
+    } else {
+      return "";
+    }
   };
   return (
     <Box
@@ -60,11 +70,7 @@ const ImpactsLivesSection = ({ data }: ImpactsLivesSectionProps) => {
           lineHeight: "1.2",
         }}
       >
-        {data.impactLivesTitleSubtext1}{" "}
-        <span style={{ color: "#08547A" }}>
-          {data.impactLivesTitleSubtext2}{" "}
-        </span>{" "}
-        {data.impactLivesTitleSubtext3}
+        {HighlightText(data?.title)}
       </Typography>
       <Box
         sx={{
@@ -83,7 +89,7 @@ const ImpactsLivesSection = ({ data }: ImpactsLivesSectionProps) => {
             margin: "0 auto", // Centers the text horizontally within its container
           }}
         >
-          {data.impactLivesDescription}
+          {data.description}
         </Typography>
       </Box>
 

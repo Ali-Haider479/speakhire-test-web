@@ -2,21 +2,29 @@ import { Box, Button, Grid, Typography } from '@mui/material'
 import Image from 'next/image';
 import React from 'react'
 
-export default function PartnersInfo() {
+interface PartnersInfoProps {
+    data: {
+      title:string,
+      description:string,
+      partner_logos:any[]
+    };
+  }
 
-    const partners = [
-        { src: '/partner1.png', alt: 'Partner 1' },
-        { src: '/partner2.png', alt: 'Partner 2' },
-        { src: '/partner3.png', alt: 'Partner 3' },
-        { src: '/partner4.png', alt: 'Partner 4' },
-        { src: '/partner5.png', alt: 'Partner 5' },
-        { src: '/partner6.png', alt: 'Partner 6' },
-        { src: '/partner7.png', alt: 'Partner 7' },
-        { src: '/partner8.png', alt: 'Partner 8' },
-        { src: '/partner9.png', alt: 'Partner 9' },
-        { src: '/partner10.png', alt: 'Partner 10' },
-        { src: '/partner11.png', alt: 'Partner 11' },
-    ];
+export default function PartnersInfo({data}:PartnersInfoProps) {
+
+    // const partners = [
+    //     { src: '/partner1.png', alt: 'Partner 1' },
+    //     { src: '/partner2.png', alt: 'Partner 2' },
+    //     { src: '/partner3.png', alt: 'Partner 3' },
+    //     { src: '/partner4.png', alt: 'Partner 4' },
+    //     { src: '/partner5.png', alt: 'Partner 5' },
+    //     { src: '/partner6.png', alt: 'Partner 6' },
+    //     { src: '/partner7.png', alt: 'Partner 7' },
+    //     { src: '/partner8.png', alt: 'Partner 8' },
+    //     { src: '/partner9.png', alt: 'Partner 9' },
+    //     { src: '/partner10.png', alt: 'Partner 10' },
+    //     { src: '/partner11.png', alt: 'Partner 11' },
+    // ];
 
 
     return (
@@ -27,14 +35,14 @@ export default function PartnersInfo() {
                     align="center"
                     sx={{ mb: 2, fontWeight: 400, color: 'black' }}
                 >
-                    Our partner schools and organizations
+                    {data.title}
                 </Typography>
                 <Typography
                     variant="body1"
                     align="center"
                     sx={{ mb: 6, maxWidth: 800, mx: "auto", color: '#49454F', fontSize: 22 }}
                 >
-                    Schools and organizations partner with us to help their students succeed
+                    {data.description}
                 </Typography>
             </Box>
 
@@ -51,7 +59,7 @@ export default function PartnersInfo() {
                 }}
             >
                 <Grid container spacing={4} justifyContent="center">
-                    {partners.map((partner, index) => (
+                    {data.partner_logos.map((partner, index) => (
                         <Grid item key={index} xs={6} sm={3} md={2}>
                             <Box
                                 sx={{
@@ -62,7 +70,7 @@ export default function PartnersInfo() {
                                 }}
                             >
                                 <Image
-                                    src={partner.src}
+                                    src={process.env.NEXT_PUBLIC_STRAPI_URL+partner.source.url}
                                     alt={partner.alt}
                                     width={120} // Adjust width as needed
                                     height={120} // Adjust height as needed

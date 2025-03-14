@@ -3,39 +3,51 @@ import { Box, Typography } from "@mui/material";
 
 interface ImpactSectionProps {
   data: {
-    objectiveSubtext1: string;
-    objectiveSubtext2: string;
-    countriesRepresentNo: string;
-    countriesRepresentText: string;
-    careerImpactedNo: string;
-    careerImpactedText: string;
-    internshipProvidedNo: string;
-    internShipProvidedText: string;
-    studentPreparedPercentage: string;
-    studentPreparedText: string;
+    description:string
+    statistics: any[];
   };
 }
 
 const ImpactSection = async ({ data }: ImpactSectionProps) => {
   // Static data for the statistics
-  const statsData = [
-    {
-      value: data.countriesRepresentNo,
-      description: data.countriesRepresentText,
-    },
-    {
-      value: data.careerImpactedNo,
-      description: data.careerImpactedText,
-    },
-    {
-      value: data.internshipProvidedNo,
-      description: data.internShipProvidedText,
-    },
-    {
-      value: data.studentPreparedPercentage,
-      description: data.studentPreparedText,
-    },
-  ];
+  const statsData = data.statistics.map((item: any) => {
+    return { value: item.count, description: item.description };
+  });
+
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWord = words[0];
+      const lastWords = words.slice(1).join(" ");
+
+      return (
+        <p>
+          <span style={{ color: "#08547A" }}>{firstWord}</span> {lastWords}
+        </p>
+      );
+    } else {
+      return "";
+    }
+  };
+
+  // [
+  //   {
+  //     value: data.countriesRepresentNo,
+  //     description: data.countriesRepresentText,
+  //   },
+  //   {
+  //     value: data.careerImpactedNo,
+  //     description: data.careerImpactedText,
+  //   },
+  //   {
+  //     value: data.internshipProvidedNo,
+  //     description: data.internShipProvidedText,
+  //   },
+  //   {
+  //     value: data.studentPreparedPercentage,
+  //     description: data.studentPreparedText,
+  //   },
+  // ];
 
   return (
     <Box
@@ -79,8 +91,7 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
             margin: "0 auto", // Centers the text horizontally within its container
           }}
         >
-          <span style={{ color: "#08547A" }}>{data.objectiveSubtext1} </span>{" "}
-          {data.objectiveSubtext2}
+          {HighlightText(data?.description)}
         </Typography>
       </Box>
 
