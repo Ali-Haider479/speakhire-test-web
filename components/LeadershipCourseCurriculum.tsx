@@ -55,7 +55,7 @@ export default function LeadershipCourseCurriculum() {
   return (
     <Box
       sx={{
-        width: '100%',
+        width: '80vw',
         py: 5, // Padding top and bottom
         px: { xs: 2, md: 8 }, // Responsive padding left and right
       }}

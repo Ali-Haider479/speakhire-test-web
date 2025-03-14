@@ -12,6 +12,7 @@ import {
 import React from "react";
 import Image from "next/image";
 
+
 const activities = [
   {
     title: "Speakhire Series",
@@ -92,6 +93,7 @@ const ChampionsSuccessStories = [
 
 const ChampionPage = () => {
   return (
+   
     <Box
       sx={{
         display: "flex",

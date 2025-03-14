@@ -14,17 +14,16 @@ const data = [
     designation: "UX Researcher - SPEAKHIRE Alumni",
     title: "Finding My Voice, My Skills, and My Future with SPEAKHIRE",
     note: "“I'm thankful to learn what it takes to achieve future goals and build my confidence to pursue them through SPEAKHIRE. This is my second year, and I've already had so many doors open for me by the successful women I connected with my first year. ”",
-    image:"/cathy'sStory.svg",
+    image: "/cathy'sStory.svg",
     isImageLeft: false,
     isTextRightAligned: true,
-    
   },
   {
     Name: "Wade Cooper",
     designation: "UX Researcher @ Google - Champion",
     title: "How Mentors Shape Careers and Inspire Success.",
     note: "“I'm thankful to learn what it takes to achieve future goals and build my confidence to pursue them through SPEAKHIRE. This is my second year, and I've already had so many doors open for me by the successful women I connected with my first year. ”",
-    image:"/wadeStory.svg",
+    image: "/wadeStory.svg",
     isImageLeft: true,
     isTextRightAligned: false,
   },
@@ -44,13 +43,14 @@ const page = () => {
       flexDirection={"column"}
       justifyContent="center"
       alignItems="center"
+      width="100%"
     >
       <FoundationYearSection />
       <FY_InternshipProgram />
       <EconomicMobilitySection />
       <InternNetworkCircleComponent />
       <InternshipOutcomesSection />
-      <TestimonialSection data={data} title={testimonialTitle}/>
+      <TestimonialSection data={data} title={testimonialTitle} />
       <CollaborationsCarousel />
     </Box>
   );

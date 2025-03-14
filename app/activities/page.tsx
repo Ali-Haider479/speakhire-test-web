@@ -3,6 +3,7 @@ import SpeakerSeries from "@/components/SpeakerSeries";
 import StudentCarousel from "@/components/StudentCarousel";
 import ActivitiesHeader from "@/components/ActivitiesHeader";
 import React from "react";
+import { Box } from "@mui/material";
 
 function Activities() {
   return (

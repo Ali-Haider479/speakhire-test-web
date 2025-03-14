@@ -13,7 +13,6 @@ import {
 import React from "react";
 import Image from "next/image";
 import TestimonialSection from "@/components/TestimonialSection";
-import { Height } from "@mui/icons-material";
 
 const programs = [
   {

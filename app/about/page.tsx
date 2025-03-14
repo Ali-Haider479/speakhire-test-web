@@ -12,19 +12,13 @@ import NewsSection from "@/components/NewsSection";
 import BuildingLeaders from "@/components/BuildingLeaders";
 import EcoSytemAbout from "@/components/EcoSystemAbout";
 
-
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
 
 function About() {
   return (
-    <Box
-
-    >
-      {/* <Typography color="black" variant="h4">
-        About Us Page
-      </Typography> */}
+    <Box>
       <BuildingLeaders/>
       <ObjectiveSection/>
       <EcoSytemAbout/>

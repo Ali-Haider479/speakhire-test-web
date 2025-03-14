@@ -35,6 +35,7 @@ const Home = async () => {
   const data = homePageRes.data;
 
   return (
+    // <PageLayout>
     <Box>
       <SupportSection data={data} />
       <ImpactSection data={data} />
@@ -50,6 +51,7 @@ const Home = async () => {
       <StudentCarousel />
       <DonateComponent />
     </Box>
+    // </PageLayout>
   );
 };
 

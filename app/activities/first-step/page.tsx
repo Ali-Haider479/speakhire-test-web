@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const page = () => {
   return (
-    <>
+    <Box sx={{width:"100%"}}>
       <Box
         sx={{
           padding: "100px 20px",
@@ -146,7 +146,7 @@ const page = () => {
           />
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 

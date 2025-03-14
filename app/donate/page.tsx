@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const Donate = () => {
   return (
-    <>
+    <Box>
       <DonateBetterWorldSection />
       <DonateStorySection />
       <DonationPackage />
@@ -49,7 +49,7 @@ const Donate = () => {
         </Box>
       </Box>
       <DonateComponent />
-    </>
+    </Box>
   );
 };
 

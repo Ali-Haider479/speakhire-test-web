@@ -68,7 +68,7 @@ export default function LeadershipCurriculum() {
     >
       <Box
         sx={{
-          maxWidth: '1200px',
+          width:"80vw",
           margin: '0 auto',
           padding: '0 24px',
         }}

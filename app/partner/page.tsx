@@ -28,9 +28,7 @@ function Partner() {
         }
       ];
   return (
-    <Box
-
-    >
+    <Box>
         <PartnershipBanner 
         title="Together,"
         subtitle="we're building the workforce of tomorrow"

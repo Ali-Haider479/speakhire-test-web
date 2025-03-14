@@ -22,9 +22,9 @@ export default function EcoSytemAbout() {
 
             <Box
                 sx={{
-                    width: '45%', // Width adjusted
+                    width: '40%', // Width adjusted
                     backgroundColor: '#E6F2F9', // Light background color to match the image
-                    borderRadius: '20px', // Rounded corners to match the image
+                    borderRadius: '40px', // Rounded corners to match the image
                     paddingY: 5, // Add padding for spacing
                     paddingX: 4,
                     display: 'flex',

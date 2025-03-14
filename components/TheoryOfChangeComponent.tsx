@@ -10,7 +10,7 @@ export default function TheoryOfChangeComponent() {
                 padding: '20px',
                 borderRadius: '0px',
                 display: 'flex',
-                justifyContent: 'space-between',
+                justifyContent: 'center',
                 alignItems: 'center',
                 marginTop: 5,
                 height: '60vh'
@@ -19,7 +19,7 @@ export default function TheoryOfChangeComponent() {
             {/* Left section with text content */}
             <Box
                 sx={{
-                    width: '50%',
+                    width: '50vw',
 
                     display: 'flex',
                     flexDirection: 'column',
@@ -41,7 +41,7 @@ export default function TheoryOfChangeComponent() {
 
                 <Box sx={{ mb: 3 }}>
                     <Typography
-                        variant="h5"
+                        variant="h4"
                         sx={{
                             fontWeight: 'medium',
                             marginBottom: 1,
@@ -71,7 +71,7 @@ export default function TheoryOfChangeComponent() {
             {/* Right section with YouTube video */}
             <Box
                 sx={{
-                    width: '43%',
+                    width: '40vw',
                     height: '400px',
                     position: 'relative',
                     borderRadius: '20px',

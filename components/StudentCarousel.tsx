@@ -133,88 +133,106 @@ const StudentCarousel = () => {
   const carouselRef = useRef<any>(null);
 
   return (
-    <Box sx={{ margin: "0 auto", padding: "32px 16px", backgroundColor: "#F2FAFD" }}>
-      {/* Header Section */}
-      <Box sx={{ textAlign: "center", marginBottom: 6 }}>
-        <Typography variant="h3" sx={{ fontWeight: 400, marginBottom: 2, "& span": { color: "#2196f3" }, color: "black" }}>
-          Student <span>Success Stories</span>
-        </Typography>
-        <Typography variant="body1" sx={{ color: "#666", fontSize: "1.2rem" }}>
-          Explore real-life success stories from our students that have achieved remarkable results
-        </Typography>
-      </Box>
-
-      {/* Carousel Section */}
-      <Carousel
-        ref={carouselRef}
-        responsive={responsive}
-        infinite
-        centerMode
-        focusOnSelect
-        renderButtonGroupOutside
-        arrows={false}
-        customButtonGroup={
-          <CustomButtonGroup
-            next={() => carouselRef.current?.next()}
-            previous={() => carouselRef.current?.previous()}
-            setActiveIndex={setActiveIndex}
-            totalSlides={testimonials.length}
-          />
-        }
-      >
-        {testimonials.map((student, index) => (
-          <Box
-            key={student.id}
+    <Box sx={{ backgroundColor: "#F2FAFD",width:"100%" }}>
+      <Box sx={{ margin: "0 auto", padding: "32px 16px", width: "80vw" }}>
+        {/* Header Section */}
+        <Box sx={{ textAlign: "center", marginBottom: 6 }}>
+          <Typography
+            variant="h3"
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
-              transform: "scale(1)",
-              opacity: activeIndex === index ? 1 : 0.5,
+              fontWeight: 400,
+              marginBottom: 2,
+              "& span": { color: "#2196f3" },
+              color: "black",
             }}
           >
-            <Paper
+            Student <span>Success Stories</span>
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{ color: "#666", fontSize: "1.2rem" }}
+          >
+            Explore real-life success stories from our students that have
+            achieved remarkable results
+          </Typography>
+        </Box>
+
+        {/* Carousel Section */}
+        <Carousel
+          ref={carouselRef}
+          responsive={responsive}
+          infinite
+          centerMode
+          focusOnSelect
+          renderButtonGroupOutside
+          arrows={false}
+          customButtonGroup={
+            <CustomButtonGroup
+              next={() => carouselRef.current?.next()}
+              previous={() => carouselRef.current?.previous()}
+              setActiveIndex={setActiveIndex}
+              totalSlides={testimonials.length}
+            />
+          }
+        >
+          {testimonials.map((student, index) => (
+            <Box
+              key={student.id}
               sx={{
-                width: "46vw",
-                p:6,
-                borderRadius: 5,
-                py: 5,
-                pb:2,
-                my: 3,
-                backgroundColor:  "#E9F6FB",
-                textAlign: "center",
-                transition: "all 0.3s ease-in-out",
+                display: "flex",
+                justifyContent: "center",
+                transition:
+                  "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
+                transform: "scale(1)",
+                opacity: activeIndex === index ? 1 : 0.5,
               }}
-              aria-label={`testimonial by ${student.name}`}
             >
-              <Typography
-                variant="body1"
+              <Paper
                 sx={{
-                  color: "#0C111D",
-                  marginBottom: 5,
-                  fontWeight: 400,
+                  width: "38vw",
+                  p: 6,
+                  borderRadius: 5,
+                  py: 5,
+                  pb: 2,
+                  my: 3,
+                  backgroundColor: "#E9F6FB",
+                  textAlign: "center",
+                  transition: "all 0.3s ease-in-out",
                 }}
+                aria-label={`testimonial by ${student.name}`}
               >
-                {student.text}
-              </Typography>
-              <Avatar
-                sx={{
-                  width: 60,
-                  height: 60,
-                  margin: "0 auto 16px",
-                  backgroundColor: "#bbdefb",
-                  transform: "scale(1)",
-                  transition: "transform 0.3s ease-in-out",
-                }}
-                src={student.image}
-              />
-              <Typography variant="body1" sx={{ fontWeight: 400, marginBottom: 1 }}>
-                {student.name} '{student.year}
-              </Typography>
-            </Paper>
-          </Box>
-        ))}
-      </Carousel>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "#0C111D",
+                    marginBottom: 5,
+                    fontWeight: 400,
+                  }}
+                >
+                  {student.text}
+                </Typography>
+                <Avatar
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    margin: "0 auto 16px",
+                    backgroundColor: "#bbdefb",
+                    transform: "scale(1)",
+                    transition: "transform 0.3s ease-in-out",
+                  }}
+                  src={student.image}
+                />
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 400, marginBottom: 1 }}
+                >
+                  {student.name} '{student.year}
+                </Typography>
+              </Paper>
+            </Box>
+          ))}
+        </Carousel>
+      </Box>
     </Box>
   );
 };
