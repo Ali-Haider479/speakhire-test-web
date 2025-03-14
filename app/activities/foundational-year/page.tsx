@@ -7,6 +7,8 @@ import FY_InternshipProgram from "@/components/FY_InternshipProgram";
 import InternNetworkCircleComponent from "@/components/InternNetworkCircleComponent";
 import InternshipOutcomesSection from "@/components/InternshipOutcomesSection";
 import TestimonialSection from "@/components/TestimonialSection";
+import PageLayout from "@/components/PageLayout";
+
 
 const data = [
   {
@@ -39,12 +41,7 @@ const testimonialTitle = (
 
 const page = () => {
   return (
-    <Box
-      display="flex"
-      flexDirection={"column"}
-      justifyContent="center"
-      alignItems="center"
-    >
+    <PageLayout>
       <FoundationYearSection />
       <FY_InternshipProgram />
       <EconomicMobilitySection />
@@ -52,7 +49,16 @@ const page = () => {
       <InternshipOutcomesSection />
       <TestimonialSection data={data} title={testimonialTitle}/>
       <CollaborationsCarousel />
-    </Box>
+
+    </PageLayout>
+    // <Box
+    //   display="flex"
+    //   flexDirection={"column"}
+    //   justifyContent="center"
+    //   alignItems="center"
+    // >
+      
+    // </Box>
   );
 };
 

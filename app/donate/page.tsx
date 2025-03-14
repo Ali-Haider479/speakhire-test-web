@@ -4,13 +4,14 @@ import DonateStorySection from "@/components/DonateStorySection";
 import DonationCarousel from "@/components/DonationCarousel";
 import DonationPackage from "@/components/DonationPackage";
 import ExploreOtherWaysSection from "@/components/ExploreOtherWaysSection";
+import PageLayout from "@/components/PageLayout";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 
 const Donate = () => {
   return (
-    <>
+    <PageLayout>
       <DonateBetterWorldSection />
       <DonateStorySection />
       <DonationPackage />
@@ -49,7 +50,7 @@ const Donate = () => {
         </Box>
       </Box>
       <DonateComponent />
-    </>
+    </PageLayout>
   );
 };
 

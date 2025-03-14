@@ -6,6 +6,7 @@ import EmpoweringLeadersComponent from "@/components/EmpoweringLeadersComponent"
 import ActivitiesHeader from "@/components/ActivitiesHeader";
 import MemberBoard from "@/components/MemberBoardComponent";
 import React from "react";
+import PageLayout from "@/components/PageLayout";
 
 
 const page = () => {
@@ -30,8 +31,7 @@ const page = () => {
     }
   ];
   return (
-    <Box
-    >
+    <PageLayout>
       <ActivitiesHeader 
         highlightedWord="Leadership" 
         regularWord="Courses"
@@ -58,7 +58,7 @@ const page = () => {
       />
       <StudentCarousel/>
       
-    </Box>
+    </PageLayout>
   );
 };
 

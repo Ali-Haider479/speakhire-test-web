@@ -5,6 +5,7 @@ import PartnersInfo from "@/components/PartnersInfo";
 import PartnershipBanner from "@/components/PartnershipBanner";
 import ImageSection from "@/components/ImageSection";
 import ImpactSection from "@/components/ImpactSection";
+import PageLayout from "@/components/PageLayout";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
@@ -28,9 +29,7 @@ function Partner() {
         }
       ];
   return (
-    <Box
-
-    >
+    <PageLayout>
         <PartnershipBanner 
         title="Together,"
         subtitle="we're building the workforce of tomorrow"
@@ -50,7 +49,7 @@ function Partner() {
         testimonials={testimonialData}
         />
       
-    </Box>
+    </PageLayout>
   );
 }
 

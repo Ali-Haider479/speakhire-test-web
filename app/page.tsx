@@ -15,13 +15,12 @@ import ImageSection from "@/components/ImageSection";
 import ImpactSection from "@/components/ImpactSection";
 import ImpactsLivesSection from "@/components/ImpactsLivesSection";
 import PartnerMapsSection from "@/components/PartnerMapsSection";
+import PageLayout from "@/components/PageLayout";
 
 
 export default function Home() {
   return (
-    <Box>
-      {/* <Typography color="black">Home Page</Typography> */}
-      {/* Render the components here for the given task */}
+    <PageLayout>
       <SupportSection/>
       <ImageSection
         imageSrc="/stock2.jpg"
@@ -39,6 +38,7 @@ export default function Home() {
       <WorkForceComponent />
       <StudentCarousel />
       <DonateComponent />
-    </Box>
+
+    </PageLayout>
   );
 }

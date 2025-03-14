@@ -9,8 +9,10 @@ import {
   Grid2,
   Typography,
 } from "@mui/material";
+import PageLayout from "@/components/PageLayout";
 import React from "react";
 import Image from "next/image";
+
 
 const activities = [
   {
@@ -92,6 +94,7 @@ const ChampionsSuccessStories = [
 
 const ChampionPage = () => {
   return (
+    <PageLayout>
     <Box
       sx={{
         display: "flex",
@@ -599,6 +602,7 @@ const ChampionPage = () => {
         </Box>
       </Box>
     </Box>
+    </PageLayout>
   );
 };
 
