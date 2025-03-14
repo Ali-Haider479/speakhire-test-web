@@ -43,7 +43,7 @@ export default function RootLayout({
       >
         <ClientThemeProvider>
           <Navbar />
-          <main>{children}</main>
+          <main style={{display:"flex", flexDirection:"column", alignItems:"center"}}>{children}</main>
           <Footer />
         </ClientThemeProvider>
       </body>

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { Box, Typography } from "@mui/material";
-import DonateComponent from '../components/DonateComponent';
-import StudentCarousel from '../components/StudentCarousel';
-import WorkForceComponent from '../components/WorkForceComponent';
+import DonateComponent from "../components/DonateComponent";
+import StudentCarousel from "../components/StudentCarousel";
+import WorkForceComponent from "../components/WorkForceComponent";
 import OfferingsSection from "@/components/OfferingsSelection";
 import Ecosystem from "@/components/Ecosystem";
 import BecomePartnerComponent from "@/components/BecomePartnerComponent";
@@ -17,28 +17,26 @@ import ImpactsLivesSection from "@/components/ImpactsLivesSection";
 import PartnerMapsSection from "@/components/PartnerMapsSection";
 import PageLayout from "@/components/PageLayout";
 
-
 export default function Home() {
   return (
-    <PageLayout>
-      <SupportSection/>
-      <ImageSection
-        imageSrc="/stock2.jpg"
-      />
-      <ImpactSection/>
-      <PartnerMapsSection/>
-      <ImpactsLivesSection/>
-      <ObjectiveSection/>
+    // <PageLayout>
+    <Box sx={{width:"85vw"}}>
+      <SupportSection />
+      <ImageSection imageSrc="/stock2.jpg" />
+      <ImpactSection />
+      <PartnerMapsSection />
+      <ImpactsLivesSection />
+      <ObjectiveSection />
       {/* <ObjectivesComponent/> */}
-      <PartnersInfo/>
-      <PartnersTestimonials/>
+      <PartnersInfo />
+      <PartnersTestimonials />
       <BecomePartnerComponent />
       <Ecosystem />
       <OfferingsSection />
       <WorkForceComponent />
       <StudentCarousel />
       <DonateComponent />
-
-    </PageLayout>
+    </Box>
+    // </PageLayout>
   );
 }

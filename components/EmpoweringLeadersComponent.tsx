@@ -20,7 +20,6 @@ export default function EmpoweringLeadersComponent() {
         borderRadius: '30px',
         p: { xs: 3, md: 6 },
         my: 4,
-        maxWidth: '1200px',
         mx: 'auto',
       }}
     >
