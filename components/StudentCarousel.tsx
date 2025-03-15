@@ -143,13 +143,13 @@ const StudentCarousel = ({data}:StudentCarouselProps) => {
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
       const words = text.split(" ");
-      const firstPart = words.slice(0,3).join(" ");;
-      const secondPart = words.slice(3).join(" ");
+      const firstPart = words.slice(0,1).join(" ");;
+      const secondPart = words.slice(1).join(" ");
 
       return (
         <p>
             {firstPart}
-          <span style={{ color: "#0F99C3" }}> {secondPart} </span> 
+          <span style={{ color: "#2196f3" }}> {secondPart} </span> 
           
         </p>
       );
@@ -168,18 +168,16 @@ const StudentCarousel = ({data}:StudentCarouselProps) => {
             sx={{
               fontWeight: 400,
               marginBottom: 2,
-              "& span": { color: "#2196f3" },
               color: "black",
             }}
           >
-            Student <span>Success Stories</span>
+            {HighlightText(data.title)}
           </Typography>
           <Typography
             variant="body1"
             sx={{ color: "#666", fontSize: "1.2rem" }}
           >
-            Explore real-life success stories from our students that have
-            achieved remarkable results
+            {data.description}
           </Typography>
         </Box>
 
