@@ -15,22 +15,47 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 // Example data for each offering card.
 // Replace with your own images, titles, and descriptions.
-const offeringsData = [
-  {
-    title: "Partners & Orgs",
-    imageUrl: "/stock2.jpg",
-  },
-  {
-    title: "Interns (Career trainees)",
-    imageUrl: "/stock1.jpg",
-  },
-  {
-    title: "Champions (Trainers)",
-    imageUrl: "/stock2.jpg",
-  },
-];
+// const offeringsData = [
+//   {
+//     title: "Partners & Orgs",
+//     imageUrl: "/stock2.jpg",
+//   },
+//   {
+//     title: "Interns (Career trainees)",
+//     imageUrl: "/stock1.jpg",
+//   },
+//   {
+//     title: "Champions (Trainers)",
+//     imageUrl: "/stock2.jpg",
+//   },
+// ];
 
-export default function Ecosystem() {
+interface EcosystemProps{
+  data: {
+      title: string;
+      description: string;
+      eco_system_cards:any[]
+    };
+}
+
+export default function Ecosystem({data}:EcosystemProps) {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstPart = words.slice(0,1).join(" ");;
+      const secondPart = words.slice(1).join(" ");
+
+      return (
+        <p>
+             
+          <span style={{ color: "#0F99C3" }}> {firstPart} </span> 
+          {secondPart}
+        </p>
+      );
+    } else {
+      return "";
+    }
+  }
   return (
     <Box sx={{ backgroundColor: "white" }}>
       <Box sx={{ py: 6, px: { xs: 2, md: 6 }, width: "80vw", mx: "auto" }}>
@@ -40,21 +65,19 @@ export default function Ecosystem() {
           align="center"
           sx={{ mb: 2, fontWeight: 400, color: "black" }}
         >
-          <span style={{ color: "#08547A" }}>SPEAKHIRE </span>
-          Ecosystem
+          {HighlightText(data.title)}
         </Typography>
         <Typography
           variant="h6"
           align="center"
           sx={{ mb: 6, maxWidth: 800, mx: "auto", color: "#49454F" }}
         >
-          We bring together community resources, a network of professionals to
-          facilitate and empower individuals from immigrant families.
+          {data.description}
         </Typography>
 
         {/* Cards Grid */}
         <Grid container spacing={4} justifyContent="center">
-          {offeringsData.map((offer, index) => (
+          {data.eco_system_cards.map((offer, index) => (
             <Grid
               item
               key={index}
@@ -78,7 +101,7 @@ export default function Ecosystem() {
                 <CardMedia
                   component="img"
                   height="auto"
-                  image={offer.imageUrl}
+                  image={process.env.NEXT_PUBLIC_STRAPI_URL+offer.card_image.source.url}
                   alt={offer.title}
                   sx={{
                     p: 1,

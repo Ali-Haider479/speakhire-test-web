@@ -79,7 +79,7 @@ const ObjectiveSection = ({data}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns title to the left
             }}
           >
-            {data.objectives[0].title}
+            {data?.objectives[0]?.title}
           </Typography>
           <Typography
             variant="body1"
@@ -89,7 +89,7 @@ const ObjectiveSection = ({data}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns description to the left
             }}
           >
-            {data.objectives[0].description}
+            {data?.objectives[0]?.description}
           </Typography>
         </Box>
 
@@ -162,7 +162,7 @@ const ObjectiveSection = ({data}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns title to the left
             }}
           >
-            {data.objectives[1].title}
+            {data?.objectives[1]?.title}
           </Typography>
           <Typography
             variant="body1"
@@ -172,7 +172,7 @@ const ObjectiveSection = ({data}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns description to the left
             }}
           >
-            {data.objectives[1].description}
+            {data?.objectives[1]?.description}
           </Typography>
         </Box>
 
@@ -245,7 +245,7 @@ const ObjectiveSection = ({data}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns title to the left
             }}
           >
-            {data.objectives[2].title}
+            {data?.objectives[2]?.title}
           </Typography>
           <Typography
             variant="body1"
@@ -255,7 +255,7 @@ const ObjectiveSection = ({data}:ObjectiveSectionProps) => {
               marginLeft: "0", // Aligns description to the left
             }}
           >
-           {data.objectives[2].description}
+           {data?.objectives[2]?.description}
           </Typography>
         </Box>
       </Box>

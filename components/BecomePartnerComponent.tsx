@@ -2,7 +2,33 @@ import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
 
-export default function BecomePartnerComponent() {
+interface BecomePartnerComponentProps{
+    data: {
+        title: string;
+        description: string;
+        cover_image: any;
+        button:any
+      };
+}
+
+export default function BecomePartnerComponent({data}:BecomePartnerComponentProps) {
+    const HighlightText = (text: string) => {
+        if (text?.length > 0) {
+          const words = text.split(" ");
+          const firstPart = words.slice(0,3).join(" ");;
+          const secondPart = words.slice(3).join(" ");
+    
+          return (
+            <p>
+                 
+              <span style={{ color: "#0F99C3" }}> {firstPart} </span> 
+              {secondPart}
+            </p>
+          );
+        } else {
+          return "";
+        }
+      }
     return (
         <Box
             sx={{
@@ -39,8 +65,7 @@ export default function BecomePartnerComponent() {
                         marginBottom: 1,
                     }}
                 >
-                    <span style={{color:'#0F99C3'}}>Partner with us{" "}</span>
-                    to help future talent succeed
+                    {HighlightText(data.title)}
                 </Typography>
                 <Typography
                     variant="body1"
@@ -49,7 +74,7 @@ export default function BecomePartnerComponent() {
                         fontSize: 20
                     }}
                 >
-                    Your support helps individuals from immigrant families build the confidence.
+                    {data.description}
                 </Typography>
                 <Button
                     variant="contained"
@@ -60,12 +85,13 @@ export default function BecomePartnerComponent() {
                         '&:hover': {
                             bgcolor: '#0A4A5E', // Darker hover effect
                         },
-                        marginTop: 2
+                        marginTop: 2,
+                        textTransform:"none",
+                        fontWeight:"bold",
+                        fontSize:16                       
                     }}
                 >
-                    <Typography variant='body1' sx={{ fontSize: 18, fontWeight: 'bold', textTransform: 'none' }}>
-                        Become a partner now
-                    </Typography>
+                    {data?.button?.inner_text}
                 </Button>
             </Box>
 

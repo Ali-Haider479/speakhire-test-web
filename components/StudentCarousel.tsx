@@ -13,31 +13,39 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 interface TestimonialType {
   id: number;
   name: string;
-  year: string;
-  text: string;
-  image?: string;
+  age: string;
+  story: string;
+  picture: any;
 }
 
-const testimonials: TestimonialType[] = [
-  {
-    id: 1,
-    name: "Stacy",
-    year: "18",
-    text: "This is my second year in SPEAKHIRE's Foundational Year, and I'm excited to work with more career professionals in business who can help me choose the right business career pathway for my future. As a SPEAKHIRE intern, I gained valuable skills and information my first year and know I'll be able to continue to work on skills that I can apply at a future job and gain more information about colleges and careers that are right for me.",
-  },
-  {
-    id: 2,
-    name: "Afrida",
-    year: "20",
-    text: "This is my second year in SPEAKHIRE's Foundational Year, and I'm excited to work with more career professionals in business who can help me choose the right business career pathway for my future. As a SPEAKHIRE intern, I gained valuable skills and information my first year and know I'll be able to continue to work on skills that I can apply at a future job and gain more information about colleges and careers that are right for me.",
-  },
-  {
-    id: 3,
-    name: "Dayra",
-    year: "21",
-    text: "This is my second year in SPEAKHIRE's Foundational Year, and I'm excited to work with more career professionals in business who can help me choose the right business career pathway for my future. As a SPEAKHIRE intern, I gained valuable skills and information my first year and know I'll be able to continue to work on skills that I can apply at a future job and gain more information about colleges and careers that are right for me.",
-  },
-];
+interface StudentCarouselProps{
+  data:{
+    title:string,
+    description:string,
+    studentCards: TestimonialType[]
+  }
+}
+
+// const testimonials: TestimonialType[] = [
+//   {
+//     id: 1,
+//     name: "Stacy",
+//     year: "18",
+//     text: "This is my second year in SPEAKHIRE's Foundational Year, and I'm excited to work with more career professionals in business who can help me choose the right business career pathway for my future. As a SPEAKHIRE intern, I gained valuable skills and information my first year and know I'll be able to continue to work on skills that I can apply at a future job and gain more information about colleges and careers that are right for me.",
+//   },
+//   {
+//     id: 2,
+//     name: "Afrida",
+//     year: "20",
+//     text: "This is my second year in SPEAKHIRE's Foundational Year, and I'm excited to work with more career professionals in business who can help me choose the right business career pathway for my future. As a SPEAKHIRE intern, I gained valuable skills and information my first year and know I'll be able to continue to work on skills that I can apply at a future job and gain more information about colleges and careers that are right for me.",
+//   },
+//   {
+//     id: 3,
+//     name: "Dayra",
+//     year: "21",
+//     text: "This is my second year in SPEAKHIRE's Foundational Year, and I'm excited to work with more career professionals in business who can help me choose the right business career pathway for my future. As a SPEAKHIRE intern, I gained valuable skills and information my first year and know I'll be able to continue to work on skills that I can apply at a future job and gain more information about colleges and careers that are right for me.",
+//   },
+// ];
 
 const responsive = {
   desktop: {
@@ -128,9 +136,27 @@ const CustomButtonGroup = ({
   );
 };
 
-const StudentCarousel = () => {
+const StudentCarousel = ({data}:StudentCarouselProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef<any>(null);
+
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstPart = words.slice(0,3).join(" ");;
+      const secondPart = words.slice(3).join(" ");
+
+      return (
+        <p>
+            {firstPart}
+          <span style={{ color: "#0F99C3" }}> {secondPart} </span> 
+          
+        </p>
+      );
+    } else {
+      return "";
+    }
+  }
 
   return (
     <Box sx={{ backgroundColor: "#F2FAFD",width:"100%" }}>
@@ -171,11 +197,11 @@ const StudentCarousel = () => {
               next={() => carouselRef.current?.next()}
               previous={() => carouselRef.current?.previous()}
               setActiveIndex={setActiveIndex}
-              totalSlides={testimonials.length}
+              totalSlides={data.studentCards.length}
             />
           }
         >
-          {testimonials.map((student, index) => (
+          {data.studentCards.map((student, index) => (
             <Box
               key={student.id}
               sx={{
@@ -209,7 +235,7 @@ const StudentCarousel = () => {
                     fontWeight: 400,
                   }}
                 >
-                  {student.text}
+                  {student.story}
                 </Typography>
                 <Avatar
                   sx={{
@@ -220,13 +246,13 @@ const StudentCarousel = () => {
                     transform: "scale(1)",
                     transition: "transform 0.3s ease-in-out",
                   }}
-                  src={student.image}
+                  src={process.env.NEXT_PUBLIC_STRAPI_URL+student.picture.source.url}
                 />
                 <Typography
                   variant="body1"
                   sx={{ fontWeight: 400, marginBottom: 1 }}
                 >
-                  {student.name} '{student.year}
+                  {student.name} '{student.age}
                 </Typography>
               </Paper>
             </Box>

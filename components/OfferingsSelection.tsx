@@ -47,7 +47,15 @@ const offeringsData = [
   },
 ];
 
-export default function OfferingsSection() {
+interface OfferingsSectionProps{
+  data: {
+      title: string;
+      description: string;
+      offering_cards:any[]
+    };
+}
+
+export default function OfferingsSection({data}:OfferingsSectionProps) {
   return (
     <Box sx={{ backgroundColor: "white" }}>
       <Box sx={{ py: 6, px: { xs: 2, md: 6 }, width: "80vw", mx: "auto" }}>
@@ -57,21 +65,19 @@ export default function OfferingsSection() {
           align="center"
           sx={{ mb: 2, fontWeight: 400, color: "black" }}
         >
-          What we offer?
+         {data.title}
         </Typography>
         <Typography
           variant="h6"
           align="center"
           sx={{ mb: 6, maxWidth: 800, mx: "auto", color: "#49454F" }}
         >
-          We provide tailored programs and resources designed to empower
-          students from immigrant families to succeed academically,
-          professionally, and personally.
+         {data.description}
         </Typography>
 
         {/* Cards Grid */}
         <Grid container spacing={4} justifyContent="center">
-          {offeringsData.map((offer, index) => (
+          {data.offering_cards.map((offer, index) => (
             <Grid
               item
               key={index}
@@ -95,7 +101,7 @@ export default function OfferingsSection() {
                 <CardMedia
                   component="img"
                   height="auto"
-                  image={offer.imageUrl}
+                  image={process.env.NEXT_PUBLIC_STRAPI_URL+offer.image.source.url}
                   alt={offer.title}
                   sx={{
                     p: 1,

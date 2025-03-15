@@ -43,11 +43,11 @@ const Home = async () => {
       <ObjectiveSection data={data.objective_section} />
       <PartnersInfo data={data.partner_info_section}/>
       <PartnersTestimonials data={data.partners_testimonials_section}/>
-      <BecomePartnerComponent />
-      <Ecosystem />
-      <OfferingsSection />
-      <WorkForceComponent />
-      <StudentCarousel />
+      <BecomePartnerComponent data={data.become_partner_section}/>
+      <Ecosystem data={data.eco_system_section}/>
+      <OfferingsSection data={data.eco_system_section.offering_section}/>
+      <WorkForceComponent data={data.workforce_section}/>
+      <StudentCarousel data={data.student_stories_section}/>
       <DonateComponent />
     </Box>
   );
