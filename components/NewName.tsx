@@ -44,6 +44,7 @@ function NewNameComponent() {
           sx={{ 
             lineHeight: 1.7,
             fontWeight:400,
+            fontSize:16,
             '& .highlight': {
               fontWeight: 'bold'
             }

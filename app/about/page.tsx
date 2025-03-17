@@ -15,23 +15,52 @@ import EcoSytemAbout from "@/components/EcoSystemAbout";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
+async function getData() {
+  try {
+    const [aboutPageResponse, commonItemsResponse] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/about?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+    ]);
 
-function About() {
+    if (!aboutPageResponse.ok || !commonItemsResponse.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const [homePageData, commonItemsData] = await Promise.all([
+      aboutPageResponse.json(),
+      commonItemsResponse.json(),
+    ]);
+
+    return {
+      ...homePageData?.data,
+     ...commonItemsData.data,
+    };
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw error;
+  }
+}
+
+async function About() {
+  const aboutPageRes = await getData();
+  console.log(aboutPageRes);
+  const data = aboutPageRes;
   return (
     <Box>
-      <BuildingLeaders/>
-      <ObjectiveSection/>
+      <BuildingLeaders data={data.hero_section}/>
+      <ObjectiveSection data={data.objective_section}/>
       <EcoSytemAbout/>
       <TheoryOfChangeComponent/>
       <OpportunityForChangeComponent/>
-      
       <NewNameComponent/>
-      
-      <BecomePartnerComponent/>
+      <BecomePartnerComponent data={data.become_partner_section}/>
       <VissionariesComponent/>
       <MegazineSection/>
       <NewsSection/>
-
       <ActivitiesSection/>
       <DonateComponent/>
     </Box>

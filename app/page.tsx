@@ -17,22 +17,39 @@ import ImpactsLivesSection from "@/components/ImpactsLivesSection";
 import PartnerMapsSection from "@/components/PartnerMapsSection";
 
 async function getData() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?populate=*`,
-    { next: { revalidate: 60 } }
-  );
+  try {
+    const [homePageResponse, commonItemsResponse] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+    ]);
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
+    if (!homePageResponse.ok || !commonItemsResponse.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const [homePageData, commonItemsData] = await Promise.all([
+      homePageResponse.json(),
+      commonItemsResponse.json(),
+    ]);
+
+    return {
+      ...homePageData?.data,
+     ...commonItemsData.data,
+    };
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw error;
   }
-
-  return response.json();
 }
 
 const Home = async () => {
   const homePageRes = await getData();
-  console.log(homePageRes.data);
-  const data = homePageRes.data;
+  console.log(homePageRes);
+  const data = homePageRes;
 
   return (
     <Box>

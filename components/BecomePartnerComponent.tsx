@@ -65,7 +65,7 @@ export default function BecomePartnerComponent({data}:BecomePartnerComponentProp
                         marginBottom: 1,
                     }}
                 >
-                    {HighlightText(data.title)}
+                    {HighlightText(data?.title)}
                 </Typography>
                 <Typography
                     variant="body1"
@@ -74,7 +74,7 @@ export default function BecomePartnerComponent({data}:BecomePartnerComponentProp
                         fontSize: 20
                     }}
                 >
-                    {data.description}
+                    {data?.description}
                 </Typography>
                 <Button
                     variant="contained"
