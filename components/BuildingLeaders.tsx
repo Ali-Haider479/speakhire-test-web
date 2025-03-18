@@ -50,7 +50,7 @@ const TextOverlay = styled(Box)(({ theme }) => ({
   bottom: "4%",
   width: "96%",
   marginLeft: "2%",
-  backgroundColor: "rgba(255, 255, 255, 0.8)",
+  backgroundColor: "rgba(255, 255, 255, 0.7)",
   borderRadius: "20px",
   padding: "16px 24px",
   boxShadow: "0px -4px 10px rgba(0, 0, 0, 0.08)",
@@ -95,7 +95,7 @@ interface BuildingLeadersProps {
   };
 }
 
-const BuildingLeaders= ({data}:BuildingLeadersProps) => {
+const BuildingLeaders = ({ data }: BuildingLeadersProps) => {
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
       const words = text.split(" ");
@@ -105,7 +105,7 @@ const BuildingLeaders= ({data}:BuildingLeadersProps) => {
 
       return (
         <p>
-           {firstWord} <span style={{ color: "#0F99C3" }}>{middleWords}</span> {" "}
+          {firstWord} <span style={{ color: "#0F99C3" }}>{middleWords}</span>{" "}
           {lastWord}
         </p>
       );
@@ -145,19 +145,22 @@ const BuildingLeaders= ({data}:BuildingLeadersProps) => {
 
       <ImageContainer>
         <RoundedContainer>
-          <Image
-            src={process.env.NEXT_PUBLIC_STRAPI_URL+data.cover_image.source.url}
-            alt={data.cover_image.alternate_text}
-            layout="responsive"
-            width={900}
-            height={450}
-            objectFit="cover"
-          />
+          <div style={{ filter: "grayscale(100%)" }}>
+            <Image
+              src={
+                process.env.NEXT_PUBLIC_STRAPI_URL + data.cover_image.source.url
+              }
+              alt={data.cover_image.alternate_text}
+              layout="responsive"
+              width={900}
+              height={450}
+              objectFit="cover"
+            />
+          </div>
           <TextOverlay>
             <Typography
-              variant="h2"
+              variant="h3"
               sx={{
-                fontSize: "3rem",
                 fontWeight: 400,
                 marginBottom: "16px",
                 color: "#1D1B20", // Dark color for main text
@@ -171,8 +174,8 @@ const BuildingLeaders= ({data}:BuildingLeadersProps) => {
               <span style={{ color: "#08547a" }}>A</span>ll{" "}
               <span style={{ color: "#08547a" }}>K</span>ind
             </Typography>
-            <Typography variant="body1" sx={{ mt: 1 ,fontSize:22}}>
-             {data.description}
+            <Typography variant="body1" sx={{ mt: 1, fontSize: 22 }}>
+              {data.description}
             </Typography>
           </TextOverlay>
         </RoundedContainer>

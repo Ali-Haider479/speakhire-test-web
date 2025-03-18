@@ -11,7 +11,7 @@ interface ImpactSectionProps {
 const ImpactSection = async ({ data }: ImpactSectionProps) => {
   // Static data for the statistics
   const statsData = data.statistics.map((item: any) => {
-    return { value: item.count, description: item.description };
+    return { value: item.numericTitle, description: item.description };
   });
 
   const HighlightText = (text: string) => {

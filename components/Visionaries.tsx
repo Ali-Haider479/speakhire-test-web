@@ -3,7 +3,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
 import React from 'react';
 
-export default function VessionariesComponent() {
+export default function VisionariesComponent() {
   return (
     <Box
       sx={{

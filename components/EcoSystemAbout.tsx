@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import ExtensionOutlinedIcon from '@mui/icons-material/ExtensionOutlined';
 
-export default function EcoSytemAbout() {
+export default function EcoSystemAbout() {
     return (
         <Box
             sx={{

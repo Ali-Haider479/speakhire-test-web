@@ -244,7 +244,7 @@ const StudentCarousel = ({data}:StudentCarouselProps) => {
                     transform: "scale(1)",
                     transition: "transform 0.3s ease-in-out",
                   }}
-                  src={process.env.NEXT_PUBLIC_STRAPI_URL+student.picture.source.url}
+                  src={student?.picture?.source?.url?process.env.NEXT_PUBLIC_STRAPI_URL+student.picture.source.url:""}
                 />
                 <Typography
                   variant="body1"

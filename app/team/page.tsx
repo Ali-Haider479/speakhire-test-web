@@ -1,4 +1,4 @@
-import VissionariesComponent from "@/components/Vissionaries";
+import VisionariesComponent from "@/components/Visionaries";
 import MemberBoard from "@/components/MemberBoardComponent";
 
 import { Box, Typography } from "@mui/material";
@@ -56,7 +56,7 @@ function Team() {
   ];
   return (
     <Box>
-      <VissionariesComponent />
+      <VisionariesComponent />
       <MemberBoard
         title={executiveBoardTitle}
         members={boardMembers}
