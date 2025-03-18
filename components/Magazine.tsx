@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { 
-  Box, 
-  Typography, 
-  Grid, 
-  Card, 
-  CardMedia, 
+import React from "react";
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardMedia,
   CardContent,
   Button,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Image from "next/image";
 
 // Interface for magazine data
 interface MagazineCover {
@@ -23,108 +24,121 @@ interface MagazineCover {
 
 // Styled components
 const StyledCard = styled(Card)(({ theme }) => ({
-  position: 'relative',
-  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-  borderRadius: '12px',
-  overflow: 'hidden',
-  '&:hover': {
-    transform: 'scale(1.03)',
+  position: "relative",
+  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+  borderRadius: "12px",
+  overflow: "hidden",
+  "&:hover": {
+    transform: "scale(1.03)",
     boxShadow: theme.shadows[8],
   },
 }));
 
 const StyledCardMedia = styled(CardMedia)({
-  height: 400,
-  width: '100%',
-  objectFit: 'cover',
+  height: 375,
+  width: "100%",
+  objectFit: "cover",
 }) as typeof CardMedia;
 
 const ViewAllButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(4),
   padding: theme.spacing(1, 2),
-  borderRadius: '25px',
+  borderRadius: "25px",
   border: `1px solid ${theme.palette.primary.main}`,
   color: theme.palette.primary.main,
-  '&:hover': {
+  "&:hover": {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
   },
 }));
 
-const MagazineSection: React.FC = () => {
+interface MagazineSectionProps {
+  data: {
+    title: string;
+    description: string;
+    magazines: any[];
+  };
+}
+
+const MagazineSection = ({ data }: MagazineSectionProps) => {
   // Sample data - replace imageUrl with your actual image paths
-  const magazines: MagazineCover[] = [
-    {
-      id: 1,
-      imageUrl: '/stock1.jpg',
-      title: "Celebrating Women's History Month",
-      date: 'March 2024',
-      issueNumber: 'Issue 20',
-    },
-    {
-      id: 2,
-      imageUrl: '/stock2.jpg',
-      title: "Developing Tomorrow's Leaders",
-      date: 'July 2024',
-      issueNumber: 'Issue 21',
-    },
-    {
-      id: 3,
-      imageUrl: '/stock1.jpg',
-      title: "#Cheers4Careers",
-      date: 'December 2023',
-      issueNumber: 'Issue 19',
-    },
-    {
-      id: 4,
-      imageUrl: '/stock2.jpg',
-      title: "#Cheers4Careers",
-      date: 'December 2023',
-      issueNumber: 'Issue 19',
-    },
-  ];
+  // const magazines: MagazineCover[] = [
+  //   {
+  //     id: 1,
+  //     imageUrl: "/stock1.jpg",
+  //     title: "Celebrating Women's History Month",
+  //     date: "March 2024",
+  //     issueNumber: "Issue 20",
+  //   },
+  //   {
+  //     id: 2,
+  //     imageUrl: "/stock2.jpg",
+  //     title: "Developing Tomorrow's Leaders",
+  //     date: "July 2024",
+  //     issueNumber: "Issue 21",
+  //   },
+  //   {
+  //     id: 3,
+  //     imageUrl: "/stock1.jpg",
+  //     title: "#Cheers4Careers",
+  //     date: "December 2023",
+  //     issueNumber: "Issue 19",
+  //   },
+  //   {
+  //     id: 4,
+  //     imageUrl: "/stock2.jpg",
+  //     title: "#Cheers4Careers",
+  //     date: "December 2023",
+  //     issueNumber: "Issue 19",
+  //   },
+  // ];
 
   return (
-    <Box sx={{ py: 6, px: '10%' }}>
-      <Typography 
-        variant="h2" 
-        component="h1" 
-        sx={{ 
-          mb: 2, 
+    <Box sx={{ py: 6, px: "10%" }}>
+      <Typography
+        variant="h2"
+        component="h1"
+        sx={{
+          mb: 2,
           fontWeight: 500,
-          fontSize: { xs: '2rem', md: '3rem' }
+          fontSize: { xs: "2rem", md: "3rem" },
         }}
       >
-        SPEAKHIRE Magazine
+        {data.title}
       </Typography>
-      
-      <Typography 
-        variant="body1" 
-        sx={{ 
+
+      <Typography
+        variant="body1"
+        sx={{
           mb: 4,
-          color: '#42474E',
-          fontSize: { xs: '1.2rem', md: '1.5rem' }
+          color: "#42474E",
+          fontSize: { xs: "1.2rem", md: "1.5rem" },
         }}
       >
-        Explore our latest issues
+        {data.description}
       </Typography>
 
       <Grid container spacing={3}>
-        {magazines.map((magazine) => (
+        {data.magazines.map((magazine) => (
           <Grid item xs={12} sm={6} md={3} key={magazine.id}>
             <StyledCard>
               <StyledCardMedia
-                component={'img' as const}
-                image={magazine.imageUrl}
-                alt={`${magazine.title} - ${magazine.date}`}
+                component={"img" as const}
+                image={
+                  process.env.NEXT_PUBLIC_STRAPI_URL +
+                  magazine.cover_image.source.url
+                }
+                alt={`${magazine.title}`}
+                onClick={() => window.open(magazine.document_url, "_blank")}
+                sx={{ cursor: "pointer" }}
               />
-              <CardContent
+              {/* <CardContent
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
                   bottom: 0,
-                  width: '100%',
-                  background: 'rgba(0, 0, 0, 0.7)',
-                  color: 'white',
+                  width: "100%",
+                  background: "rgba(0, 0, 0, 0.7)",
+                  color: "white",
                 }}
               >
                 <Typography variant="subtitle2" component="div">
@@ -136,13 +150,13 @@ const MagazineSection: React.FC = () => {
                 <Typography variant="h6" component="div">
                   {magazine.title}
                 </Typography>
-              </CardContent>
+              </CardContent> */}
             </StyledCard>
           </Grid>
         ))}
       </Grid>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <ViewAllButton variant="outlined">
           View all SPEAKHIRE Magazines
         </ViewAllButton>

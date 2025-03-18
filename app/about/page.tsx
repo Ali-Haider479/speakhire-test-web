@@ -53,15 +53,15 @@ async function About() {
     <Box>
       <BuildingLeaders data={data.hero_section}/>
       <ObjectiveSection data={data.objective_section}/>
-      <EcoSystemAbout/>
-      <TheoryOfChangeComponent/>
-      <OpportunityForChangeComponent/>
-      <NewNameComponent/>
+      <EcoSystemAbout data={data.about_ecosystem}/>
+      <TheoryOfChangeComponent data={data.theory_of_change_section}/>
+      <OpportunityForChangeComponent data={data.theory_of_change_section.opportunity_for_change_section}/>
+      <NewNameComponent data={data.why_new_name_section}/>
       <BecomePartnerComponent data={data.become_partner_section}/>
-      <VisionariesComponent/>
-      <MagazineSection/>
+      <VisionariesComponent data={data.meet_visionary_section}/>
+      <MagazineSection data={data.magazine_section}/>
       <NewsSection/>
-      <ActivitiesSection/>
+      <ActivitiesSection data={data.activities_outcome_section}/>
       <DonateComponent/>
     </Box>
   );

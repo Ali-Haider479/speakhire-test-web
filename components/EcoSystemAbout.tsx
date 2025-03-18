@@ -1,87 +1,121 @@
-import { Box, Button, Typography } from '@mui/material';
-import Image from 'next/image';
-import React from 'react';
-import ExtensionOutlinedIcon from '@mui/icons-material/ExtensionOutlined';
+import { Box, Typography } from "@mui/material";
+import Image from "next/image";
+import React from "react";
+import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined";
 
-export default function EcoSystemAbout() {
-    return (
+interface EcoSystemAboutProps {
+  data: {
+    title: string;
+    description: string;
+    cover_image: any;
+  };
+}
+
+export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWord = words[0];
+      const restOfWords = words.slice(1).join(" ");
+
+      return (
+        <p>
+          <span style={{ color: "#0F99C3" }}>{firstWord}</span> {restOfWords}
+        </p>
+      );
+    } else {
+      return "";
+    }
+  };
+
+  return (
+    <Box
+      sx={{
+        width: "80vw",
+        height: "80vh",
+        borderRadius: "40px",
+        backgroundColor: "#F2FAFD",
+        margin: "auto",
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: "space-between",
+        alignItems: "center",
+        my: 10,
+        pl: { xs: 3, md: 5 },
+        gap: { xs: 4, md: 0 },
+      }}
+    >
+      {/* First child box - Text Section */}
+      <Box
+        sx={{
+          width: { xs: "100%", md: "40%" },
+          paddingY: { xs: 3, md: 5 },
+          paddingX: { xs: 2, md: 4 },
+          display: "flex",
+          flexDirection: "column",
+          mt: "auto",
+        }}
+      >
         <Box
-            sx={{
-                width: '80vw', // 80% of the screen width
-                height: '70vh', // Set a height for the box
-                borderRadius: '40px', // Border radius
-                backgroundColor: '#E6F2F9', // Background color
-                margin: 'auto', // Centers the box horizontally
-                display: 'flex', // To align child boxes in a row
-                justifyContent: 'space-between', // Space between the children
-                alignItems: 'center', // Center items vertically
-                my: 10, // Vertical margin
-            }}
+          sx={{
+            backgroundColor: "lightgray",
+            borderRadius: "50%",
+            color: "#08547A",
+            width: 40,
+            height: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 2,
+            marginTop: "auto",
+          }}
         >
-            {/* First child box - takes 45% of the width */}
-
-            <Box
-                sx={{
-                    width: '40%', // Width adjusted
-                    backgroundColor: '#E6F2F9', // Light background color to match the image
-                    borderRadius: '40px', // Rounded corners to match the image
-                    paddingY: 5, // Add padding for spacing
-                    paddingX: 4,
-                    display: 'flex',
-                    flexDirection: 'column', // Stack the elements vertically
-                    justifyContent: 'flex-end',
-                    alignItems: 'flex-start',
-                    height: '100%', // Ensures the box stretches to full height
-                }}
-            >
-                <Box
-                    sx={{
-                        backgroundColor: 'lightgray',
-                        borderRadius: '50%',
-                        color: '#08547A',
-                        width: 40,
-                        height: 40,
-                        display: 'flex', // Enable flexbox
-                        alignItems: 'center', // Center vertically
-                        justifyContent: 'center', // Center horizontally
-                        marginBottom: 2
-                    }}
-                >
-                    <ExtensionOutlinedIcon />
-                </Box>
-                <Typography
-                    variant="h3"
-                    sx={{
-                        fontWeight: 'bold',
-                        marginBottom: 1,
-                        width: 20
-                    }}
-                >
-                    <span style={{color:'#0F99C3'}}>SPEAKHIRE{" "}</span>
-                    Ecosystem
-                </Typography>
-                <Typography
-                    variant="body1"
-                    sx={{
-                        marginBottom: 2,
-                        fontSize: 20
-                    }}
-                >
-                    We bring together community resources, a network of professionals to facilitate and empower individuals from immigrant families.
-                </Typography>
-
-            </Box>
-
-            {/* Second child box - takes 55% of the width */}
-            <Box sx={{ width: '50%', position: 'relative', height: '100%' }}>
-                <Image
-                    src="/stock2.jpg" // Replace with your actual image source
-                    alt="partner-image"
-                    layout="fill" // Make the image fill the parent container
-                    objectFit="cover" // Ensure the image covers the entire area
-                    style={{ borderRadius: '40px' }}
-                />
-            </Box>
+          <ExtensionOutlinedIcon />
         </Box>
-    );
+
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            marginBottom: 1,
+            fontSize: { xs: "1.5rem", md: "2rem" },
+          }}
+        >
+          {HighlightText(data.title)}
+        </Typography>
+
+        <Typography
+          variant="body1"
+          sx={{
+            marginBottom: 2,
+            fontSize: { xs: "1rem", md: "1.25rem" },
+          }}
+        >
+          {data.description}
+        </Typography>
+      </Box>
+
+      {/* Second child box - Image Section */}
+      <Box
+        sx={{
+          width: { xs: "100%", md: "40vw" },
+          position: "relative",
+          height: { xs: "50vh", md: "80vh" },
+          backgroundColor: "#E4F5FB",
+          borderRadius: "40px",
+          overflow: "hidden", // Ensures no overflow issues
+        }}
+      >
+        <Image
+          src={process.env.NEXT_PUBLIC_STRAPI_URL + data.cover_image.source.url}
+          alt={data.cover_image.alternate_text}
+          layout="responsive" // Correct layout for full-box fill
+          objectFit="cover" // Ensures the image scales properly inside the box
+          width={16}
+          height={9}
+          style={{ padding: "40px" }} // Matches the box's rounded corners
+        />
+      </Box>
+    </Box>
+  );
 }
