@@ -14,13 +14,13 @@ import { styled } from "@mui/material/styles";
 import Image from "next/image";
 
 // Interface for magazine data
-interface MagazineCover {
-  id: number;
-  imageUrl: string;
-  title: string;
-  date: string;
-  issueNumber: string;
-}
+// interface MagazineCover {
+//   id: number;
+//   imageUrl: string;
+//   title: string;
+//   date: string;
+//   issueNumber: string;
+// }
 
 // Styled components
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -35,7 +35,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const StyledCardMedia = styled(CardMedia)({
-  height: 375,
+  height: "auto",
   width: "100%",
   objectFit: "cover",
 }) as typeof CardMedia;
@@ -61,38 +61,6 @@ interface MagazineSectionProps {
 }
 
 const MagazineSection = ({ data }: MagazineSectionProps) => {
-  // Sample data - replace imageUrl with your actual image paths
-  // const magazines: MagazineCover[] = [
-  //   {
-  //     id: 1,
-  //     imageUrl: "/stock1.jpg",
-  //     title: "Celebrating Women's History Month",
-  //     date: "March 2024",
-  //     issueNumber: "Issue 20",
-  //   },
-  //   {
-  //     id: 2,
-  //     imageUrl: "/stock2.jpg",
-  //     title: "Developing Tomorrow's Leaders",
-  //     date: "July 2024",
-  //     issueNumber: "Issue 21",
-  //   },
-  //   {
-  //     id: 3,
-  //     imageUrl: "/stock1.jpg",
-  //     title: "#Cheers4Careers",
-  //     date: "December 2023",
-  //     issueNumber: "Issue 19",
-  //   },
-  //   {
-  //     id: 4,
-  //     imageUrl: "/stock2.jpg",
-  //     title: "#Cheers4Careers",
-  //     date: "December 2023",
-  //     issueNumber: "Issue 19",
-  //   },
-  // ];
-
   return (
     <Box sx={{ py: 6, px: "10%" }}>
       <Typography
@@ -129,7 +97,7 @@ const MagazineSection = ({ data }: MagazineSectionProps) => {
                   magazine.cover_image.source.url
                 }
                 alt={`${magazine.title}`}
-                onClick={() => window.open(magazine.document_url, "_blank")}
+                // onClick={() => window.open(magazine.document_url, "_blank")}
                 sx={{ cursor: "pointer" }}
               />
               {/* <CardContent

@@ -1,20 +1,24 @@
-import { Box, Button, Typography } from "@mui/material";
+"use client";
+import { Box, Button, Link, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
-import React from "react";
-
+import React, { useState } from "react";
+import MemberBoard from "./MemberBoardComponent";
 interface VisionariesComponentProps {
   data: {
     title: string;
     description: string;
     button: any;
     cover_image: any;
+    team: any[];
+    id:number
   };
 }
 
 export default function VisionariesComponent({
   data,
 }: VisionariesComponentProps) {
+  const [showTeam, setShowTeam] = useState(false);
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
       const words = text.split(" ");
@@ -39,6 +43,7 @@ export default function VisionariesComponent({
         display: "flex",
         justifyContent: "center", // Center the inner content horizontally
         alignItems: "center", // Center vertically if needed
+        flexDirection: "column",
       }}
     >
       <Box
@@ -75,7 +80,7 @@ export default function VisionariesComponent({
               marginBottom: 1,
             }}
           >
-           {HighlightText(data.title)}
+            {HighlightText(data?.title)}
           </Typography>
           <Typography
             variant="body1"
@@ -84,14 +89,14 @@ export default function VisionariesComponent({
               fontSize: 20,
             }}
           >
-            {data.description}
+            {data?.description}
           </Typography>
           <Button
             variant="outlined"
             color="primary"
             endIcon={<ArrowForwardIcon />}
             sx={{
-              borderRadius: "20px",
+              borderRadius: "25px",
               textTransform: "none",
               padding: "8px 16px",
               borderColor: "#1976d2",
@@ -101,9 +106,11 @@ export default function VisionariesComponent({
                 backgroundColor: "rgba(25, 118, 210, 0.04)",
               },
               marginTop: "30px",
+              fontSize: 16,
             }}
+            onClick={() => setShowTeam(!showTeam)}
           >
-            {data.button.inner_text}
+            {data?.button?.inner_text}
           </Button>
         </Box>
 
@@ -111,15 +118,25 @@ export default function VisionariesComponent({
         <Box sx={{ width: "60%", position: "relative", height: "100%" }}>
           <Image
             src={
-              process.env.NEXT_PUBLIC_STRAPI_URL + data.cover_image.source.url
+              data?.cover_image?.source.url
+                ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                  data?.cover_image?.source.url
+                : ""
             } // Replace with your actual image source
-            alt={data.cover_image.alternate_text}
+            alt={data?.cover_image?.alternate_text}
             layout="fill" // Make the image fill the parent container
             objectFit="cover" // Ensure the image covers the entire area
             style={{ borderRadius: "40px" }}
           />
         </Box>
       </Box>
+      {showTeam && (
+        <Box key={'team-section'} sx={{ width: "80vw" }}>
+          {data.team.map((team: any) => (
+            <MemberBoard title={team.title} members={team.team_members} />
+          ))}
+        </Box>
+      )}
     </Box>
   );
 }

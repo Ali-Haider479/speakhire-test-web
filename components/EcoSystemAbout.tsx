@@ -32,7 +32,7 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
     <Box
       sx={{
         width: "80vw",
-        height: "80vh",
+        height: "auto",
         borderRadius: "40px",
         backgroundColor: "#F2FAFD",
         margin: "auto",

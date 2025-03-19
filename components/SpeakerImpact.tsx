@@ -1,28 +1,51 @@
-'use client'
-import { Box, Button, Typography } from '@mui/material';
-import Image from 'next/image';
-import React from 'react';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+"use client";
+import { Box, Button, Typography } from "@mui/material";
+import Image from "next/image";
+import React from "react";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import { join } from "path";
 
-export default function SpeakerImpact() {
+interface SpeakerImpactProps {
+  data: {
+    title: string;
+    description: string;
+    speaker_impact: any[];
+  };
+}
+
+export default function SpeakerImpact({ data }: SpeakerImpactProps) {
   // Speaker data
   const speakers = [
-    { id: 1, imageUrl: '/stock1.jpg', alt: 'Speaker 1', offsetY: 0 },
-    { id: 2, imageUrl: '/stock2.jpg', alt: 'Speaker 2', offsetY: 5 },
-    { id: 3, imageUrl: '/stock1.jpg', alt: 'Speaker 3', offsetY: 0 },
-    { id: 4, imageUrl: '/stock2.jpg', alt: 'Speaker 4', offsetY: 5 },
-    { id: 5, imageUrl: '/stock1.jpg', alt: 'Speaker 5', offsetY: 0 },
-    { id: 6, imageUrl: '/stock2.jpg', alt: 'Speaker 6', offsetY: 5 },
-    { id: 7, imageUrl: '/stock1.jpg', alt: 'Speaker 7', offsetY: 0 },
-    { id: 8, imageUrl: '/stock2.jpg', alt: 'Speaker 8', offsetY: 5 },
-    { id: 9, imageUrl: '/stock1.jpg', alt: 'Speaker 9', offsetY: 0 },
-    { id: 10, imageUrl: '/stock2.jpg', alt: 'Speaker 10', offsetY: 5 },
-    { id: 11, imageUrl: '/stock1.jpg', alt: 'Speaker 11', offsetY: 0 },
-    { id: 12, imageUrl: '/stock2.jpg', alt: 'Speaker 12', offsetY: 5 },
+    { id: 1, imageUrl: "/stock1.jpg", alt: "Speaker 1" },
+    { id: 2, imageUrl: "/stock2.jpg", alt: "Speaker 2" },
+    { id: 3, imageUrl: "/stock1.jpg", alt: "Speaker 3" },
+    { id: 4, imageUrl: "/stock2.jpg", alt: "Speaker 4" },
+    { id: 5, imageUrl: "/stock1.jpg", alt: "Speaker 5" },
+    { id: 6, imageUrl: "/stock2.jpg", alt: "Speaker 6" },
+    { id: 7, imageUrl: "/stock1.jpg", alt: "Speaker 7" },
   ];
 
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWords = words[0];
+      const highlightedWord = words[1];
+      const restOfWords = words.slice(2).join(" ");
+
+      return (
+        <p>
+          {firstWords}
+          <span style={{ color: "#005776" }}> {highlightedWord} </span>{" "}
+          {restOfWords}
+        </p>
+      );
+    } else {
+      return "";
+    }
+  };
+
   return (
-    <Box sx={{ textAlign: 'center', py: 8, width: '100%', mx: 'auto' }}>
+    <Box sx={{ textAlign: "center", py: 8, width: "100%", mx: "auto" }}>
       <Typography
         variant="h3"
         sx={{
@@ -30,65 +53,70 @@ export default function SpeakerImpact() {
           marginBottom: 1,
         }}
       >
-        How <span style={{ color: '#005776' }}>SPEAKHIRE</span> speakers impact lives
+        {HighlightText(data.title)}
       </Typography>
       <Typography
         variant="body1"
         sx={{
           marginBottom: 4,
-          fontSize: 20
+          fontSize: 20,
         }}
       >
-        Watch our speakers here
+        {data.description}
       </Typography>
-      
+
       {/* Speaker images container with zig-zag pattern */}
       <Box
         sx={{
-          position: 'relative',
-          width: '100%',
+          position: "relative",
+          width: "100%",
           height: 220,
-          overflowX: 'auto',
-          margin: '40px 0',
-          '&::-webkit-scrollbar': {
-            display: 'none'
+          overflowX: "auto",
+          margin: "40px 0",
+          "&::-webkit-scrollbar": {
+            display: "none",
           },
-          scrollbarWidth: 'none',
+          scrollbarWidth: "none",
         }}
       >
-        <Box 
-          sx={{ 
-            display: 'flex',
-            position: 'absolute',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 'max-content'
+        <Box
+          sx={{
+            display: "flex",
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "max-content",
           }}
         >
-          {speakers.map((speaker) => (
+          {data.speaker_impact.map((speaker, index) => (
             <Box
               key={speaker.id}
               sx={{
                 width: 100,
                 height: 180,
                 borderRadius: 100,
-                overflow: 'hidden',
-                position: 'relative',
-                marginTop: speaker.offsetY,
+                overflow: "hidden",
+                position: "relative",
+                marginTop: index % 2 === 0 ? 0 : 5,
                 marginRight: 1.5,
                 marginLeft: 1.5,
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                transition: 'transform 0.3s ease',
-                '&:hover': {
-                  transform: 'scale(1.05)',
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+                transition: "transform 0.3s ease",
+                "&:hover": {
+                  transform: "scale(1.05)",
                 },
               }}
             >
               <Image
-                src={speaker.imageUrl}
-                alt={speaker.alt}
+                src={
+                  speaker?.picture?.source?.url
+                    ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                      speaker?.picture?.source?.url
+                    : null
+                }
+                alt={speaker.picture.alternate_text}
                 fill
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: "cover" }}
                 sizes="100px"
                 priority={speaker.id <= 6}
               />
@@ -96,25 +124,28 @@ export default function SpeakerImpact() {
           ))}
         </Box>
       </Box>
-      
+
       <Button
         variant="outlined"
         startIcon={<YouTubeIcon />}
         sx={{
-          borderRadius: '20px',
-          padding: '10px 24px',
-          textTransform: 'none',
+          borderRadius: "20px",
+          padding: "10px 24px",
+          textTransform: "none",
           fontWeight: 500,
-          border: '2px solid #005776',
-          color: '#005776',
-          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-          '&:hover': {
-            backgroundColor: 'rgba(0, 87, 118, 0.04)',
-            borderColor: '#005776',
-          }
+          border: "2px solid #005776",
+          color: "#005776",
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+          "&:hover": {
+            backgroundColor: "rgba(0, 87, 118, 0.04)",
+            borderColor: "#005776",
+          },
         }}
       >
-        <Typography variant='body1' sx={{ fontSize: 18, fontWeight: 'normal', textTransform: 'none' }}>
+        <Typography
+          variant="body1"
+          sx={{ fontSize: 18, fontWeight: "normal", textTransform: "none" }}
+        >
           Watch on YouTube
         </Typography>
       </Button>

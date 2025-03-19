@@ -1,11 +1,11 @@
 import BecomePartnerComponent from "@/components/BecomePartnerComponent";
 import VisionariesComponent from "@/components/Visionaries";
 import DonateComponent from "@/components/DonateComponent";
-import NewNameComponent from "@/components/NewName"
+import NewNameComponent from "@/components/NewName";
 import ObjectiveSection from "@/components/ObjectivesSection";
 import ObjectivesComponent from "@/components/ObjectivesComponent";
 import TheoryOfChangeComponent from "@/components/TheoryOfChangeComponent";
-import OpportunityForChangeComponent from "@/components/OpportunityComponent"
+import OpportunityForChangeComponent from "@/components/OpportunityComponent";
 import ActivitiesSection from "@/components/Activities";
 import MagazineSection from "@/components/Magazine";
 import NewsSection from "@/components/NewsSection";
@@ -30,14 +30,14 @@ async function getData() {
       throw new Error("Failed to fetch data");
     }
 
-    const [homePageData, commonItemsData] = await Promise.all([
+    const [aboutPageData, commonItemsData] = await Promise.all([
       aboutPageResponse.json(),
       commonItemsResponse.json(),
     ]);
 
     return {
-      ...homePageData?.data,
-     ...commonItemsData.data,
+      ...aboutPageData?.data,
+      ...commonItemsData.data,
     };
   } catch (error) {
     console.error("Data fetching error:", error);
@@ -51,18 +51,22 @@ async function About() {
   const data = aboutPageRes;
   return (
     <Box>
-      <BuildingLeaders data={data.hero_section}/>
-      <ObjectiveSection data={data.objective_section}/>
-      <EcoSystemAbout data={data.about_ecosystem}/>
-      <TheoryOfChangeComponent data={data.theory_of_change_section}/>
-      <OpportunityForChangeComponent data={data.theory_of_change_section.opportunity_for_change_section}/>
-      <NewNameComponent data={data.why_new_name_section}/>
-      <BecomePartnerComponent data={data.become_partner_section}/>
-      <VisionariesComponent data={data.meet_visionary_section}/>
-      <MagazineSection data={data.magazine_section}/>
-      <NewsSection/>
-      <ActivitiesSection data={data.activities_outcome_section}/>
-      <DonateComponent/>
+      <BuildingLeaders data={data.hero_section} />
+      <ObjectiveSection data={data.objective_section} />
+      <EcoSystemAbout data={data.about_ecosystem} />
+      <TheoryOfChangeComponent data={data.theory_of_change_section} />
+      <OpportunityForChangeComponent
+        data={data.theory_of_change_section.opportunity_for_change_section}
+      />
+      <NewNameComponent data={data.why_new_name_section} />
+      <BecomePartnerComponent data={data.become_partner_section} />
+      <VisionariesComponent
+        data={{ ...data.meet_visionary_section, ...data.team_section }}
+      />
+      <MagazineSection data={data.magazine_section} />
+      <NewsSection data={data.latest_news} />
+      <ActivitiesSection data={data.activities_outcome_section} />
+      <DonateComponent />
     </Box>
   );
 }

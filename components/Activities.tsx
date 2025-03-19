@@ -21,7 +21,7 @@ interface CarouselImage {
 
 interface CarouselItemProps {
   active?: boolean;
-  customPosition: "top" | "middle" | "bottom";
+  custom_position: "top" | "middle" | "bottom";
 }
 const CarouselContainer = styled(Box)({
   position: "relative",
@@ -44,15 +44,15 @@ const CarouselImage = styled("img")({
 });
 
 const CarouselItem = styled(Box)<CarouselItemProps>(
-  ({ active, customPosition }) => ({
+  ({ active, custom_position }) => ({
     position: "absolute", // MUI's position property
     left: 0,
     right: 0,
     transition: "all 0.5s ease",
     transform: `translateY(${
-      customPosition === "top"
+      custom_position === "top"
         ? "-120%"
-        : customPosition === "bottom"
+        : custom_position === "bottom"
         ? "120%"
         : "0"
     })`,
@@ -173,20 +173,20 @@ const ActivitiesSection = ({ data }: ActivitiesSectionProps) => {
         <Box sx={{ flex: 1 }}>
           <CarouselContainer>
             {data.carousel_images.map((image, index) => {
-              let customPosition: "top" | "middle" | "bottom" = "middle";
+              let custom_position: "top" | "middle" | "bottom" = "middle";
               const diff =
-                (index - activeIndex + carouselImages.length) %
-                carouselImages.length;
+                (index - activeIndex + data.carousel_images.length) %
+                data.carousel_images.length;
 
-              if (diff === carouselImages.length - 1) customPosition = "top";
-              else if (diff === 1) customPosition = "bottom";
+              if (diff === data.carousel_images.length - 1) custom_position = "top";
+              else if (diff === 1) custom_position = "bottom";
               else if (diff !== 0) return null;
 
               return (
                 <CarouselItem
                   key={image.id}
                   active={index === activeIndex}
-                  customPosition={customPosition} // Updated here
+                  custom_position={custom_position} // Updated here
                   onClick={() => handleImageClick(index)}
                   sx={{
                     cursor: "pointer",

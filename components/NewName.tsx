@@ -19,7 +19,7 @@ function NewNameComponent({ data }: NewNameComponentProps) {
       return (
         <p>
           {firstWords}
-          <span style={{ color: "#0F99C3" }}>{restOfWords}</span>
+          <span style={{ color: "#0F99C3" }}> {restOfWords}</span>
         </p>
       );
     } else {
