@@ -1,15 +1,17 @@
-import { Box, Typography } from "@mui/material";
+"use client"
 import React from "react";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 type TestimonialProps = {
-  title: string;
-  note: string;
-  Name: string;
+  highlight: string;
+  description: string;
+  name: string;
   designation: string;
-  image: string;
-  isImageLeft?: boolean;
-  isTextRightAligned?: boolean;
+  employer: string;
+  association: string;
+  cover_image: any;
+  isImageLeft: boolean;
 };
 
 type TestimonialCardProps = {
@@ -22,26 +24,45 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => (
       display: "flex",
       flexDirection: testimonial.isImageLeft ? "row" : "row-reverse",
       alignItems: "center",
-      gap: 4,
+      justifyContent: "center",
+      gap: { xs: 4, md: 10 },
       marginTop: 5,
       textAlign: "left",
     }}
   >
-    <Box sx={{ flex: 1 }}>
-      <Image src={testimonial.image} alt="" height={506} width={720} />
+    {/* Image Section */}
+    <Box>
+      <Image
+        src={
+          testimonial.cover_image?.source?.url
+            ? process.env.NEXT_PUBLIC_STRAPI_URL +
+              testimonial.cover_image?.source?.url
+            : null
+        }
+        alt=""
+        height={506}
+        width={720}
+        style={{
+          borderRadius: "20px", // Rounded corners
+        }}
+      />
     </Box>
 
+    {/* Text Content Section */}
     <Box
       sx={{
         backgroundColor: "#e1f7ff",
         borderRadius: "40px",
         padding: { xs: "24px", md: "40px" },
-        maxWidth: "32rem",
-        height:"auto"
+        maxWidth: "30vw",
+        height:"506px"
       }}
     >
-      <Typography variant="h5" sx={{ fontWeight: 500, marginBottom: "16px", color: "#111827" }}>
-        {testimonial.title}
+      <Typography
+        variant="h5"
+        sx={{ fontWeight: 500, marginBottom: "16px", color: "#111827", mt:5 }}
+      >
+        {testimonial.highlight}
       </Typography>
 
       <Typography
@@ -49,12 +70,12 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => (
         sx={{
           color: "#374151",
           marginBottom: "24px",
-          lineHeight: "1.25",
-          fontSize: "1.28rem",
-          marginTop: 5,
+          lineHeight: "1.5",
+          fontSize: "1.25rem",
+          marginTop: 2,
         }}
       >
-        {testimonial.note}
+        {testimonial.description}
       </Typography>
 
       <Box
@@ -64,15 +85,17 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => (
           padding: "12px 16px",
           borderLeft: "1px solid #374151",
           maxWidth: "400px",
-          marginTop: 5,
+          marginTop: 3,
           marginLeft: 0,
         }}
       >
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "#222" }}>
-          {testimonial.Name}
+          {testimonial.name}
         </Typography>
         <Typography variant="body2" sx={{ color: "#555" }}>
-          {testimonial.designation}
+          {`${testimonial.designation} ${
+            testimonial.employer ? `@ ${testimonial.employer}` : ""
+          } - ${testimonial.association} `}
         </Typography>
       </Box>
     </Box>
@@ -84,9 +107,30 @@ type Props = {
   title: any;
 };
 
+const HighlightText = (text: string) => {
+  if (text?.length > 0) {
+    const words = text.split(" ");
+    const firstPart = words.slice(0, 2).join(" ");
+    const middlePart = words[2];
+    const lastPart = words.slice(3).join(" ");
+
+    return (
+      <p>
+        {firstPart}
+        <span style={{ color: "#08547A" }}> {middlePart} </span>
+        {lastPart}
+      </p>
+    );
+  } else {
+    return "";
+  }
+};
+
 const TestimonialSection = ({ data, title }: Props) => (
-  <Box sx={{ mt: 5, mb: 10 }}>
-    {title}
+  <Box sx={{ mt: 5, mb: 10, width: "80vw" }}>
+    <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
+      {HighlightText(title)}
+    </Typography>
     {data.map((testimonial, index) => (
       <TestimonialCard key={index} testimonial={testimonial} />
     ))}

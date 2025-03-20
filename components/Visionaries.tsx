@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Button, Divider, Link, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -11,7 +11,7 @@ interface VisionariesComponentProps {
     button: any;
     cover_image: any;
     team: any[];
-    id:number
+    id: number;
   };
 }
 
@@ -131,9 +131,12 @@ export default function VisionariesComponent({
         </Box>
       </Box>
       {showTeam && (
-        <Box key={'team-section'} sx={{ width: "80vw" }}>
+        <Box key={"team-section"}>
           {data.team.map((team: any) => (
-            <MemberBoard title={team.title} members={team.team_members} />
+            <>
+              <MemberBoard title={team.title} members={team.team_members} />
+              <Divider sx={{ mt: 5, mb: 5, width: "100vw" }} />
+            </>
           ))}
         </Box>
       )}

@@ -1,20 +1,21 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Button, Grid, Card, CardContent, CardMedia, CardActions, Chip } from '@mui/material';
 import Image from 'next/image';
+import CourseCard from './CourseCard';
 
 // Define the course type
 interface CourseType {
   id: string;
   title: string;
-  titleHighlight: string;
   description: string;
-  image: string;
-  cohortType: string;
+  cover_image: any;
+  cohortType?: string;
+  outcomes:any[]
 }
 
 // Define the courses data
-const coursesData: CourseType[] = [
+const coursesData = [
   {
     id: '1',
     title: 'Discovering',
@@ -57,7 +58,28 @@ const coursesData: CourseType[] = [
   },
 ];
 
-export default function LeadershipCurriculum() {
+interface LeadershipCurriculumProps{
+  data:{
+    title:string,
+    leadership_courses:CourseType[]
+  }
+}
+
+export default function LeadershipCurriculum({data}:LeadershipCurriculumProps) {
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 2).join(" ");
+    const highlightedWord = words[2];
+
+    return (
+      <p>
+        {firstWords}{" "}
+        <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
+      </p>
+    );
+  };
   return (
     <Box
       sx={{
@@ -82,128 +104,14 @@ export default function LeadershipCurriculum() {
               display: 'inline',
             }}
           >
-            Leadership Course{' '}
-            <Typography
-              variant="h3"
-              component="span"
-              sx={{
-                fontWeight: 400, // Matching the font weight
-                color: '#0F99C3', // Using the exact blue color from your component
-              }}
-            >
-              Curriculum
-            </Typography>
+            {HighlightText(data.title)}
           </Typography>
         </Box>
 
         {/* Course Grid */}
         <Grid container spacing={4}>
-          {coursesData.map((course) => (
-            <Grid item xs={12} sm={6} md={4} key={course.id}>
-              <Card 
-                elevation={0} 
-                sx={{ 
-                  backgroundColor: 'transparent',
-                  borderRadius: 0,
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                {/* Course Image Container */}
-                <Box sx={{ position: 'relative', height: '220px', borderRadius: '8px', overflow: 'hidden' }}>
-                  <Image
-                    src={course.image}
-                    alt={`${course.title} ${course.titleHighlight}`}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </Box>
-                
-                {/* Course Content */}
-                <CardContent sx={{ flexGrow: 1, px: 0, pt: 2 }}>
-                  {/* Cohort Type (if any) */}
-                  {course.cohortType && (
-                    <Chip 
-                      label={course.cohortType} 
-                      size="small" 
-                      sx={{
-                        backgroundColor: '#E6F2F9',
-                        color: '#0F99C3',
-                        fontSize: '0.75rem',
-                        height: '24px',
-                        marginBottom: '10px',
-                        borderRadius: '4px',
-                      }}
-                    />
-                  )}
-                  
-                  {/* Course Title with Highlighted Word */}
-                  <Box display="flex" flexWrap="wrap" alignItems="baseline" mb={1}>
-                    <Typography
-                      variant="h5"
-                      component="span"
-                      sx={{
-                        fontWeight: 400,
-                        mr: 1,
-                      }}
-                    >
-                      {course.title}
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      component="span"
-                      sx={{
-                        fontWeight: 400,
-                        color: '#0F99C3',
-                      }}
-                    >
-                      {course.titleHighlight}
-                    </Typography>
-                  </Box>
-                  
-                  {/* Course Description */}
-                  <Typography 
-                    variant="body1" 
-                    sx={{ 
-                      color: 'text.secondary',
-                      fontSize: 16, // Matching your fontSize pattern
-                    }}
-                  >
-                    {course.description}
-                  </Typography>
-                </CardContent>
-                
-                {/* Read More Button */}
-                <CardActions sx={{ justifyContent: 'center', px: 0 }}>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      borderRadius: '20px', // Matching your button style
-                      borderColor: '#0F99C3',
-                      color: '#0F99C3',
-                      padding: '8px 24px',
-                      '&:hover': {
-                        backgroundColor: 'rgba(15, 153, 195, 0.1)',
-                        borderColor: '#0F99C3',
-                      },
-                      width: '100%'
-                    }}
-                  >
-                    <Typography 
-                      variant="body1" 
-                      sx={{ 
-                        fontSize: 16, 
-                        fontWeight: 400, 
-                        textTransform: 'none' // Matching your button text style
-                      }}
-                    >
-                      Read more
-                    </Typography>
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
+          {data.leadership_courses.map((course) => (
+            <CourseCard course={course}/>
           ))}
         </Grid>
       </Box>

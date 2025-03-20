@@ -1,26 +1,53 @@
-import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
-import Image from 'next/image';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import React from "react";
+import { Box, Typography, Grid } from "@mui/material";
+import Image from "next/image";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-export default function EmpoweringLeadersComponent() {
-  // List items for the bullet points
-  const programFeatures = [
-    "Students seeking career exposure",
-    "Requires a minimum of 10 sessions",
-    "Sessions are between 45 minutes to 3 hours",
-    "Between 20 - 30 students depending on course"
-  ];
+interface EmpoweringLeadersComponentProps {
+  data: {
+    title: string;
+    description_part1: string;
+    description_part2: string;
+    prerequisition_list: any[];
+    cover_image: any;
+  };
+}
+
+export default function EmpoweringLeadersComponent({
+  data,
+}: EmpoweringLeadersComponentProps) {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const lines = text.split(":");
+      console.log(lines);
+      const words = lines[0].split(" ");
+      const highlightedWord = words[2];
+      const line1firstPart = words.slice(0, -1);
+      const line2 = lines[1].trim();
+
+      return (
+        <>
+          <p>
+            {line1firstPart}
+            <span style={{ color: "#0F99C3" }}> {highlightedWord}</span>:
+          </p>
+          <p>{line2}</p>
+        </>
+      );
+    } else {
+      return "";
+    }
+  };
 
   return (
     <Box
       sx={{
-        width: '80vw',
-        backgroundColor: '#F5F8FA', // Light blue background
-        borderRadius: '30px',
+        width: "80vw",
+        backgroundColor: "#F5F8FA", // Light blue background
+        borderRadius: "30px",
         p: { xs: 3, md: 6 },
         my: 4,
-        mx: 'auto',
+        mx: "auto",
       }}
     >
       {/* Main Title Section */}
@@ -29,52 +56,26 @@ export default function EmpoweringLeadersComponent() {
         component="h2"
         sx={{
           fontWeight: 400,
-          color: '#333',
+          color: "#333",
           mb: 1,
-          fontSize: { xs: '26px', sm: '32px', md: '40px' },
+          fontSize: { xs: "26px", sm: "32px", md: "40px" },
           lineHeight: 1.2,
         }}
       >
-        Empowering Tomorrow's{' '}
-        <Typography
-          variant="h3"
-          component="span"
-          sx={{
-            fontWeight: 400,
-            color: '#0F99C3', // Blue color for "Leaders"
-            fontSize: 'inherit',
-          }}
-        >
-          Leaders
-        </Typography>
-        :
-      </Typography>
-
-      <Typography
-        variant="h3"
-        component="h3"
-        sx={{
-          fontWeight: 400,
-          color: '#333',
-          mb: 3,
-          fontSize: { xs: '26px', sm: '32px', md: '40px' },
-          lineHeight: 1.2,
-        }}
-      >
-        DBEIA Leadership Program
+        {HighlightText(data.title)}
       </Typography>
 
       {/* Program Description */}
       <Typography
         variant="body1"
         sx={{
-          color: '#555',
+          color: "#555",
           mb: 4,
-          fontSize: '16px',
+          fontSize: "16px",
           lineHeight: 1.6,
         }}
       >
-        Named after the values we hold around DBEIA, our Leadership Courses introduce students to early and critical leadership skills. Through each course, students learn the leadership skills listed below through different applications to ensure they understand how these skills are exhibited within various industries.
+        {data.description_part1}
       </Typography>
 
       {/* Content Grid: Text Left, Image Right */}
@@ -84,62 +85,67 @@ export default function EmpoweringLeadersComponent() {
           <Typography
             variant="body1"
             sx={{
-              color: '#555',
+              color: "#555",
               mb: 4,
-              fontSize: '16px',
+              fontSize: "16px",
               lineHeight: 1.6,
             }}
           >
-            We have five courses, spanning from our Discovering Leadership, for our students just beginning to discover the world of career pathways and leadership, and ending with our Empowering Leadership course, for our students who have already been exploring career pathways and are looking to further step into their leadership. The Discovering Leadership course is a pre-requisite to some courses*.
+            {data.description_part2}
           </Typography>
 
           {/* Bullet points with custom icons */}
           <Box sx={{ mt: 2 }}>
-            {programFeatures.map((feature, index) => (
+            {data.prerequisition_list.map((feature, index) => (
               <Box
                 key={index}
                 sx={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
+                  display: "flex",
+                  alignItems: "flex-start",
                   mb: 2,
                 }}
               >
                 <CheckCircleOutlineIcon
                   sx={{
-                    color: '#0F99C3',
+                    color: "#0F99C3",
                     mr: 1,
-                    mt: '3px',
-                    fontSize: '20px',
+                    mt: "3px",
+                    fontSize: "20px",
                   }}
                 />
                 <Typography
                   variant="body1"
                   sx={{
-                    color: '#555',
-                    fontSize: '16px',
+                    color: "#555",
+                    fontSize: "16px",
                   }}
                 >
-                  {feature}
+                  {feature.description}
                 </Typography>
               </Box>
             ))}
           </Box>
         </Grid>
-        
+
         {/* Right side - Image */}
         <Grid item xs={12} md={6}>
           <Box
             sx={{
-              position: 'relative',
-              width: '100%',
-              height: { xs: '300px', md: '400px' },
-              borderRadius: '15px',
-              overflow: 'hidden',
+              position: "relative",
+              width: "100%",
+              height: { xs: "300px", md: "400px" },
+              borderRadius: "15px",
+              overflow: "hidden",
             }}
           >
             <Image
-              src="/stock1.jpg"
-              alt="Students collaborating on a leadership activity"
+              src={
+                data?.cover_image?.source?.url
+                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                    data?.cover_image?.source?.url
+                  : null
+              }
+              alt={data?.cover_image?.alternate_text}
               layout="fill"
               objectFit="cover"
             />

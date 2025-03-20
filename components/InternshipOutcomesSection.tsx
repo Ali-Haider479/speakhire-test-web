@@ -8,20 +8,39 @@ import {
   ListItemText,
   styled,
   Button,
+  Grid,
 } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 
-const InternshipOutcomesSection = () => {
-  const activities = [
-    "positive identity development and goal setting ",
-    "increased school engagement and belonging",
-    "increased self-efficiency",
-    "access to social capital and opportunities",
-    "social and workplace skills gains for students",
-    "make schools more inclusive",
-    "complete your own resume with skills and experiences gained from the internship year.",
-  ];
+interface InternshipOutcomesSectionProps {
+  data: {
+    title: string;
+    outcomes: any[];
+    carousel_images: any[];
+  };
+}
+
+const InternshipOutcomesSection = ({
+  data,
+}: InternshipOutcomesSectionProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstPart = words[0];
+      const lastPart = words.slice(1).join(" ");
+
+      return (
+        <p>
+          
+          <span style={{ color: "#0F99C3" }}>{firstPart} </span>
+          {lastPart}
+        </p>
+      );
+    } else {
+      return "";
+    }
+  };
 
   return (
     <Box
@@ -31,24 +50,24 @@ const InternshipOutcomesSection = () => {
         px: "10%",
         p: { xs: 2, md: 8 },
         flexDirection: { xs: "column", md: "row" },
-        width:"80vw"
+        width: "80vw",
       }}
     >
       {/* Left Column */}
-      <Box sx={{ flex: 1 }}>
+      <Grid item xs={12} md={6}>
+      <Box sx={{ flex: 1}}>
         <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
-          <span style={{ color: "#0F99C3" }}>Outcomes </span>
-          of this program
+          {HighlightText(data.title)}
         </Typography>
 
         <List sx={{ mb: 4 }}>
-          {activities.map((activity, index) => (
+          {data.outcomes.map((activity, index) => (
             <ListItem key={index} sx={{ pb: 2 }}>
               <ListItemIcon>
                 <Image src={"/checkBadge.svg"} alt="" width={24} height={24} />
               </ListItemIcon>
               <ListItemText
-                primary={activity}
+                primary={activity.description}
                 sx={{
                   "& .MuiListItemText-primary": {
                     fontSize: "1.1rem",
@@ -67,7 +86,6 @@ const InternshipOutcomesSection = () => {
             borderRadius: "50px",
             borderColor: "#08547A",
             textTransform: "none",
-            
           }}
           variant="outlined"
           endIcon={<Image src={"/link.svg"} alt="" width={16} height={16} />}
@@ -89,6 +107,8 @@ const InternshipOutcomesSection = () => {
           Intern Application
         </Button>
       </Box>
+      </Grid>
+      <Grid item xs={12} md={6}>
       <Box
         sx={{
           display: "flex",
@@ -99,21 +119,26 @@ const InternshipOutcomesSection = () => {
           borderRadius: "20px",
         }}
       >
-        <Image
-          src={"/10.png"}
-          alt=""
-          width={620}
-          height={306}
-          style={{ borderRadius: 24 }}
-        />
-        <Image
-          src={"/internship.png"}
-          alt=""
-          width={620}
-          height={306}
-          style={{ borderRadius: 24, aspectRatio: 16 / 9 }}
-        />
+        {data.carousel_images.map((item: any, index: number) => (
+          <Image
+            key={index} // Added key for React's list rendering
+            src={
+              item?.source?.url
+                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${item.source.url}`
+                : "/fallback-image.png" // Improved UX with a fallback image
+            }
+            alt={item?.alternate_text || "Carousel Image"}
+            layout="responsive" // Maintains aspect ratio automatically
+            width={4} // Aspect ratio 16:9
+            height={3} // Aspect ratio 16:9
+            style={{
+              borderRadius: 24,
+              objectFit: "cover", // Ensures proper image scaling
+            }}
+          />
+        ))}
       </Box>
+      </Grid>
     </Box>
   );
 };

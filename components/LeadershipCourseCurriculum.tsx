@@ -7,81 +7,48 @@ interface CurriculumItem {
   title: string;
 }
 
-export default function LeadershipCourseCurriculum() {
-  // Data for the curriculum items
-  const curriculumItems: CurriculumItem[] = [
-    {
-      id: "1",
-      title: "Accountability - Balancing commitments"
-    },
-    {
-      id: "2",
-      title: "Conflict management - Internal and interpersonal"
-    },
-    {
-      id: "3",
-      title: "Diversity and inclusion"
-    },
-    {
-      id: "4",
-      title: "Non-positional leadership - Leading from within"
-    },
-    {
-      id: "5",
-      title: "Defining your vision"
-    },
-    {
-      id: "6",
-      title: "The importance of listening"
-    },
-    {
-      id: "7",
-      title: "Engaging in productive self-reflection and wellness"
-    },
-    {
-      id: "8",
-      title: "Goal-setting"
-    },
-    {
-      id: "9",
-      title: "Social media and your personal profile"
-    },
-    {
-      id: "10",
-      title: "Leadership essentials: Integrity, empathy, authenticity, emotional intelligence, and humility"
-    }
-  ];
+interface LeadershipCourseCurriculumProps{
+  data:{
+    title:string,
+    course_curriculum:any[]
+  }
+}
+
+export default function LeadershipCourseCurriculum({data}:LeadershipCourseCurriculumProps) {
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 2).join(" ");
+    const highlightedWord = words[2];
+
+    return (
+      <p>
+        {firstWords}{" "}
+        <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
+      </p>
+    );
+  };
 
   return (
     <Box
       sx={{
         width: '80vw',
         py: 5, // Padding top and bottom
-        px: { xs: 2, md: 8 }, // Responsive padding left and right
+        px: { xs: 2, md: 0 }, // Responsive padding left and right
       }}
     >
       {/* Header Section */}
       <Box mb={4}>
         <Typography 
-          variant="h3" 
-          component="h1" 
+          variant="h4" 
           sx={{ 
             fontWeight: 400,
             display: 'inline',
             color: '#333',
           }}
         >
-          Leadership Course{' '}
-          <Typography
-            variant="h3"
-            component="span"
-            sx={{
-              fontWeight: 400,
-              color: '#0F99C3', // Using the blue color from your first image
-            }}
-          >
-            Curriculum
-          </Typography>
+          {HighlightText(data.title)}
         </Typography>
       </Box>
 
@@ -113,7 +80,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[0].title}
+                {data.course_curriculum[0].description}
               </Typography>
             </Box>
           </Grid>
@@ -137,7 +104,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[1].title}
+                {data.course_curriculum[1].description}
               </Typography>
             </Box>
           </Grid>
@@ -161,7 +128,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[2].title}
+                {data.course_curriculum[2].description}
               </Typography>
             </Box>
           </Grid>
@@ -189,7 +156,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[3].title}
+                {data.course_curriculum[3].description}
               </Typography>
             </Box>
           </Grid>
@@ -213,7 +180,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[4].title}
+                {data.course_curriculum[4].description}
               </Typography>
             </Box>
           </Grid>
@@ -237,7 +204,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[5].title}
+                {data.course_curriculum[5].description}
               </Typography>
             </Box>
           </Grid>
@@ -265,7 +232,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[6].title}
+                {data.course_curriculum[6].description}
               </Typography>
             </Box>
           </Grid>
@@ -289,7 +256,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[7].title}
+                {data.course_curriculum[7].description}
               </Typography>
             </Box>
           </Grid>
@@ -313,7 +280,7 @@ export default function LeadershipCourseCurriculum() {
                   fontSize: '16px'
                 }}
               >
-                {curriculumItems[8].title}
+                {data.course_curriculum[8].description}
               </Typography>
             </Box>
           </Grid>
@@ -343,7 +310,7 @@ export default function LeadershipCourseCurriculum() {
                   textAlign: 'center'
                 }}
               >
-                {curriculumItems[9].title}
+                {data.course_curriculum[9].description}
               </Typography>
             </Box>
           </Grid>
