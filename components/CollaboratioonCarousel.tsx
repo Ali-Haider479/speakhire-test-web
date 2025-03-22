@@ -6,7 +6,6 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-
 const slides = [
   {
     img: "/slide.png",
@@ -77,8 +76,8 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
                     : null
                 }
                 alt={slide.cover_image.alternate_text}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
               />
               <Box
                 sx={{
@@ -90,7 +89,7 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
                     "linear-gradient(transparent, rgba(0, 0, 0, 0.8))",
                   color: "white",
                   pb: 3,
-                  px:4,
+                  px: 4,
                   ml: 0,
                 }}
               >

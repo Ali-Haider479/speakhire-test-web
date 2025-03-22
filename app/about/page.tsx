@@ -66,7 +66,7 @@ async function About() {
       <MagazineSection data={data.magazine_section} />
       <NewsSection data={data.latest_news} />
       <ActivitiesSection data={data.activities_outcome_section} />
-      <DonateComponent />
+      <DonateComponent data={data?.donate_component}/>
     </Box>
   );
 }

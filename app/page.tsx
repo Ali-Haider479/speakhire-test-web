@@ -65,7 +65,7 @@ const Home = async () => {
       <OfferingsSection data={data?.eco_system_section.offering_section}/>
       <WorkForceComponent data={data?.workforce_section}/>
       <StudentCarousel data={data?.student_stories_section}/>
-      <DonateComponent />
+      <DonateComponent data={data?.donate_component}/>
     </Box>
   );
 };

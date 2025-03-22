@@ -31,7 +31,7 @@ export default function PartnersTestimonials({
     }
   }
   return (
-    <Box sx={{ backgroundColor: "#F2FAFD", py: 5 }}>
+    <Box sx={{ backgroundColor: "#F2FAFD", py: 5 ,width:"100vw"}}>
       <Typography
         variant="h3"
         align="center"

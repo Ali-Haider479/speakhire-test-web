@@ -64,14 +64,13 @@ const SupportSection = async ({ data }: HeroSectionProps) => {
             color: "#49454F", // Gray color for the description
             marginBottom: "32px",
             //   maxWidth: '600px',
-            width: "32vw",
+            width: "40vw",
             margin: "0 auto",
             lineHeight: "1.5",
             fontWeight: 500,
           }}
         >
-          Your support helps individuals from immigrant families build the
-          confidence, skills, and networks they need to thrive in the workforce
+          {data.description}
         </Typography>
         <Button
           variant="contained"
@@ -88,7 +87,7 @@ const SupportSection = async ({ data }: HeroSectionProps) => {
             textTransform: "none",
           }}
         >
-          Make an impact today
+          {data.button.inner_text}
         </Button>
       </Box>
       <ImageSection imageSrc={data?.cover_image?.source?.url} />

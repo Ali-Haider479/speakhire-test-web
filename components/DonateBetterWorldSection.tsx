@@ -17,13 +17,12 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
 
     const words = text.split(" ");
     const firstWords = words.slice(0, 6).join(" ");
-    const highlightedWord = words.slice(7,9).join(" ");
+    const highlightedWord = words.slice(7, 9).join(" ");
     const restOfWords = words.slice(9).join(" ");
 
     return (
       <p>
-        {firstWords}{" "}
-        <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
+        {firstWords} <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
         {restOfWords}
       </p>
     );
@@ -113,9 +112,9 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
                   data.cover_image.source.url
                 : null
             }
-            alt={data.cover_image.alternate_text||"Donate Cause"}
-            layout="fill"
-            objectFit="cover"
+            alt={data.cover_image.alternate_text || "Donate Cause"}
+            fill
+            style={{ objectFit: "cover" }}
           />
         </CardContent>
       </Box>

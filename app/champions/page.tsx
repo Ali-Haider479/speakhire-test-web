@@ -176,8 +176,8 @@ const ChampionPage = async () => {
                   : null
               }
               alt="Donate Cause"
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
             />
           </CardContent>
         </Box>
@@ -215,7 +215,9 @@ const ChampionPage = async () => {
                 key={index}
                 sx={{
                   borderRight:
-                    index < data.champion_activities_section.contribute_card.length - 1 && !(index % 2)
+                    index <
+                      data.champion_activities_section.contribute_card.length -
+                        1 && !(index % 2)
                       ? "1px solid #ccc "
                       : "none",
                 }}
@@ -247,13 +249,16 @@ const ChampionPage = async () => {
 
                 {index < 2 && <Divider sx={{ width: "90%", ml: 3 }} />}
 
-                {index > 1 && index !== data.champion_activities_section.contribute_card.length - 1 && (
-                  <Divider
-                    sx={{
-                      ml: index === 3 ? -3 : "",
-                    }}
-                  />
-                )}
+                {index > 1 &&
+                  index !==
+                    data.champion_activities_section.contribute_card.length -
+                      1 && (
+                    <Divider
+                      sx={{
+                        ml: index === 3 ? -3 : "",
+                      }}
+                    />
+                  )}
               </Grid>
             )
           )}
@@ -604,7 +609,7 @@ const ChampionPage = async () => {
             src={
               data.become_champion_section?.cover_image?.source?.url
                 ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                data.become_champion_section?.cover_image?.source?.url
+                  data.become_champion_section?.cover_image?.source?.url
                 : ""
             }
             alt="Become Champion"

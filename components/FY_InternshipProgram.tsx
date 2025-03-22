@@ -14,7 +14,7 @@ const FY_InternshipProgram = ({ data }: FY_InternshipProgramProps) => {
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
       const words = text.split(" ");
-      const firstPart = words.slice(0,2).join(" ");
+      const firstPart = words.slice(0, 2).join(" ");
       const lastPart = words.slice(4).join(" ");
       const middlePart = words.slice(2, 4).join(" ");
 
@@ -70,7 +70,7 @@ const FY_InternshipProgram = ({ data }: FY_InternshipProgramProps) => {
         <Typography
           variant="body1"
           sx={{
-            mt:5,
+            mt: 5,
             marginBottom: 2,
             fontSize: { xs: "1rem", sm: "1.2rem", md: "1.25rem" },
           }}
@@ -90,13 +90,13 @@ const FY_InternshipProgram = ({ data }: FY_InternshipProgramProps) => {
         <Image
           src={
             data?.cover_image?.source?.url
-              ? process.env.NEXT_PUBLIC_STRAPI_URL + data?.cover_image?.source?.url
+              ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                data?.cover_image?.source?.url
               : null
           }
           alt="partner-image"
-          layout="fill"
-          objectFit="cover"
-          style={{ borderRadius: "40px" }}
+          fill
+          style={{ objectFit: "cover", borderRadius: "40px" }}
         />
         <Image
           src="/awardWinner.svg"

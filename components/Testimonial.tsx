@@ -46,7 +46,7 @@ const Testimonial: React.FC<TestimonialProps> = ({
           fontSize: { xs: "1.5rem", md: "2rem" },
           fontWeight: 600,
           mb: 6,
-          mt:5
+          mt: 5,
         }}
       >
         {statement}
@@ -108,7 +108,7 @@ const Testimonial: React.FC<TestimonialProps> = ({
         src={process.env.NEXT_PUBLIC_STRAPI_URL + videoUrl}
         alt="Testimonial media"
         layout="responsive"
-        objectFit="cover"
+        style={{ objectFit: "cover" }}
         width={16}
         height={9}
       />
@@ -121,7 +121,7 @@ const Testimonial: React.FC<TestimonialProps> = ({
         padding: { xs: 2, md: 3 },
         backgroundColor: "white",
         borderRadius: "24px",
-        width:"100%"
+        width: "100%",
       }}
     >
       {isMobile ? (

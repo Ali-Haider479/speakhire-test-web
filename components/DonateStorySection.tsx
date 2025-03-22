@@ -96,7 +96,9 @@ const DonateStorySection = ({ data }: DonateStorySectionProps) => {
                 {item.name}
               </Typography>
               <Typography variant="body2" sx={{ color: "#555" }}>
-                {`${item.designation} ${item.employer?`@ ${item.employer}`:""} - ${item.association}`}
+                {`${item.designation} ${
+                  item.employer ? `@ ${item.employer}` : ""
+                } - ${item.association}`}
               </Typography>
             </Box>
           </Box>
@@ -114,7 +116,7 @@ const DonateStorySection = ({ data }: DonateStorySectionProps) => {
                   : null
               }
               alt=""
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
               height={506}
               width={720}
             />

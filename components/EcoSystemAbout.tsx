@@ -110,10 +110,9 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
           src={process.env.NEXT_PUBLIC_STRAPI_URL + data.cover_image.source.url}
           alt={data.cover_image.alternate_text}
           layout="responsive" // Correct layout for full-box fill
-          objectFit="cover" // Ensures the image scales properly inside the box
+          style={{ objectFit: "cover", padding: "40px" }} // Ensures the image scales properly inside the box
           width={16}
           height={9}
-          style={{ padding: "40px" }} // Matches the box's rounded corners
         />
       </Box>
     </Box>

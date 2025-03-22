@@ -258,8 +258,8 @@ const Interns = async () => {
                   : null
               }
               alt={data.hero_section?.cover_image.alternate_texts}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
             />
           </CardContent>
         </Box>
@@ -415,8 +415,8 @@ const Interns = async () => {
                           : null
                       }
                       alt="Community"
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{ objectFit: "cover" }}
                     />
                   </Box>
                 ))}
@@ -449,8 +449,8 @@ const Interns = async () => {
                       : null
                   }
                   alt="Community"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                 />
               </Box>
             ))}
@@ -506,10 +506,14 @@ const Interns = async () => {
           <Image
             src={
               data?.apply_now_section?.cover_image?.source?.url
-                ? process.env.NEXT_PUBLIC_STRAPI_URL+data?.apply_now_section?.cover_image?.source?.url
+                ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                  data?.apply_now_section?.cover_image?.source?.url
                 : null
             }
-            alt={data?.apply_now_section?.cover_image.alternate_text||"Become Champion"}
+            alt={
+              data?.apply_now_section?.cover_image.alternate_text ||
+              "Become Champion"
+            }
             width={800}
             height={200}
             style={{ borderRadius: 35, justifySelf: "right" }}

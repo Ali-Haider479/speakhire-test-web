@@ -124,9 +124,8 @@ export default function VisionariesComponent({
                 : ""
             } // Replace with your actual image source
             alt={data?.cover_image?.alternate_text}
-            layout="fill" // Make the image fill the parent container
-            objectFit="cover" // Ensure the image covers the entire area
-            style={{ borderRadius: "40px" }}
+            fill // Make the image fill the parent container
+            style={{ objectFit: "cover", borderRadius: "40px" }} // Ensure the image covers the entire area
           />
         </Box>
       </Box>

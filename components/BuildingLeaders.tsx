@@ -154,7 +154,7 @@ const BuildingLeaders = ({ data }: BuildingLeadersProps) => {
               layout="responsive"
               width={900}
               height={450}
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
             />
           </div>
           <TextOverlay>

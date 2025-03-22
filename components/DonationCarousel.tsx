@@ -37,18 +37,17 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
 
     const words = text.split(" ");
     const firstWords = words.slice(0, 5).join(" ");
-    const highlightedWord = words.slice(5,7).join(" ");
+    const highlightedWord = words.slice(5, 7).join(" ");
     const restOfWords = words.slice(7).join(" ");
 
     return (
       <p>
-        {firstWords}{" "}
-        <span style={{ color: "#6AAA19" }}>{highlightedWord}</span>{" "}
+        {firstWords} <span style={{ color: "#6AAA19" }}>{highlightedWord}</span>{" "}
         {restOfWords}
       </p>
     );
   };
-  
+
   return (
     <Box
       sx={{
@@ -95,9 +94,9 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
                       ? process.env.NEXT_PUBLIC_STRAPI_URL + img?.src
                       : null
                   }
-                  alt={img.alt||"Community"}
-                  layout="fill"
-                  objectFit="cover"
+                  alt={img.alt || "Community"}
+                  fill
+                  style={{ objectFit: "cover" }}
                 />
               </Box>
             ))}

@@ -16,11 +16,11 @@ const EconomicMobilitySection = ({ data }: EconomicMobilitySectionProps) => {
     acc[rowIndex].push({
       src: item.source.url,
       width: index % 3 === 0 ? "46%" : "27%",
-      alt:item.alternate_text
+      alt: item.alternate_text,
     });
     return acc;
   }, []);
-  
+
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
       const words = text.split(" ");
@@ -71,33 +71,34 @@ const EconomicMobilitySection = ({ data }: EconomicMobilitySectionProps) => {
           borderRadius: "20px",
         }}
       >
-        {groupedImages.map((row:any, rowIndex:number) => (
+        {groupedImages.map((row: any, rowIndex: number) => (
           <Box
             key={rowIndex}
             sx={{ display: "flex", justifyContent: "center", gap: 2 }}
           >
-            {row.map((img:any, index:number) => (
+            {row.map((img: any, index: number) => (
               <Box
                 key={index}
                 sx={{
                   position: "relative",
                   borderRadius: "16px",
                   overflow: "hidden",
-                  width: rowIndex % 3 === 0 && index === 0
-                  ? "46%"
-                  : rowIndex % 3 === 2 && index === 2
-                  ? "46%"
-                   : rowIndex % 3 === 1 && index === 1
-                  ? "46%"
-                  : "27%",
+                  width:
+                    rowIndex % 3 === 0 && index === 0
+                      ? "46%"
+                      : rowIndex % 3 === 2 && index === 2
+                      ? "46%"
+                      : rowIndex % 3 === 1 && index === 1
+                      ? "46%"
+                      : "27%",
                   height: 176,
                 }}
               >
                 <Image
-                  src={process.env.NEXT_PUBLIC_STRAPI_URL+img.src}
+                  src={process.env.NEXT_PUBLIC_STRAPI_URL + img.src}
                   alt={img.alt}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                 />
               </Box>
             ))}

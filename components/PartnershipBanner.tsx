@@ -19,13 +19,13 @@ const PartnershipBanner = ({data}:PartnershipBannerProps) => {
     <Box sx={{display:"flex",flexDirection:"column", alignItems:"center",justifyContent:"center"}}>
       <Box
         sx={{
-          width: "100%",
+          width: "100vw",
           bgcolor: "#F2FAFD",
           py: 5,
           overflow: "hidden",
         }}
       >
-        <Container maxWidth="lg">
+        <Container>
           {/* Top Section */}
           <Box
             sx={{

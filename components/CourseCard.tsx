@@ -51,8 +51,8 @@ const CourseCard = ({ course }: any) => {
                 : null
             }
             alt={`${course.title}`}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
           />
         </Box>
 
@@ -112,8 +112,8 @@ const CourseCard = ({ course }: any) => {
                 borderColor: "#0F99C3",
               },
               width: "100%",
-              textTransform:"none",
-              fontSize:16
+              textTransform: "none",
+              fontSize: 16,
             }}
             onClick={() => setShowMore(!showMore)}
           >

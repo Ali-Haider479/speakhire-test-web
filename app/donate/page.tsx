@@ -10,15 +10,28 @@ import Image from "next/image";
 
 async function getData() {
   try {
-    const DonationApiRes = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/donation-page?populate=*`,
-      { next: { revalidate: 60 } }
-    );
+    const [DonationApiRes, commonItemsResponse] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/donation-page?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+    ]);
 
-    if (!DonationApiRes.ok) throw new Error("Failed to fetch data");
+    if (!DonationApiRes.ok || !commonItemsResponse.ok) {
+      throw new Error("Failed to fetch data");
+    }
 
-    const DonationApiData = await DonationApiRes.json();
-    return { ...DonationApiData?.data };
+    const [DonationApiData, commonItemsData] = await Promise.all([
+      DonationApiRes.json(),
+      commonItemsResponse.json(),
+    ]);
+
+    return {
+      ...DonationApiData?.data,
+      ...commonItemsData.data,
+    };
   } catch (error) {
     console.error("Data fetching error:", error);
     throw error;
@@ -93,7 +106,7 @@ const Donate = async () => {
           ))}
         </Box>
       </Box>
-      <DonateComponent />
+      <DonateComponent data={data?.donate_component}/>
     </Box>
   );
 };

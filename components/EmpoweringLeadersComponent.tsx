@@ -146,8 +146,8 @@ export default function EmpoweringLeadersComponent({
                   : null
               }
               alt={data?.cover_image?.alternate_text}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
             />
           </Box>
         </Grid>

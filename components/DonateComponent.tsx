@@ -23,17 +23,17 @@ const DonateCard = styled(Card)(({ theme }) => ({
     flexDirection: 'column',
   },
   height: '65vh',
-  width: '80vw'
+  width: '80vw',
 }));
 
 const ContentSection = styled(CardContent)(({ theme }) => ({
   flex: '0.3',
-  padding: theme.spacing(4),
+  padding: theme.spacing(3),
   color: 'white',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  gap: theme.spacing(2),
+  gap: theme.spacing(3),
   borderTopRightRadius: '24px',    // Add this
   borderBottomRightRadius: '24px', // Add this
 }));
@@ -59,7 +59,16 @@ const ImageSection = styled(Box)({
   borderRadius: '24px', // Change this to round all corners
 });
 
-const DonateComponent = () => {
+interface DonateComponentProps{
+  data:{
+    title:string,
+    description:string,
+    button:any,
+    cover_image:any
+  }
+}
+
+const DonateComponent = ({data}:DonateComponentProps) => {
   const handleDonateClick = () => {
     // Handle donation logic here
     console.log('Donate button clicked');
@@ -69,13 +78,12 @@ const DonateComponent = () => {
     <Container>
       <DonateCard>
         <ContentSection>
-          <Typography variant="h3" component="h2" fontWeight="bold" gutterBottom>
-            Donate today to Change a Life Forever
+          <Typography variant="h3" fontWeight="bold" gutterBottom>
+            {data.title}
           </Typography>
 
           <Typography variant="body1" sx={{ mb: 4 }}>
-            Your support helps individuals from immigrant families build the confidence,
-            skills, and networks they need to thrive in the workforce. Every contribution counts.
+            {data.description}
           </Typography>
 
           <DonateButton
@@ -83,13 +91,13 @@ const DonateComponent = () => {
             startIcon={<FavoriteIcon />}
             onClick={handleDonateClick}
           >
-            Donate Now
+            {data.button.inner_text}
           </DonateButton>
         </ContentSection>
 
         <ImageSection>
           <Image
-            src="/donate.png" 
+            src={data.cover_image?.source?.url? process.env.NEXT_PUBLIC_STRAPI_URL+data.cover_image.source.url:null}
             alt="Children sitting together"
             fill
             style={{ objectFit: 'cover' }}
