@@ -2,7 +2,32 @@ import { Box, Button, CardContent, styled, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 
-const DonateBetterWorldSection = () => {
+interface DonateBetterWorldSectionProps {
+  data: {
+    title: string;
+    description: string;
+    button: any;
+    cover_image: any;
+  };
+}
+
+const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 6).join(" ");
+    const highlightedWord = words.slice(7,9).join(" ");
+    const restOfWords = words.slice(9).join(" ");
+
+    return (
+      <p>
+        {firstWords}{" "}
+        <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
+        {restOfWords}
+      </p>
+    );
+  };
   return (
     <Box
       sx={{
@@ -13,11 +38,11 @@ const DonateBetterWorldSection = () => {
         textAlign: "center",
         alignItems: "center",
         width: "100vw",
-        height:"auto",
-        background: 'linear-gradient(180deg, #F2FAFD 70%, #ffffff 30%)',
+        height: "auto",
+        background: "linear-gradient(180deg, #F2FAFD 70%, #ffffff 30%)",
         // padding: theme.spacing(6, 0),
-        position: 'relative',
-        overflow: 'hidden',
+        position: "relative",
+        overflow: "hidden",
       }}
     >
       <Typography
@@ -31,9 +56,7 @@ const DonateBetterWorldSection = () => {
           width: "45vw",
         }}
       >
-        Every investment brings us closer to a
-        <span style={{ color: "#0F99C3" }}> better world </span>
-        for immigrants
+        {HighlightText(data.title)}
       </Typography>
       <Typography
         variant="body1"
@@ -48,27 +71,23 @@ const DonateBetterWorldSection = () => {
           fontWeight: 500,
         }}
       >
-        Your support helps individuals from immigrant families build the
-        confidence, skills, and networks they need to thrive in the workforce
+        {data.description}
       </Typography>
       <Button
         variant="contained"
         sx={{
           bgcolor: "#08547A", // Button color
-          borderRadius: 5,
+          borderRadius: 25,
           padding: "10px 30px",
           "&:hover": {
             bgcolor: "#0A4A5E", // Darker hover effect
           },
           marginTop: 4,
+          textTransform: "none",
+          fontSize: 16,
         }}
       >
-        <Typography
-          variant="body1"
-          sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
-        >
-          Make an impact today
-        </Typography>
+        {data.button.inner_text}
       </Button>
       <Box
         sx={{
@@ -81,15 +100,20 @@ const DonateBetterWorldSection = () => {
           overflow: "hidden",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
           backgroundColor: "#ffffff",
-          height:"80vh",
-          marginTop:5
+          height: "80vh",
+          marginTop: 5,
         }}
       >
         <CardContent>
           {/* This is where your image will go */}
           <Image
-            src="/donateCause.svg"
-            alt="Donate Cause"
+            src={
+              data.cover_image?.source?.url
+                ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                  data.cover_image.source.url
+                : null
+            }
+            alt={data.cover_image.alternate_text||"Donate Cause"}
             layout="fill"
             objectFit="cover"
           />

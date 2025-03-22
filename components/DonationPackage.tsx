@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -6,52 +7,48 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
+import { title } from "process";
 import React from "react";
 
 type Packages = {
-  title: string;
-  price: string;
-  descriptionHrs: string;
   description: string;
-  buttonText: string;
+  hours: string;
+  price: string;
+  title: string;
+  type: string;
+  button: any;
 };
 
-const Packages = [
-  {
-    title: "Change trendsetter",
-    price: "$15,000",
-    descriptionHrs: `270 Hours`,
-    description:
-      "Speakhire envisions a future where education empowers immigrants to thrive.",
-    buttonText: "Join as a trendsetter",
-  },
-  {
-    title: "Change Leader",
-    price: "$20,000",
-    descriptionHrs: `405 Hours`,
-    description:
-      "Speakhire envisions a future where education empowers immigrants to thrive.",
-    buttonText: "Lead the change",
-  },
-  {
-    title: "Change Visionary",
-    price: "$30,000",
-    descriptionHrs: "675 Hours",
-    description:
-      "Speakhire envisions a future where education empowers immigrants to thrive.",
-    buttonText: "Join as a visionary",
-  },
-  {
-    title: "Change Agent",
-    price: "$5,000",
-    descriptionHrs: `20 Hours`,
-    description:
-      "Speakhire envisions a future where education empowers immigrants to thrive.",
-    buttonText: "Become a agent",
-  },
-];
+type BetterTomorrowCard = {
+  title: string;
+  description: string;
+  buttons: any[];
+};
 
-const DonationPackage = () => {
+interface DonationPackageProps {
+  data: {
+    title: string;
+    corporate_plan_card: Packages[];
+    better_tomorrow_card: BetterTomorrowCard;
+  };
+}
+
+const DonationPackage = ({ data }: DonationPackageProps) => {
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 3).join(" ");
+    const highlightedWord = words.slice(3, 5).join(" ");
+    const restOfWords = words.slice(6).join(" ");
+
+    return (
+      <p>
+        {firstWords} <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
+        {restOfWords}
+      </p>
+    );
+  };
   return (
     <Box
       sx={{
@@ -60,31 +57,44 @@ const DonationPackage = () => {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
+        px: 2, // Padding for smaller screens
       }}
     >
-      <Box sx={{ width: "60vw", mb: 3, justifyItems: "center" }}>
-        <Typography variant="h3">
-          Empower change with&nbsp;
-          <span style={{ color: "#0F99C3" }}>corporate plans</span>
-          &nbsp;for driving impact
-        </Typography>
+      {/* Title and Button Section */}
+      <Box
+        sx={{
+          width: { xs: "90vw", md: "60vw" },
+          mb: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="h3">{HighlightText(data.title)}</Typography>
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             backgroundColor: "#F2FAFD",
             borderRadius: "10px",
-            padding: "4px",
+            padding: "0px",
             width: "fit-content",
             mt: 2,
           }}
         >
-          {/* Left Side - Individual Donor */}
-          <Typography sx={{ px: 2, fontWeight: 500, color: "#000" }}>
+          <Button
+            sx={{
+              px: 2,
+              fontWeight: 500,
+              color: "#000",
+              textTransform: "none",
+              borderRadius: "10px",
+            }}
+          >
             Individual donor
-          </Typography>
+          </Button>
 
-          {/* Right Side - Button */}
           <Button
             variant="contained"
             sx={{
@@ -100,21 +110,30 @@ const DonationPackage = () => {
           </Button>
         </Box>
       </Box>
+
+      {/* Corporate Plan Cards */}
       <Box
-        sx={{ display: "flex", flexWrap: "wrap", gap: 2, textAlign: "left" }}
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 2,
+          textAlign: "left",
+          justifyContent: "center",
+        }}
       >
-        {Packages.map((item: Packages, index: number) => (
+        {data.corporate_plan_card.map((item: Packages, index: number) => (
           <Card
-            key={index} // Ensure unique keys for React
+            key={index}
             sx={{
               p: 3,
-              width: "16vw",
-              height: "60vh",
+              width: { xs: "90vw", sm: "40vw", md: "18vw" }, // Responsive widths
+              height: "auto",
+              minHeight:"28vw",
               borderRadius: 5,
               backgroundColor: "#F2FAFD",
               display: "flex",
               flexDirection: "column",
-              transition: "background-color 0.2s, color 0.2s", // Smooth hover effect
+              transition: "background-color 0.2s, color 0.2s",
               ":active": {
                 backgroundColor: "#08547A",
                 color: "#FFFFFF",
@@ -142,84 +161,82 @@ const DonationPackage = () => {
               <Typography variant="body1" sx={{ mt: 2, mb: 2 }}>
                 Provide&nbsp;
                 <Typography component="span" sx={{ color: "#0F99C3" }}>
-                  {item.descriptionHrs}
+                  {`${item.hours} hours`}
                 </Typography>
                 &nbsp;of career counselling
               </Typography>
               <Typography variant="body1">{item.description}</Typography>
             </Box>
 
-            {/* Button at the bottom */}
             <Button
               variant="contained"
               fullWidth
               sx={{
                 borderRadius: 10,
                 backgroundColor: "#08547A",
-                transition: "background-color 0.2s, color 0.2s", // Smooth effect
+                transition: "background-color 0.2s, color 0.2s",
                 ":active": { backgroundColor: "#FFFFFF", color: "#08547A" },
                 textTransform: "none",
+                mt:3
               }}
             >
-              <Typography >{item.buttonText}</Typography>
+              <Typography>{item?.button?.inner_text}</Typography>
             </Button>
           </Card>
         ))}
       </Box>
+
+      {/* Better Tomorrow Card */}
       <Box
         sx={{
           backgroundColor: "#F2FAFD",
           borderRadius: 5,
-          width: "67vw",
+          width: { xs: "90vw", md: "75vw" }, // Responsive width
           mt: 5,
           p: 3,
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center", // Ensures vertical alignment
+          flexDirection: { xs: "column", md: "row" }, // Vertical on small screens
+          gap: 3,
         }}
       >
         {/* Left Side - Text */}
-        <Box sx={{ width: "50%", textAlign: "left" }}>
-          <Typography variant="h4">Together for a Better Tomorrow</Typography>
+        <Box sx={{ width: { xs: "100%", md: "50%" }, textAlign: "left" }}>
+          <Typography variant="h4">
+            {data.better_tomorrow_card.title}
+          </Typography>
           <Typography variant="body1" sx={{ mt: 2 }}>
-            Your generosity today can change lives tomorrow. Together, we can
-            reach our goal of developing future leaders.
+            {data.better_tomorrow_card.description}
           </Typography>
         </Box>
 
         {/* Right Side - Buttons */}
         <Box
           sx={{
-            width: "50%",
+            width: { xs: "100%", md: "50%" },
             display: "flex",
-            justifyContent: "flex-end",
-            mt: "auto",
+            flexDirection: "row",
+            gap: 2,
+            mt: { xs: 3, md: "auto" },
           }}
         >
-          <Button
-            variant="outlined"
-            sx={{
-              borderColor: "#08547A",
-              color: "#08547A",
-              borderRadius: 5,
-              textTransform: "none", // Makes it look more natural
-            }}
-          >
-            <Typography variant="body1">Explore Partnership Guide</Typography>
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              ml: 2,
-              backgroundColor: "#08547A",
-              color: "white",
-              borderRadius: 5,
-              textTransform: "none",
-            }}
-          >
-            <Typography variant="body1">Become a Sponsor</Typography>
-          </Button>
+          {data.better_tomorrow_card.buttons.map((btn: any, index: number) => (
+            <Button
+              key={btn.inner_text}
+              variant={index === 1 ? "contained" : "outlined"}
+              sx={{
+                borderColor: "#08547A",
+                color: `${index === 1 ? "white" : "#08547A"}`,
+                backgroundColor: `${index === 1 ? "#08547A" : ""}`,
+                borderRadius: 5,
+                textTransform: "none",
+                fontSize: 16,
+                alignSelf: "flex-end",
+                ml: `${index === 1 ? "1" : "auto"}`,
+              }}
+            >
+              {btn.inner_text}
+            </Button>
+          ))}
         </Box>
       </Box>
     </Box>

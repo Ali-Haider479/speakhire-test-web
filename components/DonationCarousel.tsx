@@ -6,7 +6,6 @@ const images = [
   [
     { src: "/11.jpg", width: "30%" },
     { src: "/12.jpg", width: "70%" },
-    
   ],
   [
     { src: "/13.jpg", width: "70%" },
@@ -14,7 +13,42 @@ const images = [
   ],
 ];
 
-const DonationCarousel = () => {
+interface DonationCarouselProps {
+  data: {
+    title: string;
+    images: any[];
+  };
+}
+
+const DonationCarousel = ({ data }: DonationCarouselProps) => {
+  const groupedImages = data.images.reduce((acc, item, index) => {
+    const rowIndex = Math.floor(index / 2);
+    acc[rowIndex] = acc[rowIndex] || [];
+    acc[rowIndex].push({
+      src: item.source.url,
+      width: index % 3 === 0 ? "70%" : "30%",
+      alt: item.alternate_text,
+    });
+    return acc;
+  }, []);
+
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 5).join(" ");
+    const highlightedWord = words.slice(5,7).join(" ");
+    const restOfWords = words.slice(7).join(" ");
+
+    return (
+      <p>
+        {firstWords}{" "}
+        <span style={{ color: "#6AAA19" }}>{highlightedWord}</span>{" "}
+        {restOfWords}
+      </p>
+    );
+  };
+  
   return (
     <Box
       sx={{
@@ -26,9 +60,7 @@ const DonationCarousel = () => {
       }}
     >
       <Typography variant="h3" sx={{ color: "#085236", width: "60vw" }}>
-        Your donation creates opportunities and{" "}
-        <span style={{ color: "#6AAA19" }}>changes lives </span>
-        for generations
+        {HighlightText(data.title)}
       </Typography>
 
       <Box
@@ -38,15 +70,15 @@ const DonationCarousel = () => {
           gap: 2,
           padding: 3,
           width: "80vw",
-          mt:4
+          mt: 4,
         }}
       >
-        {images.map((row, rowIndex) => (
+        {groupedImages.map((row: any, rowIndex: number) => (
           <Box
             key={rowIndex}
             sx={{ display: "flex", justifyContent: "center", gap: 2 }}
           >
-            {row.map((img, index) => (
+            {row.map((img: any, index: number) => (
               <Box
                 key={index}
                 sx={{
@@ -58,8 +90,12 @@ const DonationCarousel = () => {
                 }}
               >
                 <Image
-                  src={img.src}
-                  alt="Community"
+                  src={
+                    img?.src
+                      ? process.env.NEXT_PUBLIC_STRAPI_URL + img?.src
+                      : null
+                  }
+                  alt={img.alt||"Community"}
                   layout="fill"
                   objectFit="cover"
                 />

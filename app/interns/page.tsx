@@ -89,30 +89,78 @@ const data = [
   },
 ];
 
-const images = [
-  [
-    { src: "/13.jpg", width: "68%", height: "30%" },
-    { src: "/14.jpg", width: "30%", height: "30%" },
-  ],
-  [
-    { src: "/11.jpg", width: "30%", height: "70%" },
-    { src: "/12.jpg", width: "68%", height: "70%" },
-  ],
-];
+async function getData() {
+  try {
+    const InternsPageApiRes = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/interns-page?populate=*`,
+      { next: { revalidate: 60 } }
+    );
 
-const verticalImagesLayout = [
-  { src: "/1.png", height: "70%" },
-  { src: "/2.png", height: "30%" },
-];
+    if (!InternsPageApiRes.ok) throw new Error("Failed to fetch data");
 
-const testimonialTitle = (
-  <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
-    What <span style={{ color: "#0F99C3" }}> alumnis </span>
-    has to say
-  </Typography>
-);
+    const InternsPageApiData = await InternsPageApiRes.json();
+    return { ...InternsPageApiData?.data };
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw error;
+  }
+}
 
-const Interns = () => {
+const Interns = async () => {
+  const InternPageRes = await getData();
+  const data = InternPageRes;
+  console.log(data);
+  const TextHighlighter = (title: string, wordsToHighlight: string) => {
+    const titleParts = title.includes(wordsToHighlight)
+      ? title.split(wordsToHighlight)
+      : [title, ""];
+    return (
+      <>
+        {titleParts[0]}
+        <Typography
+          component="span"
+          sx={{
+            color: "#00a6d9",
+            fontWeight: 400,
+            fontSize: "inherit",
+          }}
+        >
+          {wordsToHighlight}
+        </Typography>
+        {titleParts[1]}
+      </>
+    );
+  };
+
+  const allImages = data.national_mentorship_month.images;
+
+  const images = [
+    allImages.slice(0, 2).map((item: any, index: number) => {
+      return {
+        src: item.source.url,
+        height: "30%",
+        width: index % 2 == 0 ? "68%" : "30%",
+      };
+    }),
+    allImages.slice(2, 4).map((item: any, index: number) => {
+      return {
+        src: item.source.url,
+        height: "70%",
+        width: index % 2 == 0 ? "30%" : "68%",
+      };
+    }),
+    ,
+  ];
+
+  const verticalImagesLayout = allImages
+    .slice(4, 6)
+    .map((item: any, index: number) => {
+      return {
+        src: item.source.url,
+        height: index % 2 == 0 ? "70%" : "30%",
+      };
+    });
+
   return (
     <Box
       sx={{
@@ -149,8 +197,7 @@ const Interns = () => {
             width: "35vw",
           }}
         >
-          Shape your
-          <span style={{ color: "#0F99C3" }}> future </span> , master your path
+          {TextHighlighter(data.hero_section.title, "future")}
         </Typography>
         <Typography
           variant="body1"
@@ -165,8 +212,7 @@ const Interns = () => {
             fontWeight: 500,
           }}
         >
-          As a SPEAKHIRE Intern, you'll gain leadership skills, connect with
-          industry experts, and build a network to support your career journey.
+          {data.hero_section.description}
         </Typography>
         <Button
           variant="contained"
@@ -184,7 +230,7 @@ const Interns = () => {
             variant="body1"
             sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
           >
-            Apply for Foundation Year
+            {data.hero_section.button.inner_text}
           </Typography>
         </Button>
         <Box
@@ -205,8 +251,13 @@ const Interns = () => {
           <CardContent>
             {/* This is where your image will go */}
             <Image
-              src="/championCover.png"
-              alt="Donate Cause"
+              src={
+                data.hero_section?.cover_image?.source?.url
+                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                    data.hero_section?.cover_image?.source?.url
+                  : null
+              }
+              alt={data.hero_section?.cover_image.alternate_texts}
               layout="fill"
               objectFit="cover"
             />
@@ -224,9 +275,7 @@ const Interns = () => {
         }}
       >
         <Typography variant="h3" sx={{ width: "60vw" }}>
-          Empowering futures through
-          <span style={{ color: "#0F99C3" }}> courses that shape </span>
-          skills and future
+          {TextHighlighter(data.intership_courses.title, "courses that shape")}
         </Typography>
         <Box
           sx={{
@@ -237,61 +286,92 @@ const Interns = () => {
           }}
         >
           <Grid container spacing={3}>
-            {programs.map((item, index) => (
-              <Grid item xs={12} sm={6} key={index}>
-                <Card
-                  elevation={0}
-                  sx={{
-                    backgroundColor: "#F2FAFD",
-                    p: 6,
-                    textAlign: "left",
-                    borderRadius: 5,
-                  }}
-                >
-                  <img src={item.programIcon} alt={item.title} />
-                  {item.invite && <> {item.invite}</>}
-                  <Typography variant="h4" sx={{ mt: 2 }}>
-                    {item.title}
-                  </Typography>
-                  <List>
-                    {item.details.map((detail, index) => (
-                      <ListItem>
-                        <ListItemIcon>
-                          <img src="/checkBadge.svg" alt="check" />
-                        </ListItemIcon>
-                        <ListItemText>{detail}</ListItemText>
-                      </ListItem>
-                    ))}
-                  </List>
-                  <Typography variant="body2" sx={{ mt: 2 }}>
-                    {item.application}
-                  </Typography>
-                  <Button
-                    variant="contained"
+            {data.intership_courses.courses_cards.map(
+              (item: any, index: number) => (
+                <Grid item xs={12} sm={6} key={index}>
+                  <Card
+                    elevation={0}
                     sx={{
-                      mt: 2,
-                      backgroundColor: "#006397",
-                      textTransform: "none",
-                      borderRadius: 10,
-                      fontWeight: "bold",
+                      backgroundColor: "#F2FAFD",
+                      p: 6,
+                      textAlign: "left",
+                      borderRadius: 5,
                     }}
                   >
-                    Register Now
-                  </Button>
-                </Card>
-              </Grid>
-            ))}
+                    <img
+                      src={
+                        item.course_img.source.url
+                          ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                            item.course_img.source.url
+                          : null
+                      }
+                      alt={item.title}
+                    />
+                    {item.invite && <> {item.invite}</>}
+                    <Typography variant="h4" sx={{ mt: 2 }}>
+                      {item.title}
+                    </Typography>
+                    <List>
+                      {item.what_course_offer.map(
+                        (detail: any, index: number) => (
+                          <ListItem key={index}>
+                            <ListItemIcon>
+                              <img src="/checkBadge.svg" alt="check" />
+                            </ListItemIcon>
+                            <ListItemText>{detail.description}</ListItemText>
+                          </ListItem>
+                        )
+                      )}
+                    </List>
+                    <Typography variant="body2" sx={{ mt: 2 }}>
+                      {item.application}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        mt: 2,
+                        backgroundColor: "#006397",
+                        textTransform: "none",
+                        borderRadius: 10,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Register Now
+                    </Button>
+                  </Card>
+                </Grid>
+              )
+            )}
           </Grid>
         </Box>
       </Box>
-      <Box sx={{ backgroundColor: "#F2FAFD", width: "80vw", p: 5, mb: 5 }}>
-        <TestimonialSection title={testimonialTitle} data={data} />
+      <Box
+        sx={{
+          backgroundColor: "#F2FAFD",
+          width: "80vw",
+          p: 5,
+          mb: 5,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <TestimonialSection
+          title={
+            <Typography
+              variant="h4"
+              sx={{ mb: 4, fontWeight: "normal", color: "black" }}
+            >
+              {TextHighlighter(data.alumins_testimonials.title, "alumnis")}
+            </Typography>
+          }
+          data={data.alumins_testimonials.testimonials}
+        />
       </Box>
       <Box sx={{ textAlign: "center" }}>
         <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
-          Celebrating national
-          <span style={{ color: "#0F99C3" }}> Mentorship </span>
-          month
+          {TextHighlighter(data.national_mentorship_month.title, "Mentorship")}
         </Typography>
         <Box
           sx={{
@@ -317,7 +397,7 @@ const Interns = () => {
                   mb: 2,
                 }}
               >
-                {row.map((img, index) => (
+                {row.map((img: any, index: number) => (
                   <Box
                     key={index}
                     sx={{
@@ -329,7 +409,11 @@ const Interns = () => {
                     }}
                   >
                     <Image
-                      src={img.src}
+                      src={
+                        img?.src
+                          ? process.env.NEXT_PUBLIC_STRAPI_URL + img.src
+                          : null
+                      }
                       alt="Community"
                       layout="fill"
                       objectFit="cover"
@@ -347,7 +431,7 @@ const Interns = () => {
               gap: 2,
             }}
           >
-            {verticalImagesLayout.map((img, index) => (
+            {verticalImagesLayout.map((img: any, index: number) => (
               <Box
                 key={index}
                 sx={{
@@ -359,7 +443,11 @@ const Interns = () => {
                 }}
               >
                 <Image
-                  src={img.src}
+                  src={
+                    img?.src
+                      ? process.env.NEXT_PUBLIC_STRAPI_URL + img.src
+                      : null
+                  }
                   alt="Community"
                   layout="fill"
                   objectFit="cover"
@@ -377,7 +465,7 @@ const Interns = () => {
           display: "flex",
           flexDirection: "row",
           mb: 5,
-          mt:10
+          mt: 10,
         }}
       >
         <Box
@@ -387,15 +475,14 @@ const Interns = () => {
             flexDirection: "column",
             px: 10,
             py: 15,
-            textAlign:"left"
+            textAlign: "left",
           }}
         >
           <Typography variant="h3" sx={{ color: "white" }}>
-            Build your future with us
+            {data.apply_now_section.title}
           </Typography>
           <Typography variant="body1" sx={{ color: "white" }}>
-            Join our programs to get the skills, mentorship and network that
-            helps you outperform in your career.
+            {data.apply_now_section.description}
           </Typography>
           <Button
             variant="contained"
@@ -411,17 +498,21 @@ const Interns = () => {
               variant="body1"
               sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
             >
-              Apply for Foundational Year now
+              {data.apply_now_section.button.inner_text}
             </Typography>
           </Button>
         </Box>
-        <Box sx={{ width: "50vw"}}>
+        <Box sx={{ width: "50vw" }}>
           <Image
-            src="/becomeChampion.png"
-            alt="Become Champion"
+            src={
+              data?.apply_now_section?.cover_image?.source?.url
+                ? process.env.NEXT_PUBLIC_STRAPI_URL+data?.apply_now_section?.cover_image?.source?.url
+                : null
+            }
+            alt={data?.apply_now_section?.cover_image.alternate_text||"Become Champion"}
             width={800}
             height={200}
-            style={{ borderRadius: 35,justifySelf:"right" }}
+            style={{ borderRadius: 35, justifySelf: "right" }}
           />
         </Box>
       </Box>

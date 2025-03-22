@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
@@ -16,18 +16,20 @@ type TestimonialProps = {
 
 type TestimonialCardProps = {
   testimonial: TestimonialProps;
+  index: number;
 };
 
-const TestimonialCard = ({ testimonial }: TestimonialCardProps) => (
+const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => (
   <Box
     sx={{
       display: "flex",
-      flexDirection: testimonial.isImageLeft ? "row" : "row-reverse",
+      flexDirection: index % 2 == 0 ? "row" : "row-reverse",
       alignItems: "center",
       justifyContent: "center",
       gap: { xs: 4, md: 10 },
       marginTop: 5,
       textAlign: "left",
+      px: 3,
     }}
   >
     {/* Image Section */}
@@ -55,12 +57,12 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => (
         borderRadius: "40px",
         padding: { xs: "24px", md: "40px" },
         maxWidth: "30vw",
-        height:"506px"
+        height: "506px",
       }}
     >
       <Typography
         variant="h5"
-        sx={{ fontWeight: 500, marginBottom: "16px", color: "#111827", mt:5 }}
+        sx={{ fontWeight: 500, marginBottom: "16px", color: "#111827", mt: 5 }}
       >
         {testimonial.highlight}
       </Typography>
@@ -129,10 +131,10 @@ const HighlightText = (text: string) => {
 const TestimonialSection = ({ data, title }: Props) => (
   <Box sx={{ mt: 5, mb: 10, width: "80vw" }}>
     <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
-      {HighlightText(title)}
+      {title || HighlightText(title)}
     </Typography>
     {data.map((testimonial, index) => (
-      <TestimonialCard key={index} testimonial={testimonial} />
+      <TestimonialCard key={index} testimonial={testimonial} index={index} />
     ))}
   </Box>
 );

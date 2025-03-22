@@ -7,123 +7,120 @@ const data = [
     Name: "Wade Cooper",
     designation: "UX Researcher @ Google - Champion",
     note: "Because of people like you, I was able to receive the mentorship I needed. Thank you for helping me start over.",
-    img:"/wadeStory.svg"
+    img: "/wadeStory.svg",
   },
   {
     Name: "Emily Wade",
     designation: "UX Researcher @ Google - Champion",
     note: "Because of people like you, I was able to receive the mentorship I needed. Thank you for helping me start over.",
-    img:"/emilyWadeStory.svg"
+    img: "/emilyWadeStory.svg",
   },
 ];
 
-const DonateStorySection = () => {
+interface DonateStorySectionProps {
+  data: {
+    association: string;
+    cover_image: any;
+    description: string;
+    designation: string;
+    employer: string;
+    highlight: string;
+    name: string;
+  }[];
+}
+
+const DonateStorySection = ({ data }: DonateStorySectionProps) => {
   return (
     <Box
       sx={{
-        marginTop:10,
+        marginTop: 10,
         marginBottom: 10,
-        width: "100vw",
+        width: "80vw",
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        justifyContent:"center"
+        justifyContent: "center",
       }}
     >
-      <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
-        See how <span style={{ color: "#0F99C3" }}>SPEAKHIRE </span>
-        is changing lives
-      </Typography>
-
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
+      {data.map((item: any, index: number) => (
         <Box
           sx={{
-            backgroundColor: "#e1f7ff",
-            borderRadius: "40px",
-            padding: { xs: "24px", md: "40px" },
-            maxWidth: "32rem",
-            marginX: "auto",
-            textAlign: "left",
-            marginLeft: 0,
+            display: "flex",
+            flexDirection: {
+              xs: "column",
+              md: index % 2 === 0 ? "row" : "row-reverse",
+            },
+            alignItems: "center",
+            justifyContent: "center",
+            gap: { xs: 4, md: 10 },
+            mb: 5,
+            flex: 1,
           }}
+          key={index}
         >
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 500,
-              marginBottom: "16px",
-              color: "#111827",
-            }}
-          >
-            {data[0].note}
-          </Typography>
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              padding: "12px 16px",
-              borderLeft: "1px solid #374151", // Left border with a blue shade
-              maxWidth: "400px", // Adjust width if needed
-              marginTop: 15,
+              backgroundColor: "#e1f7ff",
+              borderRadius: "40px",
+              padding: { xs: "24px", md: "40px" },
+              maxWidth: "32rem",
+              textAlign: "left",
+              height: "450px",
             }}
           >
-            <Typography variant="h6" sx={{ fontWeight: "bold", color: "#222" }}>
-              {data[0].Name}
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 500,
+                marginBottom: "16px",
+                color: "#111827",
+                pt: 3,
+              }}
+            >
+              {item.description}
             </Typography>
-            <Typography variant="body2" sx={{ color: "#555" }}>
-              {data[0].designation}
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                padding: "12px 16px",
+                borderLeft: "1px solid #374151",
+                maxWidth: "400px",
+                marginTop: 5,
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: "bold", color: "#222" }}
+              >
+                {item.name}
+              </Typography>
+              <Typography variant="body2" sx={{ color: "#555" }}>
+                {`${item.designation} ${item.employer?`@ ${item.employer}`:""} - ${item.association}`}
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <Box sx={{ marginLeft: 4 }}>
-          <Image src={data[0].img} alt="" height={506} width={720} />
-        </Box>
-      </Box>
-
-      <Box sx={{ display: "flex", flexDirection: "row", marginTop: 15 }}>
-        <Box sx={{ marginLeft: 0 }}>
-          <Image src={data[1].img} alt="" height={506} width={720} />
-        </Box>
-        <Box
-          sx={{
-            backgroundColor: "#e1f7ff",
-            borderRadius: "40px",
-            padding: { xs: "24px", md: "40px" },
-            maxWidth: "32rem",
-            marginX: "auto",
-            textAlign: "left",
-            marginLeft: 4,
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 500,
-              marginBottom: "16px",
-              color: "#111827",
-            }}
-          >
-            {data[1].note}
-          </Typography>
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              padding: "12px 16px",
-              borderLeft: "1px solid #374151", // Left border with a blue shade
-              maxWidth: "400px", // Adjust width if needed
-              marginTop: 15,
+              width: { xs: "100%", md: "50%" },
+              textAlign: "center", // Centers image on smaller screens
             }}
           >
-            <Typography variant="h6" sx={{ fontWeight: "bold", color: "#222" }}>
-              {data[1].Name}
-            </Typography>
-            <Typography variant="body2" sx={{ color: "#555" }}>
-              {data[1].designation}
-            </Typography>
+            <Image
+              src={
+                item.cover_image.source.url
+                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                    item.cover_image.source.url
+                  : null
+              }
+              alt=""
+              objectFit="cover"
+              height={506}
+              width={720}
+            />
           </Box>
         </Box>
-      </Box>
+      ))}
     </Box>
   );
 };

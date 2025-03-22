@@ -8,46 +8,73 @@ import ImpactSection from "@/components/ImpactSection";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-
-
-function Partner() {
-    const testimonialData = [
+async function getData() {
+  try {
+    const [partnerPageResponse, commonItemsResponse] = await Promise.all([
+      fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/partner-page?populate=*`,
         {
-          statement: "Because of people like you, I was able to receive the mentorship I needed. Thank you for helping me start over.",
-          personName: "Wade Cooper",
-          designation: "UX Researcher @ Google - Champion",
-          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-          avatarUrl: "/wade-avatar.jpg"
-        },
-        {
-          statement: "Because of people like you, I was able to receive the mentorship I needed. Thank you for helping me start over.",
-          personName: "Emily Wade",
-          designation: "UX Researcher @ Google - Champion",
-          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-          avatarUrl: "/emily-avatar.jpg"
+          next: { revalidate: 60 },
         }
-      ];
+      ),
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+    ]);
+
+    if (!partnerPageResponse.ok || !commonItemsResponse.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const [partnerPageData, commonItemsData] = await Promise.all([
+      partnerPageResponse.json(),
+      commonItemsResponse.json(),
+    ]);
+
+    return {
+      ...partnerPageData?.data,
+      ...commonItemsData.data,
+    };
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw error;
+  }
+}
+
+async function Partner() {
+  const partnerPageRes = await getData();
+  console.log(partnerPageRes);
+  const data = partnerPageRes;
+  const testimonialData = [
+    {
+      statement:
+        "Because of people like you, I was able to receive the mentorship I needed. Thank you for helping me start over.",
+      personName: "Wade Cooper",
+      designation: "UX Researcher @ Google - Champion",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      avatarUrl: "/wade-avatar.jpg",
+    },
+    {
+      statement:
+        "Because of people like you, I was able to receive the mentorship I needed. Thank you for helping me start over.",
+      personName: "Emily Wade",
+      designation: "UX Researcher @ Google - Champion",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      avatarUrl: "/emily-avatar.jpg",
+    },
+  ];
   return (
-    <Box>
-        <PartnershipBanner 
-        title="Together,"
-        subtitle="we're building the workforce of tomorrow"
-        buttonText="Become a partner now"
-        tagline="Join hands with SPEAKHIRE to empower students with the skills they need and the talent your industry deserves"
-        />
-        <ImageSection
-        imageSrc="/stock1.jpg"
-        />
-        <ImpactSection/>
-        <PartnersInfo/>
-        <PartnersTestimonials/>
-        <BecomePartnerComponent/>
-        <TestimonialsContainer
-        title="Where are our talents now"
+    <Box sx={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
+      <PartnershipBanner data={data.hero_section}/>
+      <ImpactSection data={data.economic_growth_statistics}/>
+      <PartnersInfo data={data.join_change_maker_section}/>
+      <PartnersTestimonials data={data.partners_testimonials_section}/>
+      <BecomePartnerComponent data={data.become_partner_section}/>
+      <TestimonialsContainer
+        title={data.talents_testimonial.title}
         highlightedWord="talents"
-        testimonials={testimonialData}
-        />
-      
+        testimonials={data.talents_testimonial}
+      />
     </Box>
   );
 }
