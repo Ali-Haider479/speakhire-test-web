@@ -182,7 +182,7 @@ const ChampionPage = async () => {
           </CardContent>
         </Box>
       </Box>
-      <Typography variant="h2" sx={{ mt: 10 }}>
+      <Typography variant="h3" sx={{ mt: 10 }}>
         {TextHighlighter(
           data.champion_activities_section.title,
           "Champion activities"
@@ -265,13 +265,13 @@ const ChampionPage = async () => {
         </Grid>
       </Box>
       <Box sx={{ width: "80vw", textAlign: "center", mt: 10, mb: 5 }}>
-        <Typography variant="h3">
+        <Typography variant="h3" >
           {TextHighlighter(
             data.other_way_to_impact_section.title,
             "Other ways"
           )}
         </Typography>
-        <Grid container spacing={3} sx={{ mt: 5 }}>
+        <Grid container spacing={3} sx={{ mt: 0 }}>
           {data.other_way_to_impact_section.contribute_card.map(
             (
               item: { title: string; description: string; button: any },
@@ -285,7 +285,7 @@ const ChampionPage = async () => {
                     flexDirection: "column", // Aligns content vertically
                     textAlign: "left",
                     backgroundColor: "#F2FAFD",
-                    p: 5,
+                    p: 6,
                     borderRadius: 5,
                     minHeight: 400,
                   }}
@@ -332,12 +332,12 @@ const ChampionPage = async () => {
       <Box
         sx={{
           backgroundColor: "#F2FAFD",
-          width: "80vw",
+          width: "100vw",
           textAlign: "center",
           py: "100px",
-          px: "80px",
+          px: "15vw",
           mb: 5,
-          borderRadius: 5,
+          // borderRadius: 5,
         }}
       >
         <Typography variant="h3">
@@ -346,7 +346,7 @@ const ChampionPage = async () => {
             "leading companies"
           )}
         </Typography>
-        <Box sx={{ backgroundColor: "#E9F6FB", borderRadius: 5, mt: 5, py: 5 }}>
+        <Box sx={{ backgroundColor: "#E9F6FB", borderRadius: 10, mt: 5, py: 5 }}>
           <Grid2 sx={{ px: 5, py: 3 }}>
             {groupedLogos.map((row: any[], index: number) => (
               <Grid2
@@ -395,6 +395,7 @@ const ChampionPage = async () => {
               textTransform: "none",
               fontSize: 16,
               fontWeight: "bold",
+              py:1.2
             }}
           >
             {data.leading_companies_section?.buttons[0].inner_text}
@@ -493,11 +494,12 @@ const ChampionPage = async () => {
         sx={{
           my: 5,
           textAlign: "left",
-          width: "80vw",
+          width: "100vw",
+          px: '10vw',
           backgroundColor: "#F2FAFD",
         }}
       >
-        <Box sx={{ ml: 5, mt: 5 }}>
+        <Box sx={{ ml: 4, mt: 5 }}>
           <Typography variant="h3">
             {TextHighlighter(
               data.champion_stories_section.title,
@@ -513,7 +515,7 @@ const ChampionPage = async () => {
           spacing={3}
           sx={{
             padding: 4,
-            mt: 4,
+            mt: 0,
           }}
         >
           {data.champion_stories_section.champion_story_card.map(
@@ -601,7 +603,7 @@ const ChampionPage = async () => {
           width: "80vw",
           display: "flex",
           flexDirection: "row",
-          mb: 5,
+          my: 5,
         }}
       >
         <Box sx={{ width: "50vw" }}>
@@ -630,7 +632,7 @@ const ChampionPage = async () => {
           <Typography variant="h3" sx={{ color: "white" }}>
             {data.become_champion_section.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "white" }}>
+          <Typography variant="body1" sx={{ color: "white", paddingBottom:1 }}>
             {data.become_champion_section.description}
           </Typography>
           <Button
@@ -640,7 +642,8 @@ const ChampionPage = async () => {
               borderRadius: 20,
               textTransform: "none",
               color: "#08547A",
-              mt: 5,
+              mt: 1,
+              py:1.2
             }}
           >
             <Typography

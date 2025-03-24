@@ -93,7 +93,7 @@ const SpeakerSeries = ({ data }: SpeakerSeriesProps) => {
     }
   };
   return (
-    <Box sx={{ py: 5, width: "80vw" }}>
+    <Box sx={{ py: 5, width: "80vw", mb:5 }}>
       {/* Header Section */}
       <Box sx={{ mb: 5 }}>
         <Typography
@@ -127,6 +127,7 @@ const SpeakerSeries = ({ data }: SpeakerSeriesProps) => {
                 overflow: "visible",
                 bgcolor: "#f5f9fc",
               }}
+              elevation={0}
             >
               <CardMedia
                 component="img"

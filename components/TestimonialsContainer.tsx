@@ -43,7 +43,7 @@ const TestimonialsContainer = ({
         sx={{
           fontSize: { xs: "2rem", md: "3rem" },
           fontWeight: 400,
-          mb: 6,
+          mb: 0,
           textAlign: "left",
         }}
       >

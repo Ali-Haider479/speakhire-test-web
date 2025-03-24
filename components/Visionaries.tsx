@@ -129,7 +129,7 @@ export default function VisionariesComponent({
           />
         </Box>
       </Box>
-      {showTeam && (
+      {/* {showTeam && (
         <Box key={"team-section"}>
           {data.team.map((team: any) => (
             <>
@@ -137,6 +137,12 @@ export default function VisionariesComponent({
               <Divider sx={{ mt: 5, mb: 5, width: "100vw" }} />
             </>
           ))}
+        </Box>
+      )} */}
+      {showTeam && (
+        <Box key={"team-section"}>
+              <MemberBoard title={data.team[0].title} members={data.team[0].team_members} />
+              {/* <Divider sx={{ mt: 5, mb: 5, width: "100vw" }} /> */}
         </Box>
       )}
     </Box>

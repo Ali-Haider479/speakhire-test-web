@@ -148,7 +148,7 @@ const firstStepPage = async () => {
               marginBottom: "24px",
               lineHeight: "1.5",
               fontSize: { xs: "1rem", md: "1.28rem" },
-              marginTop: 5,
+              marginTop: 1,
             }}
           >
             {data.description}

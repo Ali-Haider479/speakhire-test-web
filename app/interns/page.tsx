@@ -187,7 +187,7 @@ const Interns = async () => {
         }}
       >
         <Typography
-          variant="h2"
+          variant="h3"
           sx={{
             fontSize: "3rem",
             fontWeight: 400,
@@ -348,7 +348,7 @@ const Interns = async () => {
       <Box
         sx={{
           backgroundColor: "#F2FAFD",
-          width: "80vw",
+          width: "100vw",
           p: 5,
           mb: 5,
           display: "flex",
@@ -370,7 +370,7 @@ const Interns = async () => {
         />
       </Box>
       <Box sx={{ textAlign: "center" }}>
-        <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
+        <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal", mt:5 }}>
           {TextHighlighter(data.national_mentorship_month.title, "Mentorship")}
         </Typography>
         <Box
@@ -492,6 +492,7 @@ const Interns = async () => {
               textTransform: "none",
               color: "#08547A",
               mt: 5,
+              py:1.2
             }}
           >
             <Typography

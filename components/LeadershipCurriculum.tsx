@@ -84,8 +84,9 @@ export default function LeadershipCurriculum({data}:LeadershipCurriculumProps) {
     <Box
       sx={{
         width: '100%',
-        backgroundColor: '#E6F2F9', // Matching the background color from your component
+        backgroundColor: '#F2FAFD', // Matching the background color from your component
         padding: '60px 0',
+        mt:5
       }}
     >
       <Box

@@ -224,6 +224,7 @@ const StudentCarousel = ({data}:StudentCarouselProps) => {
                   transition: "all 0.3s ease-in-out",
                 }}
                 aria-label={`testimonial by ${student.name}`}
+                elevation={0}
               >
                 <Typography
                   variant="body1"

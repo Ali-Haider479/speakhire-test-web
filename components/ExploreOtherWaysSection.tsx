@@ -71,13 +71,14 @@ const ExploreOtherWaysSection = ({ data }: ExploreOtherWaysSectionProps) => {
             sx={{
               backgroundColor: "#F2FAFD",
               borderRadius: 5,
-              p: 4,
+              p: 6,
               height: "100%", // Ensures uniform height for all cards
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
               textAlign: "left",
             }}
+            elevation={0}
           >
             {/* Icon at the top */}
             <Box

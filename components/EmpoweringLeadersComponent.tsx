@@ -46,7 +46,7 @@ export default function EmpoweringLeadersComponent({
         backgroundColor: "#F5F8FA", // Light blue background
         borderRadius: "30px",
         p: { xs: 3, md: 6 },
-        my: 4,
+        my: 10,
         mx: "auto",
       }}
     >

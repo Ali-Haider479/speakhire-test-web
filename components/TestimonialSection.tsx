@@ -130,7 +130,7 @@ const HighlightText = (text: string) => {
 
 const TestimonialSection = ({ data, title }: Props) => (
   <Box sx={{ mt: 5, mb: 10, width: "80vw" }}>
-    <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
+    <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal", ml:3 }}>
       {title || HighlightText(title)}
     </Typography>
     {data.map((testimonial, index) => (

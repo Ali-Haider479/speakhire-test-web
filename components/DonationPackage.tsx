@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { title } from "process";
-import React from "react";
+import React, { useState } from "react";
 
 type Packages = {
   description: string;
@@ -34,6 +34,14 @@ interface DonationPackageProps {
 }
 
 const DonationPackage = ({ data }: DonationPackageProps) => {
+
+  const [activeDonorType, setActiveDonorType] = useState("individual"); // Default to "individual"
+
+  const handleSwitch = (type: React.SetStateAction<string>) => {
+    setActiveDonorType(type);
+  };
+
+
   const HighlightText = (text: string) => {
     if (!text || text.trim().length === 0) return null;
 
@@ -72,7 +80,7 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
         }}
       >
         <Typography variant="h3">{HighlightText(data.title)}</Typography>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             alignItems: "center",
@@ -108,7 +116,60 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
           >
             Become a corporate donor
           </Button>
-        </Box>
+        </Box> */}
+
+<Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        backgroundColor: "#F2FAFD",
+        borderRadius: "10px",
+        padding: "0px",
+        width: "fit-content",
+        mt: 2,
+        overflow: "hidden", // Ensures buttons fit within the rounded container
+      }}
+    >
+      <Button
+        sx={{
+          px: 2,
+          fontWeight: 500,
+          color: activeDonorType === "individual" ? "#FFF" : "#000",
+          textTransform: "none",
+          borderRadius: "10px 0 0 10px", // Left button has rounded left corners
+          backgroundColor:
+            activeDonorType === "individual" ? "#0A4E71" : "transparent",
+          "&:hover": {
+            backgroundColor:
+              activeDonorType === "individual" ? "#083F5A" : "#E0F0F5",
+          },
+          minWidth: "120px", // Ensure consistent width
+        }}
+        onClick={() => handleSwitch("individual")}
+      >
+        Individual donor
+      </Button>
+
+      <Button
+        sx={{
+          px: 3,
+          fontWeight: 500,
+          color: activeDonorType === "corporate" ? "#FFF" : "#000",
+          textTransform: "none",
+          borderRadius: "0 10px 10px 0", // Right button has rounded right corners
+          backgroundColor:
+            activeDonorType === "corporate" ? "#0A4E71" : "transparent",
+          "&:hover": {
+            backgroundColor:
+              activeDonorType === "corporate" ? "#083F5A" : "#E0F0F5",
+          },
+          minWidth: "180px", // Ensure consistent width
+        }}
+        onClick={() => handleSwitch("corporate")}
+      >
+        Become a corporate donor
+      </Button>
+    </Box>
       </Box>
 
       {/* Corporate Plan Cards */}
@@ -177,7 +238,8 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
                 transition: "background-color 0.2s, color 0.2s",
                 ":active": { backgroundColor: "#FFFFFF", color: "#08547A" },
                 textTransform: "none",
-                mt:3
+                // mt:3
+                py:1.6
               }}
             >
               <Typography>{item?.button?.inner_text}</Typography>
@@ -232,6 +294,7 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
                 fontSize: 16,
                 alignSelf: "flex-end",
                 ml: `${index === 1 ? "1" : "auto"}`,
+                py:1
               }}
             >
               {btn.inner_text}

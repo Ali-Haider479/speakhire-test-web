@@ -47,7 +47,7 @@ const InternshipOutcomesSection = ({
       sx={{
         display: "flex",
         gap: 8,
-        px: "10%",
+        // px: "8%",
         p: { xs: 2, md: 8 },
         flexDirection: { xs: "column", md: "row" },
         width: "80vw",
@@ -56,7 +56,7 @@ const InternshipOutcomesSection = ({
       {/* Left Column */}
       <Grid item xs={12} md={6}>
       <Box sx={{ flex: 1}}>
-        <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
+        <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal",}}>
           {HighlightText(data.title)}
         </Typography>
 

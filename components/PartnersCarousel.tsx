@@ -126,10 +126,11 @@ export default function PartnersCarousel({testimonials}:Props) {
                 flexDirection: "column",
                 alignItems: "flex-start",
                 width: "80%",
-                height: "520px",
+                minHeight: "450px",
                 margin: "0 auto",
               }}
             >
+              <Box sx={{height: "100px"}}>
               <Image
                 src={process.env.NEXT_PUBLIC_STRAPI_URL+testimonial.instituteLogo.source.url}
                 alt={testimonial.instituteLogo.alternate_text}
@@ -137,6 +138,7 @@ export default function PartnersCarousel({testimonials}:Props) {
                 height={80}
                 style={{ marginBottom: "20px" }}
               />
+              </Box>
               <Typography
                 variant="h6"
                 sx={{
@@ -153,7 +155,7 @@ export default function PartnersCarousel({testimonials}:Props) {
                   textAlign: "left",
                   marginBottom: "15px",
                   fontSize: 15,
-                  height: "150px",
+                  minHeight: "150px",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   display: "-webkit-box",

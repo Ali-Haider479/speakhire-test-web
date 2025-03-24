@@ -34,7 +34,7 @@ export default function LeadershipCourseCurriculum({data}:LeadershipCourseCurric
     <Box
       sx={{
         width: '80vw',
-        py: 5, // Padding top and bottom
+        pb: 5, // Padding top and bottom
         px: { xs: 2, md: 0 }, // Responsive padding left and right
       }}
     >

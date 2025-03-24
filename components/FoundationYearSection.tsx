@@ -50,7 +50,7 @@ function FoundationYearSection() {
           paddingTop: "2vh",
         }}
       >
-        <span style={{ color: "#0F99C3" }}>Foundation </span>
+        <span style={{ color: "#0F99C3" }}>Foundational </span>
         Year
       </Typography>
       <Button

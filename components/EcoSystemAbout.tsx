@@ -20,7 +20,7 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
 
       return (
         <p>
-          <span style={{ color: "#0F99C3" }}>{firstWord}</span> {restOfWords}
+          <span style={{ color: "#0F99C3" }}>{firstWord}</span><br/> {restOfWords}
         </p>
       );
     } else {
@@ -98,9 +98,9 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
       {/* Second child box - Image Section */}
       <Box
         sx={{
-          width: { xs: "100%", md: "40vw" },
+          width: { xs: "100%", md: "60vw" },
           position: "relative",
-          height: { xs: "50vh", md: "80vh" },
+          height: { xs: "50vh", md: "70vh" },
           backgroundColor: "#E4F5FB",
           borderRadius: "40px",
           overflow: "hidden", // Ensures no overflow issues

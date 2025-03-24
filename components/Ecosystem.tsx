@@ -88,7 +88,7 @@ export default function Ecosystem({data}:EcosystemProps) {
             >
               <Card
                 sx={{
-                  height: "100%",
+                  // height: "100%",
                   // width: '85%',
                   display: "flex",
                   flexDirection: "column",

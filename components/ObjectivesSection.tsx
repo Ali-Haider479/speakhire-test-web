@@ -35,7 +35,7 @@ const ObjectiveSection = ({data}:ObjectiveSectionProps) => {
           display: "flex",
           justifyContent: "center",
           gap: "25px",
-          width: "70vw",
+          width: "80vw",
           paddingY: "20px",
           paddingX: "20px",
           margin: "0 auto",
