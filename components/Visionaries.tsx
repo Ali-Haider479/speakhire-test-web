@@ -4,6 +4,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
 import React, { useState } from "react";
 import MemberBoard from "./MemberBoardComponent";
+
 interface VisionariesComponentProps {
   data: {
     title: string;
@@ -26,9 +27,9 @@ export default function VisionariesComponent({
       const lastWords = words.slice(1).join(" ");
 
       return (
-        <p>
+        <>
           <span style={{ color: "#0F99C3" }}>{firstWord}</span> {lastWords}
-        </p>
+        </>
       );
     } else {
       return "";
@@ -41,36 +42,35 @@ export default function VisionariesComponent({
         backgroundColor: "#F2FAFD", // Light background color (you can adjust this to match your design, e.g., #ECF6FB or any other color)
         padding: "20px 0",
         display: "flex",
-        justifyContent: "center", // Center the inner content horizontally
-        alignItems: "center", // Center vertically if needed
         flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Box
         sx={{
-          width: "80vw", // 80% of the screen width
-          height: "586px", // Set a height for the box
-          borderRadius: "40px", // Border radius
-          backgroundColor: "#F2FAFD", // Background color
-          margin: "auto", // Centers the box horizontally
-          display: "flex", // To align child boxes in a row
-          justifyContent: "space-between", // Space between the children
-          alignItems: "center", // Center items vertically
-          my: 10, // Vertical margin
+          width: "80vw",
+          borderRadius: "40px",
+          backgroundColor: "#F2FAFD",
+          margin: "auto",
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: "space-between",
+          alignItems: "center",
+          my: {xs:3,md:8},
         }}
       >
-        {/* First child box - takes 45% of the width */}
         <Box
           sx={{
-            width: "40%", // Width adjusted
-            backgroundColor: "#F2FAFD", // Light background color to match the image
-            borderRadius: "20px", // Rounded corners to match the image
-            padding: 3, // Add padding for spacing
+            width: { xs: "100%", md: "38%" },
+            backgroundColor: "#F2FAFD",
+            borderRadius: "20px",
+            padding: 3,
             display: "flex",
-            flexDirection: "column", // Stack the elements vertically
-            // justifyContent: 'center',
+            flexDirection: "column",
             alignItems: "flex-start",
-            height: "100%", // Ensures the box stretches to full height
+            height: "100%",
+            minHeight:{md:"500px"}
           }}
         >
           <Typography
@@ -78,6 +78,7 @@ export default function VisionariesComponent({
             sx={{
               fontWeight: 400,
               marginBottom: 1,
+              fontSize: { xs: "28px", md: "36px" },
             }}
           >
             {HighlightText(data?.title)}
@@ -86,7 +87,7 @@ export default function VisionariesComponent({
             variant="body1"
             sx={{
               marginBottom: 2,
-              fontSize: 20,
+              fontSize: { xs: "16px", md: "20px" },
             }}
           >
             {data?.description}
@@ -99,13 +100,13 @@ export default function VisionariesComponent({
               borderRadius: "25px",
               textTransform: "none",
               padding: "8px 16px",
-              borderColor: "#1976d2",
-              color: "#1976d2",
+              borderColor: "##006397",
+              color: "##006397",
               "&:hover": {
                 borderColor: "#1565c0",
                 backgroundColor: "rgba(25, 118, 210, 0.04)",
               },
-              marginTop: "30px",
+              marginTop: "auto",
               fontSize: 16,
             }}
             onClick={() => setShowTeam(!showTeam)}
@@ -114,37 +115,45 @@ export default function VisionariesComponent({
           </Button>
         </Box>
 
-        {/* Second child box - takes 55% of the width */}
-        <Box sx={{ width: "60%", position: "relative", height: "100%" }}>
+        <Box
+          sx={{
+            width: { xs: "100%", md: "60%" },
+            position: "relative",
+            height: "100%",
+            minHeight: {xs:"300px",md:"500px"},
+          }}
+        >
           <Image
             src={
               data?.cover_image?.source.url
                 ? process.env.NEXT_PUBLIC_STRAPI_URL +
                   data?.cover_image?.source.url
                 : ""
-            } // Replace with your actual image source
+            }
             alt={data?.cover_image?.alternate_text}
-            fill // Make the image fill the parent container
-            style={{ objectFit: "cover", borderRadius: "40px" }} // Ensure the image covers the entire area
+            fill
+            style={{ objectFit: "cover", borderRadius: "40px" }}
           />
         </Box>
       </Box>
-      {/* {showTeam && (
+      {showTeam && (
         <Box key={"team-section"}>
-          {data.team.map((team: any) => (
+          {data.team.map((team: any,index:number) => (
             <>
               <MemberBoard title={team.title} members={team.team_members} />
-              <Divider sx={{ mt: 5, mb: 5, width: "100vw" }} />
+              {index!==data.team.length-1 && <Divider sx={{ mt: 5, mb: 5, width: "100vw" }} />}
             </>
           ))}
         </Box>
-      )} */}
-      {showTeam && (
-        <Box key={"team-section"}>
-              <MemberBoard title={data.team[0].title} members={data.team[0].team_members} />
-              {/* <Divider sx={{ mt: 5, mb: 5, width: "100vw" }} /> */}
-        </Box>
       )}
+      {/* {showTeam && (
+        <Box key={"team-section"}>
+          <MemberBoard
+            title={data.team[0].title}
+            members={data.team[0].team_members}
+          />
+        </Box>
+      )} */}
     </Box>
   );
 }

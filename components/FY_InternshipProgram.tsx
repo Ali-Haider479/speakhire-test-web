@@ -19,11 +19,11 @@ const FY_InternshipProgram = ({ data }: FY_InternshipProgramProps) => {
       const middlePart = words.slice(2, 4).join(" ");
 
       return (
-        <p>
+        <>
           {firstPart}
           <span style={{ color: "#0F99C3" }}> {middlePart} </span>
           {lastPart}
-        </p>
+        </>
       );
     } else {
       return "";

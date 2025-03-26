@@ -34,11 +34,11 @@ const ExploreOtherWaysSection = ({ data }: ExploreOtherWaysSectionProps) => {
     const restOfWords = words.slice(3).join(" ");
 
     return (
-      <p>
+      <>
         {firstWords}{" "}
         <span style={{ color: "#6AAA19" }}>{highlightedWord}</span>{" "}
         {restOfWords}
-      </p>
+      </>
     );
   };
   return (

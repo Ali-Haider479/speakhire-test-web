@@ -4,15 +4,6 @@ import Image from "next/image";
 import { styled } from "@mui/material/styles";
 import WorkforceCard from "./WorkforceCard";
 
-const ImageContainer = styled(Box)(({ theme }) => ({
-  position: "relative",
-  width: "100%",
-  height: "100%", // Ensures the container fills the grid cell height
-  "& img": {
-    borderRadius: theme.spacing(1),
-  },
-}));
-
 interface WorkforceComponentProps {
   data: {
     title: string;
@@ -27,6 +18,7 @@ const WorkforceComponent = ({ data }: WorkforceComponentProps) => {
       sx={{
         backgroundColor: "#F2FAFD",
         py: 2,
+        width:"100vw"
       }}
     >
       <Grid
@@ -50,7 +42,11 @@ const WorkforceComponent = ({ data }: WorkforceComponentProps) => {
             display: "flex",
           }}
         >
-          <WorkforceCard title={data.title} description={data.description} button={data.button}/>
+          <WorkforceCard
+            title={data.title}
+            description={data.description}
+            button={data.button}
+          />
         </Grid>
 
         {/* Image Section (60% on md and up, 100% on xs) */}
@@ -62,7 +58,16 @@ const WorkforceComponent = ({ data }: WorkforceComponentProps) => {
             display: "flex",
           }}
         >
-          <ImageContainer>
+          <Box
+            sx={{
+              position: "relative",
+              width: "100%",
+              height: "100%", // Ensures the container fills the grid cell height
+              "& img": {
+                borderRadius: 1,
+              },
+            }}
+          >
             <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
               <Image
                 src={
@@ -74,7 +79,7 @@ const WorkforceComponent = ({ data }: WorkforceComponentProps) => {
                 style={{ objectFit: "cover", borderRadius: 40 }}
               />
             </Box>
-          </ImageContainer>
+          </Box>
         </Grid>
       </Grid>
     </Box>

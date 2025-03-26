@@ -21,10 +21,10 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
     const restOfWords = words.slice(9).join(" ");
 
     return (
-      <p>
+      <>
         {firstWords} <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
         {restOfWords}
-      </p>
+      </>
     );
   };
   return (
@@ -93,7 +93,6 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
           position: "relative",
           zIndex: 1,
           width: "80vw", // 80% of the viewport width
-          marginLeft: "-2vw", // Add left margin to center it horizontally
           borderRadius: "40px",
           border: "10px solid rgb(195, 206, 211)",
           overflow: "hidden",

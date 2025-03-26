@@ -1,7 +1,6 @@
 'use client'
-import React, { useState } from 'react';
-import { Box, Typography, Button, Grid, Card, CardContent, CardMedia, CardActions, Chip } from '@mui/material';
-import Image from 'next/image';
+import React from 'react';
+import { Box, Typography, Grid, } from '@mui/material';
 import CourseCard from './CourseCard';
 
 // Define the course type
@@ -74,10 +73,10 @@ export default function LeadershipCurriculum({data}:LeadershipCurriculumProps) {
     const highlightedWord = words[2];
 
     return (
-      <p>
+      <>
         {firstWords}{" "}
         <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
-      </p>
+      </>
     );
   };
   return (

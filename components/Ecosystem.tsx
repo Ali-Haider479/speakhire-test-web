@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import {
   Box,
@@ -12,72 +10,73 @@ import {
   Button,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CustomButton from "./CustomButton";
 
-// Example data for each offering card.
-// Replace with your own images, titles, and descriptions.
-// const offeringsData = [
-//   {
-//     title: "Partners & Orgs",
-//     imageUrl: "/stock2.jpg",
-//   },
-//   {
-//     title: "Interns (Career trainees)",
-//     imageUrl: "/stock1.jpg",
-//   },
-//   {
-//     title: "Champions (Trainers)",
-//     imageUrl: "/stock2.jpg",
-//   },
-// ];
-
-interface EcosystemProps{
+interface EcosystemProps {
   data: {
-      title: string;
-      description: string;
-      eco_system_cards:any[]
-    };
+    title: string;
+    description: string;
+    eco_system_cards: any[];
+  };
 }
 
-export default function Ecosystem({data}:EcosystemProps) {
+export default function Ecosystem({ data }: EcosystemProps) {
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
       const words = text.split(" ");
-      const firstPart = words.slice(0,1).join(" ");;
+      const firstPart = words.slice(0, 1).join(" ");
       const secondPart = words.slice(1).join(" ");
 
       return (
-        <p>
-             
-          <span style={{ color: "#0F99C3" }}> {firstPart} </span> 
+        <>
+          <span style={{ color: "#0F99C3" }}> {firstPart} </span>
           {secondPart}
-        </p>
+        </>
       );
     } else {
       return "";
     }
-  }
+  };
   return (
     <Box sx={{ backgroundColor: "white" }}>
-      <Box sx={{ py: 6, px: { xs: 2, md: 6 }, width: "80vw", mx: "auto" }}>
+      <Box
+        sx={{
+          py: { xs: 1, md: 6 },
+          px: { xs: 2, md: 6 },
+          width: "80vw",
+          mx: "auto",
+        }}
+      >
         {/* Heading and Description */}
         <Typography
-          variant="h3"
+          variant="h2"
           align="center"
-          sx={{ mb: 2, fontWeight: 400, color: "black" }}
+          sx={{
+            mb: 2,
+            fontWeight: 400,
+            color: "black",
+            fontSize: { xs: "2rem", md: "3rem" },
+          }}
         >
-          {HighlightText(data.title)}
+          {HighlightText(data?.title)}
         </Typography>
         <Typography
           variant="h6"
           align="center"
-          sx={{ mb: 6, maxWidth: 800, mx: "auto", color: "#49454F" }}
+          sx={{
+            mb: { xs: 2, md: 6 },
+            maxWidth: 800,
+            mx: "auto",
+            color: "#49454F",
+            fontSize: { xs: "0.75rem", md: "1.25rem" },
+          }}
         >
-          {data.description}
+          {data?.description}
         </Typography>
 
         {/* Cards Grid */}
         <Grid container spacing={4} justifyContent="center">
-          {data.eco_system_cards.map((offer, index) => (
+          {data?.eco_system_cards?.map((offer, index) => (
             <Grid
               item
               key={index}
@@ -101,7 +100,10 @@ export default function Ecosystem({data}:EcosystemProps) {
                 <CardMedia
                   component="img"
                   height="auto"
-                  image={process.env.NEXT_PUBLIC_STRAPI_URL+offer.card_image.source.url}
+                  image={
+                    process.env.NEXT_PUBLIC_STRAPI_URL +
+                    offer.card_image.source.url
+                  }
                   alt={offer.title}
                   sx={{
                     p: 1,
@@ -131,13 +133,10 @@ export default function Ecosystem({data}:EcosystemProps) {
                     justifyContent: "center",
                   }}
                 >
-                  <Button
+                  <CustomButton
+                    icon={<ArrowForwardIcon />}
+                    innerText="Explore more"
                     variant="outlined"
-                    color="primary"
-                    endIcon={<ArrowForwardIcon />}
-                    onClick={() => {
-                      console.log("View intern programs clicked");
-                    }}
                     sx={{
                       color: "#006397",
                       borderColor: "#006397",
@@ -155,9 +154,8 @@ export default function Ecosystem({data}:EcosystemProps) {
                         color: "white !important",
                       },
                     }}
-                  >
-                    Explore more
-                  </Button>
+                    iconOnStart={false}
+                  />
                 </CardActions>
               </Card>
             </Grid>

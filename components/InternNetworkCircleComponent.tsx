@@ -19,11 +19,11 @@ const InternNetworkCircleComponent = ({
       const lastPart = words.slice(1).join(" ");
 
       return (
-        <p>
+        <>
           
           <span style={{ color: "#0F99C3" }}>{firstPart} </span>
           {lastPart}
-        </p>
+        </>
       );
     } else {
       return "";

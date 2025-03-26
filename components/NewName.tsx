@@ -17,10 +17,10 @@ function NewNameComponent({ data }: NewNameComponentProps) {
       const restOfWords = words[words.length - 1];
 
       return (
-        <p>
+        <>
           {firstWords}
           <span style={{ color: "#0F99C3" }}> {restOfWords}</span>
-        </p>
+        </>
       );
     } else {
       return "";

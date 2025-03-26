@@ -97,7 +97,7 @@ export default function PartnersCarousel({testimonials}:Props) {
   return (
     <Box
       sx={{
-        padding: "40px 0",
+        padding: {xs:"20px 20px",md:"40px 0"},
         backgroundColor: "#F2FAFD",
         display: "flex",
         justifyContent: "center",

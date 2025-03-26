@@ -13,12 +13,12 @@ interface PartnersInfoProps {
 
 export default function PartnersInfo({ data }: PartnersInfoProps) {
   return (
-    <Box sx={{ backgroundColor: "#F2FAFD", py: 5, width: "100vw" }}>
-      <Box>
+    <Box sx={{ backgroundColor: "#F2FAFD", py: 5, width: "100vw", display:"flex",flexDirection:"column",alignItems:"center" }}>
+      <Box sx={{width:"80vw"}}>
         <Typography
-          variant="h3"
+          variant="h2"
           align="center"
-          sx={{ mb: 2, fontWeight: 400, color: "black" }}
+          sx={{ mb: 2, fontWeight: 400, color: "black", fontSize:{xs:"2rem",md:"3rem"} }}
         >
           {data.title}
         </Typography>
@@ -41,7 +41,7 @@ export default function PartnersInfo({ data }: PartnersInfoProps) {
         sx={{
           width: "80vw",
           backgroundColor: "#E6F2F9", // Light background color
-          padding: "40px 0",
+          padding: {xs:"40px 20px",md:"40px 0"},
           borderRadius: 15,
           margin: "0 auto", // Center the container horizontally
           display: "flex",
@@ -81,6 +81,7 @@ export default function PartnersInfo({ data }: PartnersInfoProps) {
           gap: 2, // Adds space between buttons
           flexDirection: "row", // Stacks the buttons vertically
           py: 5,
+          width:"80vw"
         }}
       >
         <Button

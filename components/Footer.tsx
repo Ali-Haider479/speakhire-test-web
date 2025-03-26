@@ -81,7 +81,7 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={30}>
+        <Grid container spacing={{xs:10,md:30}}>
           {/* Left Section */}
           <Grid item xs={12} md={4}>
             <Box>

@@ -19,10 +19,10 @@ async function getData() {
   try {
     const [aboutPageResponse, commonItemsResponse] = await Promise.all([
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/about?populate=*`, {
-        next: { revalidate: 60 },
+        cache: "no-store",
       }),
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
-        next: { revalidate: 60 },
+        cache: "no-store",
       }),
     ]);
 

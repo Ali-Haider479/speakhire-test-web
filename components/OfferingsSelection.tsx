@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import {
   Box,
@@ -12,40 +10,6 @@ import {
   Button,
 } from "@mui/material";
 import CallMadeIcon from "@mui/icons-material/CallMade";
-
-// Example data for each offering card.
-// Replace with your own images, titles, and descriptions.
-const offeringsData = [
-  {
-    title: "Leadership courses",
-    description: "10-session courses to support individuals exploring careers.",
-    imageUrl: "/Foundational Year/20191026_104734.jpg",
-  },
-  {
-    title: "Foundational Year",
-    description:
-      "Year-long virtual program to support individuals seeking college & career opportunities.",
-    imageUrl: "/stock1.jpg",
-  },
-  {
-    title: "SPEAKHIRE Seminars",
-    description:
-      "Hour-long professional development topics to help you succeed.",
-    imageUrl: "/stock1.jpg",
-  },
-  {
-    title: "Pathways Days",
-    description:
-      "Present new possibilities with Pathways Days so they discover their path forward.",
-    imageUrl: "/stock1.jpg",
-  },
-  {
-    title: "Symposiums",
-    description:
-      "Long-form global dialogues that push societies to progress toward the future.",
-    imageUrl: "/stock1.jpg",
-  },
-];
 
 interface OfferingsSectionProps{
   data: {
@@ -61,16 +25,16 @@ export default function OfferingsSection({data}:OfferingsSectionProps) {
       <Box sx={{ py: 6, px: { xs: 2, md: 6 }, width: "80vw", mx: "auto" }}>
         {/* Heading and Description */}
         <Typography
-          variant="h3"
+          variant="h2"
           align="center"
-          sx={{ mb: 2, fontWeight: 400, color: "black" }}
+          sx={{ mb: 2, fontWeight: 400, color: "black",fontSize:{xs:"2rem",md:"3rem"} }}
         >
          {data.title}
         </Typography>
         <Typography
           variant="h6"
           align="center"
-          sx={{ mb: 6, maxWidth: 800, mx: "auto", color: "#49454F" }}
+          sx={{ mb: 6, maxWidth: 800, mx: "auto", color: "#49454F",fontSize:{xs:"0.75rem",md:"1.25rem"} }}
         >
          {data.description}
         </Typography>

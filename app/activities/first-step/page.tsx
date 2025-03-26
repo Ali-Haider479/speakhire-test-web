@@ -32,11 +32,11 @@ const firstStepPage = async () => {
     const restOfWords = words.slice(3).join(" ");
 
     return (
-      <p>
+      <>
         {firstWords}{" "}
         <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
         {restOfWords}
-      </p>
+      </>
     );
   };
 
@@ -155,7 +155,7 @@ const firstStepPage = async () => {
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Image src="/checkBadge.svg" alt="" width={24} height={24} />
+            <Image src="/checkBadge.svg" alt="checkBadge" width={24} height={24} />
             <Typography variant="body2">{data.highlight}</Typography>
           </Box>
         </Box>

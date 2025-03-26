@@ -1,5 +1,5 @@
 // "use client"
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import DonateComponent from "../components/DonateComponent";
 import StudentCarousel from "../components/StudentCarousel";
 import WorkForceComponent from "../components/WorkForceComponent";
@@ -8,10 +8,8 @@ import Ecosystem from "@/components/Ecosystem";
 import BecomePartnerComponent from "@/components/BecomePartnerComponent";
 import PartnersInfo from "@/components/PartnersInfo";
 import PartnersTestimonials from "@/components/PartnersTestimonials";
-import ObjectivesComponent from "@/components/ObjectivesComponent";
 import ObjectiveSection from "@/components/ObjectivesSection";
 import SupportSection from "@/components/SupportSections";
-import ImageSection from "@/components/ImageSection";
 import ImpactSection from "@/components/ImpactSection";
 import ImpactsLivesSection from "@/components/ImpactsLivesSection";
 import PartnerMapsSection from "@/components/PartnerMapsSection";
@@ -20,10 +18,10 @@ async function getData() {
   try {
     const [homePageResponse, commonItemsResponse] = await Promise.all([
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?populate=*`, {
-        next: { revalidate: 60 },
+        cache: "no-store", // Disables caching (SSR mode)
       }),
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
-        next: { revalidate: 60 },
+        cache: "no-store", // Disables caching (SSR mode)
       }),
     ]);
 
@@ -38,7 +36,7 @@ async function getData() {
 
     return {
       ...homePageData?.data,
-     ...commonItemsData.data,
+      ...commonItemsData.data,
     };
   } catch (error) {
     console.error("Data fetching error:", error);
@@ -52,21 +50,21 @@ const Home = async () => {
   const data = homePageRes;
 
   return (
-    <Box>
+    <>
       <SupportSection data={data?.hero_section} />
       <ImpactSection data={data?.statistics_section} />
-      <PartnerMapsSection data={data?.statistics_section}/>
+      <PartnerMapsSection data={data?.statistics_section} />
       <ImpactsLivesSection data={data?.impact_lives_section} />
       <ObjectiveSection data={data?.objective_section} />
-      <PartnersInfo data={data?.partner_info_section}/>
-      <PartnersTestimonials data={data?.partners_testimonials_section}/>
-      <BecomePartnerComponent data={data?.become_partner_section}/>
-      <Ecosystem data={data?.eco_system_section}/>
-      <OfferingsSection data={data?.eco_system_section.offering_section}/>
-      <WorkForceComponent data={data?.workforce_section}/>
-      <StudentCarousel data={data?.student_stories_section}/>
-      <DonateComponent data={data?.donate_component}/>
-    </Box>
+      <PartnersInfo data={data?.partner_info_section} />
+      <PartnersTestimonials data={data?.partners_testimonials_section} />
+      <BecomePartnerComponent data={data?.become_partner_section} />
+      <Ecosystem data={data?.eco_system_section} />
+      <OfferingsSection data={data?.eco_system_section.offering_section} />
+      <WorkForceComponent data={data?.workforce_section} />
+      <StudentCarousel data={data?.student_stories_section} />
+      <DonateComponent data={data?.donate_component} />
+    </>
   );
 };
 

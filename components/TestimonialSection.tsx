@@ -117,11 +117,11 @@ const HighlightText = (text: string) => {
     const lastPart = words.slice(3).join(" ");
 
     return (
-      <p>
+      <>
         {firstPart}
         <span style={{ color: "#08547A" }}> {middlePart} </span>
         {lastPart}
-      </p>
+      </>
     );
   } else {
     return "";

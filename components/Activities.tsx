@@ -51,12 +51,13 @@ const CarouselItem = styled(Box)<CarouselItemProps>(
     transition: "all 0.5s ease",
     transform: `translateY(${
       custom_position === "top"
-        ? "-120%"
+        ? "-105%"
         : custom_position === "bottom"
-        ? "120%"
+        ? "105%"
         : "0"
     })`,
-    scale: active ? "1" : "0.85",
+    scale: 1,
+    opacity: active ? 1 : 0.6,
     "&::after": {
       content: '""',
       position: "absolute",
@@ -64,7 +65,6 @@ const CarouselItem = styled(Box)<CarouselItemProps>(
       left: 0,
       right: 0,
       bottom: 0,
-      background: active ? "none" : "rgba(0, 0, 0, 0.4)",
       borderRadius: "16px",
       transition: "all 0.5s ease",
     },
@@ -143,13 +143,13 @@ const ActivitiesSection = ({ data }: ActivitiesSectionProps) => {
       >
         {/* Left Column */}
         <Box sx={{ flex: 1 }}>
-          <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
+          <Typography variant="h4" sx={{ mb: 3, fontWeight: 700 }}>
             {data.title}
           </Typography>
 
           <List sx={{ mb: 4 }}>
             {data?.outcomes.map((activity, index) => (
-              <ListItem key={index} sx={{ pb: 2 }}>
+              <ListItem key={index} sx={{ p: 0, m: 0, py: 0.5 }}>
                 <ListItemIcon>
                   <img src="/checkBadge.svg" alt="checked List item" />
                 </ListItemIcon>
@@ -178,7 +178,8 @@ const ActivitiesSection = ({ data }: ActivitiesSectionProps) => {
                 (index - activeIndex + data.carousel_images.length) %
                 data.carousel_images.length;
 
-              if (diff === data.carousel_images.length - 1) custom_position = "top";
+              if (diff === data.carousel_images.length - 1)
+                custom_position = "top";
               else if (diff === 1) custom_position = "bottom";
               else if (diff !== 0) return null;
 
@@ -192,7 +193,10 @@ const ActivitiesSection = ({ data }: ActivitiesSectionProps) => {
                     cursor: "pointer",
                   }}
                 >
-                  <CarouselImage src={process.env.NEXT_PUBLIC_STRAPI_URL+image.source.url} alt={image.alt} />
+                  <CarouselImage
+                    src={process.env.NEXT_PUBLIC_STRAPI_URL + image.source.url}
+                    alt={image.alt}
+                  />
                 </CarouselItem>
               );
             })}

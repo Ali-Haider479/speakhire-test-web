@@ -29,11 +29,11 @@ const EconomicMobilitySection = ({ data }: EconomicMobilitySectionProps) => {
       const middlePart = words.slice(1, 3).join(" ");
 
       return (
-        <p>
+        <>
           {firstPart}
           <span style={{ color: "#0F99C3" }}> {middlePart} </span>
           {lastPart}
-        </p>
+        </>
       );
     } else {
       return "";

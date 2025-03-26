@@ -51,10 +51,10 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
     const restOfWords = words.slice(6).join(" ");
 
     return (
-      <p>
+      <>
         {firstWords} <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
         {restOfWords}
-      </p>
+      </>
     );
   };
   return (

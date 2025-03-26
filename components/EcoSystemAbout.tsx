@@ -19,9 +19,9 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
       const restOfWords = words.slice(1).join(" ");
 
       return (
-        <p>
-          <span style={{ color: "#0F99C3" }}>{firstWord}</span><br/> {restOfWords}
-        </p>
+        <>
+          <span style={{ color: "#0F99C3" }}>{firstWord}</span> {restOfWords}
+        </>
       );
     } else {
       return "";
@@ -40,8 +40,8 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
         flexDirection: { xs: "column", md: "row" },
         justifyContent: "space-between",
         alignItems: "center",
-        my: 10,
-        pl: { xs: 3, md: 5 },
+        my: {xs:0,md:10},
+        pl: { xs: 0, md: 5 },
         gap: { xs: 4, md: 0 },
       }}
     >
@@ -98,9 +98,9 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
       {/* Second child box - Image Section */}
       <Box
         sx={{
-          width: { xs: "100%", md: "60vw" },
+          width: { xs: "100%", md: "45vw" },
           position: "relative",
-          height: { xs: "50vh", md: "70vh" },
+          height: { xs: "40vh", md: "70vh" },
           backgroundColor: "#E4F5FB",
           borderRadius: "40px",
           overflow: "hidden", // Ensures no overflow issues
@@ -109,10 +109,8 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
         <Image
           src={process.env.NEXT_PUBLIC_STRAPI_URL + data.cover_image.source.url}
           alt={data.cover_image.alternate_text}
-          layout="responsive" // Correct layout for full-box fill
-          style={{ objectFit: "cover", padding: "40px" }} // Ensures the image scales properly inside the box
-          width={16}
-          height={9}
+          layout="fill"
+          style={{ objectFit: "contain", borderRadius: "40px", padding: "40px" }}
         />
       </Box>
     </Box>

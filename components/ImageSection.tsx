@@ -55,7 +55,7 @@ const ImageSection = (imageSrc:any) => {
       <Box 
         sx={{
           width: '80vw', // Adjust width as needed
-          height: '89vh', // Adjust height as needed
+          maxHeight: '710px', // Adjust height as needed
           backgroundColor: '#08547A1A', // Solid white background for the inner box (fully opaque)
           borderRadius: '60px', // Rounded corners for the inner box
           overflow: 'hidden', // Ensures the image stays within rounded corners

@@ -97,7 +97,13 @@ const MagazineSection = ({ data }: MagazineSectionProps) => {
                   magazine.cover_image.source.url
                 }
                 alt={`${magazine.title}`}
-                // onClick={() => window.open(magazine.document_url, "_blank")}
+                onClick={() =>
+                  window.open(
+                    process.env.NEXT_PUBLIC_STRAPI_URL +
+                      magazine.cover_image.source.url,
+                    "_blank"
+                  )
+                }
                 sx={{ cursor: "pointer" }}
               />
               {/* <CardContent

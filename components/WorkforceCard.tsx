@@ -18,11 +18,11 @@ const WorkforceCard = (data: WorkforceCardProps) => {
       const fourthPart = words[6];
 
       return (
-        <p>
+        <>
           {firstPart} <span style={{ color: "#2563eb" }}>{secondPart}</span>{" "}
           {thirdPart} {" "}
           <span style={{ color: "#2563eb" }}>{fourthPart}</span>
-        </p>
+        </>
       );
     } else {
       return "";
@@ -41,11 +41,12 @@ const WorkforceCard = (data: WorkforceCardProps) => {
       }}
     >
       <Typography
-        variant="h3"
+        variant="h2"
         sx={{
           fontWeight: 500,
           marginBottom: "16px",
           color: "#111827",
+          fontSize:{xs:"2rem",md:"3rem"}
         }}
       >
         {HighlightText(data.title)}
@@ -57,7 +58,7 @@ const WorkforceCard = (data: WorkforceCardProps) => {
           color: "#374151",
           marginBottom: "24px",
           lineHeight: "1.25",
-          fontSize: "1.28rem",
+          fontSize: {xs:"0.85rem",md:"1.25rem"},
         }}
       >
         {data.description}

@@ -38,8 +38,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body
         className={`${comfortaa.className} ${quicksand.className} antialiased`}
+        style={{
+          minHeight: "100vh",
+          overflowX: "hidden",
+          margin: 0,
+          padding: 0,
+          boxSizing: "border-box", // Ensures better layout consistency
+        }}
       >
         <ClientThemeProvider>
           <Navbar />
@@ -48,6 +58,8 @@ export default function RootLayout({
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              width: "100%", // Ensures content adapts to screen size
+              padding: "0", // Adds spacing for better readability on mobile
             }}
           >
             {children}

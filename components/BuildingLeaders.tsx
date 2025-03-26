@@ -1,90 +1,6 @@
-"use client";
 import React from "react";
 import { Box, Typography, Container } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import Image from "next/image";
-
-// Styled components for the background
-const GradientBackground = styled(Box)(({ theme }) => ({
-  background: "linear-gradient(180deg, #F2FAFD 50%, #ffffff 50%)",
-  padding: theme.spacing(6, 0),
-  position: "relative",
-  overflow: "hidden",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-}));
-
-const WhiteSection = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
-  height: "60%",
-  background: "#ffffff",
-  borderTopLeftRadius: "40px",
-  borderTopRightRadius: "40px",
-  zIndex: 0,
-}));
-
-const ImageContainer = styled(Box)(({ theme }) => ({
-  position: "relative",
-  width: "85vw",
-  margin: "auto",
-  borderRadius: "50px",
-  border: "8px solid #d8eaf5",
-  padding: "8px",
-  backgroundColor: "#f7fbff",
-  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
-}));
-
-const RoundedContainer = styled(Box)(({ theme }) => ({
-  position: "relative",
-  borderRadius: "40px",
-  overflow: "hidden",
-  backgroundColor: "#ffffff",
-}));
-
-const TextOverlay = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  bottom: "4%",
-  width: "96%",
-  marginLeft: "2%",
-  backgroundColor: "rgba(255, 255, 255, 0.7)",
-  borderRadius: "20px",
-  padding: "16px 24px",
-  boxShadow: "0px -4px 10px rgba(0, 0, 0, 0.08)",
-}));
-
-// Inner content of the curved card (where the image will go)
-const CardContent = styled(Box)(({ theme }) => ({
-  position: "relative",
-  zIndex: 3,
-  overflow: "hidden",
-  height: "89vh",
-  borderRadius: "32px",
-  backgroundColor: "#f0f0f0", // Placeholder for the image background
-}));
-
-// Text styling
-const SpeakHighlight = styled("span")({
-  color: "#0B72B9",
-  fontWeight: 700,
-});
-
-// Container for the breadcrumb navigation
-const BreadcrumbContainer = styled(Box)({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  marginBottom: "16px",
-});
-
-// Container for the title
-const TitleContainer = styled(Box)({
-  textAlign: "center",
-  marginBottom: "24px",
-});
 
 interface BuildingLeadersProps {
   data: {
@@ -104,20 +20,38 @@ const BuildingLeaders = ({ data }: BuildingLeadersProps) => {
       const middleWords = words[1];
 
       return (
-        <p>
+        <>
           {firstWord} <span style={{ color: "#0F99C3" }}>{middleWords}</span>{" "}
           {lastWord}
-        </p>
+        </>
       );
     } else {
       return "";
     }
   };
   return (
-    <GradientBackground>
+    <Box
+      sx={{
+        background: "linear-gradient(180deg, #F2FAFD 50%, #ffffff 50%)",
+        padding: {xs:2,md:6},
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width:"100vw"
+      }}
+    >
       {/* <WhiteSection /> */}
 
-      <BreadcrumbContainer>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: "16px",
+        }}
+      >
         <Typography variant="body1" component="div">
           <Box component="span" sx={{ mr: 1 }}>
             <a href="/" style={{ color: "#0B72B9", textDecoration: "none" }}>
@@ -129,22 +63,40 @@ const BuildingLeaders = ({ data }: BuildingLeadersProps) => {
             About us
           </Box>
         </Typography>
-      </BreadcrumbContainer>
+      </Box>
 
-      <TitleContainer>
+      <Box sx={{ textAlign: "center", marginBottom: "24px" }}>
         <Typography
-          variant="h3"
-          component="h1"
+          variant="h2"
           gutterBottom
-          sx={{ fontWeight: 500 }}
+          sx={{ fontWeight: 500, fontSize: { xs: "2rem", md: "3rem" } }}
         >
           {/* About <SpeakHighlight>SPEAKHIRE</SpeakHighlight>: Building leaders */}
           {HighlightText(data.title)}
         </Typography>
-      </TitleContainer>
+      </Box>
 
-      <ImageContainer>
-        <RoundedContainer>
+      <Box
+        sx={{
+          position: "relative",
+          width: {xs:"95vw",md:"80vw"},
+          maxHeight: "710",
+          margin: {xs:0,md:"auto"},
+          borderRadius: "50px",
+          border: "8px solid #d8eaf5",
+          padding: "8px",
+          backgroundColor: "#f7fbff",
+          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Box
+          sx={{
+            position: "relative",
+            borderRadius: "40px",
+            overflow: "hidden",
+            backgroundColor: "#ffffff",
+          }}
+        >
           <div style={{ filter: "grayscale(100%)" }}>
             <Image
               src={
@@ -152,19 +104,31 @@ const BuildingLeaders = ({ data }: BuildingLeadersProps) => {
               }
               alt={data.cover_image.alternate_text}
               layout="responsive"
-              width={900}
-              height={450}
+              width={16}
+              height={9}
               style={{ objectFit: "cover" }}
             />
           </div>
-          <TextOverlay>
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: "4%",
+              width: "96%",
+              marginLeft: "2%",
+              backgroundColor: "rgba(255, 255, 255, 0.7)",
+              borderRadius: {xs:"30px",md:"20px"},
+              padding: {xs:"8px 16px",md:"16px 24px"},
+              boxShadow: "0px -4px 10px rgba(0, 0, 0, 0.08)",
+            }}
+          >
             <Typography
-              variant="h3"
+              variant="h2"
               sx={{
                 fontWeight: 400,
                 marginBottom: "16px",
                 color: "#1D1B20", // Dark color for main text
                 lineHeight: "1.2",
+                fontSize: { xs: "0.9rem", md: "3rem" },
               }}
             >
               <span style={{ color: "#08547a" }}> SPEAK</span> stands for{" "}
@@ -174,13 +138,16 @@ const BuildingLeaders = ({ data }: BuildingLeadersProps) => {
               <span style={{ color: "#08547a" }}>A</span>ll{" "}
               <span style={{ color: "#08547a" }}>K</span>ind
             </Typography>
-            <Typography variant="body1" sx={{ mt: 1, fontSize: 22 }}>
+            <Typography
+              variant="body1"
+              sx={{ mt: 1, fontSize: { xs: "0.9rem", md: "1.25rem" } }}
+            >
               {data.description}
             </Typography>
-          </TextOverlay>
-        </RoundedContainer>
-      </ImageContainer>
-    </GradientBackground>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

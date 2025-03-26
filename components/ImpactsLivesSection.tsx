@@ -1,13 +1,11 @@
-"use client";
-import React from "react";
 import { Box, Typography } from "@mui/material";
-import YouTube from "react-youtube";
+import YouTubePlayer from "./YouTubePlayer";
 
 interface ImpactsLivesSectionProps {
   data: {
-    title:string,
-    description:string,
-    links:any[]
+    title: string;
+    description: string;
+    links: any[];
   };
 }
 
@@ -16,23 +14,10 @@ function extractYouTubeID(url: string) {
   return match ? match[1] : null;
 }
 
-const ImpactsLivesSection = ({ data }: ImpactsLivesSectionProps) => {
-  // Sample array of YouTube video IDs (replace with your actual video IDs)
-  //   const videoIds = ["rH6EZrsBJG4", "4zokzUxKPLs", "mT1yas4HOlU"];
-  const videoLinks = data.links.map((item:any)=>item.url)
-  console.log(videoLinks);
-
-  // Options for YouTube player (customize as needed)
-  const youtubeOptions = {
-    width: "100%",
-    height: "100%",
-    playerVars: {
-      autoplay: 0, // Disable autoplay
-      controls: 1, // Show controls
-      modestbranding: 1, // Hide YouTube logo
-      rel: 0, // Don't show related videos
-    },
-  };
+export default async function ImpactsLivesSection({
+  data,
+}: ImpactsLivesSectionProps) {
+  const videoLinks = data.links.map((item: any) => item.url);
 
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
@@ -42,63 +27,62 @@ const ImpactsLivesSection = ({ data }: ImpactsLivesSectionProps) => {
       const middleWord = words[1];
 
       return (
-        <p>
-          {firstWord}  <span style={{ color: "#08547A" }}>{middleWord}</span>{" "}
-         {lastWords}
-        </p>
+        <>
+          {firstWord} <span style={{ color: "#08547A" }}>{middleWord}</span>{" "}
+          {lastWords}
+        </>
       );
     } else {
       return "";
     }
   };
+
   return (
     <Box
       sx={{
+        display: "flex",
+        flexDirection: "column",
         padding: "40px 20px",
-        backgroundColor: "#FFFFFF", // White background
+        backgroundColor: "#FFFFFF",
         textAlign: "center",
+        alignItems: "center",
+        justifyContent: "center",
         width: "100%",
       }}
     >
       <Typography
         variant="h2"
         sx={{
-          fontSize: "3rem",
+          fontSize: { xs: "2rem", md: "3rem" },
           fontWeight: 400,
           marginBottom: "16px",
-          color: "#1D1B20", // Dark color for main text
+          color: "#1D1B20",
           lineHeight: "1.2",
         }}
       >
         {HighlightText(data?.title)}
       </Typography>
-      <Box
+
+      <Typography
+        variant="body1"
         sx={{
-          textAlign: "center", // Centered the text alignment
-          width: "100vw",
+          fontSize: "1.25rem",
+          marginBottom: "32px",
+          fontWeight: 500,
+          lineHeight: "1.5",
+          width: { xs: "60vw", md: "40vw" },
         }}
       >
-        <Typography
-          variant="body1"
-          sx={{
-            fontSize: "1.25rem",
-            marginBottom: "32px",
-            fontWeight: 500,
-            lineHeight: "1.5",
-            width: "40vw",
-            margin: "0 auto", // Centers the text horizontally within its container
-          }}
-        >
-          {data.description}
-        </Typography>
-      </Box>
+        {data.description}
+      </Typography>
 
       <Box
         sx={{
           display: "flex",
+          flexDirection:{xs:"column",md:"row"},          
           justifyContent: "center",
-          gap: "24px", // Spacing between stats
-          flexWrap: "wrap", // Responsive wrapping
+          gap: "24px",
+          flexWrap: "wrap",
           width: "80vw",
           margin: "0 auto",
           marginTop: 5,
@@ -110,28 +94,18 @@ const ImpactsLivesSection = ({ data }: ImpactsLivesSectionProps) => {
             sx={{
               flex: "1",
               height: "35vh",
-              aspectRatio: "16/9", // Maintain 16:9 aspect ratio for videos
-              backgroundColor: "#F2FAFD", // Light blue background for video containers
-              borderRadius: "40px", // Rounded corners
-              overflow: "hidden", // Ensures video stays within rounded corners
-              boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Optional shadow
-              position: "relative", // For positioning YouTube player
+              aspectRatio: "16/9",
+              backgroundColor: "#F2FAFD",
+              borderRadius: "40px",
+              overflow: "hidden",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+              position: "relative",
             }}
           >
-            <YouTube
-              videoId={extractYouTubeID(link)?.toString()}
-              opts={youtubeOptions}
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "40px", // Matches the box's rounded corners
-              }}
-            />
+            <YouTubePlayer videoId={`${extractYouTubeID(link)?.toString()}`} />
           </Box>
         ))}
       </Box>
     </Box>
   );
-};
-
-export default ImpactsLivesSection;
+}

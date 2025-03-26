@@ -22,19 +22,21 @@ export default function OpportunityForChangeComponent({data}:OpportunityForChang
       <Box
         sx={{
           width: "80vw",
-          padding: "30px",
+          py:5,
+          px:{xs:0,md:2},
           borderRadius: "0px",
           // background: 'linear-gradient(180deg,rgb(255, 255, 255) 0%,#ecf6fb 90%)',
           // my: 5,
         }}
       >
-        <Box sx={{ width: "80vw" }}>
+        <Box sx={{ width: "79vw" }}>
           <Typography
-            variant="h4"
+            variant="h2"
             sx={{
               fontWeight: "bold",
               marginBottom: 4,
               color: "#333333",
+              fontSize:{xs:"2rem",md:"3rem"}
             }}
           >
             Opportunity for Change
@@ -61,6 +63,7 @@ export default function OpportunityForChangeComponent({data}:OpportunityForChang
                       fontWeight: "bold",
                       color: "#0F99C3",
                       marginBottom: 1,
+                      fontSize:{xs:"1.5rem",md:"2.25rem"}
                     }}
                   >
                     {stat.numericTitle}

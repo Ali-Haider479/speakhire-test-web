@@ -23,10 +23,10 @@ export default function LeadershipCourseCurriculum({data}:LeadershipCourseCurric
     const highlightedWord = words[2];
 
     return (
-      <p>
+      <>
         {firstWords}{" "}
         <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
-      </p>
+      </>
     );
   };
 

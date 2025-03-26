@@ -39,11 +39,11 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
       const part5 = words.slice(5).join(" ");
 
       return (
-        <p>
+        <>
           {part1}
           <span style={{ color: "#0F99C3" }}> {part2} </span> {part3}
           <span style={{ color: "#0F99C3" }}> {part4} </span> {part5}
-        </p>
+        </>
       );
     } else {
       return "";
@@ -55,20 +55,20 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
       sx={{
         width: "100%",
         backgroundColor: "#F2FAFD",
-        padding: "20px",
-        borderRadius: "0px",
         display: "flex",
         flexDirection: { xs: "column", md: "row" }, // Stack on small screens, side-by-side on medium+
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 5,
-        height: "auto" // Height auto for mobile
+        marginTop: {xs:3,md:5},
+        height: "auto", // Height auto for mobile
+        px:{xs:"10px", md:"20px"},
+        py:{xs:2,md:5}
       }}
     >
       {/* Left section with text content */}
       <Box
         sx={{
-          width: { xs: "80%", md: "40vw" },
+          width: { xs: "90%", md: "45vw" },
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -76,12 +76,13 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
         }}
       >
         <Typography
-          variant="h3" // Reduced font size for better mobile readability
+          variant="h2" // Reduced font size for better mobile readability
           sx={{
             fontWeight: "bold",
-            marginBottom: 10,
+            marginBottom: {xs:5,md:10},
             color: "#333333",
-            mt:5
+            mt:5,
+            fontSize:{xs:"2rem",md:"3rem"}
           }}
         >
           {data.title}
@@ -93,6 +94,7 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
             sx={{
               fontWeight: "medium",
               marginBottom: 1,
+              fontSize:{xs:"1.5rem",md:"2.25rem"}
             }}
           >
             {HighlightText(data.descriptionTitle)}
@@ -105,7 +107,7 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
             marginBottom: 2,
             color: "#555555",
             lineHeight: 1.7,
-            fontSize: "1.25rem", // Smaller font size for readability on mobile
+            fontSize: {xs:"1rem",md:"1.25rem"}, // Smaller font size for readability on mobile
           }}
         >
           {data.description}
@@ -115,13 +117,13 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
       {/* Right section with YouTube video */}
       <Box
         sx={{
-          width: { xs: "80%", md: "40vw" },
+          width: { xs: "80%", md: "35vw" },
           height: { xs: "250px", md: "400px" },
           position: "relative",
           borderRadius: "20px",
           overflow: "hidden",
           backgroundColor: "#f5f5f5",
-          mt: { xs: 3, md: 0 }, // Margin added only for mobile view
+          mt: { xs: 3, md: 5 }, // Margin added only for mobile view
         }}
       >
         <Box

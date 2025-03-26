@@ -20,10 +20,10 @@ const SupportSection = async ({ data }: HeroSectionProps) => {
       const middleWords = words.slice(1, -1).join(" ");
 
       return (
-        <p>
+        <>
           <span style={{ color: "#0F99C3" }}>{firstWord}</span> {middleWords}{" "}
           <span style={{ color: "#08547A" }}>{lastWord}</span>
-        </p>
+        </>
       );
     } else {
       return "";
@@ -45,16 +45,15 @@ const SupportSection = async ({ data }: HeroSectionProps) => {
         <Typography
           variant="h2"
           sx={{
-            width: "60vw",
-            fontSize: "3rem",
+            width: {xs:"80vw",md:"60vw"},
+            fontSize: { xs: "2rem", md: "3rem" },
             fontWeight: 400,
             marginBottom: "16px",
             lineHeight: "1.2",
-            paddingTop: "10vh",
+            paddingTop: {xs:"3vh",md:"10vh"},
+            textAlign:"center"
           }}
         >
-          {/* <span style={{ color: "#0F99C3" }}>{data.heroSubTitle1} </span>
-          {data.heroSubTitle2} <span style={{ color: "#08547A" }}>leaders</span> */}
           {HighlightText(data?.title)}
         </Typography>
         <Typography
@@ -64,7 +63,7 @@ const SupportSection = async ({ data }: HeroSectionProps) => {
             color: "#49454F", // Gray color for the description
             marginBottom: "32px",
             //   maxWidth: '600px',
-            width: "40vw",
+            width: {xs:"70vw",md:"40vw",},
             margin: "0 auto",
             lineHeight: "1.5",
             fontWeight: 500,

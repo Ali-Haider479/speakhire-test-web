@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 
 interface ImpactSectionProps {
   data: {
-    description:string
+    description: string;
     statistics: any[];
   };
 }
@@ -21,9 +21,9 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
       const lastWords = words.slice(1).join(" ");
 
       return (
-        <p>
+        <>
           <span style={{ color: "#08547A" }}>{firstWord}</span> {lastWords}
-        </p>
+        </>
       );
     } else {
       return "";
@@ -56,12 +56,15 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
         backgroundColor: "#FFFFFF", // White background
         textAlign: "center",
         width: "100%",
+        alignItems:"center",
+        display:"flex",
+        flexDirection:"column"
       }}
     >
       <Typography
         variant="h2"
         sx={{
-          fontSize: "3rem",
+          fontSize: { xs: "2rem", md: "3rem" },
           fontWeight: 400,
           marginBottom: "16px",
           color: "#1D1B20", // Dark color for main text
@@ -74,26 +77,19 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
         <span style={{ color: "#0F99C3" }}>A</span>ll{" "}
         <span style={{ color: "#0F99C3" }}>k</span>ind
       </Typography>
-      <Box
+
+      <Typography
+        variant="body1"
         sx={{
-          textAlign: "center", // Centered the text alignment
-          width: "100vw",
+          fontSize: "1.25rem",
+          marginBottom: "32px",
+          fontWeight: 500,
+          lineHeight: "1.5",
+          width: { xs: "60vw", md: "40vw" },
         }}
       >
-        <Typography
-          variant="body1"
-          sx={{
-            fontSize: "1.25rem",
-            marginBottom: "32px",
-            fontWeight: 500,
-            lineHeight: "1.5",
-            width: "40vw",
-            margin: "0 auto", // Centers the text horizontally within its container
-          }}
-        >
-          {HighlightText(data?.description)}
-        </Typography>
-      </Box>
+        {HighlightText(data?.description)}
+      </Typography>
 
       <Box
         sx={{

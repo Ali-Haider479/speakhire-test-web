@@ -33,11 +33,11 @@ export default function SpeakerImpact({ data }: SpeakerImpactProps) {
       const restOfWords = words.slice(2).join(" ");
 
       return (
-        <p>
+        <>
           {firstWords}
           <span style={{ color: "#005776" }}> {highlightedWord} </span>{" "}
           {restOfWords}
-        </p>
+        </>
       );
     } else {
       return "";

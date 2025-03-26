@@ -2,10 +2,6 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
-const title = `<span style= "color: #08547A;" }}>
-                        4 States 
-                    </span>with Partner Schools & Orgs`;
-
 interface PartnerMapsSectionProps {
   data: {
     countries_represented_title:string,
@@ -23,9 +19,9 @@ const PartnerMapsSection = async ({ data }:PartnerMapsSectionProps) => {
       const lastWords = words.slice(1).join(" ");
 
       return (
-        <p>
+        <>
           <span style={{ color: "#08547A" }}>{firstWord}</span> {lastWords}
-        </p>
+        </>
       );
     } else {
       return "";
@@ -39,7 +35,7 @@ const PartnerMapsSection = async ({ data }:PartnerMapsSectionProps) => {
         alignItems: "center",
         padding: "40px 8vw",
         backgroundColor: "#ffffff",
-        // width: '80vw'
+        flexDirection:{xs:"column",md:"row"}
       }}
     >
       {/* Left Section: US Map */}
@@ -48,7 +44,7 @@ const PartnerMapsSection = async ({ data }:PartnerMapsSectionProps) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "50%",
+          width: {xs:"100%",md:"50%"},
           height: "400px", // Fixed height for both sections
           justifyContent: "center", // Center content vertically
         }}
@@ -64,10 +60,6 @@ const PartnerMapsSection = async ({ data }:PartnerMapsSectionProps) => {
             width: "50%",
           }}
         >
-          {/* <span style={{ color: "#08547A" }}>4 States </span>with Partner
-          Schools & Orgs */}
-          {/* {title} */}
-          {/* <div dangerouslySetInnerHTML={{ __html: title }} /> */}
           {HighlightText(data.presence_title)}   
         </Typography>
         <Box
@@ -96,9 +88,10 @@ const PartnerMapsSection = async ({ data }:PartnerMapsSectionProps) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "50%",
+          width: {xs:"100%",md:"50%"},
           height: "400px", // Fixed height for both sections
           justifyContent: "center", // Center content vertically
+          mt:{xs:5}
         }}
       >
         <Typography

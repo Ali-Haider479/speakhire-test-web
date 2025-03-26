@@ -41,10 +41,10 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
     const restOfWords = words.slice(7).join(" ");
 
     return (
-      <p>
+      <>
         {firstWords} <span style={{ color: "#6AAA19" }}>{highlightedWord}</span>{" "}
         {restOfWords}
-      </p>
+      </>
     );
   };
 
