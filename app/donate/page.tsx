@@ -12,10 +12,10 @@ async function getData() {
   try {
     const [DonationApiRes, commonItemsResponse] = await Promise.all([
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/donation-page?populate=*`, {
-        next: { revalidate: 60 },
+        cache: "no-store",
       }),
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
-        next: { revalidate: 60 },
+        cache: "no-store",
       }),
     ]);
 
@@ -66,12 +66,12 @@ const Donate = async () => {
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
-          mt: 10,
+          mt: {xs:5,md:10},
           alignItems: "center",
-          width: "100vw",
+          width: {xs:"85vw",md:"100vw"},
         }}
       >
-        <Typography variant="h3" sx={{width:"80vw"}}>
+        <Typography variant="h2" sx={{width:{xs:"90vw",md:"80vw"},fontSize:{xs:"2rem",md:"3rem"}}}>
           {data.contributors_section.title.split(" ").slice(0, -1).join(" ")}
           <span style={{ color: "#08547A" }}>
             {" "}

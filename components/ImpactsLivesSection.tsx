@@ -83,9 +83,10 @@ export default async function ImpactsLivesSection({
           justifyContent: "center",
           gap: "24px",
           flexWrap: "wrap",
-          width: "80vw",
+          width: {xs:"85vw",md:"80vw"},
+          height:"auto",
           margin: "0 auto",
-          marginTop: 5,
+          marginTop: {xs:0,md:5},
         }}
       >
         {videoLinks.map((link, index) => (
@@ -93,10 +94,10 @@ export default async function ImpactsLivesSection({
             key={index}
             sx={{
               flex: "1",
-              height: "35vh",
-              aspectRatio: "16/9",
+              height: {xs:"40vh",md:"35vh"},
+              aspectRatio: {xs:"4/3",md:"16/9"},
               backgroundColor: "#F2FAFD",
-              borderRadius: "40px",
+              borderRadius: {xs:"24px",md:"40px"},
               overflow: "hidden",
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
               position: "relative",

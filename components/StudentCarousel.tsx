@@ -121,7 +121,7 @@ const StudentCarousel = ({ data }: StudentCarouselProps) => {
 
   return (
     <Box sx={{ backgroundColor: "#F2FAFD", width: "100%" }}>
-      <Box sx={{ margin: "0 auto", padding: "32px 16px", width: "90vw" }}>
+      <Box sx={{ margin: "0 auto", padding: "32px 16px", width: {xs:"90vw",md:"80vw"} }}>
         {/* Header Section */}
         <Box sx={{ textAlign: "center", marginBottom: 4 }}>
           <Typography

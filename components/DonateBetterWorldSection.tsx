@@ -32,27 +32,23 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        // padding: "40px 20px",
-        backgroundColor: "#F2FAFD", // Light blue background from the image
+        backgroundColor: "#F2FAFD",
         textAlign: "center",
         alignItems: "center",
         width: "100vw",
         height: "auto",
         background: "linear-gradient(180deg, #F2FAFD 70%, #ffffff 30%)",
-        // padding: theme.spacing(6, 0),
-        position: "relative",
-        overflow: "hidden",
       }}
     >
       <Typography
         variant="h2"
         sx={{
-          fontSize: "3rem",
+          fontSize: {xs:"2rem",md:"3rem"},
           fontWeight: 400,
           marginBottom: "16px",
           lineHeight: "1.2",
-          paddingTop: "10vh",
-          width: "45vw",
+          paddingTop: {xs:"5vh",md:"10vh"},
+          width: {xs:"80vw",md:"45vw"},
         }}
       >
         {HighlightText(data.title)}
@@ -64,7 +60,7 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
           color: "#49454F", // Gray color for the description
           marginBottom: "32px",
           //   maxWidth: '600px',
-          width: "35vw",
+          width: {xs:"70vw",md:"45vw"},
           margin: "0 auto",
           lineHeight: "1.5",
           fontWeight: 500,
@@ -92,13 +88,13 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
         sx={{
           position: "relative",
           zIndex: 1,
-          width: "80vw", // 80% of the viewport width
+          width: {xs:"90vw",md:"80vw"},
           borderRadius: "40px",
           border: "10px solid rgb(195, 206, 211)",
           overflow: "hidden",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
           backgroundColor: "#ffffff",
-          height: "80vh",
+          height: {xs:"30vh",md:"80vh"},
           marginTop: 5,
         }}
       >

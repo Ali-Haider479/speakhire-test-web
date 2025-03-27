@@ -55,10 +55,10 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
-        mt: 10,
+        mt: {xs:5,md:10},
       }}
     >
-      <Typography variant="h3" sx={{ color: "#085236", width: "60vw" }}>
+      <Typography variant="h2" sx={{ color: "#085236", width: {xs:"80vw",md:"60vw"} ,fontSize:{xs:"2rem",md:"3rem"}}}>
         {HighlightText(data.title)}
       </Typography>
 
@@ -67,15 +67,15 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          padding: 3,
-          width: "80vw",
-          mt: 4,
+          padding: {xs:1,md:3},
+          width: {xs:"90vw",md:"80vw"},
+          mt: {xs:2,md:4},
         }}
       >
         {groupedImages.map((row: any, rowIndex: number) => (
           <Box
             key={rowIndex}
-            sx={{ display: "flex", justifyContent: "center", gap: 2 }}
+            sx={{ display: "flex", justifyContent: "center", gap: {xs:1,md:2}, }}
           >
             {row.map((img: any, index: number) => (
               <Box
@@ -85,7 +85,7 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
                   borderRadius: "16px",
                   overflow: "hidden",
                   width: img.width,
-                  height: "40vh",
+                  height: {xs:"35vw",md:"40vh"},
                 }}
               >
                 <Image

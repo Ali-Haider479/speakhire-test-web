@@ -52,7 +52,7 @@ const ExploreOtherWaysSection = ({ data }: ExploreOtherWaysSectionProps) => {
         justifyContent: "center",
       }}
     >
-      <Typography variant="h3">
+      <Typography variant="h2" sx={{fontSize:{xs:"2rem",md:"3rem", maxWidth:"80vw"}}}>
         {HighlightText(data.title)}
       </Typography>
       <Box
@@ -61,7 +61,7 @@ const ExploreOtherWaysSection = ({ data }: ExploreOtherWaysSectionProps) => {
           gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, // 1-column on small screens, 2-columns on larger
           gap: 3, // Spacing between cards
           p: 3, // Padding for the whole section
-          width: "80vw",
+          width: {xs:"90vw",md:"80vw"},
           key: "contribute_card",
         }}
       >

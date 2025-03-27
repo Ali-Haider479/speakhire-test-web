@@ -17,6 +17,7 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
     <Box
       sx={{
         display: "flex",
+        mt:5,
         alignItems: "center",
         justifyContent: "center",
         minHeight: "506px",
@@ -28,9 +29,9 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
           display: "flex",
           borderRadius: "24px",
           overflow: "hidden",
-          backgroundColor: "#6AB43E",
+          backgroundColor: "#6BAA1E",
           flexDirection: { xs: "column-reverse",md:"row" },
-          height: "auto",
+          height: {xs:"auto",md:"506px"},
           width: "80vw",
           mb:5
         }}
@@ -48,7 +49,7 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
             borderBottomRightRadius: "24px", // Add this
           }}
         >
-          <Typography variant="h3" fontWeight="bold" gutterBottom>
+          <Typography variant="h2" fontWeight="bold" gutterBottom sx={{fontSize:{xs:"2rem",md:"3rem"}}}>
             {data.title}
           </Typography>
 
@@ -62,10 +63,10 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
             sx={{
               backgroundColor: "white",
               color: "#426E0B",
-              padding: 1.5 ,
+              padding: {xs:1,md:1.5} ,
               borderRadius: "50px",
               textTransform: "none",
-              fontSize: "1.1rem",
+              fontSize: {xs:"1rem",md:"1.1rem"},
               fontWeight: 600,
               "&:hover": {
                 backgroundColor: "rgba(255, 255, 255, 0.9)",
@@ -80,7 +81,7 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
           sx={{
             flex: "0.7",
             position: "relative",
-            minHeight: "400px",
+            minHeight: {xs:"250px",md:"400px"},
             overflow: "hidden",
             borderRadius: "24px", // Change this to round all corners
           }}
