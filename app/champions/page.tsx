@@ -291,7 +291,7 @@ const ChampionPage = async () => {
                 >
                   <Image
                     src={OtherWaysIcons[index].icon}
-                    alt=""
+                    alt={`${item.title} icon`}
                     height={60}
                     width={60}
                     style={{

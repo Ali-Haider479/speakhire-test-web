@@ -74,7 +74,7 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
         position: "relative",
       }}
     >
-      <Box sx={{ width: "80vw", margin: "0 auto" }}>
+      <Box sx={{ width: {xs:"90vw",md:"80vw"}, margin: {xs:1,md:"0 auto"} }}>
         <Box sx={{ mb: 4, textAlign: "left" }}>
           <Typography variant={"h3"} gutterBottom>
             {title}

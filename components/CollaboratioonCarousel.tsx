@@ -37,10 +37,10 @@ interface CollaborationsCarouselProps {
 const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
   return (
     <Box
-      sx={{ textAlign: "center", py: 6, px: 2, maxWidth: "80vw", mx: "auto" }}
+      sx={{ textAlign: "center", py: {xs:1,md:6}, px: 2, maxWidth: {xs:"100vw",md:"80vw"}, mx: "auto" }}
     >
       {/* Heading */}
-      <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
+      <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4, width:{xs:"95%"} }}>
         {data.title}
       </Typography>
 
@@ -88,15 +88,15 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
                   background:
                     "linear-gradient(transparent, rgba(0, 0, 0, 0.8))",
                   color: "white",
-                  pb: 3,
-                  px: 4,
+                  pb: {xs:1.5,md:3},
+                  px: {xs:1.5,md:4},
                   ml: 0,
                 }}
               >
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", fontSize:{xs:"1.1rem"} }}>
                   {slide.title}
                 </Typography>
-                <Typography variant="body2">{slide.description}</Typography>
+                <Typography variant="body2" sx={{fontSize:"0.7rem"}}>{slide.description}</Typography>
               </Box>
             </Box>
           </SwiperSlide>

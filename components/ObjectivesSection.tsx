@@ -94,14 +94,17 @@ const ObjectiveSection = ({ data }: ObjectiveSectionProps) => {
             {/* Decorative Line + Diamond */}
             <Box
               sx={{
-                display: "flex",
+                display: {
+                  xs: "flex", // Show on small screens (899px or less)
+                  md: index === data.objectives.length - 1 ? "none" : "flex", // Hide on medium+ screens for last item
+                },
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "flex-start",
                 position: "relative",
                 width: "24px", // Fixed width for diamond alignment
                 marginLeft: "20px",
-                height:"100%"
+                height: "100%",
               }}
             >
               <Box

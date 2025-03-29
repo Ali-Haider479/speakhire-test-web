@@ -97,7 +97,7 @@ const Donate = async () => {
               }
               width={380} 
               height={120}
-              alt={item.alternate_text}
+              alt={item.alternate_text||"contributorsSection Logo"}
               style={{
                 maxWidth: "100%",
                 height: "auto", 

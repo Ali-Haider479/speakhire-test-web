@@ -44,7 +44,7 @@ const footerSections: FooterSection[] = [
   {
     title: "Get involved",
     links: [
-      { label: "Partners", href: "/partners" },
+      { label: "Partners", href: "/partner" },
       { label: "Champions", href: "/champions" },
       { label: "Interns", href: "/interns" },
       { label: "Careers", href: "/careers" },
@@ -55,10 +55,10 @@ const footerSections: FooterSection[] = [
     title: "Activities",
     links: [
       { label: "All activities", href: "/activities" },
-      { label: "SPEAKHIRE series", href: "/series" },
-      { label: "First step", href: "/first-step" },
-      { label: "Leadership course", href: "/leadership" },
-      { label: "Foundational year", href: "/foundational-year" },
+      { label: "SPEAKHIRE series", href: "/activities" },
+      { label: "First step", href: "/activities/first-step" },
+      { label: "Leadership course", href: "/activities/leadership-courses" },
+      { label: "Foundational year", href: "/activities/foundational-year" },
     ],
   },
 ];

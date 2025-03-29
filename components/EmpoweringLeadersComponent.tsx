@@ -42,23 +42,22 @@ export default function EmpoweringLeadersComponent({
   return (
     <Box
       sx={{
-        width: "80vw",
+        width: {xs:"90vw",md:"80vw"},
         backgroundColor: "#F5F8FA", // Light blue background
         borderRadius: "30px",
         p: { xs: 3, md: 6 },
-        my: 10,
+        my: {xs:5,md:10},
         mx: "auto",
       }}
     >
       {/* Main Title Section */}
       <Typography
-        variant="h3"
-        component="h2"
+        variant="h2"
         sx={{
           fontWeight: 400,
           color: "#333",
           mb: 1,
-          fontSize: { xs: "26px", sm: "32px", md: "40px" },
+          fontSize: { xs: "24px", sm: "32px", md: "40px" },
           lineHeight: 1.2,
         }}
       >

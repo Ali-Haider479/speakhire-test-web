@@ -257,7 +257,7 @@ const Interns = async () => {
                     data.hero_section?.cover_image?.source?.url
                   : null
               }
-              alt={data.hero_section?.cover_image.alternate_texts}
+              alt={data.hero_section?.cover_image.alternate_texts||"intern cover image"}
               fill
               style={{ objectFit: "cover" }}
             />

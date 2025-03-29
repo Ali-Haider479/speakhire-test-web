@@ -35,7 +35,7 @@ export default function BecomePartnerComponent({
   return (
     <Box
       sx={{
-        width: "75vw", // Adjusted for better scaling
+        width: "80vw", // Adjusted for better scaling
         height: { xs: "auto", md: "586px" }, // Flexible height for smaller screens
         borderRadius: "40px",
         backgroundColor: "#E6F2F9",

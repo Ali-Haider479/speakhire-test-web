@@ -23,10 +23,10 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => (
   <Box
     sx={{
       display: "flex",
-      flexDirection: index % 2 == 0 ? "row" : "row-reverse",
+      flexDirection: index % 2 == 0 ? {xs:"column",md:"row"} : {xs:"column",md:"row-reverse"},
       alignItems: "center",
       justifyContent: "center",
-      gap: { xs: 4, md: 10 },
+      gap: { xs: 4, md: 8 },
       marginTop: 5,
       textAlign: "left",
       px: 3,
@@ -56,8 +56,8 @@ const TestimonialCard = ({ testimonial, index }: TestimonialCardProps) => (
         backgroundColor: "#e1f7ff",
         borderRadius: "40px",
         padding: { xs: "24px", md: "40px" },
-        maxWidth: "30vw",
-        height: "506px",
+        maxWidth: {xs:"80vw",md:"35vw"},
+        height: "auto",
       }}
     >
       <Typography
@@ -129,7 +129,7 @@ const HighlightText = (text: string) => {
 };
 
 const TestimonialSection = ({ data, title }: Props) => (
-  <Box sx={{ mt: 5, mb: 10, width: "80vw" }}>
+  <Box sx={{ mt: 5, mb: 10, width: {xs:"95vw",md:"80vw"} }}>
     <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal", ml:3 }}>
       {title || HighlightText(title)}
     </Typography>

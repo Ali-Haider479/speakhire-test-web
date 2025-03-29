@@ -90,7 +90,7 @@ export default function LeadershipCurriculum({data}:LeadershipCurriculumProps) {
     >
       <Box
         sx={{
-          width:"80vw",
+          width:{xs:"90vw",md:"80vw"},
           margin: '0 auto',
           padding: '0 24px',
         }}
