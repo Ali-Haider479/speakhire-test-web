@@ -1,7 +1,10 @@
+// layout.tsx
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Comfortaa, Quicksand } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ClientThemeProvider from "@/components/ClientThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,6 +13,16 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const comfortaa = Comfortaa({
+  weight: "400", // adjust weight as needed
+  subsets: ["latin"],
+});
+
+const quicksand = Quicksand({
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -25,11 +38,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${comfortaa.className} ${quicksand.className} antialiased`}
+        style={{
+          minHeight: "100vh",
+          overflowX: "hidden",
+          margin: 0,
+          padding: 0,
+          boxSizing: "border-box", // Ensures better layout consistency
+        }}
       >
-        <Navbar />
-        <main>{children}</main>
+        <ClientThemeProvider>
+          <Navbar />
+          <main
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "100%", // Ensures content adapts to screen size
+              padding: "0", // Adds spacing for better readability on mobile
+            }}
+          >
+            {children}
+          </main>
+          <Footer />
+        </ClientThemeProvider>
       </body>
     </html>
   );
