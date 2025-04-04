@@ -2,82 +2,111 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 
-import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined";
+interface FY_InternshipProgramProps {
+  data: {
+    title: string;
+    description: string;
+    cover_image: any;
+  };
+}
 
-const FY_InternshipProgram = () => {
+const FY_InternshipProgram = ({ data }: FY_InternshipProgramProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstPart = words.slice(0, 2).join(" ");
+      const lastPart = words.slice(4).join(" ");
+      const middlePart = words.slice(2, 4).join(" ");
+
+      return (
+        <>
+          {firstPart}
+          <span style={{ color: "#0F99C3" }}> {middlePart} </span>
+          {lastPart}
+        </>
+      );
+    } else {
+      return "";
+    }
+  };
   return (
     <Box
       sx={{
-        width: "80vw", // 80% of the screen width
-        height: "50vh", // Set a height for the box
-        // borderRadius: "40px", // Border radius
-        margin: "auto", // Centers the box horizontally
-        display: "flex", // To align child boxes in a row
-        justifyContent: "space-between", // Space between the children
-        alignItems: "center", // Center items vertically
-        my: 10, // Vertical margin
-        // marginTop:-5,
-        borderTopLeftRadius:"40px",
-        borderTopRightRadius:"40px"
+        width: {xs:"90vw",md:"80vw"},
+        height: { xs: "auto", md: "50vh" }, // Dynamic height for responsiveness
+        margin: "auto",
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" }, // Column layout for smaller screens
+        justifyContent: "space-between",
+        alignItems: "center",
+        my: {xs:3,md:10},
+        borderTopLeftRadius: "40px",
+        borderTopRightRadius: "40px",
+        gap: {xs:2,md:4}, // Adds spacing between content in column view
       }}
     >
-      {/* First child box - takes 45% of the width */}
-
+      {/* First child box - text content */}
       <Box
         sx={{
-          width: "50%", // Width adjusted
-          borderRadius: "20px", // Rounded corners to match the image
-          paddingY: 5, // Add padding for spacing
-          paddingX: 4,
+          width: { xs: "100%", md: "45%" },
+          paddingY: {xs:2,md:4},
+          paddingX: {xs:1.5,md:3},
           display: "flex",
-          flexDirection: "column", // Stack the elements vertically
+          flexDirection: "column",
           justifyContent: "flex-end",
           alignItems: "flex-start",
-          height: "100%", // Ensures the box stretches to full height
         }}
       >
         <Typography
-          variant="h3"
+          variant="h4"
           sx={{
             fontWeight: "bold",
             marginBottom: 1,
-            width: "576px",
+            fontSize: { xs: "1.8rem", sm: "2rem", md: "2.5rem" },
           }}
         >
-          Building a{" "}
-          <span style={{ color: "#0F99C3" }}>brighter tomorrow </span>
-          with Foundational Year Internship program
+          {HighlightText(data.title)}
         </Typography>
         <Typography
           variant="body1"
           sx={{
+            mt: 5,
             marginBottom: 2,
-            fontSize: 20,
+            fontSize: { xs: "1rem", sm: "1.2rem", md: "1.25rem" },
           }}
         >
-          We bring together community resources, a network of professionals to
-          facilitate and empower individuals from immigrant families.
+          {data.description}
         </Typography>
       </Box>
 
-      {/* Second child box - takes 55% of the width */}
-      <Box sx={{ width: "50%", position: "relative", height: "100%" }}>
+      {/* Second child box - image content */}
+      <Box
+        sx={{
+          width: { xs: "100%", md: "60%" },
+          position: "relative",
+          height: { xs: "300px", md: "100%" },
+        }}
+      >
         <Image
-          src="/internship.png" // Replace with your actual image source
+          src={
+            data?.cover_image?.source?.url
+              ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                data?.cover_image?.source?.url
+              : null
+          }
           alt="partner-image"
-          layout="fill" // Make the image fill the parent container
-          objectFit="cover" // Ensure the image covers the entire area
-          style={{ borderRadius: "40px" }}
+          fill
+          style={{ objectFit: "cover", borderRadius: "40px" }}
         />
         <Image
           src="/awardWinner.svg"
-          alt="partner-image"
-          width={100}
-          height={100}
+          alt="award-winner"
+          width={80} // Reduced size for better responsiveness
+          height={80}
           style={{
             position: "absolute",
-            bottom: "15px", // Adjust as needed
-            right: "25px", // Adjust as needed
+            bottom: "15px",
+            right: "15px",
           }}
         />
       </Box>

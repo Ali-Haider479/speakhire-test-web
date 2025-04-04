@@ -8,6 +8,10 @@ import Image from "next/image";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
+type Props = {
+  testimonials: any[];
+};
+
 // Sample data for partner testimonials
 const testimonials = [
   {
@@ -89,11 +93,11 @@ const CustomButtonGroup = ({
   </Box>
 );
 
-export default function PartnersCarousel() {
+export default function PartnersCarousel({ testimonials }: Props) {
   return (
     <Box
       sx={{
-        padding: "40px 0",
+        padding: { xs: "20px 20px", md: "40px 0" },
         backgroundColor: "#F2FAFD",
         display: "flex",
         justifyContent: "center",
@@ -111,7 +115,7 @@ export default function PartnersCarousel() {
           arrows={false} // Hide default arrows
           renderButtonGroupOutside
         >
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial: any, index: number) => (
             <Box
               key={index}
               sx={{
@@ -121,18 +125,23 @@ export default function PartnersCarousel() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-                width: "80%",
-                height: "520px",
+                width: {xs:"95%",md:"80%"},
+                minHeight: "450px",
                 margin: "0 auto",
               }}
             >
-              <Image
-                src={testimonial.logo}
-                alt={testimonial.name}
-                width={80}
-                height={80}
-                style={{ marginBottom: "20px" }}
-              />
+              <Box sx={{ height: "100px" }}>
+                <Image
+                  src={
+                    process.env.NEXT_PUBLIC_STRAPI_URL +
+                    testimonial.instituteLogo.source.url
+                  }
+                  alt={testimonial.instituteLogo.alternate_text}
+                  width={80}
+                  height={80}
+                  style={{ marginBottom: "20px" }}
+                />
+              </Box>
               <Typography
                 variant="h6"
                 sx={{
@@ -141,15 +150,15 @@ export default function PartnersCarousel() {
                   marginBottom: "15px",
                 }}
               >
-                Exceptional performance
+                {testimonial.title}
               </Typography>
               <Typography
                 variant="body1"
                 sx={{
                   textAlign: "left",
                   marginBottom: "15px",
-                  fontSize: 15,
-                  height: "150px",
+                  fontSize: { xs: 14, md: 16 },
+                  minHeight: {xs:"250px",md:"150px"},
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   display: "-webkit-box",
@@ -157,8 +166,9 @@ export default function PartnersCarousel() {
                   WebkitBoxOrient: "vertical",
                 }}
               >
-                {testimonial.testimonial}
+                {testimonial.description}
               </Typography>
+
               <Box sx={{ borderLeft: "1px solid #0D5C75", mt: 2 }}>
                 <Typography
                   variant="body2"
@@ -167,10 +177,10 @@ export default function PartnersCarousel() {
                     color: "#0C111D",
                     textAlign: "left",
                     paddingLeft: 1,
-                    fontSize: 20,
+                    fontSize: { xs: 16, md: 20 },
                   }}
                 >
-                  {testimonial.title}
+                  {testimonial.designation}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -178,10 +188,10 @@ export default function PartnersCarousel() {
                     color: "#49454F",
                     textAlign: "left",
                     paddingLeft: 1,
-                    fontSize: 15,
+                    fontSize:  { xs: 14, md: 16 },
                   }}
                 >
-                  {testimonial.name}
+                  {testimonial.institute_name}
                 </Typography>
               </Box>
             </Box>

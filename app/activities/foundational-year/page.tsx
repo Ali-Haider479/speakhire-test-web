@@ -8,35 +8,37 @@ import InternNetworkCircleComponent from "@/components/InternNetworkCircleCompon
 import InternshipOutcomesSection from "@/components/InternshipOutcomesSection";
 import TestimonialSection from "@/components/TestimonialSection";
 
-const data = [
-  {
-    Name: "Cathy Whealon",
-    designation: "UX Researcher - SPEAKHIRE Alumni",
-    title: "Finding My Voice, My Skills, and My Future with SPEAKHIRE",
-    note: "“I'm thankful to learn what it takes to achieve future goals and build my confidence to pursue them through SPEAKHIRE. This is my second year, and I've already had so many doors open for me by the successful women I connected with my first year. ”",
-    image: "/cathy'sStory.svg",
-    isImageLeft: false,
-    isTextRightAligned: true,
-  },
-  {
-    Name: "Wade Cooper",
-    designation: "UX Researcher @ Google - Champion",
-    title: "How Mentors Shape Careers and Inspire Success.",
-    note: "“I'm thankful to learn what it takes to achieve future goals and build my confidence to pursue them through SPEAKHIRE. This is my second year, and I've already had so many doors open for me by the successful women I connected with my first year. ”",
-    image: "/wadeStory.svg",
-    isImageLeft: true,
-    isTextRightAligned: false,
-  },
-];
+async function getData() {
+  try {
+    const foundationalYearApiRes = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/foundation-year-page?populate=*`,
+      { next: { revalidate: 60 } }
+    );
 
-const testimonialTitle = (
-  <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal" }}>
-    See how <span style={{ color: "#0F99C3" }}>SPEAKHIRE </span>
-    is changing lives
-  </Typography>
-);
+    if (!foundationalYearApiRes.ok) throw new Error("Failed to fetch data");
 
-const page = () => {
+    const foundationalYearData = await foundationalYearApiRes.json();
+    return { ...foundationalYearData?.data };
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw error;
+  }
+}
+
+const foundationalYearPage = async () => {
+  const foundationalYearPageRes = await getData();
+  const data = foundationalYearPageRes;
+  console.log(data);
+
+  const testimonialsData = data.testimonial_section.testimonials.map(
+    (item: any, index: number) => {
+      return {
+        ...item,
+        isImageLeft: index % 2 === 0 ? true : false,
+      };
+    }
+  );
+
   return (
     <Box
       display="flex"
@@ -46,14 +48,17 @@ const page = () => {
       width="100%"
     >
       <FoundationYearSection />
-      <FY_InternshipProgram />
-      <EconomicMobilitySection />
-      <InternNetworkCircleComponent />
-      <InternshipOutcomesSection />
-      <TestimonialSection data={data} title={testimonialTitle} />
-      <CollaborationsCarousel />
+      <FY_InternshipProgram data={data.internship_program_section} />
+      <EconomicMobilitySection data={data.economic_mobility_section} />
+      <InternNetworkCircleComponent data={data.inter_network_section} />
+      <InternshipOutcomesSection data={data.program_outcomes_section} />
+      <TestimonialSection
+        data={testimonialsData}
+        title={data.testimonial_section.title}
+      />
+      <CollaborationsCarousel data={data.our_mission_section}/>
     </Box>
   );
 };
 
-export default page;
+export default foundationalYearPage;

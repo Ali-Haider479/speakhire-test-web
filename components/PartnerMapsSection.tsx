@@ -2,109 +2,129 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
-const PartnerMapsSection = () => {
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "40px 8vw",
-                backgroundColor: "#ffffff",
-                // width: '80vw'
-            }}
-        >
-            {/* Left Section: US Map */}
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    width: "50%",
-                    height: "400px", // Fixed height for both sections
-                    justifyContent: "center", // Center content vertically
-                }}
-            >
-                <Typography
-                    variant="h6"
-                    sx={{
-                        fontWeight: 600,
-                        marginBottom: "20px",
-                        textAlign: "center",
-                        fontSize: '1.8rem',
-                        color: '#49454F',
-                        width: '50%'
-                    }}
-                >
-                    <span style={{ color: '#08547A' }}>
-                        4 States {' '}
-                    </span>with Partner Schools & Orgs
-                </Typography>
-                <Box
-                    sx={{
-                        width: "100%",
-                        maxWidth: "400px",
-                        height: "auto",
-                        flexGrow: 1, // Allows the image to grow within the fixed height
-                        display: "flex",
-                        alignItems: "center", // Center the image vertically
-                    }}
-                >
-                    <Image
-                        src="/usa-map.svg"
-                        alt="US Map with Partner States"
-                        width={400}
-                        height={300}
-                        layout="responsive"
-                    />
-                </Box>
-            </Box>
+interface PartnerMapsSectionProps {
+  data: {
+    countries_represented_title: string;
+    countries_represented_map_image: any;
+    presence_map_image: any;
+    presence_title: string;
+  };
+}
 
-            {/* Right Section: World Map */}
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    width: "50%",
-                    height: "400px", // Fixed height for both sections
-                    justifyContent: "center", // Center content vertically
-                }}
-            >
-                <Typography
-                    variant="body1"
-                    sx={{
-                        fontWeight: 600,
-                        marginBottom: "20px",
-                        textAlign: "center",
-                        fontSize: '1.8rem',
-                        color: '#49454F'
-                    }}
-                >
-                    <span style={{ color: '#08547A' }}>70{' '}</span>
-                    countries represented
-                </Typography>
-                <Box
-                    sx={{
-                        width: "100%",
-                        maxWidth: "500px",
-                        height: "auto",
-                        flexGrow: 1, // Allows the image to grow within the fixed height
-                        display: "flex",
-                        alignItems: "center", // Center the image vertically
-                    }}
-                >
-                    <Image
-                        src="/world-map.svg"
-                        alt="World Map with Represented Countries"
-                        width={400}
-                        height={400}
-                        layout="responsive"
-                    />
-                </Box>
-            </Box>
+const commonBoxStyles = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: { xs: "100%", md: "40vw" },
+  height: { xs: "auto", md: "400px" },
+  justifyContent: "center",
+};
+
+const PartnerMapsSection = async ({ data }: PartnerMapsSectionProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWord = words[0];
+      const lastWords = words.slice(1).join(" ");
+
+      return (
+        <>
+          <span style={{ color: "#08547A" }}>{firstWord}</span> {lastWords}
+        </>
+      );
+    } else {
+      return "";
+    }
+  };
+  const presenceMapUrl =
+    data?.presence_map_image?.source?.url || "/images/fallback-presence.png";
+  const countriesMapUrl =
+    data?.countries_represented_map_image?.source?.url ||
+    "/images/fallback-countries.png";
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "40px 8vw",
+        backgroundColor: "#ffffff",
+        flexDirection: { xs: "column", md: "row" },
+        height: "auto",
+        mt: {xs:1,md:8},
+      }}
+    >
+      {/* Left Section: US Map */}
+      <Box sx={commonBoxStyles}>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 600,
+            marginBottom: "20px",
+            textAlign: "center",
+            fontSize: { xs: "1.5rem", md: "1.8rem" },
+            color: "#49454F",
+            width: { xs: "80%", md: "50%" },
+          }}
+        >
+          {HighlightText(data.presence_title)}
+        </Typography>
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: { xs: "400px", md: "650px" },
+            height: "auto",
+            flexGrow: 1,
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${presenceMapUrl}`}
+            alt="US Map with Partner States"
+            width={16}
+            height={9}
+            layout="responsive"
+          />
         </Box>
-    );
+      </Box>
+
+      {/* Right Section: World Map */}
+      <Box sx={{ ...commonBoxStyles, mt: { xs: 5, md: 0 } }}>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 600,
+            marginBottom: "20px",
+            textAlign: "center",
+            fontSize: { xs: "1.5rem", md: "1.8rem" },
+            color: "#49454F",
+          }}
+        >
+          {HighlightText(data.countries_represented_title)}
+        </Typography>
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: { xs: "500px", md: "800px" },
+            height: "auto",
+            flexGrow: 1,
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${countriesMapUrl}`}
+            alt="World Map with Represented Countries"
+            width={16}
+            height={9}
+            layout="responsive"
+          />
+        </Box>
+      </Box>
+    </Box>
+  );
 };
 
 export default PartnerMapsSection;

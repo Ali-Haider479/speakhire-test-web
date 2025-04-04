@@ -12,88 +12,70 @@ import {
 import React from "react";
 import Image from "next/image";
 
-
-const activities = [
-  {
-    title: "Speakhire Series",
-    description:
-      "Become a speaker and share your story from school to career through our SPEAKHIRE SERIES, 1 hour webinars to our general audience...",
-  },
-  {
-    title: "Skill Leaders",
-    description:
-      "SPEAKHIRE Seminars, also known as SPEAKHIRE Skills Seminars, are 45-minute to 1-hour sessions led by one of our Champions...",
-  },
-  {
-    title: "Foundational Year",
-    description:
-      "SPEAKHIRE’s award-winning Foundational Year supports, prepares, and empowers all kinds looking for career counseling...",
-  },
-  {
-    title: "Exploratory Year",
-    description:
-      "The Exploratory Years are for individuals who have graduated from the Foundational Year and have proven their commitment to...",
-  },
-  {
-    title: "Pathways Days",
-    description:
-      "Have you ever wondered how others achieved career success? Pathways Days are career-focused events designed to explore different career paths...",
-  },
-];
-
-const OtherWaysData = [
+const OtherWaysIcons = [
   {
     icon: "/donateIcon.svg",
-    title: "Donate",
-    description:
-      "Your donation empowers immigrants by providing skills and career opportunities through SPEAKHIRE, helping them build brighter futures. Make an impact today.",
-    buttonText: "Donate Now",
   },
   {
     icon: "/companyMatch.svg",
-    title: "Company Matching",
-    description:
-      "Employee match programs encourage giving by rewarding staff donations, offering an easy way to double your impact. It's free money you can use to support your community.",
-    buttonText: "Match Now",
   },
   {
     icon: "/sponsorIcon.svg",
-    title: "Sponsor",
-    description:
-      "By sponsoring SPEAKHIRE, you help provide immigrants with the tools and opportunities they need to succeed. Your support creates pathways for education, mentorship, and career growth, empowering individuals to build better futures. Join us in making a meaningful difference today.",
-    buttonText: "Sponsor Now",
   },
 ];
 
-const data = [
-  {
-    Name: "Wade Cooper",
-    designation: "UX Researcher @ Google - Champion",
-    title: "How Mentors Shape Careers and Inspire Success.",
-    note: "“I'm thankful to learn what it takes to achieve future goals and build my confidence to pursue them through SPEAKHIRE. This is my second year, and I've already had so many doors open for me by the successful women I connected with my first year. ”",
-  },
-];
+async function getData() {
+  try {
+    const ChampionApiRes = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/champions-page?populate=*`,
+      { next: { revalidate: 60 } }
+    );
 
-const ChampionsSuccessStories = [
-  {
-    name: "Cathy Whealon",
-    story:
-      "This is my second year in SPEAKHIRE's Foundational Year, and I'm excited to work with more career professionals in business who can help me choose the right business career pathway for my future. As a SPEAKHIRE Intern, I gained valuable skills and information my first year and know this year I'll be able to continue to work on skills that I can apply at a future job and gain more information about colleges and careers that are right for me.",
-    designation: "UX Researcher",
-    companyLogo: "/googleLogo2.svg",
-  },
-  {
-    name: "Sharon Shi",
-    story:
-      "This is my second year in SPEAKHIRE's Foundational Year, and I'm excited to work with more career professionals in business who can help me choose the right business career pathway for my future. As a SPEAKHIRE Intern, I gained valuable skills and information my first year and know this year I'll be able to continue to work on skills that I can apply at a future job and gain more information about colleges and careers that are right for me.",
-    designation: "Director of Strategy & Operations",
-    companyLogo: "/metaLogo.svg",
-  },
-];
+    if (!ChampionApiRes.ok) throw new Error("Failed to fetch data");
 
-const ChampionPage = () => {
+    const ChampionApiData = await ChampionApiRes.json();
+    return { ...ChampionApiData?.data };
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw error;
+  }
+}
+
+const ChampionPage = async () => {
+  const ChampionPageRes = await getData();
+  const data = ChampionPageRes;
+  console.log(data);
+  const TextHighlighter = (title: string, wordsToHighlight: string) => {
+    const titleParts = title.includes(wordsToHighlight)
+      ? title.split(wordsToHighlight)
+      : [title, ""];
+    return (
+      <>
+        {titleParts[0]}
+        <Typography
+          component="span"
+          sx={{
+            color: "#00a6d9",
+            fontWeight: 400,
+            fontSize: "inherit",
+          }}
+        >
+          {wordsToHighlight}
+        </Typography>
+        {titleParts[1]}
+      </>
+    );
+  };
+  const groupedLogos = data.leading_companies_section.partner_logos.reduce(
+    (acc: any[], curr: any, index: number) => {
+      const rowIndex = Math.floor(index / 5);
+      acc[rowIndex] = acc[rowIndex] || [];
+      acc[rowIndex].push(curr);
+      return acc;
+    },
+    []
+  );
   return (
-   
     <Box
       sx={{
         display: "flex",
@@ -112,41 +94,41 @@ const ChampionPage = () => {
           width: "100vw",
           height: "auto",
           background: "linear-gradient(180deg, #F2FAFD 70%, #ffffff 30%)",
-          position: "relative",
-          overflow: "hidden",
         }}
       >
         <Typography
           variant="h2"
           sx={{
-            fontSize: "3rem",
+            fontSize: {xs:"2rem",md:"3rem"},
             fontWeight: 400,
             marginBottom: "16px",
             lineHeight: "1.2",
             paddingTop: "10vh",
-            width: "45vw",
+            width: {xs:"80vw",md:"45vw"},
           }}
         >
-          Shape the future, become a
+          {/* Shape the future, become a
           <span style={{ color: "#0F99C3" }}> mentor </span>
-          today
+          today */}
+          {TextHighlighter(data.hero_section.title, "mentor")}
         </Typography>
         <Typography
           variant="body1"
           sx={{
-            fontSize: "1.2rem",
+            fontSize: {xs:"1rem",md:"1.2rem"},
             color: "#49454F", // Gray color for the description
             marginBottom: "32px",
             //   maxWidth: '600px',
-            width: "35vw",
+            width: {xs:"80vw",md:"35vw"},
             margin: "0 auto",
             lineHeight: "1.5",
             fontWeight: 500,
           }}
         >
-          Ready to inspire future leaders? With{" "}
-          <span style={{ color: "#0F99C3" }}> two years of experience </span> ,
-          you can become a SPEAKHIRE CPC and make an impact!
+          {TextHighlighter(
+            data.hero_section.description,
+            "two years of experience"
+          )}
         </Typography>
         <Button
           variant="contained"
@@ -162,231 +144,246 @@ const ChampionPage = () => {
         >
           <Typography
             variant="body1"
-            sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
+            sx={{ fontSize: {xs:14,md:16}, fontWeight: "bold", textTransform: "none" }}
           >
-            Become a Champion
+            {data.hero_section.button.inner_text}
           </Typography>
         </Button>
         <Box
           sx={{
             position: "relative",
             zIndex: 1,
-            width: "80vw", // 80% of the viewport width
-            marginLeft: "-2vw", // Add left margin to center it horizontally
+            width: {xs:"90vw",md:"80vw"}, // 80% of the viewport width
             borderRadius: "40px",
             border: "10px solid rgb(195, 206, 211)",
-            overflow: "hidden",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
             backgroundColor: "#ffffff",
-            height: "80vh",
+            height: {xs:'25vh',md:"70vh"},
             marginTop: 5,
           }}
         >
           <CardContent>
             {/* This is where your image will go */}
             <Image
-              src="/championCover.png"
+              src={
+                data?.hero_section?.cover_image?.source?.url
+                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                    data?.hero_section?.cover_image?.source?.url
+                  : null
+              }
               alt="Donate Cause"
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover", borderRadius:30}}
             />
           </CardContent>
         </Box>
       </Box>
+      <Typography variant="h2" sx={{ mt: 10, fontSize:{xs:"2rem",md:"3rem",textAlign:"center"} }}>
+        {TextHighlighter(
+          data.champion_activities_section.title,
+          "Champion activities"
+        )}
+      </Typography>
       <Box
         sx={{
-          backgroundColor: "#F2FAFD",
+          // backgroundColor: "#F2FAFD",
           width: "79vw",
           height: "auto",
-          mt: 15,
+          mt: 5,
           mb: 5,
+          alignItems:"center"
         }}
       >
         <Grid
           container
-          spacing={3}
+          spacing={{xs:1,md:3}}
           sx={{
-            backgroundColor: "#EAF4F8",
+            backgroundColor: "#F2FAFD",
             borderRadius: 5,
-            padding: 4,
+            padding: {xs:2,md:4},
           }}
         >
-          {activities.map((activity, index) => (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              key={index}
-              sx={{
-                borderRight:
-                  index < activities.length - 1 && !(index % 2)
-                    ? "1px solid #ccc "
-                    : "none",
-              }}
-            >
-              <Card
-                elevation={0}
-                sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+          {data.champion_activities_section.contribute_card.map(
+            (activity: { title: string; description: string }, index: any) => (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                key={index}
+                sx={{
+                  borderRight:
+                   { xs:"none",md: index <
+                      data.champion_activities_section.contribute_card.length -
+                        1 && !(index % 2)
+                      ? "1px solid #ccc "
+                      : "none",}
+                }}
               >
-                <CardContent>
-                  <Typography variant="h5" fontWeight="bold">
-                    {activity.title}
+                <Card
+                  elevation={0}
+                  sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+                >
+                  <CardContent>
+                    <Typography variant="h5" fontWeight="bold">
+                      {activity.title}
+                    </Typography>
+                    <Typography variant="body1" mt={1} mb={2}>
+                      {activity.description}
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        borderRadius: 50,
+                        borderColor: "#006397",
+                        color: "#006397",
+                        textTransform: "none",
+                      }}
+                    >
+                      Read More
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {index < 2 && <Divider sx={{ width: {xs:"100%",md:"90%"}, ml: {xs:0,md:3} }} />}
+
+                {index > 1 &&
+                  index !==
+                    data.champion_activities_section.contribute_card.length -
+                      1 && (
+                    <Divider
+                      sx={{
+                        ml: {xs:0,md:index === 3 ? -3 : ""},
+                      }}
+                    />
+                  )}
+              </Grid>
+            )
+          )}
+        </Grid>
+      </Box>
+      <Box sx={{ width: "80vw", textAlign: "center", mt: {xs:5,md:10}, mb: 5 }}>
+        <Typography variant="h2" sx={{fontSize:{xs:"2rem",md:"3rem"}}} >
+          {TextHighlighter(
+            data.other_way_to_impact_section.title,
+            "Other ways"
+          )}
+        </Typography>
+        <Grid container spacing={3} sx={{ mt: 0 }}>
+          {data.other_way_to_impact_section.contribute_card.map(
+            (
+              item: { title: string; description: string; button: any },
+              index: number
+            ) => (
+              <Grid item xs={12} sm={index !== 2 ? 6 : 12} key={index}>
+                <Card
+                  elevation={0}
+                  sx={{
+                    display: "flex", // Ensures flex behavior
+                    flexDirection: "column", // Aligns content vertically
+                    textAlign: "left",
+                    backgroundColor: "#F2FAFD",
+                    p: {xs:4,md:6},
+                    borderRadius: 5,
+                    minHeight: 400,
+                  }}
+                >
+                  <Image
+                    src={OtherWaysIcons[index].icon}
+                    alt={`${item.title} icon`}
+                    height={60}
+                    width={60}
+                    style={{
+                      backgroundColor: "#E6EEF2",
+                      borderRadius: 50,
+                      padding: 18,
+                    }}
+                  />
+                  <Typography variant="h4" sx={{ marginTop: 3 ,fontSize:{xs:"1.25rem",md:"2rem"}}}>
+                    {item.title}
                   </Typography>
-                  <Typography variant="body1" mt={1} mb={2}>
-                    {activity.description}
+                  <Typography variant="body1" style={{ marginTop: 5 }}>
+                    {item.description}
                   </Typography>
+
                   <Button
                     variant="outlined"
                     sx={{
                       borderRadius: 50,
+                      width: 150,
                       borderColor: "#006397",
                       color: "#006397",
+                      mt: "auto",
                       textTransform: "none",
                     }}
                   >
-                    Read More
+                    <Typography variant="body1">
+                      {item?.button?.inner_text}
+                    </Typography>
                   </Button>
-                </CardContent>
-              </Card>
-
-              {index < 2 && <Divider sx={{ width: "90%", ml: 3 }} />}
-
-              {index > 1 && index !== activities.length - 1 && (
-                <Divider
-                  sx={{
-                    ml: index === 3 ? -3 : "",
-                  }}
-                />
-              )}
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-      <Box sx={{ width: "80vw", textAlign: "center", mt: 10, mb: 5 }}>
-        <Typography variant="h3">
-          <span style={{ color: "#0F99C3" }}>Other ways </span> to make an
-          impact
-        </Typography>
-        <Grid container spacing={3} sx={{ mt: 5 }}>
-          {OtherWaysData.map((item: any, index: number) => (
-            <Grid item xs={12} sm={index !== 2 ? 6 : 12} key={index}>
-              <Card
-                elevation={0}
-                sx={{
-                  display: "flex", // Ensures flex behavior
-                  flexDirection: "column", // Aligns content vertically
-                  textAlign: "left",
-                  backgroundColor: "#F2FAFD",
-                  p: 5,
-                  borderRadius: 5,
-                  minHeight: 400,
-                }}
-              >
-                <Image
-                  src={item.icon}
-                  alt=""
-                  height={60}
-                  width={60}
-                  style={{
-                    backgroundColor: "#E6EEF2",
-                    borderRadius: 50,
-                    padding: 18,
-                  }}
-                />
-                <Typography variant="h4" style={{ marginTop: 30 }}>
-                  {item.title}
-                </Typography>
-                <Typography variant="body1" style={{ marginTop: 5 }}>
-                  {item.description}
-                </Typography>
-
-                <Button
-                  variant="outlined"
-                  sx={{
-                    borderRadius: 50,
-                    width: 150,
-                    borderColor: "#006397",
-                    color: "#006397",
-                    mt: "auto",
-                    textTransform: "none",
-                  }}
-                >
-                  <Typography variant="body1">{item?.buttonText}</Typography>
-                </Button>
-              </Card>
-            </Grid>
-          ))}
+                </Card>
+              </Grid>
+            )
+          )}
         </Grid>
       </Box>
       <Box
         sx={{
           backgroundColor: "#F2FAFD",
-          width: "80vw",
+          width: "100vw",
           textAlign: "center",
           py: "100px",
-          px: "80px",
+          px: "15vw",
           mb: 5,
-          borderRadius: 5,
+          // borderRadius: 5,
         }}
       >
         <Typography variant="h3">
-          Our champions represents{" "}
-          <span style={{ color: "#0F99C3" }}> leading companies</span>
+          {TextHighlighter(
+            data.leading_companies_section.title,
+            "leading companies"
+          )}
         </Typography>
-        <Box sx={{ backgroundColor: "#E9F6FB", borderRadius: 5, mt: 5, py: 5 }}>
-          <Grid2 sx={{ px: 5, py: 3 }}>
-            <Grid2 sx={{ display: "flex", flexDirection: "row", gap: 8 }}>
-              <img src="/leadingCompanies/googleLogo.svg" alt="Google" />
-              <img src="/leadingCompanies/IBM_Logo.svg" alt="IBM" />
-              <img src="/leadingCompanies/cater'sLogo.svg" alt="cater's" />
-              <img
-                src="/leadingCompanies/LorealParisLogo.svg"
-                alt="Loreal Paris"
-              />
-              <img src="/leadingCompanies/VaynerMedia.svg" alt="Vayner Media" />
-            </Grid2>
-            <Grid2
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 8,
-                px: 7,
-                mt: 5,
-              }}
-            >
-              <img src="/leadingCompanies/usAidLogo.svg" alt="USAID" />
-              <img src="/leadingCompanies/nycLogo.svg" alt="NYC DOE" />
-              <img
-                src="/leadingCompanies/waltDisnepLogo.svg"
-                alt="Walt Disnep"
-              />
-              <img
-                src="/leadingCompanies/unitedNationsLogo.svg"
-                alt="United Nations"
-              />
-              <img
-                src="/leadingCompanies/harvardUniversityLogo.svg"
-                alt="Harvard University"
-              />
-              <img src="/leadingCompanies/wesLogo.svg" alt="WES" />
-            </Grid2>
-            <Grid2
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 8,
-                px: 7,
-                mt: 5,
-              }}
-            >
-              <img src="/leadingCompanies/swissReLogo.svg" alt="SwissRe" />
-              <img src="/leadingCompanies/unicefLogo.svg" alt="Unicef" />
-              <img src="/leadingCompanies/E&Y_Logo.svg" alt="E&Y" />
-              <img
-                src="/leadingCompanies/bankOfAmerica.svg"
-                alt="Bank of America"
-              />
-            </Grid2>
+        <Box sx={{ backgroundColor: "#E9F6FB", borderRadius: 10, mt: 5, py: 5 }}>
+          <Grid2 sx={{ px: 3, py: 3 }}>
+            {groupedLogos.map((row: any[], index: number) => (
+              <Grid2
+                key={index}
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 8,
+                  flexWrap: "wrap", // Ensures responsiveness
+                  justifyContent: "center", // Centers content nicely
+                  alignItems:"center",
+                  mt: index === 0 ? 0 : 5, // Adds spacing between rows
+                }}
+              >
+                {row.map((item: any, idx: number) => (
+                  <Box
+                    key={idx}
+                    sx={{
+                      maxWidth: "180px", // Ensures logos are uniform in size
+                      minWidth: "80px", // Helps maintain structure in smaller screens
+                      textAlign: "center", // Centers logos
+                    }}
+                  >
+                    <img
+                      src={
+                        item.source?.url
+                          ? process.env.NEXT_PUBLIC_STRAPI_URL + item.source.url
+                          : ""
+                      }
+                      alt={item.alternate_text || "Company Logo"}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </Box>
+                ))}
+              </Grid2>
+            ))}
           </Grid2>
           <Button
             variant="contained"
@@ -396,160 +393,209 @@ const ChampionPage = () => {
               textTransform: "none",
               fontSize: 16,
               fontWeight: "bold",
+              py:1.2
             }}
           >
-            Become a champion
+            {data.leading_companies_section?.buttons[0].inner_text}
           </Button>
         </Box>
       </Box>
-      <Box sx={{ mt: 5, mb: 5 }}>
-        <Typography variant="h3">What our champions has to say</Typography>
-        <Box sx={{ display: "flex", flexDirection: "row", marginTop: 5 }}>
-          <Box sx={{ marginLeft: 0 }}>
-            <Image src="/wadeStory.svg" alt="" height={506} width={720} />
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: "#e1f7ff",
-              borderRadius: "40px",
-              padding: { xs: "24px", md: "40px" },
-              maxWidth: "32rem",
-              marginX: "auto",
-              textAlign: "left",
-              marginLeft: 4,
-            }}
-          >
-            <Typography
-              variant="h5"
-              sx={{
-                fontWeight: 500,
-                marginBottom: "16px",
-                color: "#111827",
-              }}
-            >
-              {data[0].title}
-            </Typography>
-
-            <Typography
-              variant="body1"
-              sx={{
-                color: "#374151",
-                marginBottom: "24px",
-                lineHeight: "1.25",
-                fontSize: "1.28rem",
-                marginTop: 5,
-              }}
-            >
-              {data[0].note}
-            </Typography>
+      <Box sx={{ mt: 5, mb: 5 , alignItems:"center",textAlign:"center",width:{xs:"90vw",md:"80vw"}}}>
+        <Typography variant="h2" sx={{fontSize:{xs:"2rem",md:"3rem"}}}>What our champions has to say</Typography>
+        {data.champion_testimonial_section.testimonials.map(
+          (item: any, index: number) => (
             <Box
               sx={{
                 display: "flex",
-                flexDirection: "column",
-                padding: "12px 16px",
-                borderLeft: "1px solid #374151", // Left border with a blue shade
-                maxWidth: "400px", // Adjust width if needed
+                flexDirection: {xs:"column",md:index % 2 == 0 ? "row" : "row-reverse"},
                 marginTop: 5,
               }}
             >
-              <Typography
-                variant="h6"
-                sx={{ fontWeight: "bold", color: "#222" }}
+              <Box sx={{ marginLeft: 0 }}>
+                <Image
+                  src={
+                    item.cover_image?.source?.url
+                      ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                        item.cover_image?.source?.url
+                      : null
+                  }
+                  alt={
+                    item.cover_image.alternate_text ||
+                    `TestimonialImage${index}`
+                  }
+                  height={506}
+                  width={720}
+                />
+              </Box>
+              <Box
+                sx={{
+                  display:"flex",
+                  flexDirection:"column",
+                  backgroundColor: "#e1f7ff",
+                  borderRadius: {xs:"20px",md:"40px"},
+                  padding: { xs: "24px", md: "48px" },
+                  maxWidth: "42rem",
+                  marginX: "auto",
+                  textAlign: "left",
+                  marginLeft: {xs:0,md:12},
+                  mt:{xs:2,md:0}
+                }}
               >
-                {data[0].Name}
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#555" }}>
-                {data[0].designation}
-              </Typography>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: 500,
+                    marginBottom: "16px",
+                    color: "#111827",
+                  }}
+                >
+                  {item?.highlight}
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "#374151",
+                    marginBottom: "24px",
+                    lineHeight: "1.25",
+                    fontSize: "1.28rem",
+                    marginTop: 5,
+                  }}
+                >
+                  {item.description}
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: "12px 16px",
+                    borderLeft: "1px solid #374151", // Left border with a blue shade
+                    maxWidth: "400px", // Adjust width if needed
+                    marginTop: "auto",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: "bold", color: "#222" }}
+                  >
+                    {item.name}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "#555" }}>
+                    {`${item.designation} ${
+                      item.employer ? ` @ ${item.employer}` : ""
+                    } - ${item.association}`}
+                  </Typography>
+                </Box>
+              </Box>
             </Box>
-          </Box>
-        </Box>
+          )
+        )}
       </Box>
       <Box
         sx={{
           my: 5,
           textAlign: "left",
-          width: "80vw",
+          width: "100vw",
+          px: '10vw',
           backgroundColor: "#F2FAFD",
         }}
       >
-        <Box sx={{ ml: 5, mt: 5 }}>
-          <Typography variant="h3">
-            Champions’{" "}
-            <span style={{ color: "#0F99C3" }}> success stories</span>
+        <Box sx={{ ml:{ xs:1,md:4}, mt: 5 }}>
+          <Typography variant="h2" sx={{fontSize:{xs:"2rem",md:"3rem"}}}>
+            {TextHighlighter(
+              data.champion_stories_section.title,
+              "success stories"
+            )}
           </Typography>
           <Typography variant="body1">
-            Explore real-life success stories from our champions that
+            {data.champion_stories_section.description}
           </Typography>
         </Box>
         <Grid
           container
           spacing={3}
           sx={{
-            padding: 4,
-            mt: 4,
+            padding: {xs:1,md:4},
+            py:{xs:4},
+            mt: 0,
           }}
         >
-          {ChampionsSuccessStories.map((champion, index) => (
-            <Grid item xs={12} sm={6} key={index}>
-              <Card
-                elevation={0}
-                sx={{
-                  boxShadow: "none",
-                  backgroundColor: "#EAF4F8",
-                  borderRadius: 5,
-                  p: 3,
-                }}
-              >
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Avatar
+          {data.champion_stories_section.champion_story_card.map(
+            (champion: any, index: number) => (
+              <Grid item xs={12} sm={6} key={index}>
+                <Card
+                  elevation={0}
+                  sx={{
+                    boxShadow: "none",
+                    backgroundColor: "#EAF4F8",
+                    borderRadius: 5,
+                    p: 3,
+                  }}
+                >
+                  <CardContent>
+                    <Box
                       sx={{
-                        width: 60,
-                        height: 60,
-                        margin: "0 0 16px",
-                        backgroundColor: "#bbdefb",
-                        transform: "scale(1)",
-                        transition: "transform 0.3s ease-in-out",
-                        alignSelf: "start",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
                       }}
-                    />
-                    <img src={champion.companyLogo} alt="" />
-                  </Box>
-
-                  <Typography variant="body1" mt={1} mb={2}>
-                    {champion.story}
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      padding: "12px 16px",
-                      borderLeft: "1px solid #374151", // Left border with a blue shade
-                      maxWidth: "400px", // Adjust width if needed
-                      marginTop: 5,
-                    }}
-                  >
-                    <Typography
-                      variant="h6"
-                      sx={{ fontWeight: "bold", color: "#222" }}
                     >
-                      {champion.name}
+                      <Avatar
+                        src={
+                          champion?.picture?.source?.url
+                            ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                              champion?.picture?.source?.url
+                            : ""
+                        }
+                        sx={{
+                          width: 60,
+                          height: 60,
+                          margin: "0 0 16px",
+                          backgroundColor: "#bbdefb",
+                          transform: "scale(1)",
+                          transition: "transform 0.3s ease-in-out",
+                          alignSelf: "start",
+                        }}
+                      />
+                      <img
+                        src={
+                          champion?.employer_logo?.source?.url
+                            ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                              champion?.employer_logo?.source?.url
+                            : ""
+                        }
+                        alt={champion.employer_logo.aria_description}
+                      />
+                    </Box>
+
+                    <Typography variant="body1" mt={1} mb={2}>
+                      {champion.message}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: "#555" }}>
-                      {champion.designation}
-                    </Typography>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        padding: "12px 16px",
+                        borderLeft: "1px solid #374151", // Left border with a blue shade
+                        maxWidth: "400px", // Adjust width if needed
+                        marginTop: 5,
+                      }}
+                    >
+                      <Typography
+                        variant="h6"
+                        sx={{ fontWeight: "bold", color: "#222" }}
+                      >
+                        {champion.name}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: "#555" }}>
+                        {champion.designation}
+                      </Typography>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            )
+          )}
         </Grid>
       </Box>
       <Box
@@ -558,28 +604,38 @@ const ChampionPage = () => {
           borderRadius: 10,
           width: "80vw",
           display: "flex",
-          flexDirection: "row",
-          mb:5
+          flexDirection: {xs:"column",md:"row"},
+          my: 5,
         }}
       >
-        <Box sx={{ width: "50vw" }}>
-          <Image src="/becomeChampion.png" alt="Become Champion" width={800} height={200} style={{borderRadius:35}}/>
+        <Box sx={{ width: {md:"50vw"} }}>
+          <Image
+            src={
+              data.become_champion_section?.cover_image?.source?.url
+                ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                  data.become_champion_section?.cover_image?.source?.url
+                : ""
+            }
+            alt="Become Champion"
+            width={800}
+            height={200}
+            style={{ borderRadius: 35 }}
+          />
         </Box>
         <Box
           sx={{
-            width: "35vw",
+            width: {md:"35vw"},
             display: "flex", // Ensures flex behavior
             flexDirection: "column",
-            px:5,
-            py:15
+            px: 5,
+            py: {xs:5,md:15},
           }}
         >
-          <Typography variant="h3" sx={{ color: "white" }}>
-            Are you ready to become champion?
+          <Typography variant="h2" sx={{ color: "white",fontSize:{xs:"2rem",md:"3rem"} }}>
+            {data.become_champion_section.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "white" }}>
-            Mentor and empower the next generation of leaders. Join us today and
-            help shape brighter futures for immigrants.
+          <Typography variant="body1" sx={{ color: "white", paddingBottom:1 }}>
+            {data.become_champion_section.description}
           </Typography>
           <Button
             variant="contained"
@@ -588,14 +644,15 @@ const ChampionPage = () => {
               borderRadius: 20,
               textTransform: "none",
               color: "#08547A",
-              mt: 5,
+              mt: 1,
+              py:1.2
             }}
           >
             <Typography
               variant="body1"
-              sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" ,}}
+              sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
             >
-              Become a Champion
+              {data.become_champion_section.button.inner_text}
             </Typography>
           </Button>
         </Box>

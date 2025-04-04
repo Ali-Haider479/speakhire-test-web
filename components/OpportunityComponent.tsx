@@ -1,38 +1,13 @@
 import { Box, Typography, Grid } from "@mui/material";
 import React from "react";
 
-export default function OpportunityForChangeComponent() {
-  const stats = [
-    {
-      percentage: ">70%",
-      description: "jobs are identified primarily through network connections.",
-    },
-    {
-      percentage: "45%",
-      description:
-        "of those network connections are family connections (immigrant families don't have as strong connections)",
-    },
-    {
-      percentage: ">50%",
-      description:
-        "of all first jobs are received through internships people hold – but, our population of individuals do not hold these internships.",
-    },
-    {
-      percentage: "85%",
-      description: "of internships are identified through network connections",
-    },
-    {
-      percentage: "1:600",
-      description:
-        "is the average school counselor to student ratio reach, especially in high needs schools, when the recommended is 1:250 students applying to and accepted into more target colleges than continuing-gen peers in higher ratio schools",
-    },
-    {
-      percentage: "1:250",
-      description:
-        "counselor to student ratio results in an 18 point increase on each SAT section and lower ratios result in first-gen college going students applying to and accepted into more target colleges than continuing-gen peers in higher ratio schools",
-    },
-  ];
+interface OpportunityForChangeComponentProps{
+  data:{
+    statistics:any[]
+  }
+}
 
+export default function OpportunityForChangeComponent({data}:OpportunityForChangeComponentProps) {
   return (
     <Box
       sx={{
@@ -47,26 +22,28 @@ export default function OpportunityForChangeComponent() {
       <Box
         sx={{
           width: "80vw",
-          padding: "30px",
+          py:5,
+          px:{xs:0,md:2},
           borderRadius: "0px",
           // background: 'linear-gradient(180deg,rgb(255, 255, 255) 0%,#ecf6fb 90%)',
           // my: 5,
         }}
       >
-        <Box sx={{ width: "80vw" }}>
+        <Box sx={{ width: "79vw" }}>
           <Typography
-            variant="h4"
+            variant="h2"
             sx={{
               fontWeight: "bold",
               marginBottom: 4,
               color: "#333333",
+              fontSize:{xs:"2rem",md:"3rem"}
             }}
           >
             Opportunity for Change
           </Typography>
 
           <Grid container spacing={3}>
-            {stats.map((stat, index) => (
+            {data.statistics.map((stat, index) => (
               <Grid item xs={12} md={4} key={index}>
                 <Box
                   sx={{
@@ -86,15 +63,16 @@ export default function OpportunityForChangeComponent() {
                       fontWeight: "bold",
                       color: "#0F99C3",
                       marginBottom: 1,
+                      fontSize:{xs:"1.5rem",md:"2.25rem"}
                     }}
                   >
-                    {stat.percentage}
+                    {stat.numericTitle}
                   </Typography>
                   <Typography
                     variant="body1"
                     sx={{
                       color: "#555555",
-                      fontSize: "0.9rem",
+                      fontSize: "1rem",
                     }}
                   >
                     {stat.description}

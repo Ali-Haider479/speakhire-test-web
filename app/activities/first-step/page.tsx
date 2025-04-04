@@ -1,42 +1,73 @@
-import { Box, Button, styled, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 
-const page = () => {
+async function getData() {
+  try {
+    const firstStepApiRes = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/first-step?populate=*`,
+      { next: { revalidate: 60 } }
+    );
+
+    if (!firstStepApiRes.ok) throw new Error("Failed to fetch data");
+
+    const firstStepData = await firstStepApiRes.json();
+    return { ...firstStepData?.data };
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw error;
+  }
+}
+
+const firstStepPage = async () => {
+  const firstStepPageRes = await getData();
+  const data = firstStepPageRes;
+
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 2).join(" ");
+    const highlightedWord = words[2];
+    const restOfWords = words.slice(3).join(" ");
+
+    return (
+      <>
+        {firstWords}{" "}
+        <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
+        {restOfWords}
+      </>
+    );
+  };
+
   return (
-    <Box sx={{width:"100%"}}>
+    <Box sx={{display:"flex", width: "100vw", flexDirection:"column",alignItems:"center" }}>
+      {/* Banner Section */}
       <Box
         sx={{
-          padding: "100px 20px",
-          backgroundColor: "#F2FAFD", // Light blue background from the image
+          padding: { xs: "60px 15px", md: "100px 20px" },
+          backgroundColor: "#F2FAFD",
           textAlign: "center",
-          width: "100%",
-          height: "353px",
+          height: { xs: "auto", md: "353px" },
+          width:"100vw"
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="body1" component="div">
-            <Box component="span" sx={{ mr: 1 }}>
-              <a href="/" style={{ color: "#0B72B9", textDecoration: "none" }}>
-                Home
-              </a>
-            </Box>
-            /
-            <Box component="span" sx={{ ml: 1, color: "#666" }}>
-              Activities
-            </Box>
-          </Typography>
-        </Box>
+        <Typography variant="body1" component="div">
+          <Box component="span" sx={{ mr: 1 }}>
+            <a href="/" style={{ color: "#0B72B9", textDecoration: "none" }}>
+              Home
+            </a>
+          </Box>
+          /
+          <Box component="span" sx={{ ml: 1, color: "#666" }}>
+            Activities
+          </Box>
+        </Typography>
+
         <Typography
           variant="h2"
           sx={{
-            fontSize: "3rem",
+            fontSize: { xs: "2rem", md: "3rem" },
             fontWeight: 400,
             marginBottom: "16px",
             lineHeight: "1.2",
@@ -46,6 +77,7 @@ const page = () => {
           <span style={{ color: "#0F99C3" }}>First </span>
           Step
         </Typography>
+
         <Button
           variant="outlined"
           color="primary"
@@ -53,20 +85,20 @@ const page = () => {
             color: "#006397",
             borderColor: "#006397",
             borderRadius: 5,
-            padding: "10px 30px",
-            boxShadow: "none !important", // Removes default shadow
-            transition: "all 0.3s ease-in-out", // Smooth hover effect
+            padding: { xs: "8px 20px", md: "10px 30px" },
             "&:hover": {
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2) !important", // Adds shadow on hover
-              backgroundColor: "#064067 !important", // Slightly darker blue on hover,
+              backgroundColor: "#064067 !important",
               color: "white !important",
-              "& img": {
-                filter: "brightness(0) invert(1)",  // Turns icon to pure white
-              },
             },
           }}
           endIcon={
-            <Image src="/link.svg" alt="Link Icon" width={20} height={20} style={{ transition: "filter 0.3s ease" }}/>
+            <Image
+              src="/link.svg"
+              alt="Link Icon"
+              width={20}
+              height={20}
+              style={{ transition: "filter 0.3s ease" }}
+            />
           }
         >
           <Typography
@@ -78,36 +110,38 @@ const page = () => {
         </Button>
       </Box>
 
+      {/* Content Section */}
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: { xs: "column", md: "row" },
           justifyContent: "center",
           alignItems: "center",
-          padding: "80px",
-          width: "100%",
+          padding: { xs: "40px 10px", md: "80px" },
+          gap: { xs: 4, md: 10 },
+          width:{xs:"90vw",md:"100vw"}
         }}
       >
         <Box
           sx={{
             backgroundColor: "#e1f7ff",
-            borderRadius: "40px",
-            padding: { xs: "24px", md: "40px" },
-            maxWidth: "32rem",
+            borderRadius: {xs:"24px",md:"40px"},
+            padding: { xs: "30px", md: "40px" },
+            maxWidth: {xs:"100%",md:"32rem"},
             textAlign: "left",
-            height: 506,
+            height: { xs: "auto", md: 506 },
           }}
         >
           <Typography
-            variant="h3"
+            variant="h2"
             sx={{
               fontWeight: 500,
               marginBottom: "16px",
               color: "#111827",
+              fontSize: { xs: "2rem", md: "3rem" },
             }}
           >
-            Navigating Your <span style={{ color: "#0F99C3" }}>Future </span>:
-            Foundational Year Guidance
+            {HighlightText(data.title)}
           </Typography>
 
           <Typography
@@ -115,34 +149,35 @@ const page = () => {
             sx={{
               color: "#374151",
               marginBottom: "24px",
-              lineHeight: "1.25",
-              fontSize: "1.28rem",
-              marginTop: 5,
+              lineHeight: "1.5",
+              fontSize: { xs: "1rem", md: "1.28rem" },
+              marginTop: 1,
             }}
           >
-            4 sessions to support students who are looking to participate in the
-            Foundational Year and ensure their success when meeting with Career
-            Pathways Champions
+            {data.description}
           </Typography>
+
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Image src="/checkBadge.svg" alt="" width={24} height={24} />
-            <Typography variant="body2">
-              Sessions include: virtual professionalism, communication best
-              practices, navigating tech tools, accountability
-            </Typography>
+            <Image src="/checkBadge.svg" alt="checkBadge" width={24} height={24} />
+            <Typography variant="body2">{data.highlight}</Typography>
           </Box>
         </Box>
-        <Box sx={{ marginLeft: 10 }}>
-          {/* <Image src={"/firstStep.svg"} alt={""}  /> */}
-          <iframe
+
+        {/* Image Section */}
+        <Box sx={{ width: "100%", maxWidth: { xs: "100%", md: 720 } }}>
+          <Image
             height={506}
             width={720}
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Story"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{borderRadius: '30px'}}
+            alt={data.cover_image.alternate_text||"First Step image"}
+            src={
+              process.env.NEXT_PUBLIC_STRAPI_URL +
+              data.cover_image.source.url
+            }
+            style={{
+              borderRadius: "30px",
+              width: "100%",
+              height: "auto",
+            }}
           />
         </Box>
       </Box>
@@ -150,4 +185,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default firstStepPage;

@@ -2,38 +2,45 @@ import { Box, Button, Card, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 
-const data = [
+const icons = [
   {
     icon: "./joinTeam.svg",
-    title: "Join Our Team",
-    description:
-      "We are always seeking passionate individuals to join our team and help us make a meaningful difference in the lives of others and the community.",
-    buttonText: "Join Now",
   },
   {
     icon: "./companyMatch.svg",
-    title: "Company Matching",
-    description:
-      "Encourage your company to double your impact and amplify change. Add SPEAKHIRE to your corporate donation matching program to help create more opportunities for those in need.",
-    buttonText: "Match Now",
   },
   {
     icon: "./champion.svg",
-    title: "Become a Champion",
-    description:
-      "We understand your busy schedule, which is why we’ve made career counseling easy to access, seamless, and adaptable to your personal needs.",
-    buttonText: "Book Session",
   },
   {
     icon: "./user.svg",
-    title: "Volunteer",
-    description:
-      "Looking to make a difference? We have numerous opportunities where your skills and support can have a lasting impact on our mission and the community we serve.",
-    buttonText: "Became Volunteer",
   },
 ];
 
-const ExploreOtherWaysSection = () => {
+interface ExploreOtherWaysSectionProps {
+  data: {
+    title: string;
+    contribute_card: any[];
+  };
+}
+
+const ExploreOtherWaysSection = ({ data }: ExploreOtherWaysSectionProps) => {
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 1).join(" ");
+    const highlightedWord = words.slice(1,3).join(" ");
+    const restOfWords = words.slice(3).join(" ");
+
+    return (
+      <>
+        {firstWords}{" "}
+        <span style={{ color: "#6AAA19" }}>{highlightedWord}</span>{" "}
+        {restOfWords}
+      </>
+    );
+  };
   return (
     <Box
       sx={{
@@ -45,9 +52,8 @@ const ExploreOtherWaysSection = () => {
         justifyContent: "center",
       }}
     >
-      <Typography variant="h3">
-        Explore <span style={{ color: "#6AAA19" }}>other ways</span> to
-        contribute
+      <Typography variant="h2" sx={{fontSize:{xs:"2rem",md:"3rem", maxWidth:"80vw"}}}>
+        {HighlightText(data.title)}
       </Typography>
       <Box
         sx={{
@@ -55,22 +61,24 @@ const ExploreOtherWaysSection = () => {
           gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, // 1-column on small screens, 2-columns on larger
           gap: 3, // Spacing between cards
           p: 3, // Padding for the whole section
-          width: "80vw",
+          width: {xs:"90vw",md:"80vw"},
+          key: "contribute_card",
         }}
       >
-        {data.map((item: any, index: number) => (
+        {data.contribute_card.map((item: any, index: number) => (
           <Card
             key={index}
             sx={{
               backgroundColor: "#F2FAFD",
               borderRadius: 5,
-              p: 4,
+              p: 6,
               height: "100%", // Ensures uniform height for all cards
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
               textAlign: "left",
             }}
+            elevation={0}
           >
             {/* Icon at the top */}
             <Box
@@ -83,10 +91,11 @@ const ExploreOtherWaysSection = () => {
                 backgroundColor: "white",
                 borderRadius: "50%",
                 mb: 2, // Space below the icon
+                key: index,
               }}
             >
               <Image
-                src={item.icon}
+                src={icons[index].icon}
                 alt={item.title}
                 width={60}
                 height={60}
@@ -117,7 +126,7 @@ const ExploreOtherWaysSection = () => {
                 textTransform: "none",
               }}
             >
-              {item.buttonText}
+              {item.button.inner_text}
             </Button>
           </Card>
         ))}

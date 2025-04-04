@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { 
-  Box, 
-  Container, 
-  Typography, 
-  Card, 
-  CardContent, 
-  CardMedia, 
-  Button, 
-  Grid 
-} from '@mui/material';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import Image from 'next/image';
+import React from "react";
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+  Grid,
+} from "@mui/material";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import Image from "next/image";
 
 // Speaker data type
 interface Speaker {
@@ -32,137 +32,166 @@ const speakers: Speaker[] = [
     name: "CAROLINA",
     lastName: "JANNICELLI",
     title: "Leader | Entrepreneur",
-    description: "Carolina shares how she found her voice and made sure to use it in order to find her place as a leader in an industry dominated by men.",
+    description:
+      "Carolina shares how she found her voice and made sure to use it in order to find her place as a leader in an industry dominated by men.",
     image: "/stock1.jpg",
-    youtubeLink: "https://www.youtube.com/watch?v=example1"
+    youtubeLink: "https://www.youtube.com/watch?v=example1",
   },
   {
     id: 2,
     name: "DR. EDMUND",
     lastName: "ADJAPONG",
     title: "Leader | Entrepreneur",
-    description: "Dr. Edmund Adjapong, a native of the Bronx, NY, is an assistant professor in the Education Studies Department at Seton Hall University.",
+    description:
+      "Dr. Edmund Adjapong, a native of the Bronx, NY, is an assistant professor in the Education Studies Department at Seton Hall University.",
     image: "/stock2.jpg",
-    youtubeLink: "https://www.youtube.com/watch?v=example2"
+    youtubeLink: "https://www.youtube.com/watch?v=example2",
   },
   {
     id: 3,
     name: "KIM",
     lastName: "LE",
     title: "Leader | Entrepreneur",
-    description: "Kim escaped Vietnam as a refugee to becoming a successful entrepreneur, proving the American Dream is possible!",
+    description:
+      "Kim escaped Vietnam as a refugee to becoming a successful entrepreneur, proving the American Dream is possible!",
     image: "/stock1.jpg",
-    youtubeLink: "https://www.youtube.com/watch?v=example3"
-  }
+    youtubeLink: "https://www.youtube.com/watch?v=example3",
+  },
 ];
 
-const SpeakerSeries: React.FC = () => {
+interface SpeakerSeriesProps {
+  data: {
+    title: string;
+    description: string;
+    leader_info_card: any[];
+  };
+}
+
+const SpeakerSeries = ({ data }: SpeakerSeriesProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const lines = text.split(":");
+      const words = lines[0].split(" ");
+      const firstWord = words[0];
+      const secondWord = words[1];
+      const middlePart1 = words.slice(2, 3);
+      const middleWord = words[3];
+      const lastWords = lines[1];
+
+      return (
+        <>
+          <p>
+            {firstWord} <span style={{ color: "#0F99C3" }}>{secondWord}</span>{" "}
+            {middlePart1}
+            <span style={{ color: "#0F99C3" }}> {middleWord}</span>:
+          </p>
+          <p>{lastWords}</p>
+        </>
+      );
+    } else {
+      return "";
+    }
+  };
   return (
-    <Box sx={{ py: 5, width:"80vw" }}>
+    <Box sx={{ py: 5, width: "80vw", mb:5 }}>
       {/* Header Section */}
       <Box sx={{ mb: 5 }}>
-        <Typography 
-          variant="h2" 
-          component="h1" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 400, 
-            fontSize: { xs: '2rem', md: '3rem' }
+        <Typography
+          variant="h3"
+          gutterBottom
+          sx={{
+            fontWeight: 400,
           }}
         >
-          <Box component="span" sx={{ color: '#000' }}>Global</Box>{' '}
-          <Box component="span" sx={{ color: '#005776' }}>Leaders</Box>
-          <Box component="span" sx={{ color: '#000' }}>,</Box>{' '}
-          <Box component="span" sx={{ color: '#000' }}>Local</Box>{' '}
-          <Box component="span" sx={{ color: '#005776' }}>Heroes</Box>
-          <Box component="span" sx={{ color: '#000' }}>:</Box>
+          {HighlightText(data.title)}
         </Typography>
-        <Typography 
-          variant="h3" 
-          component="h2" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 400, 
-            fontSize: { xs: '1.75rem', md: '2.5rem' }
-          }}
+        <Typography
+          variant="body1"
+          sx={{ fontSize: "1.1rem", maxWidth: "80vw", lineHeight: 1.6 }}
         >
-          A Year of Inspiration
-        </Typography>
-        <Typography variant="body1" sx={{ fontSize: '1.1rem', maxWidth: '80vw', lineHeight: 1.6 }}>
-          SPEAKHIRE puts up a virtual Speaker Series open to all. Each year from September to June, we present incredible speakers 
-          who have overcome many obstacles, identified opportunities, and persevered to reach career success. Our speakers 
-          predominantly come from immigrant backgrounds and are very close to the cultures of their countries of origin. We feature one 
-          speaker per month through a webinar that is recorded for later viewing purposes for a larger audience. All of our speaker 
-          events can be viewed on our YouTube channel.
+          {data.description}
         </Typography>
       </Box>
 
       {/* Speaker Cards */}
       <Grid container spacing={3}>
-        {speakers.map((speaker) => (
+        {data.leader_info_card.map((speaker) => (
           <Grid item xs={12} md={4} key={speaker.id}>
-            <Card 
-              sx={{ 
-                height: '100%', 
-                display: 'flex', 
-                flexDirection: 'column',
+            <Card
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
                 borderRadius: 5,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                overflow: 'visible',
-                bgcolor: '#f5f9fc'
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                overflow: "visible",
+                bgcolor: "#f5f9fc",
               }}
+              elevation={0}
             >
               <CardMedia
                 component="img"
                 height="300"
-                image={speaker.image}
-                alt={`${speaker.name} ${speaker.lastName}`}
-                sx={{ objectFit: 'cover', borderTopRightRadius: 15, borderTopLeftRadius: 15}}
+                image={
+                  speaker?.picture?.source?.url
+                    ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                      speaker?.picture?.source?.url
+                    : ""
+                }
+                alt={`${speaker.name}`}
+                sx={{
+                  objectFit: "cover",
+                  borderTopRightRadius: 15,
+                  borderTopLeftRadius: 15,
+                }}
               />
-              <CardContent sx={{ flexGrow: 1, px: 3, py: 3 }}>
-                <Typography 
-                  gutterBottom 
-                  variant="h5" 
-                  component="div" 
-                  sx={{ fontWeight: 400, fontSize: '1.4rem', mb: 0.5 }}
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  flexGrow: 1,
+                  px: 3,
+                  py: 3,
+                }}
+              >
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{ fontWeight: 400, fontSize: "1.4rem", mb: 0.5 }}
                 >
-                  <Box component="span" sx={{ color: '#000' }}>{speaker.name}</Box>{' '}
-                  <Box component="span" sx={{ color: '#005776' }}>{speaker.lastName}</Box>
+                  {speaker.name}
                 </Typography>
-                <Typography 
-                  variant="subtitle1" 
+                <Typography
+                  variant="body1"
                   color="text.secondary"
-                  sx={{ mb: 2, fontWeight: 400 }}
+                  sx={{ mb: 2, fontWeight: 600 }}
                 >
-                  {speaker.title}
+                  {speaker.role}
                 </Typography>
-                <Typography variant="body1" sx={{ mb: 3, fontSize: '1rem' }}>
+                <Typography variant="body1" sx={{ mb: 3, fontSize: "1rem" }}>
                   {speaker.description}
                 </Typography>
-                <Button 
-                  variant="outlined" 
-                  startIcon={<YouTubeIcon />}
-                  sx={{ 
-                    borderRadius: '20px',
-                    padding: '10px 24px',
-                    textTransform: 'none',
-                    fontWeight: 400,
-                    border: '2px solid #0097cc',
-                    color: '#0097cc',
-                    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                    '&:hover': {
-                      backgroundColor: 'rgba(0, 87, 118, 0.04)',
-                      borderColor: '#005776'
-                    }
-                  }}
-                  href={speaker.youtubeLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Typography variant='body1' sx={{ fontSize: 18, fontWeight: 'normal', textTransform: 'none' }}>
+                <Box sx={{ mt: "auto" }}>
+                  <Button
+                    variant="outlined"
+                    startIcon={<YouTubeIcon />}
+                    sx={{
+                      width: "100%",
+                      borderRadius: "25px",
+                      textTransform: "none",
+                      fontSize: 16,
+                      fontWeight: 400,
+                      border: "1px solid #0097cc",
+                      color: "#0097cc",
+                    }}
+                    href={speaker.youtubeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Watch on YouTube
-                  </Typography>
-                </Button>
+                  </Button>
+                </Box>
               </CardContent>
             </Card>
           </Grid>

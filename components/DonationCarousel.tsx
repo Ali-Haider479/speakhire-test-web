@@ -6,7 +6,6 @@ const images = [
   [
     { src: "/11.jpg", width: "30%" },
     { src: "/12.jpg", width: "70%" },
-    
   ],
   [
     { src: "/13.jpg", width: "70%" },
@@ -14,7 +13,41 @@ const images = [
   ],
 ];
 
-const DonationCarousel = () => {
+interface DonationCarouselProps {
+  data: {
+    title: string;
+    images: any[];
+  };
+}
+
+const DonationCarousel = ({ data }: DonationCarouselProps) => {
+  const groupedImages = data.images.reduce((acc, item, index) => {
+    const rowIndex = Math.floor(index / 2);
+    acc[rowIndex] = acc[rowIndex] || [];
+    acc[rowIndex].push({
+      src: item.source.url,
+      width: index % 3 === 0 ? "70%" : "30%",
+      alt: item.alternate_text,
+    });
+    return acc;
+  }, []);
+
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 5).join(" ");
+    const highlightedWord = words.slice(5, 7).join(" ");
+    const restOfWords = words.slice(7).join(" ");
+
+    return (
+      <>
+        {firstWords} <span style={{ color: "#6AAA19" }}>{highlightedWord}</span>{" "}
+        {restOfWords}
+      </>
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -22,13 +55,11 @@ const DonationCarousel = () => {
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
-        mt: 10,
+        mt: {xs:5,md:10},
       }}
     >
-      <Typography variant="h3" sx={{ color: "#085236", width: "60vw" }}>
-        Your donation creates opportunities and{" "}
-        <span style={{ color: "#6AAA19" }}>changes lives </span>
-        for generations
+      <Typography variant="h2" sx={{ color: "#085236", width: {xs:"80vw",md:"60vw"} ,fontSize:{xs:"2rem",md:"3rem"}}}>
+        {HighlightText(data.title)}
       </Typography>
 
       <Box
@@ -36,17 +67,17 @@ const DonationCarousel = () => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          padding: 3,
-          width: "80vw",
-          mt:4
+          padding: {xs:1,md:3},
+          width: {xs:"90vw",md:"80vw"},
+          mt: {xs:2,md:4},
         }}
       >
-        {images.map((row, rowIndex) => (
+        {groupedImages.map((row: any, rowIndex: number) => (
           <Box
             key={rowIndex}
-            sx={{ display: "flex", justifyContent: "center", gap: 2 }}
+            sx={{ display: "flex", justifyContent: "center", gap: {xs:1,md:2}, }}
           >
-            {row.map((img, index) => (
+            {row.map((img: any, index: number) => (
               <Box
                 key={index}
                 sx={{
@@ -54,14 +85,18 @@ const DonationCarousel = () => {
                   borderRadius: "16px",
                   overflow: "hidden",
                   width: img.width,
-                  height: "40vh",
+                  height: {xs:"35vw",md:"40vh"},
                 }}
               >
                 <Image
-                  src={img.src}
-                  alt="Community"
-                  layout="fill"
-                  objectFit="cover"
+                  src={
+                    img?.src
+                      ? process.env.NEXT_PUBLIC_STRAPI_URL + img?.src
+                      : null
+                  }
+                  alt={img.alt || "Community"}
+                  fill
+                  style={{ objectFit: "cover" }}
                 />
               </Box>
             ))}

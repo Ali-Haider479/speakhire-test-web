@@ -1,83 +1,97 @@
-import React from 'react';
-import {
-    Box,
-    Typography,
-    Button,
-} from '@mui/material';
+import React from "react";
+import { Box, Typography, Button } from "@mui/material";
+import ImageSection from "./ImageSection";
 
-const SupportSection = () => {
+interface HeroSectionProps {
+  data: {
+    title: string;
+    description: string;
+    button: any;
+    cover_image: any;
+  };
+}
 
-    return (
-        <Box
-            sx={{
-                padding: '40px 20px',
-                backgroundColor: '#F2FAFD', // Light blue background from the image
-                textAlign: 'center',
-                width: '100%',
-            }}
+const SupportSection = async ({ data }: HeroSectionProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWord = words[0];
+      const lastWord = words[words.length - 1];
+      const middleWords = words.slice(1, -1).join(" ");
+
+      return (
+        <>
+          <span style={{ color: "#0F99C3" }}>{firstWord}</span> {middleWords}{" "}
+          <span style={{ color: "#08547A" }}>{lastWord}</span>
+        </>
+      );
+    } else {
+      return "";
+    }
+  };
+  return (
+    <Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          padding: "40px 20px",
+          backgroundColor: "#F2FAFD", // Light blue background from the image
+          textAlign: "center",
+          width: "100vw",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{
+            width: {xs:"80vw",md:"60vw"},
+            fontSize: { xs: "2rem", md: "3rem" },
+            fontWeight: 400,
+            marginBottom: "16px",
+            lineHeight: "1.2",
+            paddingTop: {xs:"3vh",md:"10vh"},
+            textAlign:"center"
+          }}
         >
-            <Typography
-                variant="h2"
-                sx={{
-                    fontSize: '3rem',
-                    fontWeight: 400,
-                    marginBottom: '16px',
-                    lineHeight: '1.2',
-                    paddingTop: '10vh'
-                }}
-            >
-                <span style={{ color: '#0F99C3' }}>
-                    Support{' '}
-                </span>
-                us in developing
-            </Typography>
-            <Typography
-                variant="h2"
-                sx={{
-                    fontSize: '3rem',
-                    fontWeight: 400,
-                    marginBottom: '24px',
-                    color: '#1D1B20', // Dark color for "generations of diverse leaders"
-                    lineHeight: '1.2',
-                }}
-            >
-                generations of diverse <span style={{ color: '#08547A' }}>
-                    leaders
-                </span>
-            </Typography>
-            <Typography
-                variant="body1"
-                sx={{
-                    fontSize: '1.2rem',
-                    color: '#49454F', // Gray color for the description
-                    marginBottom: '32px',
-                    //   maxWidth: '600px',
-                    width: '35vw',
-                    margin: '0 auto',
-                    lineHeight: '1.5',
-                    fontWeight: 500
-                }}
-            >
-                Your support helps individuals from immigrant families build the confidence, skills, and networks they need to thrive in the workforce
-            </Typography>
-            <Button
-                variant="contained"
-                sx={{
-                    bgcolor: '#08547A', // Button color
-                    borderRadius: 5,
-                    padding: '10px 30px',
-                    '&:hover': {
-                        bgcolor: '#0A4A5E', // Darker hover effect
-                    },
-                    marginTop: 4
-                }}
-            >
-                <Typography variant='body1' sx={{ fontSize: 16, fontWeight: 'bold', textTransform: 'none' }}>
-                    Make an impact today
-                </Typography>
-            </Button>
-        </Box>
-    );
+          {HighlightText(data?.title)}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            fontSize: "1.2rem",
+            color: "#49454F", // Gray color for the description
+            marginBottom: "32px",
+            //   maxWidth: '600px',
+            width: {xs:"70vw",md:"40vw",},
+            margin: "0 auto",
+            lineHeight: "1.5",
+            fontWeight: 500,
+          }}
+        >
+          {data.description}
+        </Typography>
+        <Button
+          variant="contained"
+          sx={{
+            bgcolor: "#08547A", // Button color
+            borderRadius: 5,
+            padding: "10px 30px",
+            "&:hover": {
+              bgcolor: "#0A4A5E", // Darker hover effect
+            },
+            marginTop: 4,
+            fontSize: 16,
+            fontWeight: "bold",
+            textTransform: "none",
+          }}
+        >
+          {data.button.inner_text}
+        </Button>
+      </Box>
+      <ImageSection imageSrc={data?.cover_image?.source?.url} />
+    </Box>
+  );
 };
 
 export default SupportSection;

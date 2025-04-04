@@ -8,11 +8,11 @@ import {
 import Image from 'next/image';
 
 
-const ImageSection = ({ imageSrc = "/stock1.jpg"}) => {
+const ImageSection = (imageSrc:any) => {
+  const fullImageSrc = imageSrc 
+    ? (process.env.NEXT_PUBLIC_STRAPI_URL+imageSrc.imageSrc)
+    : "/stock1.jpg"; // Fallback image if `imageSrc` is undefined
   // Ensure imageSrc is a valid path
-  const validImageSrc = imageSrc && (imageSrc.startsWith('/') || imageSrc.startsWith('http')) 
-    ? imageSrc 
-    : `/stock1.jpg`;
   const [dimensions, setDimensions] = useState({
     width: 78 * (typeof window !== 'undefined' ? window.innerWidth / 100 : 1248), // Default width for SSR (78vw)
     height: 89 * (typeof window !== 'undefined' ? window.innerHeight / 100 : 801), // Default height for SSR (89vh)
@@ -55,7 +55,7 @@ const ImageSection = ({ imageSrc = "/stock1.jpg"}) => {
       <Box 
         sx={{
           width: '80vw', // Adjust width as needed
-          height: '89vh', // Adjust height as needed
+          maxHeight: '710px', // Adjust height as needed
           backgroundColor: '#08547A1A', // Solid white background for the inner box (fully opaque)
           borderRadius: '60px', // Rounded corners for the inner box
           overflow: 'hidden', // Ensures the image stays within rounded corners
@@ -68,7 +68,7 @@ const ImageSection = ({ imageSrc = "/stock1.jpg"}) => {
         }}
       >
         <Image
-          src="/home/Dayra.jpg" // Replace with the actual path to your image
+          src={fullImageSrc} // Replace with the actual path to your image
           alt="Group discussion"
           width={dimensions.width} // Use dynamic width from state
           height={dimensions.height} // Use dynamic height from state

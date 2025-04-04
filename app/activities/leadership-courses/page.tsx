@@ -7,30 +7,40 @@ import ActivitiesHeader from "@/components/ActivitiesHeader";
 import MemberBoard from "@/components/MemberBoardComponent";
 import React from "react";
 
-const page = () => {
-  const facilitators = [
-    {
-      name: "Laon CHapman",
-      title: "Facilitator",
-      imagePath: "/stock1.jpg",
-      description:
-        "When I was younger, I thought I was going to grow up to be a doctor. But, when I got into high school, I realized I was no longer sure of my path since I enjoyed a variety of subjects. Blending my natural talents and interests led to a career in education, addressing inequities and increasing opportunities. My calling is to enable people to learn how to access and activate knowledge, identify opportunities, and develop skills and connections to pursue those opportunities. This is why I started SPEAKHIRE. I discovered my path was to empower others to find theirs.",
-    },
-    {
-      name: "Francesca Gonzalez",
-      title: "Speaker",
-      imagePath: "/stock2.jpg",
-      description:
-        "When I was younger, I thought I was going to grow up to be a doctor. But, when I got into high school, I realized I was no longer sure of my path since I enjoyed a variety of subjects. Blending my natural talents and interests led to a career in education, addressing inequities and increasing opportunities. My calling is to enable people to learn how to access and activate knowledge, identify opportunities, and develop skills and connections to pursue those opportunities. This is why I started SPEAKHIRE. I discovered my path was to empower others to find theirs.",
-    },
-    {
-      name: "Hye-Yung Hickman",
-      title: "Speaker & Mentor",
-      imagePath: "/stock1.jpg",
-      description:
-        "When I was younger, I thought I was going to grow up to be a doctor. But, when I got into high school, I realized I was no longer sure of my path since I enjoyed a variety of subjects. Blending my natural talents and interests led to a career in education, addressing inequities and increasing opportunities. My calling is to enable people to learn how to access and activate knowledge, identify opportunities, and develop skills and connections to pursue those opportunities. This is why I started SPEAKHIRE. I discovered my path was to empower others to find theirs.",
-    },
-  ];
+async function getData() {
+  try {
+    const [leadershipPageResponse, commonItemsResponse] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/leadership-page?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
+        next: { revalidate: 60 },
+      }),
+    ]);
+
+    if (!leadershipPageResponse.ok || !commonItemsResponse.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const [leadershipPageData, commonItemsData] = await Promise.all([
+      leadershipPageResponse.json(),
+      commonItemsResponse.json(),
+    ]);
+
+    return {
+      ...leadershipPageData?.data,
+      ...commonItemsData.data,
+    };
+  } catch (error) {
+    console.error("Data fetching error:", error);
+    throw error;
+  }
+}
+
+const leadershipPage = async() => {
+  const leadershipPageRes = await getData();
+  console.log(leadershipPageRes);
+  const data = leadershipPageRes;
   return (
     <Box sx={{mb:5, width:"100%",alignItems:"center",display:"flex",flexDirection:"column" }}>
       <ActivitiesHeader
@@ -43,23 +53,17 @@ const page = () => {
         }}
         breadcrumbLabel="Activities"
       />
-      <EmpoweringLeadersComponent />
-      <LeadershipCourseCurriculum />
-      <LeadershipCurriculum />
+      <EmpoweringLeadersComponent data={data.dbeia_leadership_program}/>
+      <LeadershipCourseCurriculum data={data.course_curriculum_section}/>
+      <LeadershipCurriculum data={data.leadership_courses_section}/>
       <MemberBoard
-        title={{
-          regularText: "Career",
-          highlightedText: "Pathways",
-          afterHighlightText: "Facilitators",
-          highlightColor: "#00A3D9", // Optional: defaults to #00A3D9 (the blue in your image)
-        }}
-        subtitle="Our facilitators are educators and social workers ready to empower your students."
-        members={facilitators}
-        autoPlayInterval={1000}
+        title={data.career_path_facilitator_section.title}
+        subtitle={data.career_path_facilitator_section.sub_title}
+        members={data.career_path_facilitator_section.team_members}
       />
-      <StudentCarousel />
+      <StudentCarousel data={data.student_stories_section}/>
     </Box>
   );
 };
 
-export default page;
+export default leadershipPage;

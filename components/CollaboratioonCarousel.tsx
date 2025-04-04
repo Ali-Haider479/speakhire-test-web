@@ -27,12 +27,21 @@ const slides = [
   },
 ];
 
-const CollaborationsCarousel = () => {
+interface CollaborationsCarouselProps {
+  data: {
+    title: string;
+    carousel_images: any[];
+  };
+}
+
+const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
   return (
-    <Box sx={{ textAlign: "center", py: 6, px: 2, maxWidth: "1440px", mx: "auto" }}>
+    <Box
+      sx={{ textAlign: "center", py: {xs:1,md:6}, px: 2, maxWidth: {xs:"100vw",md:"80vw"}, mx: "auto" }}
+    >
       {/* Heading */}
-      <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
-        <span style={{ color: "#0096c7" }}>Collaborations</span> that fuel our mission
+      <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4, width:{xs:"95%"} }}>
+        {data.title}
       </Typography>
 
       {/* Carousel */}
@@ -41,13 +50,14 @@ const CollaborationsCarousel = () => {
         pagination={{ clickable: true }}
         spaceBetween={20}
         slidesPerView={1.2}
+        centeredSlides={true}
         breakpoints={{
-          640: { slidesPerView: 1.5 },
-          1024: { slidesPerView: 2.5 },
+          640: { slidesPerView: 1.5, centeredSlides: true },
+          1024: { slidesPerView: 2.5, centeredSlides: true },
         }}
-        style={{ paddingBottom: "30px" }}
+        style={{ paddingBottom: "40px" }}
       >
-        {slides.map((slide, index) => (
+        {data.carousel_images.map((slide, index) => (
           <SwiperSlide key={index}>
             <Box
               sx={{
@@ -58,22 +68,35 @@ const CollaborationsCarousel = () => {
                 aspectRatio: "16/9",
               }}
             >
-              <Image src={slide.img} alt="Slide Image" layout="fill" objectFit="cover" />
+              <Image
+                src={
+                  slide?.cover_image?.source.url
+                    ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                      slide.cover_image.source.url
+                    : null
+                }
+                alt={slide.cover_image.alternate_text}
+                fill
+                style={{ objectFit: "cover" }}
+              />
               <Box
                 sx={{
                   position: "absolute",
                   bottom: 0,
                   left: 0,
-                  width: "100%",
-                  background: "linear-gradient(transparent, rgba(0, 0, 0, 0.8))",
+                  width: "90%",
+                  background:
+                    "linear-gradient(transparent, rgba(0, 0, 0, 0.8))",
                   color: "white",
-                  padding: "16px",
+                  pb: {xs:1.5,md:3},
+                  px: {xs:1.5,md:4},
+                  ml: 0,
                 }}
               >
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", fontSize:{xs:"1.1rem"} }}>
                   {slide.title}
                 </Typography>
-                <Typography variant="body2">{slide.description}</Typography>
+                <Typography variant="body2" sx={{fontSize:"0.7rem"}}>{slide.description}</Typography>
               </Box>
             </Box>
           </SwiperSlide>

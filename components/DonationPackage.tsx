@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -6,52 +7,66 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import React from "react";
+import { title } from "process";
+import React, { useState, useEffect } from "react";
 
 type Packages = {
-  title: string;
-  price: string;
-  descriptionHrs: string;
   description: string;
-  buttonText: string;
+  hours: string;
+  price: string;
+  title: string;
+  type: string;
+  button: any;
 };
 
-const Packages = [
-  {
-    title: "Change trendsetter",
-    price: "$15,000",
-    descriptionHrs: `270 Hours`,
-    description:
-      "Speakhire envisions a future where education empowers immigrants to thrive.",
-    buttonText: "Join as a trendsetter",
-  },
-  {
-    title: "Change Leader",
-    price: "$20,000",
-    descriptionHrs: `405 Hours`,
-    description:
-      "Speakhire envisions a future where education empowers immigrants to thrive.",
-    buttonText: "Lead the change",
-  },
-  {
-    title: "Change Visionary",
-    price: "$30,000",
-    descriptionHrs: "675 Hours",
-    description:
-      "Speakhire envisions a future where education empowers immigrants to thrive.",
-    buttonText: "Join as a visionary",
-  },
-  {
-    title: "Change Agent",
-    price: "$5,000",
-    descriptionHrs: `20 Hours`,
-    description:
-      "Speakhire envisions a future where education empowers immigrants to thrive.",
-    buttonText: "Become a agent",
-  },
-];
+type BetterTomorrowCard = {
+  title: string;
+  description: string;
+  buttons: any[];
+};
 
-const DonationPackage = () => {
+interface DonationPackageProps {
+  data: {
+    title: string;
+    corporate_plan_card: Packages[];
+    better_tomorrow_card: BetterTomorrowCard;
+  };
+}
+
+const DonationPackage = ({ data }: DonationPackageProps) => {
+  const [activeDonorType, setActiveDonorType] = useState("individual"); // Default to "individual"
+  const [filteredPlans, setFilteredPlans] = useState<Packages[]>([]);
+
+  const handleSwitch = (type: React.SetStateAction<string>) => {
+    setActiveDonorType(type);
+    const filteredPlansToShow = data.corporate_plan_card.filter(
+      (item: Packages) => item.type === type + " donor"
+    );
+    setFilteredPlans(filteredPlansToShow);
+  };
+
+  useEffect(() => {
+    const filteredPlansToShow = data.corporate_plan_card.filter(
+      (item: Packages) => item.type === activeDonorType + " donor"
+    );
+    setFilteredPlans(filteredPlansToShow);
+  }, [data.corporate_plan_card]);
+
+  const HighlightText = (text: string) => {
+    if (!text || text.trim().length === 0) return null;
+
+    const words = text.split(" ");
+    const firstWords = words.slice(0, 3).join(" ");
+    const highlightedWord = words.slice(3, 5).join(" ");
+    const restOfWords = words.slice(6).join(" ");
+
+    return (
+      <>
+        {firstWords} <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
+        {restOfWords}
+      </>
+    );
+  };
   return (
     <Box
       sx={{
@@ -60,13 +75,25 @@ const DonationPackage = () => {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
+        px: 2, // Padding for smaller screens
       }}
     >
-      <Box sx={{ width: "60vw", mb: 3, justifyItems: "center" }}>
-        <Typography variant="h3">
-          Empower change with&nbsp;
-          <span style={{ color: "#0F99C3" }}>corporate plans</span>
-          &nbsp;for driving impact
+      {/* Title and Button Section */}
+      <Box
+        sx={{
+          width: { xs: "80vw", md: "60vw" },
+          mb: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{ fontSize: { xs: "1.75rem", md: "3rem" } }}
+        >
+          {HighlightText(data.title)}
         </Typography>
         <Box
           sx={{
@@ -74,47 +101,80 @@ const DonationPackage = () => {
             alignItems: "center",
             backgroundColor: "#F2FAFD",
             borderRadius: "10px",
-            padding: "4px",
+            padding: "0px",
             width: "fit-content",
             mt: 2,
+            overflow: "hidden", // Ensures buttons fit within the rounded container
+            maxWidth: "80vw",
           }}
         >
-          {/* Left Side - Individual Donor */}
-          <Typography sx={{ px: 2, fontWeight: 500, color: "#000" }}>
-            Individual donor
-          </Typography>
-
-          {/* Right Side - Button */}
           <Button
-            variant="contained"
+            aria-pressed={activeDonorType === "individual"}
             sx={{
-              backgroundColor: "#0A4E71",
-              color: "#FFF",
-              borderRadius: "10px",
+              px: 2,
+              fontWeight: 500,
+              color: activeDonorType === "individual" ? "#FFF" : "#000",
               textTransform: "none",
-              px: 3,
-              "&:hover": { backgroundColor: "#083F5A" },
+              borderRadius: "10px 0 0 10px", // Left button has rounded left corners
+              backgroundColor:
+                activeDonorType === "individual" ? "#0A4E71" : "transparent",
+              "&:hover": {
+                backgroundColor:
+                  activeDonorType === "individual" ? "#083F5A" : "#E0F0F5",
+              },
+              minWidth: "120px", // Ensure consistent width
             }}
+            onClick={() => handleSwitch("individual")}
+          >
+            Individual donor
+          </Button>
+
+          <Button
+            aria-pressed={activeDonorType === "corporate"}
+            sx={{
+              px: 3,
+              fontWeight: 500,
+              color: activeDonorType === "corporate" ? "#FFF" : "#000",
+              textTransform: "none",
+              borderRadius: "0 10px 10px 0", // Right button has rounded right corners
+              backgroundColor:
+                activeDonorType === "corporate" ? "#0A4E71" : "transparent",
+              "&:hover": {
+                backgroundColor:
+                  activeDonorType === "corporate" ? "#083F5A" : "#E0F0F5",
+              },
+              minWidth: "180px", // Ensure consistent width
+            }}
+            onClick={() => handleSwitch("corporate")}
           >
             Become a corporate donor
           </Button>
         </Box>
       </Box>
+
+      {/* Corporate Plan Cards */}
       <Box
-        sx={{ display: "flex", flexWrap: "wrap", gap: 2, textAlign: "left" }}
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 2,
+          textAlign: "left",
+          justifyContent: "center",
+        }}
       >
-        {Packages.map((item: Packages, index: number) => (
+        {filteredPlans.map((item: Packages, index: number) => (
           <Card
-            key={index} // Ensure unique keys for React
+            key={index}
             sx={{
               p: 3,
-              width: "16vw",
-              height: "60vh",
+              width: { xs: "80vw", sm: "40vw", md: "18vw" }, // Responsive widths
+              height: "auto",
+              minHeight: "28vw",
               borderRadius: 5,
               backgroundColor: "#F2FAFD",
               display: "flex",
               flexDirection: "column",
-              transition: "background-color 0.2s, color 0.2s", // Smooth hover effect
+              transition: "background-color 0.2s, color 0.2s",
               ":active": {
                 backgroundColor: "#08547A",
                 color: "#FFFFFF",
@@ -134,92 +194,108 @@ const DonationPackage = () => {
                   pt: 2,
                   cursor: "pointer",
                   ":active": { color: "#FFFFFF" },
+                  fontSize: { xs: "1.75rem", md: "2.5rem" },
                 }}
               >
                 {item.price}
               </Typography>
 
-              <Typography variant="body1" sx={{ mt: 2, mb: 2 }}>
+              <Typography
+                variant="body1"
+                sx={{ mt: 2, mb: 2, fontSize: { xs: "0.9rem", md: "1.25rem" } }}
+              >
                 Provide&nbsp;
-                <Typography component="span" sx={{ color: "#0F99C3" }}>
-                  {item.descriptionHrs}
+                <Typography
+                  component="span"
+                  sx={{
+                    color: "#0F99C3",
+                    fontSize: { xs: "0.9rem", md: "1.25rem" },
+                  }}
+                >
+                  {`${item.hours} hours`}
                 </Typography>
                 &nbsp;of career counselling
               </Typography>
-              <Typography variant="body1">{item.description}</Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontSize: { xs: "0.9rem", md: "1.25rem" } }}
+              >
+                {item.description}
+              </Typography>
             </Box>
 
-            {/* Button at the bottom */}
             <Button
               variant="contained"
               fullWidth
               sx={{
                 borderRadius: 10,
                 backgroundColor: "#08547A",
-                transition: "background-color 0.2s, color 0.2s", // Smooth effect
+                transition: "background-color 0.2s, color 0.2s",
                 ":active": { backgroundColor: "#FFFFFF", color: "#08547A" },
                 textTransform: "none",
+                mt: 3,
+                py: { xs: 1, md: 1.6 },
+                fontSize: { xs: 14, md: 16 },
               }}
             >
-              <Typography >{item.buttonText}</Typography>
+              {item?.button?.inner_text}
             </Button>
           </Card>
         ))}
       </Box>
+
+      {/* Better Tomorrow Card */}
       <Box
         sx={{
           backgroundColor: "#F2FAFD",
           borderRadius: 5,
-          width: "67vw",
+          width: { xs: "85vw", md: "75vw" }, // Responsive width
           mt: 5,
           p: 3,
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center", // Ensures vertical alignment
+          flexDirection: { xs: "column", md: "row" }, // Vertical on small screens
+          gap: 3,
         }}
       >
         {/* Left Side - Text */}
-        <Box sx={{ width: "50%", textAlign: "left" }}>
-          <Typography variant="h4">Together for a Better Tomorrow</Typography>
+        <Box sx={{ width: { xs: "100%", md: "50%" }, textAlign: "left" }}>
+          <Typography variant="h4">
+            {data.better_tomorrow_card.title}
+          </Typography>
           <Typography variant="body1" sx={{ mt: 2 }}>
-            Your generosity today can change lives tomorrow. Together, we can
-            reach our goal of developing future leaders.
+            {data.better_tomorrow_card.description}
           </Typography>
         </Box>
 
         {/* Right Side - Buttons */}
         <Box
           sx={{
-            width: "50%",
+            width: { xs: "100%", md: "50%" },
             display: "flex",
-            justifyContent: "flex-end",
-            mt: "auto",
+            flexDirection: "row",
+            gap: 2,
+            mt: { xs: 3, md: "auto" },
           }}
         >
-          <Button
-            variant="outlined"
-            sx={{
-              borderColor: "#08547A",
-              color: "#08547A",
-              borderRadius: 5,
-              textTransform: "none", // Makes it look more natural
-            }}
-          >
-            <Typography variant="body1">Explore Partnership Guide</Typography>
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              ml: 2,
-              backgroundColor: "#08547A",
-              color: "white",
-              borderRadius: 5,
-              textTransform: "none",
-            }}
-          >
-            <Typography variant="body1">Become a Sponsor</Typography>
-          </Button>
+          {data.better_tomorrow_card.buttons.map((btn: any, index: number) => (
+            <Button
+              key={btn.inner_text}
+              variant={index === 1 ? "contained" : "outlined"}
+              sx={{
+                borderColor: "#08547A",
+                color: `${index === 1 ? "white" : "#08547A"}`,
+                backgroundColor: `${index === 1 ? "#08547A" : ""}`,
+                borderRadius: 5,
+                textTransform: "none",
+                fontSize: { xs: 14, md: 16 },
+                alignSelf: "flex-end",
+                ml: `${index === 1 ? "1" : "auto"}`,
+                py: 1,
+              }}
+            >
+              {btn.inner_text}
+            </Button>
+          ))}
         </Box>
       </Box>
     </Box>

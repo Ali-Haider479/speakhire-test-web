@@ -1,103 +1,116 @@
-'use client';
-import { Box, Button, Typography, Card, CardContent } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import Image from 'next/image';
-import { styled } from '@mui/material/styles';
-
-
-// Styled components
-const Container = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  minHeight: '100vh',
-  backgroundColor: 'white'
-})
-
-const DonateCard = styled(Card)(({ theme }) => ({
-  display: 'flex',
-  borderRadius: '24px',
-  overflow: 'hidden',
-  backgroundColor: '#6AB43E',
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-  },
-  height: '65vh',
-  width: '80vw'
-}));
-
-const ContentSection = styled(CardContent)(({ theme }) => ({
-  flex: '0.3',
-  padding: theme.spacing(4),
-  color: 'white',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  gap: theme.spacing(2),
-  borderTopRightRadius: '24px',    // Add this
-  borderBottomRightRadius: '24px', // Add this
-}));
-
-const DonateButton = styled(Button)(({ theme }) => ({
-  backgroundColor: 'white',
-  color: '#6AB43E',
-  padding: theme.spacing(1.5, 3),
-  borderRadius: '50px',
-  textTransform: 'none',
-  fontSize: '1.1rem',
-  fontWeight: 600,
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-  }
-}));
-
-const ImageSection = styled(Box)({
-  flex: '0.7',
-  position: 'relative',
-  minHeight: '400px',
-  overflow: 'hidden',
-  borderRadius: '24px', // Change this to round all corners
-});
-
-const DonateComponent = () => {
-  const handleDonateClick = () => {
-    // Handle donation logic here
-    console.log('Donate button clicked');
+import { Box, Button, Typography, Card, CardContent } from "@mui/material";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import Image from "next/image";
+import CustomButton from "./CustomButton";
+interface DonateComponentProps {
+  data: {
+    title: string;
+    description: string;
+    button: any;
+    cover_image: any;
   };
+}
 
+const DonateComponent = ({ data }: DonateComponentProps) => {
   return (
-    <Container>
-      <DonateCard>
-        <ContentSection>
-          <Typography variant="h3" component="h2" fontWeight="bold" gutterBottom>
-            Donate today to Change a Life Forever
-          </Typography>
-
-          <Typography variant="body1" sx={{ mb: 4 }}>
-            Your support helps individuals from immigrant families build the confidence,
-            skills, and networks they need to thrive in the workforce. Every contribution counts.
-          </Typography>
-
-          <DonateButton
-            variant="contained"
-            startIcon={<FavoriteIcon />}
-            onClick={handleDonateClick}
+    <Box
+      sx={{
+        display: "flex",
+        mt: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "506px",
+        backgroundColor: "white",
+        mb:5
+      }}
+    >
+      <Card
+        sx={{
+          borderRadius: "24px",
+          overflow: "hidden",
+          backgroundColor: "#6BAA1E",
+          height: {xs:"auto",md:"525px"},
+          width: "80vw",
+        }}
+      >
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column-reverse", md: "row" },
+            padding:0,
+            margin:0,
+          }}
+        >
+          <Box
+            sx={{
+              flex: "0.3",
+              padding: 6,     
+              color: "white",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              borderTopRightRadius: "24px", // Add this
+              borderBottomRightRadius: "24px", // Add this
+            }}
           >
-            Donate Now
-          </DonateButton>
-        </ContentSection>
+            <Typography
+              variant="h2"
+              fontWeight="bold"
+              gutterBottom
+              sx={{ fontSize: { xs: "2rem", md: "3rem" } }}
+            >
+              {data.title}
+            </Typography>
 
-        <ImageSection>
-          <Image
-            src="/donate.png" 
-            alt="Children sitting together"
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
-        </ImageSection>
-      </DonateCard>
-    </Container>
+            <Typography variant="body1" sx={{ mb: 4 }}>
+              {data.description}
+            </Typography>
+
+            <CustomButton
+              icon={<img src="/donateIcon1.svg" />}
+              innerText={data.button.inner_text}
+              sx={{
+                backgroundColor: "white",
+                color: "#426E0B",
+                padding: { xs: 1, md: 1.5 },
+                borderRadius: "50px",
+                textTransform: "none",
+                fontSize: { xs: "1rem", md: "1.1rem" },
+                fontWeight: 600,
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                },
+              }}
+              variant={"contained"}
+              iconOnStart={true}
+            />
+          </Box>
+
+          <Box
+            sx={{
+              flex: "0.7",
+              position: "relative",
+              minHeight: { xs: "250px", md: "400px" },
+              overflow: "hidden",
+              borderRadius: "24px", // Change this to round all corners
+            }}
+          >
+            <Image
+              src={
+                data.cover_image?.source?.url
+                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                    data.cover_image.source.url
+                  : null
+              }
+              alt="Children sitting together"
+              fill
+              style={{ objectFit: "cover" }}
+              priority
+            />
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 

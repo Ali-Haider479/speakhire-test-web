@@ -201,18 +201,17 @@ export default function ActivitiesHeader({
         {/* Button - YouTube or internal link */}
         <Button
           variant="outlined"
-          startIcon={buttonIcon}
+          endIcon={buttonIcon}
           component={buttonConfig.type === 'internal' ? Link : 'button'}
           href={buttonConfig.type === 'internal' ? buttonConfig.url : undefined}
           onClick={buttonConfig.type === 'youtube' ? () => window.open(buttonConfig.url, '_blank') : undefined}
           sx={{
-            borderRadius: '20px',
+            borderRadius: '25px',
             padding: '10px 24px',
             textTransform: 'none',
             fontWeight: 400,
-            border: '2px solid #005776',
+            border: '1px solid #005776',
             color: '#005776',
-            backgroundColor: 'white',
             boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
             '&:hover': {
               backgroundColor: 'rgba(0, 87, 118, 0.04)',
