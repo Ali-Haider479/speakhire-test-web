@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { title } from "process";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 
 type Packages = {
   description: string;
@@ -167,17 +167,25 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
             key={index}
             sx={{
               p: 3,
-              width: { xs: "80vw", sm: "40vw", md: "18vw" }, // Responsive widths
+              width: { xs: "80vw", sm: "40vw", md: "18vw" },
               height: "auto",
               minHeight: "28vw",
               borderRadius: 5,
               backgroundColor: "#F2FAFD",
               display: "flex",
               flexDirection: "column",
-              transition: "background-color 0.2s, color 0.2s",
-              ":active": {
+              transition: "all 0.2s ease",
+              color: "inherit",
+              "&:hover": {
                 backgroundColor: "#08547A",
                 color: "#FFFFFF",
+                "& h3": { color: "#FFFFFF" },
+                "& .MuiDivider-root": { borderColor: "#ffffff50" },
+                "& .MuiButton-root": {
+                  backgroundColor: "#FFFFFF",
+                  color: "#08547A",
+                  border: "1px solid #08547A",
+                },
               },
             }}
           >
@@ -185,16 +193,15 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
               <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
                 {item.title}
               </Typography>
-              <Divider />
+              <Divider sx={{ borderColor: "#08547A50" }} />
 
               <Typography
                 variant="h3"
                 sx={{
                   color: "#08547A",
                   pt: 2,
-                  cursor: "pointer",
-                  ":active": { color: "#FFFFFF" },
                   fontSize: { xs: "1.75rem", md: "2.5rem" },
+                  transition: "color 0.2s",
                 }}
               >
                 {item.price}
@@ -202,23 +209,34 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
 
               <Typography
                 variant="body1"
-                sx={{ mt: 2, mb: 2, fontSize: { xs: "0.9rem", md: "1.25rem" } }}
+                sx={{
+                  mt: 2,
+                  mb: 2,
+                  fontSize: { xs: "0.9rem", md: "1.25rem" },
+                  transition: "color 0.2s",
+                }}
               >
-                Provide&nbsp;
-                <Typography
+                Provide{" "}
+                <Box
                   component="span"
+                  className="hours-text"
                   sx={{
                     color: "#0F99C3",
-                    fontSize: { xs: "0.9rem", md: "1.25rem" },
+                    fontSize: "inherit",
+                    transition: "color 0.2s",
                   }}
                 >
                   {`${item.hours} hours`}
-                </Typography>
-                &nbsp;of career counselling
+                </Box>{" "}
+                of career counselling
               </Typography>
+
               <Typography
                 variant="body1"
-                sx={{ fontSize: { xs: "0.9rem", md: "1.25rem" } }}
+                sx={{
+                  fontSize: { xs: "0.9rem", md: "1.25rem" },
+                  transition: "color 0.2s",
+                }}
               >
                 {item.description}
               </Typography>
@@ -230,12 +248,17 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
               sx={{
                 borderRadius: 10,
                 backgroundColor: "#08547A",
-                transition: "background-color 0.2s, color 0.2s",
-                ":active": { backgroundColor: "#FFFFFF", color: "#08547A" },
+                color: "#FFFFFF",
+                transition: "all 0.2s",
                 textTransform: "none",
                 mt: 3,
                 py: { xs: 1, md: 1.6 },
                 fontSize: { xs: 14, md: 16 },
+                fontWeight: 600,
+                "&:hover": {
+                  backgroundColor: "#FFFFFF",
+                  color: "#08547A",
+                },
               }}
             >
               {item?.button?.inner_text}
