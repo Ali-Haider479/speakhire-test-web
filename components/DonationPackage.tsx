@@ -245,6 +245,7 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
             <Button
               variant="contained"
               fullWidth
+              onClick={() => window.open(item?.button?.url, "_blank")}
               sx={{
                 borderRadius: 10,
                 backgroundColor: "#08547A",
