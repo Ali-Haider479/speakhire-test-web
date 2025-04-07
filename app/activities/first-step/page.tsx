@@ -41,7 +41,7 @@ const firstStepPage = async () => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{display:"flex", width: "100vw", flexDirection:"column",alignItems:"center" }}>
       {/* Banner Section */}
       <Box
         sx={{
@@ -49,6 +49,7 @@ const firstStepPage = async () => {
           backgroundColor: "#F2FAFD",
           textAlign: "center",
           height: { xs: "auto", md: "353px" },
+          width:"100vw"
         }}
       >
         <Typography variant="body1" component="div">
@@ -116,26 +117,28 @@ const firstStepPage = async () => {
           flexDirection: { xs: "column", md: "row" },
           justifyContent: "center",
           alignItems: "center",
-          padding: { xs: "40px 20px", md: "80px" },
+          padding: { xs: "40px 10px", md: "80px" },
           gap: { xs: 4, md: 10 },
+          width:{xs:"90vw",md:"100vw"}
         }}
       >
         <Box
           sx={{
             backgroundColor: "#e1f7ff",
-            borderRadius: "40px",
-            padding: { xs: "24px", md: "40px" },
-            maxWidth: "32rem",
+            borderRadius: {xs:"24px",md:"40px"},
+            padding: { xs: "30px", md: "40px" },
+            maxWidth: {xs:"100%",md:"32rem"},
             textAlign: "left",
             height: { xs: "auto", md: 506 },
           }}
         >
           <Typography
-            variant="h3"
+            variant="h2"
             sx={{
               fontWeight: 500,
               marginBottom: "16px",
               color: "#111827",
+              fontSize: { xs: "2rem", md: "3rem" },
             }}
           >
             {HighlightText(data.title)}
@@ -165,7 +168,7 @@ const firstStepPage = async () => {
           <Image
             height={506}
             width={720}
-            alt={data.cover_image.alternate_text}
+            alt={data.cover_image.alternate_text||"First Step image"}
             src={
               process.env.NEXT_PUBLIC_STRAPI_URL +
               data.cover_image.source.url

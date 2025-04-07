@@ -68,38 +68,44 @@ export default function SpeakerImpact({ data }: SpeakerImpactProps) {
       {/* Speaker images container with zig-zag pattern */}
       <Box
         sx={{
+          display: "flex",
+          flexDirection: "row",
           position: "relative",
           width: "100%",
-          height: 220,
-          overflowX: "auto",
-          margin: "40px 0",
+          height: "auto", // Responsive height
+          minHeight: { xs: 180, sm: 220 },
+          overflowX: "hidden",
+          margin: { xs: "20px 0", sm: "40px 0" }, // Reduced margin for mobile
           "&::-webkit-scrollbar": {
             display: "none",
           },
           scrollbarWidth: "none",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <Box
           sx={{
             display: "flex",
-            position: "absolute",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "max-content",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            width: "80vw",
+            gap: { xs: 1.5, sm: 1.5 },
           }}
         >
           {data.speaker_impact.map((speaker, index) => (
             <Box
               key={speaker.id}
               sx={{
-                width: 100,
-                height: 180,
-                borderRadius: 100,
+                flexBasis: { xs: "25%", sm: "auto" },
+                width: { xs: 80, sm: 100 }, // Smaller size on mobile
+                height: { xs: 140, sm: 180 }, // Smaller size on mobile
+                borderRadius: 100, // Circular shape
                 overflow: "hidden",
                 position: "relative",
-                marginTop: index % 2 === 0 ? 0 : 5,
-                marginRight: 1.5,
-                marginLeft: 1.5,
+                marginTop: index % 2 === 0 ? 0 : { xs: 3, sm: 5 },
+                marginRight: { xs: 1, sm: 1.5 },
+                marginLeft: { xs: 1, sm: 1.5 },
                 boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
                 transition: "transform 0.3s ease",
                 "&:hover": {
@@ -119,6 +125,10 @@ export default function SpeakerImpact({ data }: SpeakerImpactProps) {
                 style={{ objectFit: "cover" }}
                 sizes="100px"
                 priority={speaker.id <= 6}
+                onClick={() => {
+                  if (!speaker?.link?.url) return;
+                  window.open(speaker.link?.url, "_blank", "noopener,noreferrer");
+                }}
               />
             </Box>
           ))}

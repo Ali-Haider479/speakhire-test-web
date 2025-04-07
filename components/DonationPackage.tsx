@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { title } from "process";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 type Packages = {
   description: string;
@@ -35,10 +35,22 @@ interface DonationPackageProps {
 
 const DonationPackage = ({ data }: DonationPackageProps) => {
   const [activeDonorType, setActiveDonorType] = useState("individual"); // Default to "individual"
+  const [filteredPlans, setFilteredPlans] = useState<Packages[]>([]);
 
   const handleSwitch = (type: React.SetStateAction<string>) => {
     setActiveDonorType(type);
+    const filteredPlansToShow = data.corporate_plan_card.filter(
+      (item: Packages) => item.type === type + " donor"
+    );
+    setFilteredPlans(filteredPlansToShow);
   };
+
+  useEffect(() => {
+    const filteredPlansToShow = data.corporate_plan_card.filter(
+      (item: Packages) => item.type === activeDonorType + " donor"
+    );
+    setFilteredPlans(filteredPlansToShow);
+  }, [data.corporate_plan_card]);
 
   const HighlightText = (text: string) => {
     if (!text || text.trim().length === 0) return null;
@@ -77,47 +89,12 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
           justifyContent: "center",
         }}
       >
-        <Typography variant="h2" sx={{ fontSize: { xs: "1.75rem", md: "3rem" } }}>
+        <Typography
+          variant="h2"
+          sx={{ fontSize: { xs: "1.75rem", md: "3rem" } }}
+        >
           {HighlightText(data.title)}
         </Typography>
-        {/* <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            backgroundColor: "#F2FAFD",
-            borderRadius: "10px",
-            padding: "0px",
-            width: "fit-content",
-            mt: 2,
-          }}
-        >
-          <Button
-            sx={{
-              px: 2,
-              fontWeight: 500,
-              color: "#000",
-              textTransform: "none",
-              borderRadius: "10px",
-            }}
-          >
-            Individual donor
-          </Button>
-
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#0A4E71",
-              color: "#FFF",
-              borderRadius: "10px",
-              textTransform: "none",
-              px: 3,
-              "&:hover": { backgroundColor: "#083F5A" },
-            }}
-          >
-            Become a corporate donor
-          </Button>
-        </Box> */}
-
         <Box
           sx={{
             display: "flex",
@@ -128,10 +105,11 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
             width: "fit-content",
             mt: 2,
             overflow: "hidden", // Ensures buttons fit within the rounded container
-            maxWidth:"80vw"
+            maxWidth: "80vw",
           }}
         >
           <Button
+            aria-pressed={activeDonorType === "individual"}
             sx={{
               px: 2,
               fontWeight: 500,
@@ -152,6 +130,7 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
           </Button>
 
           <Button
+            aria-pressed={activeDonorType === "corporate"}
             sx={{
               px: 3,
               fontWeight: 500,
@@ -183,7 +162,7 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
           justifyContent: "center",
         }}
       >
-        {data.corporate_plan_card.map((item: Packages, index: number) => (
+        {filteredPlans.map((item: Packages, index: number) => (
           <Card
             key={index}
             sx={{
@@ -215,20 +194,34 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
                   pt: 2,
                   cursor: "pointer",
                   ":active": { color: "#FFFFFF" },
-                  fontSize:{xs:"1.75rem",md:"2.5rem"}
+                  fontSize: { xs: "1.75rem", md: "2.5rem" },
                 }}
               >
                 {item.price}
               </Typography>
 
-              <Typography variant="body1" sx={{ mt: 2, mb: 2, fontSize:{xs:"0.9rem",md:"1.25rem"} }}>
+              <Typography
+                variant="body1"
+                sx={{ mt: 2, mb: 2, fontSize: { xs: "0.9rem", md: "1.25rem" } }}
+              >
                 Provide&nbsp;
-                <Typography component="span" sx={{ color: "#0F99C3" ,fontSize:{xs:"0.9rem",md:"1.25rem"}}}>
+                <Typography
+                  component="span"
+                  sx={{
+                    color: "#0F99C3",
+                    fontSize: { xs: "0.9rem", md: "1.25rem" },
+                  }}
+                >
                   {`${item.hours} hours`}
                 </Typography>
                 &nbsp;of career counselling
               </Typography>
-              <Typography variant="body1" sx={{fontSize:{xs:"0.9rem",md:"1.25rem"}}}>{item.description}</Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontSize: { xs: "0.9rem", md: "1.25rem" } }}
+              >
+                {item.description}
+              </Typography>
             </Box>
 
             <Button
@@ -240,9 +233,9 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
                 transition: "background-color 0.2s, color 0.2s",
                 ":active": { backgroundColor: "#FFFFFF", color: "#08547A" },
                 textTransform: "none",
-                mt:3,
-                py: {xs:1,md:1.6},
-                fontSize:{xs:"0.9rem",md:"1.25rem"}
+                mt: 3,
+                py: { xs: 1, md: 1.6 },
+                fontSize: { xs: 14, md: 16 },
               }}
             >
               {item?.button?.inner_text}
@@ -294,7 +287,7 @@ const DonationPackage = ({ data }: DonationPackageProps) => {
                 backgroundColor: `${index === 1 ? "#08547A" : ""}`,
                 borderRadius: 5,
                 textTransform: "none",
-                fontSize: {xs:14,md:16},
+                fontSize: { xs: 14, md: 16 },
                 alignSelf: "flex-end",
                 ml: `${index === 1 ? "1" : "auto"}`,
                 py: 1,

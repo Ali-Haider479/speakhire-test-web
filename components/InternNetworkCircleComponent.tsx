@@ -32,10 +32,10 @@ const InternNetworkCircleComponent = ({
   return (
     <Box
       sx={{
-        padding: "20px",
+        padding: {xs:"10px",md:"20px"},
         textAlign: "center",
         alignContent: "center",
-        width: "80vw",
+        width: {xs:"95vw",md:"80vw"},
         mt:5
       }}
     >
@@ -55,8 +55,9 @@ const InternNetworkCircleComponent = ({
             fontWeight: "bold",
             marginBottom: 1,
             width: "100%",
-            paddingRight: "100px",
-            paddingLeft: "100px",
+            paddingRight: {xs:0,md:"100px"},
+            paddingLeft: {xs:0,md:"100px"},
+            fontSize:{xs:"1.5rem",md:"2rem"}
           }}
         >
           {HighlightText(data.title)}

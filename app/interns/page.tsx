@@ -187,14 +187,14 @@ const Interns = async () => {
         }}
       >
         <Typography
-          variant="h3"
+          variant="h2"
           sx={{
-            fontSize: "3rem",
+            fontSize: { xs: "2rem", md: "3rem" },
             fontWeight: 400,
             marginBottom: "16px",
             lineHeight: "1.2",
-            paddingTop: "10vh",
-            width: "35vw",
+            paddingTop: {xs:"5vh",md:"10vh"},
+            width: { xs: "80vw", md: "35vw" },
           }}
         >
           {TextHighlighter(data.hero_section.title, "future")}
@@ -202,11 +202,11 @@ const Interns = async () => {
         <Typography
           variant="body1"
           sx={{
-            fontSize: "1.2rem",
+            fontSize: { xs: "1rem", md: "1.2rem" },
             color: "#49454F", // Gray color for the description
             marginBottom: "32px",
             //   maxWidth: '600px',
-            width: "45vw",
+            width: { xs: "80vw", md: "45vw" },
             margin: "0 auto",
             lineHeight: "1.5",
             fontWeight: 500,
@@ -228,7 +228,11 @@ const Interns = async () => {
         >
           <Typography
             variant="body1"
-            sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
+            sx={{
+              fontSize: { xs: 14, md: 16 },
+              fontWeight: "bold",
+              textTransform: "none",
+            }}
           >
             {data.hero_section.button.inner_text}
           </Typography>
@@ -237,14 +241,14 @@ const Interns = async () => {
           sx={{
             position: "relative",
             zIndex: 1,
-            width: "80vw", // 80% of the viewport width
+            width: { xs: "90vw", md: "80vw" }, // 80% of the viewport width
 
             borderRadius: "40px",
             border: "10px solid rgb(195, 206, 211)",
             overflow: "hidden",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
             backgroundColor: "#ffffff",
-            height: "80vh",
+            height: { xs: "25vh", md: "70vh" },
             marginTop: 5,
           }}
         >
@@ -257,7 +261,10 @@ const Interns = async () => {
                     data.hero_section?.cover_image?.source?.url
                   : null
               }
-              alt={data.hero_section?.cover_image.alternate_texts}
+              alt={
+                data.hero_section?.cover_image.alternate_texts ||
+                "intern cover image"
+              }
               fill
               style={{ objectFit: "cover" }}
             />
@@ -274,7 +281,13 @@ const Interns = async () => {
           mt: 5,
         }}
       >
-        <Typography variant="h3" sx={{ width: "60vw" }}>
+        <Typography
+          variant="h2"
+          sx={{
+            width: { xs: "80vw", md: "60vw" },
+            fontSize: { xs: "2rem", md: "3rem" },
+          }}
+        >
           {TextHighlighter(data.intership_courses.title, "courses that shape")}
         </Typography>
         <Box
@@ -293,7 +306,7 @@ const Interns = async () => {
                     elevation={0}
                     sx={{
                       backgroundColor: "#F2FAFD",
-                      p: 6,
+                      p: { xs: 3, md: 6 },
                       textAlign: "left",
                       borderRadius: 5,
                     }}
@@ -308,7 +321,10 @@ const Interns = async () => {
                       alt={item.title}
                     />
                     {item.invite && <> {item.invite}</>}
-                    <Typography variant="h4" sx={{ mt: 2 }}>
+                    <Typography
+                      variant="h4"
+                      sx={{ mt: 2, fontSize: { xs: "1.65rem" } }}
+                    >
                       {item.title}
                     </Typography>
                     <List>
@@ -361,7 +377,12 @@ const Interns = async () => {
           title={
             <Typography
               variant="h4"
-              sx={{ mb: 4, fontWeight: "normal", color: "black" }}
+              sx={{
+                mb: 4,
+                fontWeight: "normal",
+                color: "black",
+                width: "80vw",
+              }}
             >
               {TextHighlighter(data.alumins_testimonials.title, "alumnis")}
             </Typography>
@@ -369,8 +390,15 @@ const Interns = async () => {
           data={data.alumins_testimonials.testimonials}
         />
       </Box>
-      <Box sx={{ textAlign: "center" }}>
-        <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal", mt:5 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          textAlign: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal", mt: 5 }}>
           {TextHighlighter(data.national_mentorship_month.title, "Mentorship")}
         </Typography>
         <Box
@@ -381,7 +409,7 @@ const Interns = async () => {
             flexDirection: "row",
             gap: 2,
             padding: 3,
-            width: "80vw",
+            width: { xs: "90vw", md: "80vw" },
             mt: 4,
           }}
         >
@@ -393,8 +421,8 @@ const Interns = async () => {
                   width: "auto",
                   display: "flex",
                   justifyContent: "center",
-                  gap: 2,
-                  mb: 2,
+                  gap: { xs: 1, md: 2 },
+                  mb: {xs:1,md:2},
                 }}
               >
                 {row.map((img: any, index: number) => (
@@ -405,7 +433,10 @@ const Interns = async () => {
                       borderRadius: "16px",
                       overflow: "hidden",
                       width: img.width,
-                      height: img.height === "30%" ? "25vh" : "40vh",
+                      height:
+                        img.height === "30%"
+                          ? { xs: "15vh", md: "25vh" }
+                          : { xs: "25vh", md: "40vh" },
                     }}
                   >
                     <Image
@@ -428,7 +459,7 @@ const Interns = async () => {
               width: "30vw",
               display: "flex",
               flexDirection: "column",
-              gap: 2,
+              gap: {xs:1,md:2},
             }}
           >
             {verticalImagesLayout.map((img: any, index: number) => (
@@ -439,7 +470,10 @@ const Interns = async () => {
                   borderRadius: "16px",
                   overflow: "hidden",
                   width: "100%",
-                  height: img.height === "30%" ? "20vh" : "45vh",
+                  height:
+                    img.height === "30%"
+                      ? { xs: "15vh", md: "20vh" }
+                      : { xs: "25vh", md: "45vh" },
                 }}
               >
                 <Image
@@ -463,25 +497,25 @@ const Interns = async () => {
           borderRadius: 10,
           width: "80vw",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: {xs:"column",md:"row"},
           mb: 5,
           mt: 10,
         }}
       >
         <Box
           sx={{
-            width: "30vw",
+            width: {md:"30vw"},
             display: "flex", // Ensures flex behavior
             flexDirection: "column",
-            px: 10,
-            py: 15,
+            px: {xs:4,md:10},
+            py: {xs:4,md:15},
             textAlign: "left",
           }}
         >
-          <Typography variant="h3" sx={{ color: "white" }}>
+          <Typography variant="h2" sx={{ color: "white", fontSize:{xs:"2rem",md:"3rem"} }}>
             {data.apply_now_section.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "white" }}>
+          <Typography variant="body1" sx={{ color: "white",mt:2 }}>
             {data.apply_now_section.description}
           </Typography>
           <Button
@@ -492,18 +526,18 @@ const Interns = async () => {
               textTransform: "none",
               color: "#08547A",
               mt: 5,
-              py:1.2
+              py: 1.2,
             }}
           >
             <Typography
               variant="body1"
-              sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
+              sx={{ fontSize: {xs:14,md:16}, fontWeight: "bold", textTransform: "none" }}
             >
               {data.apply_now_section.button.inner_text}
             </Typography>
           </Button>
         </Box>
-        <Box sx={{ width: "50vw" }}>
+        <Box sx={{ width: {md:"50vw" }}}>
           <Image
             src={
               data?.apply_now_section?.cover_image?.source?.url

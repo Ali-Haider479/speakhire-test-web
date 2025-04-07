@@ -121,7 +121,7 @@ const StudentCarousel = ({ data }: StudentCarouselProps) => {
 
   return (
     <Box sx={{ backgroundColor: "#F2FAFD", width: "100%" }}>
-      <Box sx={{ margin: "0 auto", padding: "32px 16px", width: {xs:"90vw",md:"80vw"} }}>
+      <Box sx={{ margin: "0 auto", width: "100vw" ,padding: "32px 16px"}}>
         {/* Header Section */}
         <Box sx={{ textAlign: "center", marginBottom: 4 }}>
           <Typography
@@ -174,7 +174,7 @@ const StudentCarousel = ({ data }: StudentCarouselProps) => {
             >
               <Paper
                 sx={{
-                  width: { xs: "90vw", md: "38vw" },
+                  width: { xs: "47vw", md: "47vw" },
                   p: { xs: 3, md: 6 },
                   borderRadius: 5,
                   py: { xs: 3, md: 5 },

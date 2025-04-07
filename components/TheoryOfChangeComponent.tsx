@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import YouTube from "react-youtube";
@@ -17,7 +17,9 @@ function extractYouTubeID(url: string) {
   return match ? match[1] : null;
 }
 
-export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponentProps) {
+export default function TheoryOfChangeComponent({
+  data,
+}: TheoryOfChangeComponentProps) {
   const youtubeOptions = {
     width: "100%",
     height: "100%",
@@ -59,10 +61,10 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
         flexDirection: { xs: "column", md: "row" }, // Stack on small screens, side-by-side on medium+
         justifyContent: "center",
         alignItems: "center",
-        marginTop: {xs:3,md:5},
+        marginTop: { xs: 3, md: 5 },
         height: "auto", // Height auto for mobile
-        px:{xs:"10px", md:"20px"},
-        py:{xs:2,md:5}
+        px: { xs: "10px", md: "20px" },
+        py: { xs: 2, md: 5 },
       }}
     >
       {/* Left section with text content */}
@@ -79,10 +81,10 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
           variant="h2" // Reduced font size for better mobile readability
           sx={{
             fontWeight: "bold",
-            marginBottom: {xs:5,md:10},
+            marginBottom: { xs: 5, md: 10 },
             color: "#333333",
-            mt:5,
-            fontSize:{xs:"2rem",md:"3rem"}
+            mt: 5,
+            fontSize: { xs: "2rem", md: "3rem" },
           }}
         >
           {data.title}
@@ -94,7 +96,7 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
             sx={{
               fontWeight: "medium",
               marginBottom: 1,
-              fontSize:{xs:"1.5rem",md:"2.25rem"}
+              fontSize: { xs: "1.5rem", md: "2.25rem" },
             }}
           >
             {HighlightText(data.descriptionTitle)}
@@ -107,7 +109,7 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
             marginBottom: 2,
             color: "#555555",
             lineHeight: 1.7,
-            fontSize: {xs:"1rem",md:"1.25rem"}, // Smaller font size for readability on mobile
+            fontSize: { xs: "1rem", md: "1.25rem" }, // Smaller font size for readability on mobile
           }}
         >
           {data.description}
@@ -137,7 +139,11 @@ export default function TheoryOfChangeComponent({ data }: TheoryOfChangeComponen
           }}
         >
           <YouTube
-            videoId={extractYouTubeID(data?.link?.url)?.toString()}
+            videoId={
+              data?.link?.url
+                ? extractYouTubeID(data?.link?.url)?.toString()
+                : ""
+            }
             opts={youtubeOptions}
             style={{
               width: "100%",

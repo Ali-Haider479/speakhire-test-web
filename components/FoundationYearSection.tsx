@@ -24,7 +24,7 @@ function FoundationYearSection() {
         backgroundColor: "#F2FAFD", // Light blue background from the image
         textAlign: "center",
         width: "100%",
-        height:"353px"
+        height: "353px",
       }}
     >
       <BreadcrumbContainer>
@@ -43,9 +43,9 @@ function FoundationYearSection() {
       <Typography
         variant="h2"
         sx={{
-          fontSize: "3rem",
+          fontSize: { xs: "2rem", md: "3rem" },
           fontWeight: 400,
-          marginBottom: "16px",
+          marginBottom: {xs:"24px",md:"16px"},
           lineHeight: "1.2",
           paddingTop: "2vh",
         }}
@@ -68,18 +68,16 @@ function FoundationYearSection() {
             backgroundColor: "#064067 !important", // Slightly darker blue on hover,
             color: "white !important",
             "& img": {
-              filter: "brightness(0) invert(1)",  // Turns icon to pure white
+              filter: "brightness(0) invert(1)", // Turns icon to pure white
             },
           },
+          fontSize: {xs:14,md:16},
+          fontWeight: "bold",
+          textTransform: "none",
         }}
-        endIcon={<img src="/link.svg" width={20} height={20}/>}
+        endIcon={<img src="/link.svg" width={20} height={20} />}
       >
-        <Typography
-          variant="body1"
-          sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
-        >
-         Partner Interest Form
-        </Typography>
+        Partner Interest Form
       </Button>
       <Button
         variant="outlined"
@@ -96,19 +94,19 @@ function FoundationYearSection() {
             backgroundColor: "#064067 !important", // Slightly darker blue on hover,
             color: "white !important",
             "& img": {
-              filter: "brightness(0) invert(1)",  // Turns icon to pure white
+              filter: "brightness(0) invert(1)", // Turns icon to pure white
             },
           },
-          marginLeft:2
+          ml: { xs: 0, md: 2 },
+          mt: { xs: 1.5, md: 0 },
+          width: { xs: "225px", md: "auto" },
+          textTransform: "none",
+          fontSize: {xs:14,md:16},
+          fontWeight: "bold",
         }}
-        endIcon={<img src="/link.svg" width={20} height={20}/>}
+        endIcon={<img src="/link.svg" width={20} height={20} />}
       >
-        <Typography
-          variant="body1"
-          sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
-        >
-         Intern Application
-        </Typography>
+        Intern Application
       </Button>
     </Box>
   );

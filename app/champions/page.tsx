@@ -94,19 +94,17 @@ const ChampionPage = async () => {
           width: "100vw",
           height: "auto",
           background: "linear-gradient(180deg, #F2FAFD 70%, #ffffff 30%)",
-          position: "relative",
-          overflow: "hidden",
         }}
       >
         <Typography
           variant="h2"
           sx={{
-            fontSize: "3rem",
+            fontSize: {xs:"2rem",md:"3rem"},
             fontWeight: 400,
             marginBottom: "16px",
             lineHeight: "1.2",
             paddingTop: "10vh",
-            width: "45vw",
+            width: {xs:"80vw",md:"45vw"},
           }}
         >
           {/* Shape the future, become a
@@ -117,11 +115,11 @@ const ChampionPage = async () => {
         <Typography
           variant="body1"
           sx={{
-            fontSize: "1.2rem",
+            fontSize: {xs:"1rem",md:"1.2rem"},
             color: "#49454F", // Gray color for the description
             marginBottom: "32px",
             //   maxWidth: '600px',
-            width: "35vw",
+            width: {xs:"80vw",md:"35vw"},
             margin: "0 auto",
             lineHeight: "1.5",
             fontWeight: 500,
@@ -146,7 +144,7 @@ const ChampionPage = async () => {
         >
           <Typography
             variant="body1"
-            sx={{ fontSize: 16, fontWeight: "bold", textTransform: "none" }}
+            sx={{ fontSize: {xs:14,md:16}, fontWeight: "bold", textTransform: "none" }}
           >
             {data.hero_section.button.inner_text}
           </Typography>
@@ -155,13 +153,12 @@ const ChampionPage = async () => {
           sx={{
             position: "relative",
             zIndex: 1,
-            width: "80vw", // 80% of the viewport width
+            width: {xs:"90vw",md:"80vw"}, // 80% of the viewport width
             borderRadius: "40px",
             border: "10px solid rgb(195, 206, 211)",
-            overflow: "hidden",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
             backgroundColor: "#ffffff",
-            height: "100vh",
+            height: {xs:'25vh',md:"70vh"},
             marginTop: 5,
           }}
         >
@@ -176,12 +173,12 @@ const ChampionPage = async () => {
               }
               alt="Donate Cause"
               fill
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", borderRadius:30}}
             />
           </CardContent>
         </Box>
       </Box>
-      <Typography variant="h3" sx={{ mt: 10 }}>
+      <Typography variant="h2" sx={{ mt: 10, fontSize:{xs:"2rem",md:"3rem",textAlign:"center"} }}>
         {TextHighlighter(
           data.champion_activities_section.title,
           "Champion activities"
@@ -189,20 +186,21 @@ const ChampionPage = async () => {
       </Typography>
       <Box
         sx={{
-          backgroundColor: "#F2FAFD",
+          // backgroundColor: "#F2FAFD",
           width: "79vw",
           height: "auto",
           mt: 5,
           mb: 5,
+          alignItems:"center"
         }}
       >
         <Grid
           container
-          spacing={3}
+          spacing={{xs:1,md:3}}
           sx={{
-            backgroundColor: "#EAF4F8",
+            backgroundColor: "#F2FAFD",
             borderRadius: 5,
-            padding: 4,
+            padding: {xs:2,md:4},
           }}
         >
           {data.champion_activities_section.contribute_card.map(
@@ -214,11 +212,11 @@ const ChampionPage = async () => {
                 key={index}
                 sx={{
                   borderRight:
-                    index <
+                   { xs:"none",md: index <
                       data.champion_activities_section.contribute_card.length -
                         1 && !(index % 2)
                       ? "1px solid #ccc "
-                      : "none",
+                      : "none",}
                 }}
               >
                 <Card
@@ -246,7 +244,7 @@ const ChampionPage = async () => {
                   </CardContent>
                 </Card>
 
-                {index < 2 && <Divider sx={{ width: "90%", ml: 3 }} />}
+                {index < 2 && <Divider sx={{ width: {xs:"100%",md:"90%"}, ml: {xs:0,md:3} }} />}
 
                 {index > 1 &&
                   index !==
@@ -254,7 +252,7 @@ const ChampionPage = async () => {
                       1 && (
                     <Divider
                       sx={{
-                        ml: index === 3 ? -3 : "",
+                        ml: {xs:0,md:index === 3 ? -3 : ""},
                       }}
                     />
                   )}
@@ -263,8 +261,8 @@ const ChampionPage = async () => {
           )}
         </Grid>
       </Box>
-      <Box sx={{ width: "80vw", textAlign: "center", mt: 10, mb: 5 }}>
-        <Typography variant="h3" >
+      <Box sx={{ width: "80vw", textAlign: "center", mt: {xs:5,md:10}, mb: 5 }}>
+        <Typography variant="h2" sx={{fontSize:{xs:"2rem",md:"3rem"}}} >
           {TextHighlighter(
             data.other_way_to_impact_section.title,
             "Other ways"
@@ -284,14 +282,14 @@ const ChampionPage = async () => {
                     flexDirection: "column", // Aligns content vertically
                     textAlign: "left",
                     backgroundColor: "#F2FAFD",
-                    p: 6,
+                    p: {xs:4,md:6},
                     borderRadius: 5,
                     minHeight: 400,
                   }}
                 >
                   <Image
                     src={OtherWaysIcons[index].icon}
-                    alt=""
+                    alt={`${item.title} icon`}
                     height={60}
                     width={60}
                     style={{
@@ -300,7 +298,7 @@ const ChampionPage = async () => {
                       padding: 18,
                     }}
                   />
-                  <Typography variant="h4" style={{ marginTop: 30 }}>
+                  <Typography variant="h4" sx={{ marginTop: 3 ,fontSize:{xs:"1.25rem",md:"2rem"}}}>
                     {item.title}
                   </Typography>
                   <Typography variant="body1" style={{ marginTop: 5 }}>
@@ -346,7 +344,7 @@ const ChampionPage = async () => {
           )}
         </Typography>
         <Box sx={{ backgroundColor: "#E9F6FB", borderRadius: 10, mt: 5, py: 5 }}>
-          <Grid2 sx={{ px: 5, py: 3 }}>
+          <Grid2 sx={{ px: 3, py: 3 }}>
             {groupedLogos.map((row: any[], index: number) => (
               <Grid2
                 key={index}
@@ -356,6 +354,7 @@ const ChampionPage = async () => {
                   gap: 8,
                   flexWrap: "wrap", // Ensures responsiveness
                   justifyContent: "center", // Centers content nicely
+                  alignItems:"center",
                   mt: index === 0 ? 0 : 5, // Adds spacing between rows
                 }}
               >
@@ -363,7 +362,7 @@ const ChampionPage = async () => {
                   <Box
                     key={idx}
                     sx={{
-                      maxWidth: "100px", // Ensures logos are uniform in size
+                      maxWidth: "180px", // Ensures logos are uniform in size
                       minWidth: "80px", // Helps maintain structure in smaller screens
                       textAlign: "center", // Centers logos
                     }}
@@ -401,14 +400,14 @@ const ChampionPage = async () => {
           </Button>
         </Box>
       </Box>
-      <Box sx={{ mt: 5, mb: 5 }}>
-        <Typography variant="h3">What our champions has to say</Typography>
+      <Box sx={{ mt: 5, mb: 5 , alignItems:"center",textAlign:"center",width:{xs:"90vw",md:"80vw"}}}>
+        <Typography variant="h2" sx={{fontSize:{xs:"2rem",md:"3rem"}}}>What our champions has to say</Typography>
         {data.champion_testimonial_section.testimonials.map(
           (item: any, index: number) => (
             <Box
               sx={{
                 display: "flex",
-                flexDirection: index % 2 == 0 ? "row" : "row-reverse",
+                flexDirection: {xs:"column",md:index % 2 == 0 ? "row" : "row-reverse"},
                 marginTop: 5,
               }}
             >
@@ -430,13 +429,16 @@ const ChampionPage = async () => {
               </Box>
               <Box
                 sx={{
+                  display:"flex",
+                  flexDirection:"column",
                   backgroundColor: "#e1f7ff",
-                  borderRadius: "40px",
-                  padding: { xs: "24px", md: "40px" },
-                  maxWidth: "32rem",
+                  borderRadius: {xs:"20px",md:"40px"},
+                  padding: { xs: "24px", md: "48px" },
+                  maxWidth: "42rem",
                   marginX: "auto",
                   textAlign: "left",
-                  marginLeft: 4,
+                  marginLeft: {xs:0,md:12},
+                  mt:{xs:2,md:0}
                 }}
               >
                 <Typography
@@ -469,7 +471,7 @@ const ChampionPage = async () => {
                     padding: "12px 16px",
                     borderLeft: "1px solid #374151", // Left border with a blue shade
                     maxWidth: "400px", // Adjust width if needed
-                    marginTop: 5,
+                    marginTop: "auto",
                   }}
                 >
                   <Typography
@@ -498,8 +500,8 @@ const ChampionPage = async () => {
           backgroundColor: "#F2FAFD",
         }}
       >
-        <Box sx={{ ml: 4, mt: 5 }}>
-          <Typography variant="h3">
+        <Box sx={{ ml:{ xs:1,md:4}, mt: 5 }}>
+          <Typography variant="h2" sx={{fontSize:{xs:"2rem",md:"3rem"}}}>
             {TextHighlighter(
               data.champion_stories_section.title,
               "success stories"
@@ -513,7 +515,8 @@ const ChampionPage = async () => {
           container
           spacing={3}
           sx={{
-            padding: 4,
+            padding: {xs:1,md:4},
+            py:{xs:4},
             mt: 0,
           }}
         >
@@ -601,11 +604,11 @@ const ChampionPage = async () => {
           borderRadius: 10,
           width: "80vw",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: {xs:"column",md:"row"},
           my: 5,
         }}
       >
-        <Box sx={{ width: "50vw" }}>
+        <Box sx={{ width: {md:"50vw"} }}>
           <Image
             src={
               data.become_champion_section?.cover_image?.source?.url
@@ -621,14 +624,14 @@ const ChampionPage = async () => {
         </Box>
         <Box
           sx={{
-            width: "35vw",
+            width: {md:"35vw"},
             display: "flex", // Ensures flex behavior
             flexDirection: "column",
             px: 5,
-            py: 15,
+            py: {xs:5,md:15},
           }}
         >
-          <Typography variant="h3" sx={{ color: "white" }}>
+          <Typography variant="h2" sx={{ color: "white",fontSize:{xs:"2rem",md:"3rem"} }}>
             {data.become_champion_section.title}
           </Typography>
           <Typography variant="body1" sx={{ color: "white", paddingBottom:1 }}>
