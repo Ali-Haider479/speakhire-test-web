@@ -47,7 +47,7 @@ const footerSections: FooterSection[] = [
       { label: "Partners", href: "/partner" },
       { label: "Champions", href: "/champions" },
       { label: "Interns", href: "/interns" },
-      { label: "Careers", href: "/careers" },
+      { label: "Careers", href: "/form/dHWxc3pF" },
       { label: "Volunteers", href: "/volunteers" },
     ],
   },
