@@ -19,37 +19,32 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
         mt: 5,
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "auto",
+        minHeight: "506px",
         backgroundColor: "white",
-        mb: 5,
+        mb:5
       }}
     >
       <Card
         sx={{
           borderRadius: "24px",
-          // overflow: "hidden",
+          overflow: "hidden",
           backgroundColor: "#6BAA1E",
-          height: { xs: "auto", md: "556px" },
+          height: {xs:"auto",md:"525px"},
           width: "80vw",
-          pb: 0,
-          mb: 0,
         }}
       >
         <CardContent
           sx={{
             display: "flex",
             flexDirection: { xs: "column-reverse", md: "row" },
-            height: "100%",
-            p:0,
-            pb:0,
-            mb:0
+            padding:0,
+            margin:0,
           }}
         >
           <Box
             sx={{
-              flex: { xs: 1, md: 0.3 },
-              px: 6,
-              py: { xs: 3, md: 0 },
+              flex: "0.3",
+              padding: 6,     
               color: "white",
               display: "flex",
               flexDirection: "column",
@@ -93,10 +88,9 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
 
           <Box
             sx={{
-              flex: { xs: 1, md: 0.7 },
+              flex: "0.7",
               position: "relative",
-              height: { xs: "250px", md: "100%" },
-              minHeight: { xs: "250px", md: "unset" },
+              minHeight: { xs: "250px", md: "400px" },
               overflow: "hidden",
               borderRadius: "24px", // Change this to round all corners
             }}
