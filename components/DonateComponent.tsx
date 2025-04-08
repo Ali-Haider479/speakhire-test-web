@@ -22,6 +22,7 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
         minHeight: "auto",
         backgroundColor: "white",
         mb: 5,
+        pb:0
       }}
     >
       <Card
@@ -41,7 +42,7 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
             flexDirection: { xs: "column-reverse", md: "row" },
             height: "100%",
             p:0,
-            pb:0,
+            pb: "0 !important",
             mb:0
           }}
         >

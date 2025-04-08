@@ -398,7 +398,7 @@ const Interns = async () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal", mt: 5 }}>
+        <Typography variant="h4" sx={{ mb: {xs:2,md:4}, fontWeight: "normal", mt: {xs:2.5,md:5} }}>
           {TextHighlighter(data.national_mentorship_month.title, "Mentorship")}
         </Typography>
         <Box
@@ -407,10 +407,10 @@ const Interns = async () => {
             borderRadius: 5,
             display: "flex",
             flexDirection: "row",
-            gap: 2,
-            padding: 3,
+            gap: {xs:1,md:2},
+            padding: {xs:2,md:3},
             width: { xs: "90vw", md: "80vw" },
-            mt: 4,
+            mt: {xs:2,md:4},
           }}
         >
           <Box sx={{ width: "70vw" }}>
@@ -499,7 +499,7 @@ const Interns = async () => {
           display: "flex",
           flexDirection: {xs:"column",md:"row"},
           mb: 5,
-          mt: 10,
+          mt:{ xs:5,md:10},
         }}
       >
         <Box

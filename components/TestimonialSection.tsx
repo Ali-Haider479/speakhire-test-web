@@ -129,7 +129,7 @@ const HighlightText = (text: string) => {
 };
 
 const TestimonialSection = ({ data, title }: Props) => (
-  <Box sx={{ mt: 5, mb: 10, width: {xs:"95vw",md:"80vw"} }}>
+  <Box sx={{ mt: {xs:2,md:5}, mb: {xs:5,md:10}, width: {xs:"95vw",md:"80vw"} }}>
     <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal", ml:3 }}>
       {title || HighlightText(title)}
     </Typography>

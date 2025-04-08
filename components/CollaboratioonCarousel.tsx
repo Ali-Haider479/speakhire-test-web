@@ -5,28 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-
-const slides = [
-  {
-    img: "/slide.png",
-    title: "Celebrating WHM at City Hall",
-    description:
-      "On March 19 I had the honor of participating in the city Council event to celebrate women's month thanks to SPEAKHIRE. It was one of the most beautiful and important experiences I have had to date in NY...",
-  },
-  {
-    img: "/slide.png",
-    title: "Empowering Women in Tech",
-    description:
-      "A great event showcasing the talents of women in the tech industry, celebrating innovation, diversity, and progress in the sector.",
-  },
-  {
-    img: "/slide.png",
-    title: "Community Engagement",
-    description:
-      "Engaging with local communities and fostering relationships to build a strong and supportive network.",
-  },
-];
-
 interface CollaborationsCarouselProps {
   data: {
     title: string;
@@ -35,13 +13,39 @@ interface CollaborationsCarouselProps {
 }
 
 const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstPart = words.slice(0, 1).join(" ");
+      const lastPart = words.slice(1).join(" ");
+
+      return (
+        <>
+          
+          <span style={{ color: "#0F99C3" }}> {firstPart} </span>
+          {lastPart}
+        </>
+      );
+    } else {
+      return "";
+    }
+  };
   return (
     <Box
-      sx={{ textAlign: "center", py: {xs:1,md:6}, px: 2, maxWidth: {xs:"100vw",md:"80vw"}, mx: "auto" }}
+      sx={{
+        textAlign: "center",
+        py: { xs: 1, md: 6 },
+        // px: 2,
+        maxWidth:{xs:"90vw",md:"100vw"},
+        mx: "auto",
+      }}
     >
       {/* Heading */}
-      <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4, width:{xs:"95%"} }}>
-        {data.title}
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: "bold", mb: 4, width: { xs: "95%" } }}
+      >
+        {HighlightText(data.title)}
       </Typography>
 
       {/* Carousel */}
@@ -49,11 +53,21 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
         modules={[Pagination]}
         pagination={{ clickable: true }}
         spaceBetween={20}
-        slidesPerView={1.2}
+        slidesPerView={1}
+        freeMode={true}
         centeredSlides={true}
+        initialSlide={1} 
         breakpoints={{
-          640: { slidesPerView: 1.5, centeredSlides: true },
-          1024: { slidesPerView: 2.5, centeredSlides: true },
+          640: {
+            slidesPerView: 1.25,
+            centeredSlides: false,
+            initialSlide: 1, // Ensure it works in responsive breakpoints
+          },
+          1024: {
+            slidesPerView: 1.25,
+            centeredSlides: true,
+            initialSlide: 1, // Ensure it works in responsive breakpoints
+          },
         }}
         style={{ paddingBottom: "40px" }}
       >
@@ -62,7 +76,7 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
             <Box
               sx={{
                 position: "relative",
-                borderRadius: "16px",
+                borderRadius: {xs:"16px",md:"28px"},
                 overflow: "hidden",
                 width: "100%",
                 aspectRatio: "16/9",
@@ -84,19 +98,25 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
                   position: "absolute",
                   bottom: 0,
                   left: 0,
-                  width: "90%",
+                  width: {xs:"94%",md:"98%"},
                   background:
                     "linear-gradient(transparent, rgba(0, 0, 0, 0.8))",
                   color: "white",
-                  pb: {xs:1.5,md:3},
-                  px: {xs:1.5,md:4},
+                  pb: { xs: 1.5, md: 3 },
+                  px: { xs: 1.5, md: 4 },
                   ml: 0,
+                  textAlign:{xs:"center",md:"left"}
                 }}
               >
-                <Typography variant="h6" sx={{ fontWeight: "bold", fontSize:{xs:"1.1rem"} }}>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: "bold", fontSize: { xs: "1.1rem", md:"1.25rem" } }}
+                >
                   {slide.title}
                 </Typography>
-                <Typography variant="body2" sx={{fontSize:"0.7rem"}}>{slide.description}</Typography>
+                <Typography variant="body1" sx={{ fontSize: {xs:"0.7rem", md:"0.9rem"} }}>
+                  {slide.description}
+                </Typography>
               </Box>
             </Box>
           </SwiperSlide>

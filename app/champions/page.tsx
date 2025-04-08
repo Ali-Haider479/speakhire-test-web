@@ -102,9 +102,9 @@ const ChampionPage = async () => {
           sx={{
             fontSize: { xs: "2rem", md: "3rem" },
             fontWeight: 400,
-            marginBottom: "16px",
+            marginBottom: {xs:"8px",md:"16px"},
             lineHeight: "1.2",
-            paddingTop: "10vh",
+            paddingTop: {xs:"5vh",md:"10vh"},
             width: { xs: "80vw", md: "45vw" },
           }}
         >
@@ -188,7 +188,7 @@ const ChampionPage = async () => {
       <Typography
         variant="h2"
         sx={{
-          mt: 10,
+          mt: {xs:5,md:10},
           fontSize: { xs: "2rem", md: "3rem", textAlign: "center" },
         }}
       >
@@ -289,7 +289,7 @@ const ChampionPage = async () => {
         sx={{
           width: "80vw",
           textAlign: "center",
-          mt: { xs: 5, md: 10 },
+          mt: { xs: 2, md: 10 },
           mb: 5,
         }}
       >
@@ -660,7 +660,7 @@ const ChampionPage = async () => {
           width: "80vw",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
-          my: 5,
+          my: {xs:3,md:5},
         }}
       >
         <Box sx={{ width: { md: "50vw" } }}>

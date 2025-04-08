@@ -30,20 +30,27 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 1,
-    partialVisibilityGutter: 100,
+    partialVisibilityGutter: 100, // Shows partial next/previous cards on desktop
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 1,
-    partialVisibilityGutter: 50,
+    partialVisibilityGutter: 0, // No partial visibility on tablet
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 390, min: 0 },
     items: 1,
+    partialVisibilityGutter: 0, // No partial visibility on mobile
   },
 };
 
-const CustomArrow = ({ onClick, isLeft }: { onClick?: () => void; isLeft?: boolean }) => (
+const CustomArrow = ({
+  onClick,
+  isLeft,
+}: {
+  onClick?: () => void;
+  isLeft?: boolean;
+}) => (
   <IconButton
     onClick={onClick}
     aria-label={isLeft ? "Previous testimonial" : "Next testimonial"}
@@ -57,7 +64,11 @@ const CustomArrow = ({ onClick, isLeft }: { onClick?: () => void; isLeft?: boole
       "&:hover": { backgroundColor: "#074b6d", color: "#FFFF" },
     }}
   >
-    {isLeft ? <ArrowBackIcon sx={{ fontSize: 20 }} /> : <ArrowForwardIcon sx={{ fontSize: 20 }} />}
+    {isLeft ? (
+      <ArrowBackIcon sx={{ fontSize: 20 }} />
+    ) : (
+      <ArrowForwardIcon sx={{ fontSize: 20 }} />
+    )}
   </IconButton>
 );
 
@@ -121,7 +132,7 @@ const StudentCarousel = ({ data }: StudentCarouselProps) => {
 
   return (
     <Box sx={{ backgroundColor: "#F2FAFD", width: "100%" }}>
-      <Box sx={{ margin: "0 auto", width: "100vw" ,padding: "32px 16px"}}>
+      <Box sx={{ margin: "0 auto", maxWidth: "100vw", padding: "32px 16px" }}>
         {/* Header Section */}
         <Box sx={{ textAlign: "center", marginBottom: 4 }}>
           <Typography
@@ -144,85 +155,176 @@ const StudentCarousel = ({ data }: StudentCarouselProps) => {
         </Box>
 
         {/* Carousel Section */}
-        <Carousel
-          ref={carouselRef}
-          responsive={responsive}
-          infinite
-          centerMode
-          focusOnSelect
-          renderButtonGroupOutside
-          arrows={false}
-          customButtonGroup={
-            <CustomButtonGroup
-              next={() => carouselRef.current?.next()}
-              previous={() => carouselRef.current?.previous()}
-              setActiveIndex={setActiveIndex}
-              totalSlides={data.studentCards.length}
-            />
-          }
-        >
-          {data.studentCards.map((student, index) => (
-            <Box
-              key={student.id}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
-                transform: {xs:"scale(0.95)",md:"scale(1)"},
-                opacity: activeIndex === index ? 1 : 0.5,
-              }}
-            >
-              <Paper
+        {/* Desktop View - Original Carousel */}
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
+          <Carousel
+            ref={carouselRef}
+            responsive={responsive}
+            infinite
+            centerMode
+            focusOnSelect
+            renderButtonGroupOutside
+            arrows={false}
+            customButtonGroup={
+              <CustomButtonGroup
+                next={() => carouselRef.current?.next()}
+                previous={() => carouselRef.current?.previous()}
+                setActiveIndex={setActiveIndex}
+                totalSlides={data.studentCards.length}
+              />
+            }
+          >
+            {data.studentCards.map((student, index) => (
+              <Box
+                key={student.id}
                 sx={{
-                  width: { xs: "47vw", md: "47vw" },
-                  p: { xs: 3, md: 6 },
-                  borderRadius: 5,
-                  py: { xs: 3, md: 5 },
-                  backgroundColor: "#E9F6FB",
-                  textAlign: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%",
+                  transition:
+                    "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
+                  transform: { xs: "scale(0.95)", md: "scale(1)" },
+                  opacity: activeIndex === index ? 1 : 0.5,
                 }}
-                aria-label={`testimonial by ${student.name}`}
-                elevation={0}
               >
-                <Typography
-                  variant="body1"
+                <Paper
                   sx={{
-                    color: "#0C111D",
-                    marginBottom: 3,
-                    fontWeight: 400,
-                    fontSize: { xs: "0.9rem", md: "1.25rem" },
+                    width: { xs: "80vw", md: "47vw" },
+                    p: { xs: 3, md: 6 },
+                    borderRadius: 5,
+                    py: { xs: 3, md: 5 },
+                    backgroundColor: "#E9F6FB",
+                    textAlign: "center",
                   }}
+                  aria-label={`testimonial by ${student.name}`}
+                  elevation={0}
                 >
-                  {student.story}
-                </Typography>
-                <Avatar
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: "#0C111D",
+                      marginBottom: 3,
+                      fontWeight: 400,
+                      fontSize: { xs: "0.9rem", md: "1.25rem" },
+                    }}
+                  >
+                    {student.story}
+                  </Typography>
+                  <Avatar
+                    sx={{
+                      width: { xs: 50, md: 60 },
+                      height: { xs: 50, md: 60 },
+                      margin: "0 auto 16px",
+                      backgroundColor: "#bbdefb",
+                    }}
+                    src={
+                      student?.picture?.source?.url
+                        ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                          student.picture.source.url
+                        : ""
+                    }
+                    alt="Student Carousel Image"
+                  />
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontWeight: 400,
+                      marginBottom: 1,
+                      fontSize: { xs: "0.9rem", md: "1.25rem" },
+                    }}
+                  >
+                    {student.name} '{student.age}
+                  </Typography>
+                </Paper>
+              </Box>
+            ))}
+          </Carousel>
+        </Box>
+        {/* Mobile View */}
+        <Box sx={{ display: { xs: "block", md: "none" } }}>
+          <Carousel
+            ref={carouselRef}
+            responsive={responsive}
+            infinite
+            centerMode={false}
+            focusOnSelect
+            arrows={false} // Hide default arrows
+            renderButtonGroupOutside
+            customButtonGroup={
+              <CustomButtonGroup
+                next={() => carouselRef.current?.next()}
+                previous={() => carouselRef.current?.previous()}
+                setActiveIndex={setActiveIndex}
+                totalSlides={data.studentCards.length}
+              />
+            }
+          >
+            {data.studentCards.map((student, index) => (
+              <Box
+                key={student.id}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%",
+                  transition:
+                    "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
+                  transform: "scale(1)",
+                  opacity: 1,
+                }}
+              >
+                <Paper
                   sx={{
-                    width: { xs: 50, md: 60 },
-                    height: { xs: 50, md: 60 },
-                    margin: "0 auto 16px",
-                    backgroundColor: "#bbdefb",
+                    width: { xs: "80vw", md: "47vw" },
+                    p: { xs: 3, md: 6 },
+                    borderRadius: 5,
+                    py: { xs: 3, md: 5 },
+                    backgroundColor: "#E9F6FB",
+                    textAlign: "center",
                   }}
-                  src={
-                    student?.picture?.source?.url
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL + student.picture.source.url
-                      : ""
-                  }
-                  alt="Student Carousel Image"
-                />
-                <Typography
-                  variant="body1"
-                  sx={{
-                    fontWeight: 400,
-                    marginBottom: 1,
-                    fontSize: { xs: "0.9rem", md: "1.25rem" },
-                  }}
+                  aria-label={`testimonial by ${student.name}`}
+                  elevation={0}
                 >
-                  {student.name} '{student.age}
-                </Typography>
-              </Paper>
-            </Box>
-          ))}
-        </Carousel>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: "#0C111D",
+                      marginBottom: 3,
+                      fontWeight: 400,
+                      fontSize: { xs: "0.9rem", md: "1.25rem" },
+                    }}
+                  >
+                    {student.story}
+                  </Typography>
+                  <Avatar
+                    sx={{
+                      width: { xs: 50, md: 60 },
+                      height: { xs: 50, md: 60 },
+                      margin: "0 auto 16px",
+                      backgroundColor: "#bbdefb",
+                    }}
+                    src={
+                      student?.picture?.source?.url
+                        ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                          student.picture.source.url
+                        : ""
+                    }
+                    alt="Student Carousel Image"
+                  />
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontWeight: 400,
+                      marginBottom: 1,
+                      fontSize: { xs: "0.9rem", md: "1.25rem" },
+                    }}
+                  >
+                    {student.name} '{student.age}
+                  </Typography>
+                </Paper>
+              </Box>
+            ))}
+          </Carousel>
+        </Box>
       </Box>
     </Box>
   );
