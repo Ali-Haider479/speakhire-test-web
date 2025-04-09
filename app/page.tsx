@@ -1,5 +1,3 @@
-// "use client"
-import { Box } from "@mui/material";
 import DonateComponent from "../components/DonateComponent";
 import StudentCarousel from "../components/StudentCarousel";
 import WorkForceComponent from "../components/WorkForceComponent";

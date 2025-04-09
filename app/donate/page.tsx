@@ -1,3 +1,4 @@
+"use server"
 import DonateBetterWorldSection from "@/components/DonateBetterWorldSection";
 import DonateComponent from "@/components/DonateComponent";
 import DonateStorySection from "@/components/DonateStorySection";

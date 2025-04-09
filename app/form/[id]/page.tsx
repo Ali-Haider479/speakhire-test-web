@@ -1,7 +1,6 @@
 "use client";
 
 import { Widget } from "@typeform/embed-react";
-import { useSearchParams } from "next/navigation";
 import { useParams } from "next/navigation";
 
 export default function Page() {
