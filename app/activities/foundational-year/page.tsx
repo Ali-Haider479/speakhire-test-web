@@ -12,7 +12,13 @@ async function getData() {
   try {
     const foundationalYearApiRes = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/foundation-year-page?populate=*`,
-      { next: { revalidate: 60 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store", // Disables caching (SSR mode)
+      }
     );
 
     if (!foundationalYearApiRes.ok) throw new Error("Failed to fetch data");

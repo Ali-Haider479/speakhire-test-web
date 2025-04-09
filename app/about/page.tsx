@@ -19,10 +19,18 @@ async function getData() {
   try {
     const [aboutPageResponse, commonItemsResponse] = await Promise.all([
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/about?populate=*`, {
-        cache: "no-store",
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store", // Disables caching (SSR mode)
       }),
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
-        cache: "no-store",
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store", // Disables caching (SSR mode)
       }),
     ]);
 
