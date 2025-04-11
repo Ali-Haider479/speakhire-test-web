@@ -9,6 +9,7 @@ import {
   Alert,
   Snackbar,
 } from "@mui/material";
+import { Widget } from "@typeform/embed-react";
 
 type FormType = {
   email: { type: string; minlength: 3 };
@@ -29,6 +30,12 @@ function Contact() {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState<"success" | "error">("success");
   const [alertMsg, setAlertMsg] = useState("");
+
+  const widgetContainerStyle = {
+    width: "inherit",
+    height: 700,
+    margin: "20px auto",
+  };
 
   const onSubmit = async (data: FormType) => {
     try {
@@ -59,6 +66,110 @@ function Contact() {
       setAlertMsg(error.message || "Failed to send email.");
       setAlertOpen(true);
     }
+  };
+
+  const ContactForm = () => {
+    return (
+      <Box
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        sx={{
+          width: { xs: "80vw", md: "40vw" },
+          mx: "auto",
+          p: { xs: 1, md: 3 },
+          borderRadius: 2,
+          mb: 5,
+        }}
+      >
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+          <TextField
+            label="First Name"
+            fullWidth
+            margin="normal"
+            {...register("firstName", {
+              required: "First Name is required",
+              minLength: {
+                value: 3,
+                message: "First Name must be at least 3 characters",
+              },
+            })}
+            error={!!errors.firstName}
+            // helperText={errors.name?.message}
+          />
+          <TextField
+            label="Last Name"
+            fullWidth
+            margin="normal"
+            {...register("lastName", {
+              required: "Last Name is required",
+              minLength: {
+                value: 3,
+                message: "Last Name must be at least 3 characters",
+              },
+            })}
+            error={!!errors.lastName}
+            // helperText={errors.name?.message}
+          />
+        </Box>
+
+        <TextField
+          label="Email"
+          type="email"
+          fullWidth
+          margin="normal"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Invalid email address",
+            },
+          })}
+          error={!!errors.email}
+          // helperText={errors.email?.message}
+        />
+
+        <TextField
+          label="Subject"
+          fullWidth
+          margin="normal"
+          {...register("subject", {
+            required: "Subject is required",
+            minLength: {
+              value: 10,
+              message: "Subject must be at least 10 characters",
+            },
+          })}
+          error={!!errors.subject}
+          // helperText={errors.name?.message}
+        />
+
+        <TextField
+          label="Message"
+          fullWidth
+          margin="normal"
+          {...register("message", {
+            required: "Message is required",
+            minLength: {
+              value: 25,
+              message: "Message must be at least 25 characters",
+            },
+          })}
+          error={!!errors.message}
+          multiline
+          minRows={3}
+          // helperText={errors.name?.message}
+        />
+
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{ mt: 2, textTransform: "none", fontSize: 16 }}
+        >
+          Submit
+        </Button>
+      </Box>
+    );
   };
   return (
     <>
@@ -102,105 +213,17 @@ function Contact() {
             You SPEAK. We Listen. Leave a message
           </Typography>
         </Box>
-        <Box
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{
-            width: { xs: "80vw", md: "40vw" },
-            mx: "auto",
-            p: { xs: 1, md: 3 },
-            borderRadius: 2,
-            mb: 5,
-          }}
-        >
-          <Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-            <TextField
-              label="First Name"
-              fullWidth
-              margin="normal"
-              {...register("firstName", {
-                required: "First Name is required",
-                minLength: {
-                  value: 3,
-                  message: "First Name must be at least 3 characters",
-                },
-              })}
-              error={!!errors.firstName}
-              // helperText={errors.name?.message}
-            />
-            <TextField
-              label="Last Name"
-              fullWidth
-              margin="normal"
-              {...register("lastName", {
-                required: "Last Name is required",
-                minLength: {
-                  value: 3,
-                  message: "Last Name must be at least 3 characters",
-                },
-              })}
-              error={!!errors.lastName}
-              // helperText={errors.name?.message}
-            />
-          </Box>
-
-          <TextField
-            label="Email"
-            type="email"
-            fullWidth
-            margin="normal"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "Invalid email address",
-              },
-            })}
-            error={!!errors.email}
-            // helperText={errors.email?.message}
+        <ContactForm/>
+        {/* <Box sx={{ width: { xs: "80vw", md: "40vw" } }}>
+          <Widget
+            id={"X93bBlzN"}
+            style={widgetContainerStyle}
+            medium="demo-test"
+            hidden={{ foo: "foo value", bar: "bar value" }}
+            transitiveSearchParams={["foo", "bar"]}
+            iframeProps={{ title: "Foo Bar" }}
           />
-
-          <TextField
-            label="Subject"
-            fullWidth
-            margin="normal"
-            {...register("subject", {
-              required: "Subject is required",
-              minLength: {
-                value: 10,
-                message: "Subject must be at least 10 characters",
-              },
-            })}
-            error={!!errors.subject}
-            // helperText={errors.name?.message}
-          />
-
-          <TextField
-            label="Message"
-            fullWidth
-            margin="normal"
-            {...register("message", {
-              required: "Message is required",
-              minLength: {
-                value: 25,
-                message: "Message must be at least 25 characters",
-              },
-            })}
-            error={!!errors.message}
-            multiline
-            minRows={3}
-            // helperText={errors.name?.message}
-          />
-
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            sx={{ mt: 2, textTransform: "none", fontSize: 16 }}
-          >
-            Submit
-          </Button>
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

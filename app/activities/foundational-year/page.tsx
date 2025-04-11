@@ -53,7 +53,7 @@ const foundationalYearPage = async () => {
       alignItems="center"
       width="100%"
     >
-      <FoundationYearSection />
+      <FoundationYearSection data={data.partner_interest_form_id} />
       <FY_InternshipProgram data={data.internship_program_section} />
       <EconomicMobilitySection data={data.economic_mobility_section} />
       <InternNetworkCircleComponent data={data.inter_network_section} />

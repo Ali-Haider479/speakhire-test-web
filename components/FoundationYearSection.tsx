@@ -6,6 +6,7 @@ import {
   Container,
   styled,
   CardContent,
+  Link,
 } from "@mui/material";
 import React from "react";
 
@@ -16,7 +17,11 @@ const BreadcrumbContainer = styled(Box)({
   // marginBottom: '16px',
 });
 
-function FoundationYearSection() {
+type FoundationYearSectionProps={
+  data:string
+}
+
+function FoundationYearSection({data}:FoundationYearSectionProps) {
   return (
     <Box
       sx={{
@@ -53,6 +58,7 @@ function FoundationYearSection() {
         <span style={{ color: "#0F99C3" }}>Foundational </span>
         Year
       </Typography>
+      <Link href={`/form/${data}`}>
       <Button
         variant="outlined"
         color="primary"
@@ -79,6 +85,7 @@ function FoundationYearSection() {
       >
         Partner Interest Form
       </Button>
+      </Link>
       <Button
         variant="outlined"
         color="primary"
