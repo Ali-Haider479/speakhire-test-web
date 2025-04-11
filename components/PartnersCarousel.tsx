@@ -133,7 +133,6 @@ export default function PartnersCarousel({ testimonials }: Props) {
               <Box sx={{ height: "100px" }}>
                 <Image
                   src={
-                    process.env.NEXT_PUBLIC_STRAPI_URL +
                     testimonial.instituteLogo.source.url
                   }
                   alt={testimonial.instituteLogo.alternate_text}

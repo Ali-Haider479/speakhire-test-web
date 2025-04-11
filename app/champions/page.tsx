@@ -167,7 +167,7 @@ const ChampionPage = async () => {
             border: "10px solid rgb(195, 206, 211)",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
             backgroundColor: "#ffffff",
-            height: { xs: "25vh", md: "70vh" },
+            height: { xs: "25vh", md: "90vh" },
             marginTop: 5,
           }}
         >
@@ -176,8 +176,7 @@ const ChampionPage = async () => {
             <Image
               src={
                 data?.hero_section?.cover_image?.source?.url
-                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                    data?.hero_section?.cover_image?.source?.url
+                  ? data?.hero_section?.cover_image?.source?.url
                   : null
               }
               alt="Donate Cause"
@@ -299,8 +298,8 @@ const ChampionPage = async () => {
       </>
     );
   };
-  const OtherWaysSection=()=>{
-    return(
+  const OtherWaysSection = () => {
+    return (
       <Box
         sx={{
           width: "80vw",
@@ -379,10 +378,10 @@ const ChampionPage = async () => {
           )}
         </Grid>
       </Box>
-    )
-  }
-  const LeadingCompaniesSection=()=>{
-    return(
+    );
+  };
+  const LeadingCompaniesSection = () => {
+    return (
       <Box
         sx={{
           backgroundColor: "#F2FAFD",
@@ -427,11 +426,7 @@ const ChampionPage = async () => {
                     }}
                   >
                     <img
-                      src={
-                        item.source?.url
-                          ? process.env.NEXT_PUBLIC_STRAPI_URL + item.source.url
-                          : ""
-                      }
+                      src={item.source?.url ? item.source.url : ""}
                       alt={item.alternate_text || "Company Logo"}
                       style={{
                         width: "100%",
@@ -459,10 +454,10 @@ const ChampionPage = async () => {
           </Button>
         </Box>
       </Box>
-    )
-  }
-  const ChampionsTestimonials=()=>{
-    return(
+    );
+  };
+  const ChampionsTestimonials = () => {
+    return (
       <Box
         sx={{
           mt: 5,
@@ -492,8 +487,7 @@ const ChampionPage = async () => {
                 <Image
                   src={
                     item.cover_image?.source?.url
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                        item.cover_image?.source?.url
+                      ? item.cover_image?.source?.url
                       : null
                   }
                   alt={
@@ -568,10 +562,10 @@ const ChampionPage = async () => {
           )
         )}
       </Box>
-    )
-  }
-  const ChampionsSuccessStories=()=>{
-    return(
+    );
+  };
+  const ChampionsSuccessStories = () => {
+    return (
       <Box
         sx={{
           my: 5,
@@ -627,8 +621,7 @@ const ChampionPage = async () => {
                       <Avatar
                         src={
                           champion?.picture?.source?.url
-                            ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                              champion?.picture?.source?.url
+                            ? champion?.picture?.source?.url
                             : ""
                         }
                         sx={{
@@ -644,8 +637,7 @@ const ChampionPage = async () => {
                       <img
                         src={
                           champion?.employer_logo?.source?.url
-                            ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                              champion?.employer_logo?.source?.url
+                            ? champion?.employer_logo?.source?.url
                             : ""
                         }
                         alt={champion.employer_logo.aria_description}
@@ -682,10 +674,10 @@ const ChampionPage = async () => {
           )}
         </Grid>
       </Box>
-    )
-  }
-  const BecomeChampionSection=()=>{
-    return(
+    );
+  };
+  const BecomeChampionSection = () => {
+    return (
       <Box
         sx={{
           backgroundColor: "#08547A",
@@ -700,8 +692,7 @@ const ChampionPage = async () => {
           <Image
             src={
               data.become_champion_section?.cover_image?.source?.url
-                ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                  data.become_champion_section?.cover_image?.source?.url
+                ? data.become_champion_section?.cover_image?.source?.url
                 : ""
             }
             alt="Become Champion"
@@ -721,11 +712,22 @@ const ChampionPage = async () => {
         >
           <Typography
             variant="h2"
-            sx={{ color: "white", fontSize: { xs: "2rem", md: "3rem" },fontWeight:"bold" }}
+            sx={{
+              color: "white",
+              fontSize: { xs: "2rem", md: "3rem" },
+              fontWeight: "bold",
+            }}
           >
             {data.become_champion_section.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "white", paddingBottom: 1,fontSize:{xs:"0.9rem",md:"1.25rem"} }}>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "white",
+              paddingBottom: 1,
+              fontSize: { xs: "0.9rem", md: "1.25rem" },
+            }}
+          >
             {data.become_champion_section.description}
           </Typography>
           <Button
@@ -748,8 +750,8 @@ const ChampionPage = async () => {
           </Button>
         </Box>
       </Box>
-    )
-  }
+    );
+  };
   return (
     <Box
       sx={{
@@ -760,11 +762,12 @@ const ChampionPage = async () => {
       }}
     >
       <HeaderSection />
-      <ActivitiesSection/>
-      <OtherWaysSection/>
-      <ChampionsTestimonials/>
-      <ChampionsSuccessStories/>
-      <BecomeChampionSection/>
+      <ActivitiesSection />
+      <OtherWaysSection />
+      <ChampionsTestimonials />
+      <LeadingCompaniesSection />
+      <ChampionsSuccessStories />
+      <BecomeChampionSection />
     </Box>
   );
 };

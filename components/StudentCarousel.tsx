@@ -219,8 +219,7 @@ const StudentCarousel = ({ data }: StudentCarouselProps) => {
                     }}
                     src={
                       student?.picture?.source?.url
-                        ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                          student.picture.source.url
+                        ? student.picture.source.url
                         : ""
                     }
                     alt="Student Carousel Image"

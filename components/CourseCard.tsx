@@ -46,8 +46,7 @@ const CourseCard = ({ course }: any) => {
           <Image
             src={
               course?.cover_image?.source?.url
-                ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                  course?.cover_image?.source?.url
+                ? course?.cover_image?.source?.url
                 : null
             }
             alt={`${course.title}`}

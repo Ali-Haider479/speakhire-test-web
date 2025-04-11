@@ -116,8 +116,7 @@ export default function SpeakerImpact({ data }: SpeakerImpactProps) {
               <Image
                 src={
                   speaker?.picture?.source?.url
-                    ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                      speaker?.picture?.source?.url
+                    ? speaker?.picture?.source?.url
                     : null
                 }
                 alt={speaker.picture.alternate_text}
@@ -127,7 +126,11 @@ export default function SpeakerImpact({ data }: SpeakerImpactProps) {
                 priority={speaker.id <= 6}
                 onClick={() => {
                   if (!speaker?.link?.url) return;
-                  window.open(speaker.link?.url, "_blank", "noopener,noreferrer");
+                  window.open(
+                    speaker.link?.url,
+                    "_blank",
+                    "noopener,noreferrer"
+                  );
                 }}
               />
             </Box>

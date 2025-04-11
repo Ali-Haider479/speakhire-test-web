@@ -32,25 +32,25 @@ const FY_InternshipProgram = ({ data }: FY_InternshipProgramProps) => {
   return (
     <Box
       sx={{
-        width: {xs:"90vw",md:"80vw"},
+        width: { xs: "90vw", md: "80vw" },
         height: { xs: "auto", md: "50vh" }, // Dynamic height for responsiveness
         margin: "auto",
         display: "flex",
         flexDirection: { xs: "column", md: "row" }, // Column layout for smaller screens
         justifyContent: "space-between",
         alignItems: "center",
-        my: {xs:3,md:10},
+        my: { xs: 3, md: 10 },
         borderTopLeftRadius: "40px",
         borderTopRightRadius: "40px",
-        gap: {xs:2,md:4}, // Adds spacing between content in column view
+        gap: { xs: 2, md: 4 }, // Adds spacing between content in column view
       }}
     >
       {/* First child box - text content */}
       <Box
         sx={{
           width: { xs: "100%", md: "45%" },
-          paddingY: {xs:2,md:4},
-          paddingX: {xs:1.5,md:3},
+          paddingY: { xs: 2, md: 4 },
+          paddingX: { xs: 1.5, md: 3 },
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
@@ -90,8 +90,7 @@ const FY_InternshipProgram = ({ data }: FY_InternshipProgramProps) => {
         <Image
           src={
             data?.cover_image?.source?.url
-              ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                data?.cover_image?.source?.url
+              ? data?.cover_image?.source?.url
               : null
           }
           alt="partner-image"

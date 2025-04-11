@@ -52,7 +52,7 @@ const ImageGroup = styled(Box)({
 const ImageContainer = styled(Box)({
   position: "relative",
   width: "100%",
-  height: "200px", 
+  height: "200px",
   borderRadius: "12px",
   overflow: "hidden",
   "@media (max-width: 600px)": {
@@ -121,8 +121,7 @@ const NewsSection = ({ data }: NewsSectionProps) => {
                 <Image
                   src={
                     item?.cover_image?.source?.url
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                        item.cover_image.source.url
+                      ? item.cover_image.source.url
                       : "/api/placeholder/600/400"
                   }
                   alt={item?.cover_image?.alternate_text || "News Image"}

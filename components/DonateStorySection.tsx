@@ -33,9 +33,9 @@ const DonateStorySection = ({ data }: DonateStorySectionProps) => {
   return (
     <Box
       sx={{
-        marginTop: {xs:5,md:10},
-        marginBottom: {xs:5,md:10},
-        width: {xs:"90vw",md:"80vw"},
+        marginTop: { xs: 5, md: 10 },
+        marginBottom: { xs: 5, md: 10 },
+        width: { xs: "90vw", md: "80vw" },
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
@@ -65,7 +65,7 @@ const DonateStorySection = ({ data }: DonateStorySectionProps) => {
               padding: { xs: "24px", md: "40px" },
               maxWidth: "32rem",
               textAlign: "left",
-              height: {xs:"auto",md:"450px"},
+              height: { xs: "auto", md: "450px" },
             }}
           >
             <Typography
@@ -75,7 +75,7 @@ const DonateStorySection = ({ data }: DonateStorySectionProps) => {
                 marginBottom: "16px",
                 color: "#111827",
                 pt: 3,
-                fontSize:{xs:"1.25rem",md:"2rem"}
+                fontSize: { xs: "1.25rem", md: "2rem" },
               }}
             >
               {item.description}
@@ -84,7 +84,7 @@ const DonateStorySection = ({ data }: DonateStorySectionProps) => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                padding: {xs:"8px 12px",md:"12px 16px"},
+                padding: { xs: "8px 12px", md: "12px 16px" },
                 borderLeft: "1px solid #374151",
                 maxWidth: "400px",
                 marginTop: 5,
@@ -92,7 +92,11 @@ const DonateStorySection = ({ data }: DonateStorySectionProps) => {
             >
               <Typography
                 variant="h6"
-                sx={{ fontWeight: "bold", color: "#222", fontSize:{xs:16,md:22} }}
+                sx={{
+                  fontWeight: "bold",
+                  color: "#222",
+                  fontSize: { xs: 16, md: 22 },
+                }}
               >
                 {item.name}
               </Typography>
@@ -111,10 +115,7 @@ const DonateStorySection = ({ data }: DonateStorySectionProps) => {
           >
             <Image
               src={
-                item.cover_image.source.url
-                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                    item.cover_image.source.url
-                  : null
+                item.cover_image.source.url ? item.cover_image.source.url : null
               }
               alt=""
               style={{ objectFit: "cover" }}

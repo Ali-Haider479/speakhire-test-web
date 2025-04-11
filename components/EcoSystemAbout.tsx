@@ -107,7 +107,7 @@ export default function EcoSystemAbout({ data }: EcoSystemAboutProps) {
         }}
       >
         <Image
-          src={process.env.NEXT_PUBLIC_STRAPI_URL + data.cover_image.source.url}
+          src={data?.cover_image?.source?.url}
           alt={data.cover_image.alternate_text}
           layout="fill"
           style={{ objectFit: "contain", borderRadius: "40px", padding: "40px" }}

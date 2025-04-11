@@ -100,7 +100,7 @@ const BuildingLeaders = ({ data }: BuildingLeadersProps) => {
           <div style={{ filter: "grayscale(100%)" }}>
             <Image
               src={
-                process.env.NEXT_PUBLIC_STRAPI_URL + data.cover_image.source.url
+                 data.cover_image.source.url
               }
               alt={data.cover_image.alternate_text}
               layout="responsive"

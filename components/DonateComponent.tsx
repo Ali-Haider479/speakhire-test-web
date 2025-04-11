@@ -22,7 +22,7 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
         minHeight: "auto",
         backgroundColor: "white",
         mb: 5,
-        pb:0
+        pb: 0,
       }}
     >
       <Card
@@ -41,9 +41,9 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
             display: "flex",
             flexDirection: { xs: "column-reverse", md: "row" },
             height: "100%",
-            p:0,
+            p: 0,
             pb: "0 !important",
-            mb:0
+            mb: 0,
           }}
         >
           <Box
@@ -105,8 +105,7 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
             <Image
               src={
                 data.cover_image?.source?.url
-                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                    data.cover_image.source.url
+                  ? data.cover_image.source.url
                   : null
               }
               alt="Children sitting together"

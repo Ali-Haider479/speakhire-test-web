@@ -37,10 +37,9 @@ const PartnerMapsSection = async ({ data }: PartnerMapsSectionProps) => {
     }
   };
   const presenceMapUrl =
-    data?.presence_map_image?.source?.url || "/images/fallback-presence.png";
+    data?.presence_map_image?.source?.url ;
   const countriesMapUrl =
-    data?.countries_represented_map_image?.source?.url ||
-    "/images/fallback-countries.png";
+    data?.countries_represented_map_image?.source?.url 
 
   return (
     <Box
@@ -81,7 +80,7 @@ const PartnerMapsSection = async ({ data }: PartnerMapsSectionProps) => {
           }}
         >
           <Image
-            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${presenceMapUrl}`}
+            src={`${presenceMapUrl}`}
             alt="US Map with Partner States"
             width={16}
             height={9}
@@ -115,7 +114,7 @@ const PartnerMapsSection = async ({ data }: PartnerMapsSectionProps) => {
           }}
         >
           <Image
-            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${countriesMapUrl}`}
+            src={`${countriesMapUrl}`}
             alt="World Map with Represented Countries"
             width={16}
             height={9}

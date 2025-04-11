@@ -93,7 +93,7 @@ const SpeakerSeries = ({ data }: SpeakerSeriesProps) => {
     }
   };
   return (
-    <Box sx={{ py: 5, width: "80vw", mb:5 }}>
+    <Box sx={{ py: 5, width: "80vw", mb: 5 }}>
       {/* Header Section */}
       <Box sx={{ mb: 5 }}>
         <Typography
@@ -134,8 +134,7 @@ const SpeakerSeries = ({ data }: SpeakerSeriesProps) => {
                 height="300"
                 image={
                   speaker?.picture?.source?.url
-                    ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                      speaker?.picture?.source?.url
+                    ? speaker?.picture?.source?.url
                     : ""
                 }
                 alt={`${speaker.name}`}

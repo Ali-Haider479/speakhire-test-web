@@ -199,7 +199,7 @@ const InternshipOutcomesSection = ({
             />
           ))}
         </Box> */}
-        <Box sx={{ flex: 1 ,width:{xs:"100%",md:"35vw"}}}>
+        <Box sx={{ flex: 1, width: { xs: "100%", md: "35vw" } }}>
           <CarouselContainer>
             {data.carousel_images.map((image, index) => {
               let custom_position: "top" | "bottom" = "bottom";
@@ -222,10 +222,7 @@ const InternshipOutcomesSection = ({
                     cursor: "pointer",
                   }}
                 >
-                  <CarouselImage
-                    src={process.env.NEXT_PUBLIC_STRAPI_URL + image.source.url}
-                    alt={image.alt}
-                  />
+                  <CarouselImage src={image.source.url} alt={image.alt} />
                 </CarouselItem>
               );
             })}

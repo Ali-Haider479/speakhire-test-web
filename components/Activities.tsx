@@ -194,7 +194,7 @@ const ActivitiesSection = ({ data }: ActivitiesSectionProps) => {
                   }}
                 >
                   <CarouselImage
-                    src={process.env.NEXT_PUBLIC_STRAPI_URL + image.source.url}
+                    src={image.source.url}
                     alt={image.alt}
                   />
                 </CarouselItem>

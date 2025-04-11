@@ -14,81 +14,6 @@ import React from "react";
 import Image from "next/image";
 import TestimonialSection from "@/components/TestimonialSection";
 
-const programs = [
-  {
-    programIcon: "/leadershipIcon.svg",
-    title: "Leadership course",
-    details: [
-      "Entrepreneurial Mindset & Public Speaking",
-      "Over total of 10 sessions",
-      "Develop leadership skills",
-      "Increased self-awareness, confidence, and student engagement",
-    ],
-    application: "Applications closing on 12 Dec, 2024 12PM",
-  },
-  {
-    programIcon: "/foundationYearIcon.svg",
-    title: "Foundational year",
-    details: [
-      "Get a mentor from industry",
-      "Join the network of professionals",
-      "Develop leadership skills",
-      "Increased self-awareness, confidence, and student engagement",
-    ],
-    application: "Applications closing on 12 Dec, 2024 12PM",
-  },
-  {
-    programIcon: "/courseIcon.svg",
-    title: "Exploratory years program",
-    invite: (
-      <Typography
-        sx={{
-          backgroundColor: "#E4ECFC",
-          borderRadius: 10,
-          p: 0.25,
-          width: 300,
-          pl: 1.5,
-          mt: 2,
-        }}
-      >
-        Invite only program for{" "}
-        <Typography component="span" sx={{ fontWeight: "bold" }}>
-          FY graduates
-        </Typography>
-      </Typography>
-    ),
-    details: [
-      "Join the network of professionals",
-      "Develop leadership skills",
-      "Flexible scheduling",
-    ],
-    application: "Applications closing on 12 Dec, 2024 12PM",
-  },
-];
-
-const data = [
-  {
-    Name: "Cathy Whealon",
-    designation: "UX Researcher - SPEAKHIRE Alumni",
-    title:
-      "One of the most valuable parts was the mentorship. The instructors weren’t just teachers—they were industry experts who genuinely cared about our growth.",
-    note: "",
-    image: "/cathy'sStory.svg",
-    isImageLeft: true,
-    isTextRightAligned: false,
-  },
-  {
-    Name: "Wade Cooper",
-    designation: "UX Researcher @ Google - Champion",
-    title:
-      "I loved how the training was tailored to my needs and aligned perfectly with the challenges I face. The hands-on approach made learning engaging that I applied to my projects.",
-    note: "",
-    image: "/wadeStory.svg",
-    isImageLeft: false,
-    isTextRightAligned: true,
-  },
-];
-
 async function getData() {
   try {
     const InternsPageApiRes = await fetch(
@@ -246,7 +171,7 @@ const Interns = async () => {
             overflow: "hidden",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
             backgroundColor: "#ffffff",
-            height: { xs: "25vh", md: "70vh" },
+            height: { xs: "25vh", md: "90vh" },
             marginTop: 5,
           }}
         >
@@ -255,8 +180,7 @@ const Interns = async () => {
             <Image
               src={
                 data.hero_section?.cover_image?.source?.url
-                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                    data.hero_section?.cover_image?.source?.url
+                  ? data.hero_section?.cover_image?.source?.url
                   : null
               }
               alt={
@@ -317,8 +241,7 @@ const Interns = async () => {
                     <img
                       src={
                         item.course_img.source.url
-                          ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                            item.course_img.source.url
+                          ? item.course_img.source.url
                           : null
                       }
                       alt={item.title}
@@ -361,12 +284,10 @@ const Interns = async () => {
                     </List>
                     <Typography
                       variant="body2"
-                      sx={{ mt: 2,ml:1, color: "#063B55" }}
+                      sx={{ mt: 2, ml: 1, color: "#063B55" }}
                     >
                       Applications closing on{" "}
-                      <span
-                        style={{ color: "#063B55", fontWeight: "bold" }}
-                      >
+                      <span style={{ color: "#063B55", fontWeight: "bold" }}>
                         {item.application_closing_date}
                       </span>
                     </Typography>
@@ -378,7 +299,7 @@ const Interns = async () => {
                         textTransform: "none",
                         borderRadius: 10,
                         fontWeight: "bold",
-                        fontSize:{xs:14,md:16}
+                        fontSize: { xs: 14, md: 16 },
                       }}
                     >
                       Register Now
@@ -486,11 +407,7 @@ const Interns = async () => {
                     }}
                   >
                     <Image
-                      src={
-                        img?.src
-                          ? process.env.NEXT_PUBLIC_STRAPI_URL + img.src
-                          : null
-                      }
+                      src={img?.src ? img.src : null}
                       alt="Community"
                       fill
                       style={{ objectFit: "cover" }}
@@ -523,11 +440,7 @@ const Interns = async () => {
                 }}
               >
                 <Image
-                  src={
-                    img?.src
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL + img.src
-                      : null
-                  }
+                  src={img?.src ? img.src : null}
                   alt="Community"
                   fill
                   style={{ objectFit: "cover" }}
@@ -559,7 +472,7 @@ const Interns = async () => {
             display: "flex", // Ensures flex behavior
             flexDirection: "column",
             px: { xs: 4, md: 10 },
-            py: { xs: 4, md: 15 },
+            py: { xs: 4, md: 25 },
             textAlign: "left",
           }}
         >
@@ -569,7 +482,7 @@ const Interns = async () => {
           >
             {data.apply_now_section.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "white", mt: 2 }}>
+          <Typography variant="body1" sx={{ color: "white", mt: 2 ,fontSize: { xs: "1rem", md: "1.25rem" }}}>
             {data.apply_now_section.description}
           </Typography>
           <Button
@@ -586,7 +499,7 @@ const Interns = async () => {
             <Typography
               variant="body1"
               sx={{
-                fontSize: { xs: 14, md: 16 },
+                fontSize: { xs: 14, md: 18 },
                 fontWeight: "bold",
                 textTransform: "none",
               }}
@@ -599,16 +512,15 @@ const Interns = async () => {
           <Image
             src={
               data?.apply_now_section?.cover_image?.source?.url
-                ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                  data?.apply_now_section?.cover_image?.source?.url
+                ? data?.apply_now_section?.cover_image?.source?.url
                 : null
             }
             alt={
               data?.apply_now_section?.cover_image.alternate_text ||
               "Become Champion"
             }
-            width={800}
-            height={200}
+            width={1000}
+            height={9}
             style={{ borderRadius: 35, justifySelf: "right" }}
           />
         </Box>

@@ -21,7 +21,6 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
 
       return (
         <>
-          
           <span style={{ color: "#0F99C3" }}> {firstPart} </span>
           {lastPart}
         </>
@@ -36,7 +35,7 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
         textAlign: "center",
         py: { xs: 1, md: 6 },
         // px: 2,
-        maxWidth:{xs:"90vw",md:"100vw"},
+        maxWidth: { xs: "90vw", md: "100vw" },
         mx: "auto",
       }}
     >
@@ -56,7 +55,7 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
         slidesPerView={1}
         freeMode={true}
         centeredSlides={true}
-        initialSlide={1} 
+        initialSlide={1}
         breakpoints={{
           640: {
             slidesPerView: 1.25,
@@ -76,7 +75,7 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
             <Box
               sx={{
                 position: "relative",
-                borderRadius: {xs:"16px",md:"28px"},
+                borderRadius: { xs: "16px", md: "28px" },
                 overflow: "hidden",
                 width: "100%",
                 aspectRatio: "16/9",
@@ -85,8 +84,7 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
               <Image
                 src={
                   slide?.cover_image?.source.url
-                    ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                      slide.cover_image.source.url
+                    ? slide.cover_image.source.url
                     : null
                 }
                 alt={slide.cover_image.alternate_text}
@@ -98,23 +96,29 @@ const CollaborationsCarousel = ({ data }: CollaborationsCarouselProps) => {
                   position: "absolute",
                   bottom: 0,
                   left: 0,
-                  width: {xs:"94%",md:"98%"},
+                  width: { xs: "94%", md: "98%" },
                   background:
                     "linear-gradient(transparent, rgba(0, 0, 0, 0.8))",
                   color: "white",
                   pb: { xs: 1.5, md: 3 },
                   px: { xs: 1.5, md: 4 },
                   ml: 0,
-                  textAlign:{xs:"center",md:"left"}
+                  textAlign: { xs: "center", md: "left" },
                 }}
               >
                 <Typography
                   variant="h6"
-                  sx={{ fontWeight: "bold", fontSize: { xs: "1.1rem", md:"1.25rem" } }}
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: { xs: "1.1rem", md: "1.25rem" },
+                  }}
                 >
                   {slide.title}
                 </Typography>
-                <Typography variant="body1" sx={{ fontSize: {xs:"0.7rem", md:"0.9rem"} }}>
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: { xs: "0.7rem", md: "0.9rem" } }}
+                >
                   {slide.description}
                 </Typography>
               </Box>

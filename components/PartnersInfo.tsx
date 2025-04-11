@@ -61,7 +61,7 @@ export default function PartnersInfo({ data }: PartnersInfoProps) {
                 }}
               >
                 <Image
-                  src={process.env.NEXT_PUBLIC_STRAPI_URL + partner.source.url}
+                  src={partner.source.url}
                   alt={partner.alt}
                   width={120} // Adjust width as needed
                   height={120} // Adjust height as needed

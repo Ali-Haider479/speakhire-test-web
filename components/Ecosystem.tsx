@@ -101,13 +101,13 @@ export default function Ecosystem({ data }: EcosystemProps) {
                   component="img"
                   height="auto"
                   image={
-                    process.env.NEXT_PUBLIC_STRAPI_URL +
                     offer.card_image.source.url
                   }
                   alt={offer.title}
                   sx={{
                     p: 1,
                     borderRadius: 10, // Adjust this value as needed
+                    height:{xs:"auto",md:"250px",lg:"300px"}
                   }}
                 />
 

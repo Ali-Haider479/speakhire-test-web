@@ -74,7 +74,12 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
         position: "relative",
       }}
     >
-      <Box sx={{ width: {xs:"90vw",md:"80vw"}, margin: {xs:1,md:"0 auto"} }}>
+      <Box
+        sx={{
+          width: { xs: "90vw", md: "80vw" },
+          margin: { xs: 1, md: "0 auto" },
+        }}
+      >
         <Box sx={{ mb: 4, textAlign: "left" }}>
           <Typography variant={"h3"} gutterBottom>
             {title}
@@ -109,12 +114,7 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
                   <Box
                     key={idx}
                     component="img"
-                    src={
-                      member?.photo?.source?.url
-                        ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                          member?.photo?.source?.url
-                        : null
-                    }
+                    src={member?.photo?.source?.url}
                     alt={member.name}
                     sx={{
                       width: "100%",
@@ -129,7 +129,9 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
                   />
                 ))}
               </Box>
-              <CardContent sx={{textAlign:"justify"}}>{members[activeMember].message}</CardContent>
+              <CardContent sx={{ textAlign: "justify" }}>
+                {members[activeMember].message}
+              </CardContent>
             </Card>
           </Grid>
 
@@ -142,15 +144,7 @@ const MemberBoard: React.FC<MemberBoardProps> = ({
                 onClick={() => handleMemberClick(index)}
               >
                 <ListItemAvatar>
-                  <Avatar
-                    src={
-                      member.photo?.source?.url
-                        ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                          member.photo.source.url
-                        : null
-                    }
-                    alt={member.name}
-                  />
+                  <Avatar src={member.photo?.source?.url} alt={member.name} />
                 </ListItemAvatar>
                 <ListItemText
                   primary={

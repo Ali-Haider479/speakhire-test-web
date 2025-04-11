@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 const ImageSection = (imageSrc:any) => {
   const fullImageSrc = imageSrc 
-    ? (process.env.NEXT_PUBLIC_STRAPI_URL+imageSrc.imageSrc)
+    ? (imageSrc.imageSrc)
     : "/stock1.jpg"; // Fallback image if `imageSrc` is undefined
   // Ensure imageSrc is a valid path
   const [dimensions, setDimensions] = useState({
@@ -69,7 +69,7 @@ const ImageSection = (imageSrc:any) => {
       >
         <Image
           src={fullImageSrc} // Replace with the actual path to your image
-          alt="Group discussion"
+          alt={"Group discussion"}
           width={dimensions.width} // Use dynamic width from state
           height={dimensions.height} // Use dynamic height from state
           style={{ 

@@ -93,13 +93,11 @@ const MagazineSection = ({ data }: MagazineSectionProps) => {
               <StyledCardMedia
                 component={"img" as const}
                 image={
-                  process.env.NEXT_PUBLIC_STRAPI_URL +
                   magazine.cover_image.source.url
                 }
                 alt={`${magazine.title}`}
                 onClick={() =>
                   window.open(
-                    process.env.NEXT_PUBLIC_STRAPI_URL +
                       magazine.cover_image.source.url,
                     "_blank"
                   )

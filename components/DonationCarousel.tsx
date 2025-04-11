@@ -91,7 +91,7 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
                 <Image
                   src={
                     img?.src
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL + img?.src
+                      ? img?.src
                       : null
                   }
                   alt={img.alt || "Community"}
