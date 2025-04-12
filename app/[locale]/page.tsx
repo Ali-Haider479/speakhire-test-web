@@ -1,6 +1,6 @@
-import DonateComponent from "../components/DonateComponent";
-import StudentCarousel from "../components/StudentCarousel";
-import WorkForceComponent from "../components/WorkForceComponent";
+import DonateComponent from "../../components/DonateComponent";
+import StudentCarousel from "../../components/StudentCarousel";
+import WorkForceComponent from "../../components/WorkForceComponent";
 import OfferingsSection from "@/components/OfferingsSelection";
 import Ecosystem from "@/components/Ecosystem";
 import BecomePartnerComponent from "@/components/BecomePartnerComponent";
@@ -10,19 +10,25 @@ import ObjectiveSection from "@/components/ObjectivesSection";
 import SupportSection from "@/components/SupportSections";
 import ImpactSection from "@/components/ImpactSection";
 import ImpactsLivesSection from "@/components/ImpactsLivesSection";
-import PartnerMapsSection from "@/components/PartnerMapsSection";
+import PartnerMapsSection from "@/components/PartnerMapsSection"
 
-async function getData() {
+interface PageProps {
+  params: {
+    locale: string;
+  };
+}
+
+async function getData(locale:string) {
   try {
     const [homePageResponse, commonItemsResponse] = await Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?populate=*`, {
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?locale=${locale}&populate=*`, {
         headers: {
           Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
           "Content-Type": "application/json",
         },
         cache: "no-store", // Disables caching (SSR mode)
       }),
-      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?locale=${locale}populate=*`, {
         headers: {
           Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
           "Content-Type": "application/json",
@@ -50,8 +56,11 @@ async function getData() {
   }
 }
 
-const Home = async () => {
-  const homePageRes = await getData();
+const Home = async ({ params }: PageProps) => {
+  const { locale } = await params;
+
+  console.log(locale)
+  const homePageRes = await getData(locale);
   console.log(homePageRes);
   const data = homePageRes;
 
