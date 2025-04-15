@@ -4,4 +4,6 @@ const i18nConfig ={
     prefixDefault:true
 }
 
-module.exports = i18nConfig
+export default i18nConfig
+
+export type Locale = (typeof i18nConfig)['locales'][number]

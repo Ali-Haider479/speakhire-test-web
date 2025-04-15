@@ -26,6 +26,7 @@ import Footer from "@/components/Footer";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/navigation";
+import LanguageDropdown from "./LanguageDropDown";
 
 function Navbar() {
   const theme = useTheme();
@@ -331,6 +332,7 @@ function Navbar() {
                     height={24}
                   />
                 </IconButton>
+                <LanguageDropdown/>
                 <Button
                   variant="contained"
                   sx={{
