@@ -3,8 +3,10 @@ import { Box, Typography } from "@mui/material";
 
 interface ImpactSectionProps {
   data: {
+    title:string;
     description: string;
     statistics: any[];
+    isPartner?: boolean;
   };
 }
 
@@ -17,12 +19,12 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
       const words = text.split(" ");
-      const firstWord = words[0];
-      const lastWords = words.slice(1).join(" ");
+      const firstWord = words.slice(0,3).join(" ");
+      const lastWords = words.slice(3).join(" ");
 
       return (
         <>
-          <span style={{ color: "#08547A" }}>{firstWord}</span> {lastWords}
+          <span style={{ color: "#0F99C3" }}>{firstWord}</span> {lastWords}
         </>
       );
     } else {
@@ -30,24 +32,15 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
     }
   };
 
-  // [
-  //   {
-  //     value: data.countriesRepresentNo,
-  //     description: data.countriesRepresentText,
-  //   },
-  //   {
-  //     value: data.careerImpactedNo,
-  //     description: data.careerImpactedText,
-  //   },
-  //   {
-  //     value: data.internshipProvidedNo,
-  //     description: data.internShipProvidedText,
-  //   },
-  //   {
-  //     value: data.studentPreparedPercentage,
-  //     description: data.studentPreparedText,
-  //   },
-  // ];
+  const DefaultText = () => (
+    <>
+      We <span style={{ color: "#0F99C3" }}>S</span>upport{" "}
+      <span style={{ color: "#0F99C3" }}>P</span>repare{" "}
+      <span style={{ color: "#0F99C3" }}>E</span>mpower{" "}
+      <span style={{ color: "#0F99C3" }}>A</span>ll{" "}
+      <span style={{ color: "#0F99C3" }}>k</span>ind
+    </>
+  );
 
   return (
     <Box
@@ -56,9 +49,9 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
         backgroundColor: "#FFFFFF", // White background
         textAlign: "center",
         width: "100%",
-        alignItems:"center",
-        display:"flex",
-        flexDirection:"column"
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <Typography
@@ -71,11 +64,7 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
           lineHeight: "1.2",
         }}
       >
-        We <span style={{ color: "#0F99C3" }}>S</span>upport{" "}
-        <span style={{ color: "#0F99C3" }}>P</span>repare{" "}
-        <span style={{ color: "#0F99C3" }}>E</span>mpower{" "}
-        <span style={{ color: "#0F99C3" }}>A</span>ll{" "}
-        <span style={{ color: "#0F99C3" }}>k</span>ind
+        {data.isPartner ? HighlightText(data.title) : <DefaultText/>}
       </Typography>
 
       <Typography
@@ -88,7 +77,7 @@ const ImpactSection = async ({ data }: ImpactSectionProps) => {
           width: { xs: "60vw", md: "40vw" },
         }}
       >
-        {HighlightText(data?.description)}
+        {data?.description}
       </Typography>
 
       <Box

@@ -115,7 +115,7 @@ export default function PartnersCarousel({ testimonials }: Props) {
           arrows={false} // Hide default arrows
           renderButtonGroupOutside
         >
-          {testimonials.map((testimonial: any, index: number) => (
+          {testimonials && testimonials.map((testimonial: any, index: number) => (
             <Box
               key={index}
               sx={{
@@ -133,7 +133,6 @@ export default function PartnersCarousel({ testimonials }: Props) {
               <Box sx={{ height: "100px" }}>
                 <Image
                   src={
-                    process.env.NEXT_PUBLIC_STRAPI_URL +
                     testimonial.instituteLogo.source.url
                   }
                   alt={testimonial.instituteLogo.alternate_text}

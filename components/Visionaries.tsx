@@ -57,7 +57,7 @@ export default function VisionariesComponent({
           flexDirection: { xs: "column", md: "row" },
           justifyContent: "space-between",
           alignItems: "center",
-          my: {xs:3,md:8},
+          my: { xs: 3, md: 8 },
         }}
       >
         <Box
@@ -70,7 +70,7 @@ export default function VisionariesComponent({
             flexDirection: "column",
             alignItems: "flex-start",
             height: "100%",
-            minHeight:{md:"500px"}
+            minHeight: { md: "500px" },
           }}
         >
           <Typography
@@ -120,15 +120,12 @@ export default function VisionariesComponent({
             width: { xs: "100%", md: "60%" },
             position: "relative",
             height: "100%",
-            minHeight: {xs:"300px",md:"500px"},
+            minHeight: { xs: "300px", md: "500px" },
           }}
         >
           <Image
             src={
-              data?.cover_image?.source.url
-                ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                  data?.cover_image?.source.url
-                : ""
+              data?.cover_image?.source?.url ? data?.cover_image?.source?.url : ""
             }
             alt={data?.cover_image?.alternate_text}
             fill
@@ -138,22 +135,16 @@ export default function VisionariesComponent({
       </Box>
       {showTeam && (
         <Box key={"team-section"}>
-          {data.team.map((team: any,index:number) => (
+          {data.team.map((team: any, index: number) => (
             <>
               <MemberBoard title={team.title} members={team.team_members} />
-              {index!==data.team.length-1 && <Divider sx={{ mt: 5, mb: 5, width: "100vw" }} />}
+              {index !== data.team.length - 1 && (
+                <Divider sx={{ mt: 5, mb: 5, width: "100vw" }} />
+              )}
             </>
           ))}
         </Box>
       )}
-      {/* {showTeam && (
-        <Box key={"team-section"}>
-          <MemberBoard
-            title={data.team[0].title}
-            members={data.team[0].team_members}
-          />
-        </Box>
-      )} */}
     </Box>
   );
 }

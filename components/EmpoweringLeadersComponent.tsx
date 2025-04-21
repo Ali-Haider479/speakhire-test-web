@@ -42,11 +42,11 @@ export default function EmpoweringLeadersComponent({
   return (
     <Box
       sx={{
-        width: {xs:"90vw",md:"80vw"},
+        width: { xs: "90vw", md: "80vw" },
         backgroundColor: "#F5F8FA", // Light blue background
         borderRadius: "30px",
         p: { xs: 3, md: 6 },
-        my: {xs:5,md:10},
+        my: { xs: 5, md: 10 },
         mx: "auto",
       }}
     >
@@ -140,8 +140,7 @@ export default function EmpoweringLeadersComponent({
             <Image
               src={
                 data?.cover_image?.source?.url
-                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                    data?.cover_image?.source?.url
+                  ? data?.cover_image?.source?.url
                   : null
               }
               alt={data?.cover_image?.alternate_text}

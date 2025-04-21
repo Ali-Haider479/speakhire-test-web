@@ -7,6 +7,7 @@ import ImageSection from "@/components/ImageSection";
 import ImpactSection from "@/components/ImpactSection";
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import ObjectiveSection from "@/components/ObjectivesSection";
 
 async function getData() {
   try {
@@ -14,11 +15,19 @@ async function getData() {
       fetch(
         `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/partner-page?populate=*`,
         {
-          next: { revalidate: 60 },
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          cache: "no-store", // Disables caching (SSR mode)
         }
       ),
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
-        next: { revalidate: 60 },
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store", // Disables caching (SSR mode)
       }),
     ]);
 
@@ -64,12 +73,22 @@ async function Partner() {
     },
   ];
   return (
-    <Box sx={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
-      <PartnershipBanner data={data.hero_section}/>
-      <ImpactSection data={data.economic_growth_statistics}/>
-      <PartnersInfo data={data.join_change_maker_section}/>
-      <PartnersTestimonials data={data.partners_testimonials_section}/>
-      <BecomePartnerComponent data={data.become_partner_section}/>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <PartnershipBanner data={data.hero_section} />
+      <ImpactSection
+        data={{ ...data.economic_growth_statistics, isPartner: true }}
+      />
+      <PartnersInfo data={data.join_change_maker_section} />
+      <ObjectiveSection data={{...data.partners_objective,isPartner:true}}/>
+      <PartnersTestimonials data={data.partners_testimonials_section} />
+      <BecomePartnerComponent data={data.become_partner_section} />
       <TestimonialsContainer
         title={data.talents_testimonial.title}
         highlightedWord="talents"

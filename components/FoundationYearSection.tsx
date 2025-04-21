@@ -6,8 +6,11 @@ import {
   Container,
   styled,
   CardContent,
+  Link,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import TypeFormModal from "./TypeFormModal";
+import CustomButton from "./CustomButton";
 
 const BreadcrumbContainer = styled(Box)({
   display: "flex",
@@ -16,7 +19,12 @@ const BreadcrumbContainer = styled(Box)({
   // marginBottom: '16px',
 });
 
-function FoundationYearSection() {
+type FoundationYearSectionProps = {
+  typeFormId: string;
+};
+
+function FoundationYearSection({ typeFormId }: FoundationYearSectionProps) {
+  const [showTypeFormModal, setShowTypeFormModal] = useState(false);
   return (
     <Box
       sx={{
@@ -45,7 +53,7 @@ function FoundationYearSection() {
         sx={{
           fontSize: { xs: "2rem", md: "3rem" },
           fontWeight: 400,
-          marginBottom: {xs:"24px",md:"16px"},
+          marginBottom: { xs: "24px", md: "16px" },
           lineHeight: "1.2",
           paddingTop: "2vh",
         }}
@@ -53,9 +61,8 @@ function FoundationYearSection() {
         <span style={{ color: "#0F99C3" }}>Foundational </span>
         Year
       </Typography>
-      <Button
-        variant="outlined"
-        color="primary"
+      <CustomButton
+        innerText={"Partner Interest Form"}
         sx={{
           color: "#006397",
           borderColor: "#006397",
@@ -71,14 +78,16 @@ function FoundationYearSection() {
               filter: "brightness(0) invert(1)", // Turns icon to pure white
             },
           },
-          fontSize: {xs:14,md:16},
+          fontSize: { xs: 14, md: 16 },
           fontWeight: "bold",
           textTransform: "none",
         }}
-        endIcon={<img src="/link.svg" width={20} height={20} />}
-      >
-        Partner Interest Form
-      </Button>
+        variant="outlined"
+        icon={<img src="/link.svg" width={20} height={20} />}
+        linkUrl={true}
+        typeFormId={typeFormId}
+      />
+    
       <Button
         variant="outlined"
         color="primary"
@@ -101,13 +110,18 @@ function FoundationYearSection() {
           mt: { xs: 1.5, md: 0 },
           width: { xs: "225px", md: "auto" },
           textTransform: "none",
-          fontSize: {xs:14,md:16},
+          fontSize: { xs: 14, md: 16 },
           fontWeight: "bold",
         }}
         endIcon={<img src="/link.svg" width={20} height={20} />}
       >
         Intern Application
       </Button>
+      {/* <TypeFormModal
+        open={showTypeFormModal}
+        setOpen={setShowTypeFormModal}
+        typeFormId={typeFormId}
+      /> */}
     </Box>
   );
 }

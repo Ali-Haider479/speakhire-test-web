@@ -7,13 +7,34 @@ interface ObjectiveSectionProps {
   data: {
     title: string;
     objectives: any[];
+    isPartner?: boolean;
   };
 }
 
 const ObjectiveSection = ({ data }: ObjectiveSectionProps) => {
+  const HighlightText = (text: string) => {
+    if (text?.length > 0) {
+      const words = text.split(" ");
+      const firstWord = words.slice(0, 3).join(" ");
+      const middleWords = words.slice(3, -1).join(" ");
+      const lastWord = words[words.length - 1];
+
+      return (
+        <>
+          <span style={{ color: "#0F99C3" }}>{firstWord}</span> {middleWords}
+          <span style={{ color: "#08547A" }}> {lastWord}</span>
+        </>
+      );
+    } else {
+      return "";
+    }
+  };
   return (
     <Box
       sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         padding: { xs: "20px", md: "40px 20px" },
         textAlign: "center",
         backgroundColor: "#fff",
@@ -22,13 +43,17 @@ const ObjectiveSection = ({ data }: ObjectiveSectionProps) => {
       <Typography
         variant="h2"
         sx={{
-          fontSize: { xs: "1.8rem", md: "3rem" },
+          fontSize: {
+            xs: "1.8rem",
+            md: `${data.isPartner ? "2.5rem" : "3rem"}`,
+          },
           fontWeight: 400,
           marginBottom: "30px",
           color: "#1D1B20",
+          width: "50vw",
         }}
       >
-        Our objective is to
+        {data.isPartner ? HighlightText(data.title) : data.title}
       </Typography>
 
       <Grid
@@ -65,13 +90,7 @@ const ObjectiveSection = ({ data }: ObjectiveSectionProps) => {
                 }}
               >
                 <Image
-                  src={
-                    index === 0
-                      ? "/gear.svg"
-                      : index === 1
-                      ? "/document.svg"
-                      : "/handshake.svg"
-                  }
+                  src={objective?.icon_image?.source?.url}
                   alt="icon"
                   width={24}
                   height={24}

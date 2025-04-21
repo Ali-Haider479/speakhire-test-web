@@ -20,7 +20,6 @@ const InternNetworkCircleComponent = ({
 
       return (
         <>
-          
           <span style={{ color: "#0F99C3" }}>{firstPart} </span>
           {lastPart}
         </>
@@ -32,11 +31,11 @@ const InternNetworkCircleComponent = ({
   return (
     <Box
       sx={{
-        padding: {xs:"10px",md:"20px"},
+        padding: { xs: "10px", md: "20px" },
         textAlign: "center",
         alignContent: "center",
-        width: {xs:"95vw",md:"80vw"},
-        mt:5
+        width: { xs: "95vw", md: "80vw" },
+        mt: 5,
       }}
     >
       <Box
@@ -55,9 +54,9 @@ const InternNetworkCircleComponent = ({
             fontWeight: "bold",
             marginBottom: 1,
             width: "100%",
-            paddingRight: {xs:0,md:"100px"},
-            paddingLeft: {xs:0,md:"100px"},
-            fontSize:{xs:"1.5rem",md:"2rem"}
+            paddingRight: { xs: 0, md: "100px" },
+            paddingLeft: { xs: 0, md: "100px" },
+            fontSize: { xs: "1.5rem", md: "2rem" },
           }}
         >
           {HighlightText(data.title)}
@@ -65,8 +64,7 @@ const InternNetworkCircleComponent = ({
         <Image
           src={
             data?.cover_image?.source?.url
-              ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                data?.cover_image?.source?.url
+              ? data?.cover_image?.source?.url
               : null
           }
           alt={data.cover_image.alternate_text}

@@ -12,7 +12,13 @@ async function getData() {
   try {
     const foundationalYearApiRes = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/foundation-year-page?populate=*`,
-      { next: { revalidate: 60 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store", // Disables caching (SSR mode)
+      }
     );
 
     if (!foundationalYearApiRes.ok) throw new Error("Failed to fetch data");
@@ -47,7 +53,7 @@ const foundationalYearPage = async () => {
       alignItems="center"
       width="100%"
     >
-      <FoundationYearSection />
+      <FoundationYearSection typeFormId={data.partner_interest_form_id} />
       <FY_InternshipProgram data={data.internship_program_section} />
       <EconomicMobilitySection data={data.economic_mobility_section} />
       <InternNetworkCircleComponent data={data.inter_network_section} />

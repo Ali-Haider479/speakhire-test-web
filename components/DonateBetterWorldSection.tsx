@@ -43,12 +43,12 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
       <Typography
         variant="h2"
         sx={{
-          fontSize: {xs:"2rem",md:"3rem"},
+          fontSize: { xs: "2rem", md: "3rem" },
           fontWeight: 400,
           marginBottom: "16px",
           lineHeight: "1.2",
-          paddingTop: {xs:"5vh",md:"10vh"},
-          width: {xs:"80vw",md:"45vw"},
+          paddingTop: { xs: "5vh", md: "10vh" },
+          width: { xs: "80vw", md: "45vw" },
         }}
       >
         {HighlightText(data.title)}
@@ -60,7 +60,7 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
           color: "#49454F", // Gray color for the description
           marginBottom: "32px",
           //   maxWidth: '600px',
-          width: {xs:"70vw",md:"45vw"},
+          width: { xs: "70vw", md: "45vw" },
           margin: "0 auto",
           lineHeight: "1.5",
           fontWeight: 500,
@@ -88,13 +88,13 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
         sx={{
           position: "relative",
           zIndex: 1,
-          width: {xs:"90vw",md:"80vw"},
+          width: { xs: "90vw", md: "80vw" },
           borderRadius: "40px",
           border: "10px solid rgb(195, 206, 211)",
           overflow: "hidden",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
           backgroundColor: "#ffffff",
-          height: {xs:"30vh",md:"80vh"},
+          height: { xs: "30vh", md: "80vh" },
           marginTop: 5,
         }}
       >
@@ -102,10 +102,7 @@ const DonateBetterWorldSection = ({ data }: DonateBetterWorldSectionProps) => {
           {/* This is where your image will go */}
           <Image
             src={
-              data.cover_image?.source?.url
-                ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                  data.cover_image.source.url
-                : null
+              data.cover_image?.source?.url ? data.cover_image.source.url : null
             }
             alt={data.cover_image.alternate_text || "Donate Cause"}
             fill

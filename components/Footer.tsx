@@ -47,7 +47,7 @@ const footerSections: FooterSection[] = [
       { label: "Partners", href: "/partner" },
       { label: "Champions", href: "/champions" },
       { label: "Interns", href: "/interns" },
-      { label: "Careers", href: "/careers" },
+      { label: "Careers", href: "/form/dHWxc3pF" },
       { label: "Volunteers", href: "/volunteers" },
     ],
   },
@@ -170,7 +170,7 @@ const Footer: React.FC<FooterProps> = ({ sx }) => {
           <Grid item xs={12} md={8}>
             <Grid container spacing={4}>
               {footerSections.map((section) => (
-                <Grid item xs={12} sm={4} key={section.title}>
+                <Grid item xs={6} sm={4} key={section.title}>
                   <Typography
                     variant="h6"
                     color="text.primary"

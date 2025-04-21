@@ -1,3 +1,4 @@
+"use server";
 import DonateBetterWorldSection from "@/components/DonateBetterWorldSection";
 import DonateComponent from "@/components/DonateComponent";
 import DonateStorySection from "@/components/DonateStorySection";
@@ -11,11 +12,22 @@ import Image from "next/image";
 async function getData() {
   try {
     const [DonationApiRes, commonItemsResponse] = await Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/donation-page?populate=*`, {
-        cache: "no-store",
-      }),
+      fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/donation-page?populate=*`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          cache: "no-store", // Disables caching (SSR mode)
+        }
+      ),
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/common?populate=*`, {
-        cache: "no-store",
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store", // Disables caching (SSR mode)
       }),
     ]);
 
@@ -66,12 +78,18 @@ const Donate = async () => {
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
-          mt: {xs:5,md:10},
+          mt: { xs: 5, md: 10 },
           alignItems: "center",
-          width: {xs:"85vw",md:"100vw"},
+          width: { xs: "85vw", md: "100vw" },
         }}
       >
-        <Typography variant="h2" sx={{width:{xs:"90vw",md:"80vw"},fontSize:{xs:"2rem",md:"3rem"}}}>
+        <Typography
+          variant="h2"
+          sx={{
+            width: { xs: "90vw", md: "80vw" },
+            fontSize: { xs: "2rem", md: "3rem" },
+          }}
+        >
           {data.contributors_section.title.split(" ").slice(0, -1).join(" ")}
           <span style={{ color: "#08547A" }}>
             {" "}
@@ -83,30 +101,26 @@ const Donate = async () => {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: 3, 
+            gap: 3,
             mt: 3,
           }}
         >
           {data.contributors_section.logos.map((item: any) => (
             <Image
-              key={item.alternate_text} 
-              src={
-                item?.source?.url
-                  ? process.env.NEXT_PUBLIC_STRAPI_URL + item?.source?.url
-                  : null
-              }
-              width={380} 
+              key={item.alternate_text}
+              src={item?.source?.url ? item?.source?.url : null}
+              width={380}
               height={120}
-              alt={item.alternate_text||"contributorsSection Logo"}
+              alt={item.alternate_text || "contributorsSection Logo"}
               style={{
                 maxWidth: "100%",
-                height: "auto", 
+                height: "auto",
               }}
             />
           ))}
         </Box>
       </Box>
-      <DonateComponent data={data?.donate_component}/>
+      <DonateComponent data={data?.donate_component} />
     </Box>
   );
 };

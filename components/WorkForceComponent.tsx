@@ -71,7 +71,6 @@ const WorkforceComponent = ({ data }: WorkforceComponentProps) => {
             <Box sx={{ position: "relative", width: "100%", height: "100%" }}>
               <Image
                 src={
-                  process.env.NEXT_PUBLIC_STRAPI_URL +
                   data?.cover_image.source.url
                 } // Replace with your actual image source
                 alt="Video call grid"

@@ -1,14 +1,19 @@
 "use client";
 import { Button, SxProps, Theme } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import TypeFormModal from "./TypeFormModal";
 
 interface buttonProps {
   icon?: React.ReactNode;
-  // onClick: () => void;
-  innerText: string;
+  onClick?: () => void;
+  innerText: any;
   sx: SxProps<Theme>;
   variant: "text" | "outlined" | "contained";
-  iconOnStart: boolean;
+  iconOnStart?: boolean;
+  linkUrl?: boolean;
+  typeFormId?: string;
+  url?: string;
 }
 
 const CustomButton: React.FC<buttonProps> = ({
@@ -17,23 +22,40 @@ const CustomButton: React.FC<buttonProps> = ({
   sx,
   variant,
   iconOnStart,
+  onClick,
+  linkUrl,
+  typeFormId,
+  url,
 }: buttonProps) => {
-  const onClick = () => {
+  // const router = useRouter();
+  const [openModal, setOpenModal] = useState(false);
+  const defaultOnClick = () => {
     console.log("button clicked");
   };
 
+  const customOnClick = () => {
+    typeFormId ? setOpenModal(true) : url ? window.open(url, "_blank") : null;
+  };
+
   return (
-    <Button
-      variant={variant}
-      startIcon={iconOnStart ? icon : undefined}
-      endIcon={!iconOnStart ? icon : undefined}
-      onClick={onClick}
-      sx={{
-        ...sx,
-      }}
-    >
-      {innerText}
-    </Button>
+    <>
+      <Button
+        variant={variant}
+        startIcon={iconOnStart ? icon : undefined}
+        endIcon={!iconOnStart ? icon : undefined}
+        onClick={linkUrl ? customOnClick : onClick ? onClick : defaultOnClick}
+        sx={{
+          ...sx,
+        }}
+      >
+        {innerText}
+      </Button>
+      <TypeFormModal
+        open={openModal}
+        setOpen={setOpenModal}
+        typeFormId={typeFormId ?? ""}
+      />
+    </>
   );
 };
 

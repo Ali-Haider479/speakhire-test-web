@@ -112,7 +112,7 @@ export default function BecomePartnerComponent({
         }}
       >
         <Image
-          src="/stock2.jpg"
+          src={data?.cover_image?.source?.url}
           alt="partner-image"
           fill
           style={{

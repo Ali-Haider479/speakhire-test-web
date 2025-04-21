@@ -105,7 +105,7 @@ const Testimonial: React.FC<TestimonialProps> = ({
         }}
       /> */}
       <Image
-        src={process.env.NEXT_PUBLIC_STRAPI_URL + videoUrl}
+        src={ videoUrl}
         alt="Testimonial media"
         layout="responsive"
         style={{ objectFit: "cover" }}

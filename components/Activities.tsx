@@ -138,7 +138,7 @@ const ActivitiesSection = ({ data }: ActivitiesSectionProps) => {
           px: "10%",
           p: { xs: 2, md: 8 },
           flexDirection: { xs: "column", md: "row" },
-          width: "80vw",
+          width: {xs:"90vw",md:"80vw"},
         }}
       >
         {/* Left Column */}
@@ -194,7 +194,7 @@ const ActivitiesSection = ({ data }: ActivitiesSectionProps) => {
                   }}
                 >
                   <CarouselImage
-                    src={process.env.NEXT_PUBLIC_STRAPI_URL + image.source.url}
+                    src={image.source.url}
                     alt={image.alt}
                   />
                 </CarouselItem>

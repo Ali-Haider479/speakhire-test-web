@@ -26,7 +26,7 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
     acc[rowIndex] = acc[rowIndex] || [];
     acc[rowIndex].push({
       src: item.source.url,
-      width: index % 3 === 0 ? "70%" : "30%",
+      width: index % 3 === 0 ? "30%" : "70%",
       alt: item.alternate_text,
     });
     return acc;
@@ -91,7 +91,7 @@ const DonationCarousel = ({ data }: DonationCarouselProps) => {
                 <Image
                   src={
                     img?.src
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL + img?.src
+                      ? img?.src
                       : null
                   }
                   alt={img.alt || "Community"}

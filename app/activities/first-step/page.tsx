@@ -6,7 +6,13 @@ async function getData() {
   try {
     const firstStepApiRes = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/first-step?populate=*`,
-      { next: { revalidate: 60 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store", // Disables caching (SSR mode)
+      }
     );
 
     if (!firstStepApiRes.ok) throw new Error("Failed to fetch data");
@@ -33,15 +39,21 @@ const firstStepPage = async () => {
 
     return (
       <>
-        {firstWords}{" "}
-        <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
+        {firstWords} <span style={{ color: "#0F99C3" }}>{highlightedWord}</span>{" "}
         {restOfWords}
       </>
     );
   };
 
   return (
-    <Box sx={{display:"flex", width: "100vw", flexDirection:"column",alignItems:"center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        width: "100vw",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {/* Banner Section */}
       <Box
         sx={{
@@ -49,7 +61,7 @@ const firstStepPage = async () => {
           backgroundColor: "#F2FAFD",
           textAlign: "center",
           height: { xs: "auto", md: "353px" },
-          width:"100vw"
+          width: "100vw",
         }}
       >
         <Typography variant="body1" component="div">
@@ -119,15 +131,15 @@ const firstStepPage = async () => {
           alignItems: "center",
           padding: { xs: "40px 10px", md: "80px" },
           gap: { xs: 4, md: 10 },
-          width:{xs:"90vw",md:"100vw"}
+          width: { xs: "90vw", md: "100vw" },
         }}
       >
         <Box
           sx={{
             backgroundColor: "#e1f7ff",
-            borderRadius: {xs:"24px",md:"40px"},
+            borderRadius: { xs: "24px", md: "40px" },
             padding: { xs: "30px", md: "40px" },
-            maxWidth: {xs:"100%",md:"32rem"},
+            maxWidth: { xs: "100%", md: "32rem" },
             textAlign: "left",
             height: { xs: "auto", md: 506 },
           }}
@@ -158,7 +170,12 @@ const firstStepPage = async () => {
           </Typography>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Image src="/checkBadge.svg" alt="checkBadge" width={24} height={24} />
+            <Image
+              src="/checkBadge.svg"
+              alt="checkBadge"
+              width={24}
+              height={24}
+            />
             <Typography variant="body2">{data.highlight}</Typography>
           </Box>
         </Box>
@@ -168,11 +185,8 @@ const firstStepPage = async () => {
           <Image
             height={506}
             width={720}
-            alt={data.cover_image.alternate_text||"First Step image"}
-            src={
-              process.env.NEXT_PUBLIC_STRAPI_URL +
-              data.cover_image.source.url
-            }
+            alt={data.cover_image.alternate_text || "First Step image"}
+            src={data.cover_image?.source?.url}
             style={{
               borderRadius: "30px",
               width: "100%",

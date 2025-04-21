@@ -14,86 +14,17 @@ import React from "react";
 import Image from "next/image";
 import TestimonialSection from "@/components/TestimonialSection";
 
-const programs = [
-  {
-    programIcon: "/leadershipIcon.svg",
-    title: "Leadership course",
-    details: [
-      "Entrepreneurial Mindset & Public Speaking",
-      "Over total of 10 sessions",
-      "Develop leadership skills",
-      "Increased self-awareness, confidence, and student engagement",
-    ],
-    application: "Applications closing on 12 Dec, 2024 12PM",
-  },
-  {
-    programIcon: "/foundationYearIcon.svg",
-    title: "Foundational year",
-    details: [
-      "Get a mentor from industry",
-      "Join the network of professionals",
-      "Develop leadership skills",
-      "Increased self-awareness, confidence, and student engagement",
-    ],
-    application: "Applications closing on 12 Dec, 2024 12PM",
-  },
-  {
-    programIcon: "/courseIcon.svg",
-    title: "Exploratory years program",
-    invite: (
-      <Typography
-        sx={{
-          backgroundColor: "#E4ECFC",
-          borderRadius: 10,
-          p: 0.25,
-          width: 300,
-          pl: 1.5,
-          mt: 2,
-        }}
-      >
-        Invite only program for{" "}
-        <Typography component="span" sx={{ fontWeight: "bold" }}>
-          FY graduates
-        </Typography>
-      </Typography>
-    ),
-    details: [
-      "Join the network of professionals",
-      "Develop leadership skills",
-      "Flexible scheduling",
-    ],
-    application: "Applications closing on 12 Dec, 2024 12PM",
-  },
-];
-
-const data = [
-  {
-    Name: "Cathy Whealon",
-    designation: "UX Researcher - SPEAKHIRE Alumni",
-    title:
-      "One of the most valuable parts was the mentorship. The instructors weren’t just teachers—they were industry experts who genuinely cared about our growth.",
-    note: "",
-    image: "/cathy'sStory.svg",
-    isImageLeft: true,
-    isTextRightAligned: false,
-  },
-  {
-    Name: "Wade Cooper",
-    designation: "UX Researcher @ Google - Champion",
-    title:
-      "I loved how the training was tailored to my needs and aligned perfectly with the challenges I face. The hands-on approach made learning engaging that I applied to my projects.",
-    note: "",
-    image: "/wadeStory.svg",
-    isImageLeft: false,
-    isTextRightAligned: true,
-  },
-];
-
 async function getData() {
   try {
     const InternsPageApiRes = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/interns-page?populate=*`,
-      { next: { revalidate: 60 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_STRAPI_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store", // Disables caching (SSR mode)
+      }
     );
 
     if (!InternsPageApiRes.ok) throw new Error("Failed to fetch data");
@@ -161,16 +92,8 @@ const Interns = async () => {
       };
     });
 
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
+  const HeaderSection = () => {
+    return (
       <Box
         sx={{
           display: "flex",
@@ -193,7 +116,7 @@ const Interns = async () => {
             fontWeight: 400,
             marginBottom: "16px",
             lineHeight: "1.2",
-            paddingTop: {xs:"5vh",md:"10vh"},
+            paddingTop: { xs: "5vh", md: "10vh" },
             width: { xs: "80vw", md: "35vw" },
           }}
         >
@@ -248,7 +171,7 @@ const Interns = async () => {
             overflow: "hidden",
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
             backgroundColor: "#ffffff",
-            height: { xs: "25vh", md: "70vh" },
+            height: { xs: "25vh", md: "90vh" },
             marginTop: 5,
           }}
         >
@@ -257,8 +180,7 @@ const Interns = async () => {
             <Image
               src={
                 data.hero_section?.cover_image?.source?.url
-                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                    data.hero_section?.cover_image?.source?.url
+                  ? data.hero_section?.cover_image?.source?.url
                   : null
               }
               alt={
@@ -271,6 +193,11 @@ const Interns = async () => {
           </CardContent>
         </Box>
       </Box>
+    );
+  };
+
+  const InternshipCoursesSection = () => {
+    return (
       <Box
         sx={{
           display: "flex",
@@ -314,24 +241,40 @@ const Interns = async () => {
                     <img
                       src={
                         item.course_img.source.url
-                          ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                            item.course_img.source.url
+                          ? item.course_img.source.url
                           : null
                       }
                       alt={item.title}
                     />
-                    {item.invite && <> {item.invite}</>}
+                    {item.invite_text && (
+                      <Typography
+                        sx={{
+                          backgroundColor: "#E4ECFC",
+                          mt: 2,
+                          p: 0.5,
+                          px: 2,
+                          borderRadius: 5,
+                          color: "#063B55",
+                          width: "fit-content",
+                        }}
+                      >
+                        {item.invite_text}
+                      </Typography>
+                    )}
                     <Typography
                       variant="h4"
-                      sx={{ mt: 2, fontSize: { xs: "1.65rem" } }}
+                      sx={{ mt: 2, px: 1, fontSize: { xs: "1.65rem" } }}
                     >
                       {item.title}
                     </Typography>
                     <List>
                       {item.what_course_offer.map(
                         (detail: any, index: number) => (
-                          <ListItem key={index}>
-                            <ListItemIcon>
+                          <ListItem
+                            key={index}
+                            style={{ margin: 0, padding: 1 }}
+                          >
+                            <ListItemIcon sx={{ minWidth: "auto", mr: 1 }}>
                               <img src="/checkBadge.svg" alt="check" />
                             </ListItemIcon>
                             <ListItemText>{detail.description}</ListItemText>
@@ -339,8 +282,14 @@ const Interns = async () => {
                         )
                       )}
                     </List>
-                    <Typography variant="body2" sx={{ mt: 2 }}>
-                      {item.application}
+                    <Typography
+                      variant="body2"
+                      sx={{ mt: 2, ml: 1, color: "#063B55" }}
+                    >
+                      Applications closing on{" "}
+                      <span style={{ color: "#063B55", fontWeight: "bold" }}>
+                        {item.application_closing_date}
+                      </span>
                     </Typography>
                     <Button
                       variant="contained"
@@ -350,6 +299,7 @@ const Interns = async () => {
                         textTransform: "none",
                         borderRadius: 10,
                         fontWeight: "bold",
+                        fontSize: { xs: 14, md: 16 },
                       }}
                     >
                       Register Now
@@ -361,6 +311,11 @@ const Interns = async () => {
           </Grid>
         </Box>
       </Box>
+    );
+  };
+
+  const InternsTestimonialSection = () => {
+    return (
       <Box
         sx={{
           backgroundColor: "#F2FAFD",
@@ -390,6 +345,11 @@ const Interns = async () => {
           data={data.alumins_testimonials.testimonials}
         />
       </Box>
+    );
+  };
+
+  const MentorshipMonthCollage = () => {
+    return (
       <Box
         sx={{
           display: "flex",
@@ -398,7 +358,14 @@ const Interns = async () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h4" sx={{ mb: 4, fontWeight: "normal", mt: 5 }}>
+        <Typography
+          variant="h4"
+          sx={{
+            mb: { xs: 2, md: 4 },
+            fontWeight: "normal",
+            mt: { xs: 2.5, md: 5 },
+          }}
+        >
           {TextHighlighter(data.national_mentorship_month.title, "Mentorship")}
         </Typography>
         <Box
@@ -407,10 +374,10 @@ const Interns = async () => {
             borderRadius: 5,
             display: "flex",
             flexDirection: "row",
-            gap: 2,
-            padding: 3,
+            gap: { xs: 1, md: 2 },
+            padding: { xs: 2, md: 3 },
             width: { xs: "90vw", md: "80vw" },
-            mt: 4,
+            mt: { xs: 2, md: 4 },
           }}
         >
           <Box sx={{ width: "70vw" }}>
@@ -422,7 +389,7 @@ const Interns = async () => {
                   display: "flex",
                   justifyContent: "center",
                   gap: { xs: 1, md: 2 },
-                  mb: {xs:1,md:2},
+                  mb: { xs: 1, md: 2 },
                 }}
               >
                 {row.map((img: any, index: number) => (
@@ -440,11 +407,7 @@ const Interns = async () => {
                     }}
                   >
                     <Image
-                      src={
-                        img?.src
-                          ? process.env.NEXT_PUBLIC_STRAPI_URL + img.src
-                          : null
-                      }
+                      src={img?.src ? img.src : null}
                       alt="Community"
                       fill
                       style={{ objectFit: "cover" }}
@@ -459,7 +422,7 @@ const Interns = async () => {
               width: "30vw",
               display: "flex",
               flexDirection: "column",
-              gap: {xs:1,md:2},
+              gap: { xs: 1, md: 2 },
             }}
           >
             {verticalImagesLayout.map((img: any, index: number) => (
@@ -477,11 +440,7 @@ const Interns = async () => {
                 }}
               >
                 <Image
-                  src={
-                    img?.src
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL + img.src
-                      : null
-                  }
+                  src={img?.src ? img.src : null}
                   alt="Community"
                   fill
                   style={{ objectFit: "cover" }}
@@ -491,31 +450,39 @@ const Interns = async () => {
           </Box>
         </Box>
       </Box>
+    );
+  };
+
+  const ApplyForFoundationalYearSection = () => {
+    return (
       <Box
         sx={{
           backgroundColor: "#08547A",
           borderRadius: 10,
           width: "80vw",
           display: "flex",
-          flexDirection: {xs:"column",md:"row"},
+          flexDirection: { xs: "column", md: "row" },
           mb: 5,
-          mt: 10,
+          mt: { xs: 5, md: 10 },
         }}
       >
         <Box
           sx={{
-            width: {md:"30vw"},
+            width: { md: "30vw" },
             display: "flex", // Ensures flex behavior
             flexDirection: "column",
-            px: {xs:4,md:10},
-            py: {xs:4,md:15},
+            px: { xs: 4, md: 10 },
+            py: { xs: 4, md: 25 },
             textAlign: "left",
           }}
         >
-          <Typography variant="h2" sx={{ color: "white", fontSize:{xs:"2rem",md:"3rem"} }}>
+          <Typography
+            variant="h2"
+            sx={{ color: "white", fontSize: { xs: "2rem", md: "3rem" } }}
+          >
             {data.apply_now_section.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "white",mt:2 }}>
+          <Typography variant="body1" sx={{ color: "white", mt: 2 ,fontSize: { xs: "1rem", md: "1.25rem" }}}>
             {data.apply_now_section.description}
           </Typography>
           <Button
@@ -531,30 +498,51 @@ const Interns = async () => {
           >
             <Typography
               variant="body1"
-              sx={{ fontSize: {xs:14,md:16}, fontWeight: "bold", textTransform: "none" }}
+              sx={{
+                fontSize: { xs: 14, md: 18 },
+                fontWeight: "bold",
+                textTransform: "none",
+              }}
             >
               {data.apply_now_section.button.inner_text}
             </Typography>
           </Button>
         </Box>
-        <Box sx={{ width: {md:"50vw" }}}>
+        <Box sx={{ width: { md: "50vw" } }}>
           <Image
             src={
               data?.apply_now_section?.cover_image?.source?.url
-                ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                  data?.apply_now_section?.cover_image?.source?.url
+                ? data?.apply_now_section?.cover_image?.source?.url
                 : null
             }
             alt={
               data?.apply_now_section?.cover_image.alternate_text ||
               "Become Champion"
             }
-            width={800}
-            height={200}
+            width={1000}
+            height={9}
             style={{ borderRadius: 35, justifySelf: "right" }}
           />
         </Box>
       </Box>
+    );
+  };
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <HeaderSection />
+      <InternshipCoursesSection />
+      <InternsTestimonialSection />
+      <MentorshipMonthCollage />
+      <ApplyForFoundationalYearSection />
     </Box>
   );
 };

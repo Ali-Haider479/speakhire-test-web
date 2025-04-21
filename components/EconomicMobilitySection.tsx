@@ -43,10 +43,10 @@ const EconomicMobilitySection = ({ data }: EconomicMobilitySectionProps) => {
   return (
     <Box
       sx={{
-        padding: {xs:"10px",md:"20px"},
+        padding: { xs: "10px", md: "20px" },
         textAlign: "center",
         alignContent: "center",
-        width: {xs:"95vw",md:"80vw"},
+        width: { xs: "95vw", md: "80vw" },
       }}
     >
       <Typography
@@ -55,9 +55,9 @@ const EconomicMobilitySection = ({ data }: EconomicMobilitySectionProps) => {
           fontWeight: "bold",
           marginBottom: 1,
           width: "100%",
-          paddingRight: {xs:"0px",md:"100px"},
-          paddingLeft: {xs:"0px",md:"100px"},
-          fontSize:{xs:"2rem",md:"3rem"}
+          paddingRight: { xs: "0px", md: "100px" },
+          paddingLeft: { xs: "0px", md: "100px" },
+          fontSize: { xs: "2rem", md: "3rem" },
         }}
       >
         {HighlightText(data.title)}
@@ -66,16 +66,20 @@ const EconomicMobilitySection = ({ data }: EconomicMobilitySectionProps) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: {xs:1,md:2},
+          gap: { xs: 1, md: 2 },
           backgroundColor: "#F2FAFD", // Light blue background from the image
-          padding: {xs:1.5,md:3},
+          padding: { xs: 1.5, md: 3 },
           borderRadius: "20px",
         }}
       >
         {groupedImages.map((row: any, rowIndex: number) => (
           <Box
             key={rowIndex}
-            sx={{ display: "flex", justifyContent: "center", gap: {xs:1,md:2} }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: { xs: 1, md: 2 },
+            }}
           >
             {row.map((img: any, index: number) => (
               <Box
@@ -96,7 +100,7 @@ const EconomicMobilitySection = ({ data }: EconomicMobilitySectionProps) => {
                 }}
               >
                 <Image
-                  src={process.env.NEXT_PUBLIC_STRAPI_URL + img.src}
+                  src={img.src}
                   alt={img.alt}
                   fill
                   style={{ objectFit: "cover" }}

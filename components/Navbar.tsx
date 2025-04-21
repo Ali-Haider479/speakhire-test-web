@@ -17,7 +17,7 @@ import {
   ListItemText,
   Drawer,
 } from "@mui/material";
-import { LinkedIn, YouTube } from "@mui/icons-material";
+import { CloseFullscreen, LinkedIn, YouTube } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -27,7 +27,18 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/navigation";
 
-function Navbar() {
+interface NavbarProps{
+  data:{
+    header_buttons:any[],
+    header_icon_buttons:any[],
+    header_links:any[],
+    activities_links:any[]
+  }
+}
+
+
+function Navbar({data}:NavbarProps) {
+  console.log("Navbar Data",data)
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const router = useRouter();
@@ -81,7 +92,7 @@ function Navbar() {
               First Step
             </MenuItem>
             <MenuItem component={Link} href="/activities/foundational-year">
-              Foundation Year
+              Foundational Year
             </MenuItem>
             <MenuItem component={Link} href="/activities/leadership-courses">
               Leadership Courses
@@ -265,7 +276,7 @@ function Navbar() {
                       href="/activities/foundational-year"
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      Foundation Year
+                      Foundational Year
                     </Link>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>

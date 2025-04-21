@@ -19,32 +19,38 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
         mt: 5,
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "506px",
+        minHeight: "auto",
         backgroundColor: "white",
-        mb:5
+        mb: 5,
+        pb: 0,
       }}
     >
       <Card
         sx={{
           borderRadius: "24px",
-          overflow: "hidden",
+          // overflow: "hidden",
           backgroundColor: "#6BAA1E",
-          height: {xs:"auto",md:"525px"},
+          height: { xs: "auto", md: "556px" },
           width: "80vw",
+          pb: 0,
+          mb: 0,
         }}
       >
         <CardContent
           sx={{
             display: "flex",
             flexDirection: { xs: "column-reverse", md: "row" },
-            padding:0,
-            margin:0,
+            height: "100%",
+            p: 0,
+            pb: "0 !important",
+            mb: 0,
           }}
         >
           <Box
             sx={{
-              flex: "0.3",
-              padding: 6,     
+              flex: { xs: 1, md: 0.3 },
+              px: 6,
+              py: { xs: 3, md: 0 },
               color: "white",
               display: "flex",
               flexDirection: "column",
@@ -88,9 +94,10 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
 
           <Box
             sx={{
-              flex: "0.7",
+              flex: { xs: 1, md: 0.7 },
               position: "relative",
-              minHeight: { xs: "250px", md: "400px" },
+              height: { xs: "250px", md: "100%" },
+              minHeight: { xs: "250px", md: "unset" },
               overflow: "hidden",
               borderRadius: "24px", // Change this to round all corners
             }}
@@ -98,8 +105,7 @@ const DonateComponent = ({ data }: DonateComponentProps) => {
             <Image
               src={
                 data.cover_image?.source?.url
-                  ? process.env.NEXT_PUBLIC_STRAPI_URL +
-                    data.cover_image.source.url
+                  ? data.cover_image.source.url
                   : null
               }
               alt="Children sitting together"

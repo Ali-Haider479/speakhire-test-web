@@ -65,11 +65,13 @@ export default function OfferingsSection({data}:OfferingsSectionProps) {
                 <CardMedia
                   component="img"
                   height="auto"
-                  image={process.env.NEXT_PUBLIC_STRAPI_URL+offer.image.source.url}
+                  image={offer?.image?.source?.url}
                   alt={offer.title}
                   sx={{
                     p: 1,
                     borderRadius: 10, // Adjust this value as needed
+                    minHeight:"200px",
+                    height:{xs:"auto",md:"250px",lg:"300px"}
                   }}
                 />
 

@@ -5,7 +5,7 @@ interface ImpactsLivesSectionProps {
   data: {
     title: string;
     description: string;
-    links: any[];
+    video_links: any[];
   };
 }
 
@@ -17,7 +17,7 @@ function extractYouTubeID(url: string) {
 export default async function ImpactsLivesSection({
   data,
 }: ImpactsLivesSectionProps) {
-  const videoLinks = data.links.map((item: any) => item.url);
+  const videoLinks = data.video_links.map((item: any) => item.url);
 
   const HighlightText = (text: string) => {
     if (text?.length > 0) {
